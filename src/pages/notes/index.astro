@@ -42,6 +42,7 @@ const tabInactive = 'border-transparent text-zinc-400 hover:text-zinc-600 dark:h
       <h1 class="text-3xl font-bold mt-4 mb-2 tracking-tight">笔记</h1>
       <div class="flex items-center gap-4">
         <p class="text-zinc-500 dark:text-zinc-400">{notes.length} 篇笔记</p>
+        <a href={`${base}/timeline`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">时间线</a>
         <a href={`${base}/tags`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">标签</a>
         <a href={`${base}/search`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors flex items-center gap-1">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,6 +101,14 @@ const tabInactive = 'border-transparent text-zinc-400 hover:text-zinc-600 dark:h
         </a>
       ))}
     </div>
+
+    {notes.length > 0 && (
+      <div class="mt-10 text-center">
+        <button id="random-note" data-slugs={notes.map(n => n._slug).join(',')} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
+          🎲 随机一篇
+        </button>
+      </div>
+    )}
   </main>
 </Layout>
 
@@ -138,5 +147,15 @@ const tabInactive = 'border-transparent text-zinc-400 hover:text-zinc-600 dark:h
   const hash = window.location.hash.replace('#', '');
   if (['范式层', '架构层', '手段层'].includes(hash)) {
     setTab(hash);
+  }
+
+  // Random note
+  const randBtn = document.getElementById('random-note');
+  if (randBtn) {
+    const slugs = randBtn.dataset.slugs.split(',');
+    randBtn.addEventListener('click', () => {
+      const slug = slugs[Math.floor(Math.random() * slugs.length)];
+      window.location.href = `/digital-twin/notes/${slug}`;
+    });
   }
 </script>
