@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 const allNotes = await getCollection('notes');
 const notes = allNotes
   .filter(note => note.data['dg-publish'] !== false)
@@ -9,24 +11,62 @@ const notes = allNotes
     const dateA = a.data.创建 || '';
     const dateB = b.data.创建 || '';
     return dateB.localeCompare(dateA);
+  })
+  .map(note => {
+    const slug = note.id.replace(/^src\/content\/notes\//, '').replace(/\.md$/, '');
+    const title = note.data.title || slug.split('/').pop() || slug;
+    return { ...note, _slug: slug, _title: title };
   });
+
+const layerColors = {
+  '范式层': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
+  '架构层': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+  '手段层': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
+};
 ---
 
 <Layout title="笔记">
-  <main class="max-w-3xl mx-auto p-8">
-    <h1 class="text-3xl font-bold mb-2">笔记</h1>
-    <p class="text-gray-500 mb-8">{notes.length} 篇笔记</p>
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <header class="mb-12">
+      <a href={base} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">← 首页</a>
+      <h1 class="text-3xl font-bold mt-4 mb-2 tracking-tight">笔记</h1>
+      <p class="text-zinc-500 dark:text-zinc-400">
+        {notes.length} 篇笔记 · 按时间排序
+      </p>
+    </header>
 
-    <div class="space-y-4">
+    <div class="space-y-0 divide-y divide-zinc-200 dark:divide-zinc-800">
+      {notes.length === 0 && (
+        <p class="py-12 text-center text-zinc-400">还没有公开笔记</p>
+      )}
       {notes.map(note => (
-        <a href={`/notes/${note.slug}`} class="block p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 transition-colors">
-          <h2 class="text-lg font-semibold">{note.data.title || note.slug}</h2>
-          {note.data.创建 && (
-            <time class="text-sm text-gray-400">{note.data.创建}</time>
-          )}
-          {note.data.layer && (
-            <span class="ml-2 text-xs px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800">{note.data.layer}</span>
-          )}
+        <a
+          href={`${base}/notes/${note._slug}`}
+          class="group block py-6 -mx-3 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors"
+        >
+          <div class="flex items-start justify-between gap-4">
+            <div class="min-w-0">
+              <h2 class="text-lg font-medium group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate">
+                {note._title}
+              </h2>
+              <div class="flex items-center gap-3 mt-1.5 flex-wrap">
+                {note.data.创建 && (
+                  <time class="text-sm text-zinc-400 dark:text-zinc-500 tabular-nums">{note.data.创建}</time>
+                )}
+                {note.data.layer && (
+                  <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${layerColors[note.data.layer] || 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400'}`}>
+                    {note.data.layer}
+                  </span>
+                )}
+                {note.data.tags?.slice(0, 3).map(tag => (
+                  <span class="text-xs text-zinc-400 dark:text-zinc-500">#{tag}</span>
+                ))}
+              </div>
+            </div>
+            <svg class="w-4 h-4 mt-1.5 text-zinc-300 dark:text-zinc-600 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
         </a>
       ))}
     </div>
