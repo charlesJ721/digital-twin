@@ -14,10 +14,14 @@ const notes = allNotes
   })
   .sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''));
 
+// Separate dated and undated
+const datedNotes = notes.filter(n => n.data.date);
+const undatedNotes = notes.filter(n => !n.data.date);
+
 // Group by year
 const byYear = new Map();
-for (const note of notes) {
-  const year = (note.data.date || '未知').slice(0, 4);
+for (const note of datedNotes) {
+  const year = note.data.date.slice(0, 4);
   if (!byYear.has(year)) byYear.set(year, []);
   byYear.get(year).push(note);
 }
@@ -91,5 +95,23 @@ const layerColors = {
         ))}
       </div>
     </div>
+
+    {undatedNotes.length > 0 && (
+      <section class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+        <h2 class="text-lg font-semibold mb-6 text-zinc-400">时间不详</h2>
+        <div class="space-y-3">
+          {undatedNotes.map(note => (
+            <a href={`${base}/notes/${note._slug}`} class="block py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/30 -mx-3 px-3 rounded-lg transition-colors">
+              <h3 class="font-medium">{note._title}</h3>
+              {note.data.layer && (
+                <span class={`text-xs px-2 py-0.5 rounded-full font-medium mt-1 inline-block ${layerColors[note.data.layer] || ''}`}>
+                  {note.data.layer}
+                </span>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
   </main>
 </Layout>
