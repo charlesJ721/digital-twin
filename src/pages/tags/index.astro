@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+
+const allNotes = await getCollection('notes');
+const notes = allNotes.filter(n => n.data['dg-publish'] !== false);
+
+// Build tag map: tag -> count, notes
+const tagMap = new Map();
+for (const note of notes) {
+  for (const tag of note.data.tags || []) {
+    if (!tagMap.has(tag)) tagMap.set(tag, { count: 0, notes: [] });
+    const entry = tagMap.get(tag);
+    entry.count++;
+    entry.notes.push({
+      title: note.data.title || note.id.split('/').pop()?.replace(/\.md$/, '') || note.id,
+      slug: note.id.replace(/^src\/content\/notes\//, '').replace(/\.md$/, ''),
+      date: note.data.date || '',
+      layer: note.data.layer || '',
+    });
+  }
+}
+
+// Sort tags by count
+const sortedTags = [...tagMap.entries()].sort((a, b) => b[1].count - a[1].count);
+const maxCount = sortedTags.length > 0 ? sortedTags[0][1].count : 1;
+
+const layerColors = {
+  '范式层': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
+  '架构层': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+  '手段层': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
+};
+---
+
+<Layout title="标签">
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <a href={`${base}/notes`} class="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors mb-8">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      返回笔记
+    </a>
+
+    <h1 class="text-3xl font-bold mb-2 tracking-tight">标签</h1>
+    <p class="text-zinc-500 dark:text-zinc-400 mb-10">{sortedTags.length} 个标签</p>
+
+    <!-- Tag cloud -->
+    <div class="flex flex-wrap gap-3 mb-12" id="tag-cloud">
+      {sortedTags.map(([tag, { count }]) => {
+        const size = 0.75 + (count / maxCount) * 0.75; // 0.75rem to 1.5rem
+        const opacity = 0.6 + (count / maxCount) * 0.4;
+        return (
+          <button
+            data-tag={tag}
+            class="tag-btn px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors text-sm cursor-pointer"
+            style={`font-size: ${size}rem; opacity: ${opacity}`}
+          >
+            {tag}
+            <span class="ml-1 text-xs text-zinc-400">({count})</span>
+          </button>
+        );
+      })}
+    </div>
+
+    <!-- Results -->
+    <div id="tag-results" class="divide-y divide-zinc-200 dark:divide-zinc-800">
+      <p class="py-12 text-center text-zinc-400">点击标签查看相关笔记</p>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll('.tag-btn');
+  const results = document.getElementById('tag-results');
+  const layerColors = {
+    '范式层': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
+    '架构层': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+    '手段层': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      
+      // Toggle active state
+      const wasActive = btn.classList.contains('bg-zinc-900');
+      buttons.forEach(b => b.classList.remove('bg-zinc-900', 'text-white', 'dark:bg-zinc-100', 'dark:text-zinc-900', 'border-zinc-900', 'dark:border-zinc-100'));
+      
+      if (wasActive) {
+        results.innerHTML = '<p class="py-12 text-center text-zinc-400">点击标签查看相关笔记</p>';
+        return;
+      }
+      
+      btn.classList.add('bg-zinc-900', 'text-white', 'dark:bg-zinc-100', 'dark:text-zinc-900', 'border-zinc-900', 'dark:border-zinc-100');
+
+      // Find notes with this tag by scraping the notes page
+      fetch(`${import.meta.env.BASE_URL}/notes/`)
+        .then(r => r.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const items = doc.querySelectorAll('.note-item');
+          
+          const matches = [];
+          items.forEach(item => {
+            const tagsEl = item.querySelectorAll('span');
+            let hasTag = false;
+            tagsEl.forEach(s => {
+              if (s.textContent.trim() === `#${tag}`) hasTag = true;
+            });
+            if (hasTag) {
+              const title = item.querySelector('h2')?.textContent || '';
+              const link = item.getAttribute('href') || '';
+              const date = item.querySelector('time')?.textContent || '';
+              const layer = item.querySelector('[data-layer]')?.dataset.layer || '';
+              matches.push({ title, link, date, layer });
+            }
+          });
+
+          if (matches.length === 0) {
+            results.innerHTML = '<p class="py-12 text-center text-zinc-400">没有匹配的笔记</p>';
+            return;
+          }
+
+          results.innerHTML = matches.map(m => `
+            <a href="${m.link}" class="block py-5 hover:bg-zinc-50 dark:hover:bg-zinc-800/30 -mx-3 px-3 rounded-lg transition-colors">
+              <h2 class="text-lg font-medium mb-1">${m.title}</h2>
+              <div class="flex items-center gap-2 text-sm">
+                ${m.date ? `<span class="text-zinc-400">${m.date}</span>` : ''}
+                ${m.layer ? `<span class="text-xs px-2 py-0.5 rounded-full font-medium ${layerColors[m.layer] || ''}">${m.layer}</span>` : ''}
+              </div>
+            </a>
+          `).join('');
+        });
+    });
+  });
+</script>
