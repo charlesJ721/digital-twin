@@ -6,6 +6,11 @@ export default defineConfig({
   site: 'https://charlesJ721.github.io',
   base: '/digital-twin',
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        external: ['/pagefind/pagefind.js'],
+      },
+    },
+  },
 });

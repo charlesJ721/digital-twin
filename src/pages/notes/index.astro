@@ -8,8 +8,8 @@ const allNotes = await getCollection('notes');
 const notes = allNotes
   .filter(note => note.data['dg-publish'] !== false)
   .sort((a, b) => {
-    const dateA = a.data.创建 || '';
-    const dateB = b.data.创建 || '';
+    const dateA = a.data.date || '';
+    const dateB = b.data.date || '';
     return dateB.localeCompare(dateA);
   })
   .map(note => {
@@ -18,31 +18,60 @@ const notes = allNotes
     return { ...note, _slug: slug, _title: title };
   });
 
+// Layer counts
+const layers = ['范式层', '架构层', '手段层'];
+const layerCounts = {};
+for (const l of layers) {
+  layerCounts[l] = notes.filter(n => n.data.layer === l).length;
+}
+
 const layerColors = {
   '范式层': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
   '架构层': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
   '手段层': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
 };
+
+const tabActive = 'border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100';
+const tabInactive = 'border-transparent text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300';
 ---
 
 <Layout title="笔记">
   <main class="max-w-3xl mx-auto px-6 py-16">
-    <header class="mb-12">
+    <header class="mb-10">
       <a href={base} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">← 首页</a>
       <h1 class="text-3xl font-bold mt-4 mb-2 tracking-tight">笔记</h1>
-      <p class="text-zinc-500 dark:text-zinc-400">
-        {notes.length} 篇笔记 · 按时间排序
-      </p>
+      <div class="flex items-center gap-4">
+        <p class="text-zinc-500 dark:text-zinc-400">{notes.length} 篇笔记</p>
+        <a href={`${base}/search`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          搜索
+        </a>
+      </div>
+
+      <!-- Layer tabs -->
+      <nav class="flex gap-6 mt-6 border-b border-zinc-200 dark:border-zinc-800" id="layer-tabs">
+        <button data-layer="all" class="pb-2.5 border-b-2 text-sm font-medium transition-colors {tabActive}">
+          全部 ({notes.length})
+        </button>
+        {layers.map(l => (
+          <button data-layer={l} class={`pb-2.5 border-b-2 text-sm font-medium transition-colors ${layerCounts[l] ? tabInactive : 'border-transparent text-zinc-300 dark:text-zinc-600 cursor-default'}`}>
+            {l} ({layerCounts[l]})
+          </button>
+        ))}
+      </nav>
     </header>
 
-    <div class="space-y-0 divide-y divide-zinc-200 dark:divide-zinc-800">
+    <div class="space-y-0 divide-y divide-zinc-200 dark:divide-zinc-800" id="notes-list">
       {notes.length === 0 && (
         <p class="py-12 text-center text-zinc-400">还没有公开笔记</p>
       )}
       {notes.map(note => (
         <a
           href={`${base}/notes/${note._slug}`}
-          class="group block py-6 -mx-3 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors"
+          data-layer={note.data.layer || ''}
+          class="note-item group block py-6 -mx-3 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors"
         >
           <div class="flex items-start justify-between gap-4">
             <div class="min-w-0">
@@ -50,8 +79,8 @@ const layerColors = {
                 {note._title}
               </h2>
               <div class="flex items-center gap-3 mt-1.5 flex-wrap">
-                {note.data.创建 && (
-                  <time class="text-sm text-zinc-400 dark:text-zinc-500 tabular-nums">{note.data.创建}</time>
+                {note.data.date && (
+                  <time class="text-sm text-zinc-400 dark:text-zinc-500 tabular-nums">{note.data.date}</time>
                 )}
                 {note.data.layer && (
                   <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${layerColors[note.data.layer] || 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400'}`}>
@@ -72,3 +101,41 @@ const layerColors = {
     </div>
   </main>
 </Layout>
+
+<script>
+  const tabs = document.querySelectorAll('#layer-tabs button[data-layer]');
+  const items = document.querySelectorAll('.note-item');
+  const tabActive = 'border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100';
+  const tabInactive = 'border-transparent text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300';
+
+  function setTab(layer) {
+    tabs.forEach(t => {
+      t.className = t.className.replace(tabActive, tabInactive);
+    });
+    const active = document.querySelector(`[data-layer="${layer}"]`);
+    if (active) active.className = active.className.replace(tabInactive, tabActive);
+
+    items.forEach(item => {
+      if (layer === 'all' || item.dataset.layer === layer) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (layer !== 'all') window.location.hash = layer;
+    else window.location.hash = '';
+  }
+
+  tabs.forEach(tab => {
+    if (tab.dataset.layer === 'all') return; // skip "全部" for now
+    tab.addEventListener('click', () => setTab(tab.dataset.layer));
+  });
+  document.querySelector('[data-layer="all"]').addEventListener('click', () => setTab('all'));
+
+  // Restore from hash
+  const hash = window.location.hash.replace('#', '');
+  if (['范式层', '架构层', '手段层'].includes(hash)) {
+    setTab(hash);
+  }
+</script>

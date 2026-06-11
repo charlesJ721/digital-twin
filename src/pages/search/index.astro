@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="搜索">
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <a href={`${base}/notes`} class="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors mb-8">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      返回笔记
+    </a>
+
+    <h1 class="text-3xl font-bold mb-2 tracking-tight">搜索</h1>
+    <p class="text-zinc-500 dark:text-zinc-400 mb-8">全文检索所有公开笔记</p>
+
+    <div class="relative mb-8">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="输入关键词搜索..."
+        class="w-full px-4 py-3 pl-10 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-500 text-base"
+      />
+      <svg class="absolute left-3 top-3.5 w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </div>
+
+    <div id="search-results" class="divide-y divide-zinc-200 dark:divide-zinc-800">
+      <p class="py-12 text-center text-zinc-400">输入关键词开始搜索</p>
+    </div>
+    <div id="search-status" class="text-sm text-zinc-400 text-center mt-4 hidden"></div>
+  </main>
+</Layout>
+
+<script>
+  (async () => {
+    const script = document.createElement('script');
+    script.src = '/digital-twin/pagefind/pagefind.js';
+    document.head.appendChild(script);
+
+    await new Promise((resolve) => { script.onload = resolve; });
+
+    const pagefind = window.Pagefind;
+    if (!pagefind) {
+      document.getElementById('search-results').innerHTML = '<p class="py-12 text-center text-red-400">搜索组件加载失败，请刷新页面重试</p>';
+      return;
+    }
+
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+    const status = document.getElementById('search-status');
+    let debounce;
+
+    const layerColors = {
+      '范式层': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
+      '架构层': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+      '手段层': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
+    };
+
+    input.addEventListener('input', () => {
+      clearTimeout(debounce);
+      const query = input.value.trim();
+
+      if (!query) {
+        results.innerHTML = '<p class="py-12 text-center text-zinc-400">输入关键词开始搜索</p>';
+        status.classList.add('hidden');
+        return;
+      }
+
+      debounce = setTimeout(async () => {
+        status.classList.remove('hidden');
+        status.textContent = '搜索中...';
+
+        const search = await pagefind.search(query);
+
+        if (!search || search.results.length === 0) {
+          results.innerHTML = '<p class="py-12 text-center text-zinc-400">未找到相关结果</p>';
+          status.classList.add('hidden');
+          return;
+        }
+
+        status.textContent = `找到 ${search.results.length} 条结果`;
+
+        const html = await Promise.all(
+          search.results.slice(0, 20).map(async (r) => {
+            const data = await r.data();
+            const excerpt = (data.excerpt || '')
+              .replace(/<mark>/g, '<mark class="bg-yellow-200 dark:bg-yellow-700 rounded-sm px-0.5">')
+              .replace(/<\/mark>/g, '</mark>');
+            const title = data.meta?.title || data.url.replace(/.*\//, '').replace(/-/g, ' ');
+            const url = data.url.replace(/\/$/, '');
+            const layer = data.meta?.layer || '';
+            const date = data.meta?.['date'] || '';
+
+            return `
+              <a href="${url}" class="block py-5 hover:bg-zinc-50 dark:hover:bg-zinc-800/30 -mx-3 px-3 rounded-lg transition-colors">
+                <h2 class="text-lg font-medium mb-1">${title}</h2>
+                <div class="flex items-center gap-2 text-sm flex-wrap">
+                  ${date ? `<span class="text-zinc-400">${date}</span>` : ''}
+                  ${layer ? `<span class="text-xs px-2 py-0.5 rounded-full font-medium ${layerColors[layer] || ''}">${layer}</span>` : ''}
+                </div>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">${excerpt}</p>
+              </a>`;
+          })
+        );
+
+        results.innerHTML = html.join('');
+      }, 300);
+    });
+  })();
+</script>

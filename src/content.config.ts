@@ -9,7 +9,7 @@ const notes = defineCollection({
   loader: glob({ pattern: '**/*.md', base: contentBase }),
   schema: z.object({
     title: z.string().optional(),
-    创建: z.string().optional(),
+    date: z.string().optional(),
     'dg-publish': z.boolean().optional().default(true),
     layer: z.enum(['范式层', '架构层', '手段层']).optional(),
     tags: z.array(z.string()).optional().default([]),

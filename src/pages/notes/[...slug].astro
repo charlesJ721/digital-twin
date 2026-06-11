@@ -36,8 +36,8 @@ const layerColors = {
       <header class="mb-10 pb-8 border-b border-zinc-200 dark:border-zinc-800">
         <h1 class="text-3xl font-bold tracking-tight leading-tight mb-4">{title}</h1>
         <div class="flex items-center gap-3 flex-wrap">
-          {note.data.创建 && (
-            <time class="text-sm text-zinc-400 dark:text-zinc-500 tabular-nums">{note.data.创建}</time>
+          {note.data.date && (
+            <time class="text-sm text-zinc-400 dark:text-zinc-500 tabular-nums">{note.data.date}</time>
           )}
           {note.data.layer && (
             <span class={`text-xs px-2.5 py-1 rounded-full font-medium ${layerColors[note.data.layer] || 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400'}`}>
