@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Obsidian vault content (symlinked locally, not for git)
+src/content/notes/

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map(note => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await note.render();
+---
+
+<Layout title={note.data.title || note.slug}>
+  <main class="max-w-3xl mx-auto p-8">
+    <a href="/notes" class="text-sm text-gray-400 hover:text-gray-600 mb-4 inline-block">← 返回笔记</a>
+    
+    <article class="prose dark:prose-invert max-w-none">
+      <h1>{note.data.title || note.slug}</h1>
+      {note.data.创建 && (
+        <time class="text-sm text-gray-400">{note.data.创建}</time>
+      )}
+      {note.data.layer && (
+        <span class="ml-2 text-xs px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800">{note.data.layer}</span>
+      )}
+      <Content />
+    </article>
+  </main>
+</Layout>

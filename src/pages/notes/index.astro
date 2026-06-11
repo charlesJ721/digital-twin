@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allNotes = await getCollection('notes');
+const notes = allNotes
+  .filter(note => note.data['dg-publish'] !== false)
+  .sort((a, b) => {
+    const dateA = a.data.创建 || '';
+    const dateB = b.data.创建 || '';
+    return dateB.localeCompare(dateA);
+  });
+---
+
+<Layout title="笔记">
+  <main class="max-w-3xl mx-auto p-8">
+    <h1 class="text-3xl font-bold mb-2">笔记</h1>
+    <p class="text-gray-500 mb-8">{notes.length} 篇笔记</p>
+
+    <div class="space-y-4">
+      {notes.map(note => (
+        <a href={`/notes/${note.slug}`} class="block p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 transition-colors">
+          <h2 class="text-lg font-semibold">{note.data.title || note.slug}</h2>
+          {note.data.创建 && (
+            <time class="text-sm text-gray-400">{note.data.创建}</time>
+          )}
+          {note.data.layer && (
+            <span class="ml-2 text-xs px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800">{note.data.layer}</span>
+          )}
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
