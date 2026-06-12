@@ -5,3 +5,7 @@ compatibility_date = "2026-06-12"
 [vars]
 GITHUB_REPO = "charlesJ721/digital-twin"
 GITHUB_BRANCH = "main"
+
+[[kv_namespaces]]
+binding = "DT_DATA"
+id = "f679e6ef014f4727a2d5fb8959839d51"

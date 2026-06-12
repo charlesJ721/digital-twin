@@ -177,8 +177,13 @@ export default {
 
       try {
         if (validatedUser === username) {
-          // 认证用户 → 返回完整数据
-          const raw = await fetchFromGithub(`data/users/${username}/dimensions.json`, env);
+          // 认证用户 → 优先从 KV 读取完整数据
+          const kvData = await env.DT_DATA.get(`user:${username}`);
+          if (kvData) {
+            return json(JSON.parse(kvData), 200, headers);
+          }
+          // KV 无数据 → 尝试 GitHub
+          const raw = await fetchFromGithub(`data/users/${username}/dimensions-public.json`, env);
           if (raw) {
             return json(JSON.parse(raw), 200, headers);
           }
@@ -253,21 +258,18 @@ export default {
         const sourceTag = body.source || "api";
         const now = new Date().toISOString().slice(0, 10);
 
-        // 写入 GitHub
-        const fullResult = await commitToGithub(
-          `data/users/${username}/dimensions.json`,
-          JSON.stringify(dims, null, 2),
-          `api: ${sourceTag} — ${body.insights.length} insights (${now})`,
-          env,
-        );
+        // 完整数据存 KV
+        await env.DT_DATA.put(`user:${username}`, JSON.stringify(dims));
+
+        // 公开版提交到 GitHub
         const pubResult = await commitToGithub(
           `data/users/${username}/dimensions-public.json`,
           JSON.stringify(pub, null, 2),
-          `api: public sync (${now})`,
+          `api: ${sourceTag} — ${body.insights.length} insights (${now})`,
           env,
         );
 
-        if (!fullResult || !pubResult) {
+        if (!pubResult) {
           return json({ error: "github commit failed" }, 500, headers);
         }
 
@@ -275,10 +277,8 @@ export default {
           success: true,
           insights_added: body.insights.length,
           source: sourceTag,
-          commits: {
-            full: fullResult.sha.slice(0, 7),
-            public: pubResult.sha.slice(0, 7),
-          },
+          stored: "kv",
+          commit: pubResult.sha.slice(0, 7),
         }, 200, headers);
       } catch (e) {
         return json({ error: "internal error", detail: String(e) }, 500, headers);
