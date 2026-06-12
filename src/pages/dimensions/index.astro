@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL;
 const layers = Object.entries(dimensions.layers).sort(([a], [b]) => Number(b) - Number(a));
 
 // SVG params
-const cx = 140, cy = 140, r = 110;
+const cx = 150, cy = 150, r = 110;
 const n = layers.length;
 const startAngle = -Math.PI / 2; // start from top
 
@@ -15,8 +15,8 @@ function getPoint(i: number, value: number) {
   return {
     x: cx + r * (value / 100) * Math.cos(angle),
     y: cy + r * (value / 100) * Math.sin(angle),
-    labelX: cx + (r + 28) * Math.cos(angle),
-    labelY: cy + (r + 28) * Math.sin(angle),
+    labelX: cx + (r + 22) * Math.cos(angle),
+    labelY: cy + (r + 22) * Math.sin(angle),
     angle,
   };
 }
@@ -55,7 +55,7 @@ function statusBg(status: string) {
     <!-- Radar Chart -->
     <div class="flex flex-col lg:flex-row gap-8 items-start mb-12">
       <div class="shrink-0">
-        <svg viewBox="0 0 280 280" class="w-[280px] h-[280px]" role="img" aria-label="七层维度雷达图">
+        <svg viewBox="0 0 300 300" class="w-[300px] h-[300px]" role="img" aria-label="七层维度雷达图">
           <!-- Grid rings -->
           {rings.map(ring => (
             <polygon
