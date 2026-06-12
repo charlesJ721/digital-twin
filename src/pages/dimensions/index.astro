@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import dimensions from '../../../data/dimensions.json';
+import dimensions from '../../../data/dimensions-public.json';
 
 const base = import.meta.env.BASE_URL;
 const layers = Object.entries(dimensions.layers).sort(([a], [b]) => Number(b) - Number(a));
@@ -109,42 +109,14 @@ function statusBg(status: string) {
                 <div class={`h-full rounded-full transition-all ${layer.fill_rate > 30 ? 'bg-emerald-500' : 'bg-amber-500'}`}
                   style={`width:${layer.fill_rate}%`}></div>
               </div>
-              {layer.latest_insights.length > 0 && (
-                <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1 truncate">
-                  {layer.latest_insights[layer.latest_insights.length - 1].insight}
-                </p>
-              )}
+              <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1">
+                {layer.insight_count} 条洞察
+              </p>
             </div>
           </div>
         ))}
       </div>
     </div>
-
-    <!-- Insights detail -->
-    <section class="border-t border-zinc-200 dark:border-zinc-800 pt-8">
-      <h2 class="text-xl font-semibold mb-6">最新洞察</h2>
-      {layers.filter(([, l]) => l.latest_insights.length > 0).map(([id, layer]) => (
-        <div class="mb-6">
-          <h3 class="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-2">Layer {id} · {layer.name}</h3>
-          <div class="space-y-2">
-            {layer.latest_insights.map((insight: any, j: number) => (
-              <div class="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800">
-                <div class="flex items-start gap-2">
-                  <span class={`shrink-0 mt-0.5 text-xs px-1.5 py-0.5 rounded-full ${insight.confidence === 'high' ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-amber-500/20 text-amber-600 dark:text-amber-400'}`}>
-                    {insight.confidence === 'high' ? '高' : '中'}
-                  </span>
-                  <div>
-                    <p class="text-sm font-medium">{insight.insight}</p>
-                    <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1">{insight.evidence}</p>
-                    <p class="text-xs text-zinc-400 mt-0.5">{insight.date} · {insight.dimension}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </section>
 
     <!-- Nav footer -->
     <footer class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex gap-6 text-sm text-zinc-400">

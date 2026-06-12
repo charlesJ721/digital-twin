@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Obsidian vault content (symlinked locally, not for git)
 src/content/notes/
+
+# Private dimension data (full insights)
+data/dimensions.json
