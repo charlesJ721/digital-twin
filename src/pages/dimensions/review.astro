@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="维度审核">
+  <main class="min-h-screen px-6 py-12 max-w-4xl mx-auto">
+    <a href={`${base}/dimensions`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">← 维度雷达图</a>
+    <h1 class="text-3xl font-bold mt-4 mb-2">审核队列</h1>
+    <p class="text-zinc-500 dark:text-zinc-400 mb-2">AI 推送的洞察在此等待你的审批，通过后才会进入核心数据。</p>
+
+    <!-- Locked -->
+    <div id="locked" class="mt-6 max-w-md">
+      <label class="block text-sm font-medium mb-2">输入 API Key 解锁</label>
+      <div class="flex gap-2">
+        <input id="apikey" type="password" placeholder="dt_..." autocomplete="off"
+          class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+        <button id="unlock-btn" class="px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition-colors">解锁</button>
+      </div>
+      <p id="error-msg" class="text-xs text-red-500 mt-2 hidden"></p>
+    </div>
+
+    <!-- Review panel -->
+    <div id="unlocked" class="hidden mt-8">
+      <div class="flex items-center gap-4 mb-6">
+        <button id="refresh-btn" class="px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 text-sm hover:border-zinc-400 transition-colors">刷新</button>
+        <button id="approve-all-btn" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-sm hover:bg-emerald-700 transition-colors">全部通过</button>
+        <span id="count-badge" class="text-sm text-zinc-400"></span>
+      </div>
+      <div id="queue-container" class="space-y-3">
+        <p class="text-zinc-400 text-sm">加载中...</p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const STORAGE_KEY = 'dt_api_key';
+  const API_BASE = 'https://dt-hub.chindowj721.workers.dev';
+
+  async function fetchReview(): Promise<any> {
+    const key = localStorage.getItem(STORAGE_KEY);
+    if (!key) throw new Error('未登录');
+    const res = await fetch(`${API_BASE}/api/user/arslonga/review?key=${encodeURIComponent(key)}`);
+    if (!res.ok) throw new Error('加载失败');
+    return res.json();
+  }
+
+  async function approve(ids: string[]) {
+    const key = localStorage.getItem(STORAGE_KEY)!;
+    const res = await fetch(`${API_BASE}/api/user/arslonga/review/approve?key=${encodeURIComponent(key)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids }),
+    });
+    return res.json();
+  }
+
+  async function reject(ids: string[]) {
+    const key = localStorage.getItem(STORAGE_KEY)!;
+    const res = await fetch(`${API_BASE}/api/user/arslonga/review/reject?key=${encodeURIComponent(key)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids }),
+    });
+    return res.json();
+  }
+
+  function render(data: any) {
+    const container = document.getElementById('queue-container')!;
+    const badge = document.getElementById('count-badge')!;
+    const pending = data.pending || [];
+
+    badge.textContent = `${pending.length} 条待审`;
+
+    if (pending.length === 0) {
+      container.innerHTML = '<div class="p-8 text-center text-zinc-400"><p>✅ 审核队列为空</p><p class="text-xs mt-2">外部 AI 推送的洞察会出现在这里</p></div>';
+      (document.getElementById('approve-all-btn') as HTMLButtonElement).disabled = true;
+      return;
+    }
+
+    (document.getElementById('approve-all-btn') as HTMLButtonElement).disabled = false;
+
+    let html = '';
+    pending.forEach((item: any, idx: number) => {
+      const confClass = item.insight.confidence === 'high' ? 'bg-emerald-500/20 text-emerald-600' : 'bg-amber-500/20 text-amber-600';
+      const sourceTag = item.source === 'hermes-cron' ? '🕐 自动' : `📡 ${item.source}`;
+      html += `
+        <div class="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 transition-colors" data-id="${item.id}">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" class="review-check mt-1" data-id="${item.id}" checked />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs px-1.5 py-0.5 rounded-full ${confClass}">${item.insight.confidence}</span>
+                <span class="text-xs text-zinc-400">${escapeHtml(item.insight.dimension)}</span>
+                <span class="text-xs text-zinc-400">${sourceTag}</span>
+              </div>
+              <p class="text-sm font-medium">${escapeHtml(item.insight.insight)}</p>
+              ${item.insight.evidence ? `<p class="text-xs text-zinc-400 mt-1">📎 ${escapeHtml(item.insight.evidence)}</p>` : ''}
+            </div>
+            <div class="flex gap-1 shrink-0">
+              <button class="approve-one px-2 py-1 text-xs rounded bg-emerald-500/20 text-emerald-600 hover:bg-emerald-500/30 transition-colors" data-id="${item.id}">✓</button>
+              <button class="reject-one px-2 py-1 text-xs rounded bg-red-500/20 text-red-600 hover:bg-red-500/30 transition-colors" data-id="${item.id}">✗</button>
+            </div>
+          </div>
+        </div>`;
+    });
+    container.innerHTML = html;
+
+    // Bind events
+    container.querySelectorAll('.approve-one').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        await approve([btn.getAttribute('data-id')!]);
+        refresh();
+      });
+    });
+    container.querySelectorAll('.reject-one').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        await reject([btn.getAttribute('data-id')!]);
+        refresh();
+      });
+    });
+  }
+
+  function getCheckedIds(): string[] {
+    const checks = document.querySelectorAll('.review-check:checked') as NodeListOf<HTMLInputElement>;
+    return Array.from(checks).map(c => c.getAttribute('data-id')!);
+  }
+
+  async function refresh() {
+    try {
+      const data = await fetchReview();
+      render(data);
+    } catch (e: any) {
+      document.getElementById('queue-container')!.innerHTML = `<p class="text-red-500 text-sm">${e.message}</p>`;
+    }
+  }
+
+  function escapeHtml(s: string) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedKey = localStorage.getItem(STORAGE_KEY);
+    if (savedKey) {
+      (document.getElementById('apikey') as HTMLInputElement).value = savedKey;
+      unlock();
+    }
+
+    document.getElementById('unlock-btn')!.addEventListener('click', unlock);
+    document.getElementById('apikey')!.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+    document.getElementById('refresh-btn')!.addEventListener('click', refresh);
+    document.getElementById('approve-all-btn')!.addEventListener('click', async () => {
+      const ids = getCheckedIds();
+      if (ids.length === 0) return;
+      await approve(ids);
+      refresh();
+    });
+  });
+
+  async function unlock() {
+    const key = (document.getElementById('apikey') as HTMLInputElement).value.trim();
+    if (!key) return;
+    try {
+      const data = await fetchReview();
+      localStorage.setItem(STORAGE_KEY, key);
+      document.getElementById('locked')!.classList.add('hidden');
+      document.getElementById('unlocked')!.classList.remove('hidden');
+      document.getElementById('error-msg')!.classList.add('hidden');
+      render(data);
+    } catch {
+      document.getElementById('error-msg')!.classList.remove('hidden');
+      document.getElementById('error-msg')!.textContent = 'API Key 无效或网络不可达';
+    }
+  }
+</script>

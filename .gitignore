@@ -28,3 +28,6 @@ src/content/notes/
 
 # Private dimension data (full insights)
 data/users/*/dimensions.json
+
+# Cloudflare Workers local state
+api/.wrangler/
