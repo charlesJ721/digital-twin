@@ -1,0 +1,16 @@
+name = "dt-hub"
+main = "src/worker.ts"
+compatibility_date = "2026-06-12"
+
+[vars]
+# GitHub repo info (public)
+GITHUB_REPO = "charlesJ721/digital-twin"
+GITHUB_BRANCH = "main"
+
+# API keys will be set as secrets via `wrangler secret put`:
+#   DT_API_KEY_ARSLONGA
+#   GITHUB_TOKEN
+
+[[kv_namespaces]]
+binding = "DT_CACHE"
+id = "PLACEHOLDER"  # run `wrangler kv:namespace create DT_CACHE` to get real ID

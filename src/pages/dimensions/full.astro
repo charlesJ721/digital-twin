@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="维度全视图">
+  <main class="min-h-screen px-6 py-12 max-w-4xl mx-auto">
+    <a href={`${base}/dimensions`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">← 维度雷达图</a>
+    <h1 class="text-3xl font-bold mt-4 mb-2">维度全视图</h1>
+    <p class="text-zinc-500 dark:text-zinc-400">完整的维度洞察数据，仅本人可访问。</p>
+
+    <!-- 未认证状态 -->
+    <div id="locked" class="mt-8 max-w-md">
+      <label class="block text-sm font-medium mb-2 text-zinc-700 dark:text-zinc-300">输入 API Key 解锁</label>
+      <div class="flex gap-2">
+        <input id="apikey" type="password" placeholder="dt_..." autocomplete="off"
+          class="flex-1 px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+        <button id="unlock-btn" class="px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition-colors">
+          解锁
+        </button>
+      </div>
+      <p id="error-msg" class="text-xs text-red-500 mt-2 hidden"></p>
+      <p class="text-xs text-zinc-400 mt-3">
+        API URL: <input id="api-url" type="text" value="https://dt-hub.CHANGEME.workers.dev"
+          class="bg-transparent border-b border-zinc-300 dark:border-zinc-700 text-zinc-500 text-xs w-64 focus:outline-none focus:border-emerald-500" />
+      </p>
+    </div>
+
+    <!-- 认证后内容 -->
+    <div id="unlocked" class="hidden mt-8">
+      <div class="flex items-center gap-3 mb-6">
+        <span id="user-badge" class="px-2 py-1 text-xs rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"></span>
+        <span id="update-time" class="text-xs text-zinc-400"></span>
+        <button id="refresh-btn" class="text-xs text-zinc-400 hover:text-emerald-500 transition-colors ml-auto">刷新</button>
+        <button id="lock-btn" class="text-xs text-zinc-400 hover:text-red-500 transition-colors">锁定</button>
+      </div>
+      <div id="insights-container" class="space-y-6">
+        <p class="text-zinc-400 text-sm">加载中...</p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const STORAGE_KEY = 'dt_api_key';
+  const DEFAULT_API = 'https://dt-hub.CHANGEME.workers.dev';
+
+  function getApiBase(): string {
+    const input = document.getElementById('api-url') as HTMLInputElement;
+    return input?.value || localStorage.getItem('dt_api_url') || DEFAULT_API;
+  }
+
+  function saveApiBase(url: string) {
+    localStorage.setItem('dt_api_url', url);
+  }
+
+  async function fetchFull(apiKey: string): Promise<any> {
+    const base = getApiBase();
+    const res = await fetch(`${base}/api/user/arslonga?key=${encodeURIComponent(apiKey)}`);
+    if (!res.ok) throw new Error(res.status === 401 ? 'API Key 无效' : '请求失败');
+    return res.json();
+  }
+
+  function renderInsights(data: any) {
+    const container = document.getElementById('insights-container')!;
+    const layers = data.layers || {};
+    let html = '';
+
+    for (const [id, layer] of Object.entries(layers).reverse() as [string, any][]) {
+      const insights = layer.latest_insights || [];
+      if (insights.length === 0) continue;
+
+      html += `<div class="mb-6">
+        <h3 class="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-3">Layer ${id} · ${layer.name}</h3>
+        <div class="space-y-2">`;
+
+      for (const ins of insights) {
+        const confClass = ins.confidence === 'high'
+          ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400'
+          : 'bg-amber-500/20 text-amber-600 dark:text-amber-400';
+        html += `
+          <div class="p-3 rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <div class="flex items-start gap-2">
+              <span class="shrink-0 mt-0.5 text-xs px-1.5 py-0.5 rounded-full ${confClass}">
+                ${ins.confidence === 'high' ? '高' : '中'}
+              </span>
+              <div>
+                <p class="text-sm font-medium">${escapeHtml(ins.insight)}</p>
+                <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1">${escapeHtml(ins.evidence || '')}</p>
+                <p class="text-xs text-zinc-400 mt-0.5">${ins.date} · ${escapeHtml(ins.dimension)}</p>
+              </div>
+            </div>
+          </div>`;
+      }
+      html += '</div></div>';
+    }
+
+    container.innerHTML = html || '<p class="text-zinc-400 text-sm">暂无洞察数据</p>';
+  }
+
+  function escapeHtml(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  async function unlock() {
+    const keyInput = document.getElementById('apikey') as HTMLInputElement;
+    const errorEl = document.getElementById('error-msg')!;
+    const apiKey = keyInput.value.trim();
+
+    if (!apiKey) {
+      errorEl.textContent = '请输入 API Key';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    errorEl.classList.add('hidden');
+    const unlockBtn = document.getElementById('unlock-btn')!;
+    unlockBtn.textContent = '验证中...';
+    unlockBtn.setAttribute('disabled', 'true');
+
+    try {
+      const data = await fetchFull(apiKey);
+      localStorage.setItem(STORAGE_KEY, apiKey);
+      saveApiBase(getApiBase());
+
+      document.getElementById('locked')!.classList.add('hidden');
+      document.getElementById('unlocked')!.classList.remove('hidden');
+      document.getElementById('user-badge')!.textContent = '@arslonga';
+      document.getElementById('update-time')!.textContent = '最后更新: ' + (data.last_extraction || '未知');
+
+      renderInsights(data);
+    } catch (e: any) {
+      errorEl.textContent = e.message || '验证失败';
+      errorEl.classList.remove('hidden');
+    } finally {
+      unlockBtn.textContent = '解锁';
+      unlockBtn.removeAttribute('disabled');
+    }
+  }
+
+  // 自动重试已保存的 key
+  async function tryAutoUnlock() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    try {
+      const data = await fetchFull(saved);
+      document.getElementById('locked')!.classList.add('hidden');
+      document.getElementById('unlocked')!.classList.remove('hidden');
+      document.getElementById('user-badge')!.textContent = '@arslonga';
+      document.getElementById('update-time')!.textContent = '最后更新: ' + (data.last_extraction || '未知');
+      (document.getElementById('apikey') as HTMLInputElement).value = saved;
+      renderInsights(data);
+    } catch {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }
+
+  function lock() {
+    localStorage.removeItem(STORAGE_KEY);
+    document.getElementById('locked')!.classList.remove('hidden');
+    document.getElementById('unlocked')!.classList.add('hidden');
+    (document.getElementById('apikey') as HTMLInputElement).value = '';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const apiUrlInput = document.getElementById('api-url') as HTMLInputElement;
+    apiUrlInput.value = localStorage.getItem('dt_api_url') || DEFAULT_API;
+    apiUrlInput.addEventListener('change', () => saveApiBase(apiUrlInput.value));
+
+    document.getElementById('unlock-btn')!.addEventListener('click', unlock);
+    document.getElementById('apikey')!.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') unlock();
+    });
+    document.getElementById('lock-btn')?.addEventListener('click', lock);
+    document.getElementById('refresh-btn')?.addEventListener('click', async () => {
+      const key = localStorage.getItem(STORAGE_KEY);
+      if (key) {
+        try {
+          const data = await fetchFull(key);
+          renderInsights(data);
+          document.getElementById('update-time')!.textContent = '最后更新: ' + (data.last_extraction || '未知');
+        } catch {}
+      }
+    });
+
+    tryAutoUnlock();
+  });
+</script>

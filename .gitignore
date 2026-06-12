@@ -27,4 +27,4 @@ pnpm-debug.log*
 src/content/notes/
 
 # Private dimension data (full insights)
-data/dimensions.json
+data/users/*/dimensions.json
