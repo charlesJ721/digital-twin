@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-15T17:57:06.293460",
-  "total_sessions_processed": 3,
+  "last_extraction": "2026-06-15T22:00:00.000000",
+  "total_sessions_processed": 4,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -78,6 +78,15 @@
       "fill_rate": 60,
       "status": "partial",
       "latest_insights": [
+        {
+          "date": "2026-06-15",
+          "dimension": "行为模式",
+          "insight": "可逆性工程技术文档化：每次改动必留完整回溯路径（diff+验证+回滚命令+Obsidian存档），即使改动已验证正确。不可逆操作触发焦虑，必须确保状态变化可撤销。",
+          "confidence": "medium",
+          "evidence": "PR #17718补丁：三处代码改动已验证通过语法检查，仍选择先存档Obsidian记录（含完整回滚命令）再手动重启，而非立即重启验证。备份文件delegate_tool.py.bak-pr17718随时可回滚。",
+          "source": "hermes-cron",
+          "auto_diff": "🟡 与「战略性放弃」「保持现状」有主题关联（~25%重叠），但核心是行动后的可逆性保障而非行动前的回避——独立新增。"
+        },
         {
           "date": "2026-06-11",
           "dimension": "防御机制",
