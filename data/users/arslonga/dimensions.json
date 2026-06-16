@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-15T22:00:00.000000",
-  "total_sessions_processed": 4,
+  "last_extraction": "2026-06-17T02:00:00.000000",
+  "total_sessions_processed": 5,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -19,7 +19,7 @@
     },
     "2": {
       "name": "认知架构 (Cognitive Architecture)",
-      "fill_rate": 40,
+      "fill_rate": 50,
       "status": "partial",
       "latest_insights": [
         {
@@ -49,6 +49,24 @@
           "insight": "对「我怎么被人读懂」是认识论驱动（想知道洞察质量）而非情感驱动",
           "confidence": "high",
           "evidence": "测试洞察质量，而非关心内容对不对"
+        },
+        {
+          "date": "2026-06-16",
+          "dimension": "决策风格",
+          "insight": "AI时代PM角色杠杆意识：从提需求等排期转为用AI跑通原型再提协作请求，主动解除对工程团队的依赖，将自身重新定位为带着验证路径来协作的推动者而非等待资源的需求方",
+          "confidence": "high",
+          "evidence": "飞书会话：在讨论CLI基础设施迁移时明确规划了三周推进路径——第一周用AI自己跑通原型，第三周才找技术TL协作，核心判断是CLI层其实就是一层胶水代码AI已经能生成",
+          "source": "hermes-cron",
+          "auto_diff": "🟢 与现有L2洞察（相变型更新、保持现状偏误、信息完整性强迫）无重叠——这是专业角色定位的全新维度。"
+        },
+        {
+          "date": "2026-06-16",
+          "dimension": "决策风格",
+          "insight": "三段式叙事框架：对不同受众自动切换说服框架——技术团队说能力下沉、业务团队说快捷键、管理层说可组合性资产，基于对各自底层语言的深层理解而非表面操纵",
+          "confidence": "high",
+          "evidence": "飞书会话：在规划CLI基础设施推进时，系统性地为三类受众分别设计了不同的叙事——对技术讲前后端分离架构的延伸、对业务把CLI藏起来只说AI助手、对管理层把命令集比喻为可组合资产",
+          "source": "hermes-cron",
+          "auto_diff": "🟢 与现有L6信任/关系洞察（安全测试、信任建立条件）无重叠——这是职场利益相关者管理策略，非亲密关系模式。"
         }
       ]
     },
@@ -133,7 +151,7 @@
     },
     "5": {
       "name": "知识结构 (Knowledge Structure)",
-      "fill_rate": 55,
+      "fill_rate": 65,
       "status": "partial",
       "latest_insights": [
         {
@@ -182,6 +200,15 @@
           "confidence": "medium",
           "evidence": "SWE-bench Pro和GPQA Diamond基准推断，但编排能力无直接benchmark。",
           "source": "openclaw"
+        },
+        {
+          "date": "2026-06-16",
+          "dimension": "知识结构",
+          "insight": "方法论吸收模式：评估外部工具/方法论时采用吸星大法策略——不直接安装外部依赖，吸收设计模式核心原理改造到自有体系，保持体系闭环同时获得外部创新",
+          "confidence": "medium",
+          "evidence": "飞书会话：评估Superpowers时不安装而是识别3个可吸收模式（强制brainstorming、git worktree隔离、skill trigger机制），用不到1小时的轻量实现替代外部依赖",
+          "source": "hermes-cron",
+          "auto_diff": "🟡 与L4替代路径模式(~25%)和L1认知DIY本能(~20%)有主题关联，但吸收模式改造自有体系是独特的知识管理策略——独立新增。"
         }
       ]
     },
