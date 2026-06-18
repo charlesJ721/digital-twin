@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-17T02:00:00.000000",
-  "total_sessions_processed": 5,
+  "last_extraction": "2026-06-19T02:00:00.000000",
+  "total_sessions_processed": 8,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -19,7 +19,7 @@
     },
     "2": {
       "name": "认知架构 (Cognitive Architecture)",
-      "fill_rate": 50,
+      "fill_rate": 60,
       "status": "partial",
       "latest_insights": [
         {
@@ -67,6 +67,24 @@
           "evidence": "飞书会话：在规划CLI基础设施推进时，系统性地为三类受众分别设计了不同的叙事——对技术讲前后端分离架构的延伸、对业务把CLI藏起来只说AI助手、对管理层把命令集比喻为可组合资产",
           "source": "hermes-cron",
           "auto_diff": "🟢 与现有L6信任/关系洞察（安全测试、信任建立条件）无重叠——这是职场利益相关者管理策略，非亲密关系模式。"
+        },
+        {
+          "date": "2026-06-19",
+          "dimension": "元认知",
+          "insight": "执行铁律确立——当发现自己在复杂任务中跳过Scout-Establish-Review流程，主动设计三条硬约束强制刹停：交付物前移（第一句话必须是scout报告）、外部刹车点（每步完成前主动问用户确认才前进）、Memory写入（铁律每轮自动注入context）。从知道但没做到创建外部约束确保做的元认知升级。",
+          "confidence": "high",
+          "evidence": "CLI会话(6/18): 用户问'你为啥没这么走'时分析根因'因为没刹住车'，识别三个病灶（节奏惯性/假熟悉/没把调研当交付），主动设计三条硬约束而非口头承诺。关键转折：'问题不在不知道怎么做，在知道但没做。解决它不能靠我自己承诺——刚才3小时已经证明了承诺在压力下会蒸发。'",
+          "source": "hermes-cron",
+          "auto_diff": "🟢 与L2相变型更新者~15%（同属自我改变机制但领域不同），与L4可逆性工程~10%（都是预防性约束但不同维度），与现有所有洞察均<20%。"
+        },
+        {
+          "date": "2026-06-19",
+          "dimension": "决策风格",
+          "insight": "技术约束的条件性执念——当面对delegate_task无法指定不同子代理模型的技术约束时，反应不是接受限制而是'我绝对不相信，这条路不通！'——基于第一性原理判断（不同模型各擅胜场应该成立），系统搜索官方文档/社区/GitHub PRs直到找到PR #34773解决方案。将认知驱动本能外化到技术架构层的表现。",
+          "confidence": "medium",
+          "evidence": "CLI会话(6/18): 用户明确说'从真实需求出发，现在你很明确我的需求是不同模型做不同的事情，大家各自分工，各擅胜场，基于此，你去找...我绝对不相信，这条路不通！'Hermes搜索后找到PR #34773（5月29日已合入），测试通过。",
+          "source": "hermes-cron",
+          "auto_diff": "🟡 与L1认知驱动本能型~30%（底层动机相关但这是技术架构域的实例化），与L2保持现状偏误逻辑相反（这是主动打破现状），与L4替代路径模式~20%（都涉及绕开障碍但这是正向打破而非迂回）。整体<35%，独立入库但标注部分重叠。"
         }
       ]
     },
@@ -151,7 +169,7 @@
     },
     "5": {
       "name": "知识结构 (Knowledge Structure)",
-      "fill_rate": 65,
+      "fill_rate": 70,
       "status": "partial",
       "latest_insights": [
         {
@@ -209,6 +227,15 @@
           "evidence": "飞书会话：评估Superpowers时不安装而是识别3个可吸收模式（强制brainstorming、git worktree隔离、skill trigger机制），用不到1小时的轻量实现替代外部依赖",
           "source": "hermes-cron",
           "auto_diff": "🟡 与L4替代路径模式(~25%)和L1认知DIY本能(~20%)有主题关联，但吸收模式改造自有体系是独特的知识管理策略——独立新增。"
+        },
+        {
+          "date": "2026-06-19",
+          "dimension": "知识结构",
+          "insight": "结构化开源贡献模式——发现Hermes Agent typing indicator bug后，不仅确诊根因（流式输出chunk间typing重触发race condition），还系统性向GitHub issue #28004贡献三维度结构化信息：确诊方法（API旁路消息测试+gateway重启对照）、触发条件（长响应约116s+流式输出扩大race window）、止血方案（launchctl stop ai.hermes.gateway）。超越报告bug的结构化知识贡献行为。",
+          "confidence": "medium",
+          "evidence": "Telegram会话(6/18 22:09): Hermes分析typing indicator根因（race condition）后主动将结果贡献到GitHub issue #28004，补充三个维度的结构化信息并验证止血方案。",
+          "source": "hermes-cron",
+          "auto_diff": "🟢 与现有L5洞察均<10%——这是全新的知识外化行为模式（开源贡献），非方法论吸收或Agent架构。"
         }
       ]
     },
