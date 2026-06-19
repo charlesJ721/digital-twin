@@ -3,12 +3,23 @@ import Layout from '../../layouts/Layout.astro';
 import dimensions from '../../../data/users/arslonga/dimensions-public.json';
 
 const base = import.meta.env.BASE_URL;
-const layers = Object.entries(dimensions.layers).sort(([a], [b]) => Number(b) - Number(a));
+const layers = Object.entries(dimensions.layers).sort(([a], [b]) => Number(a) - Number(b));
+
+// 维度含义速查
+const layerDescriptions: Record<string, string> = {
+  '1': '人格特质：性格模式、核心驱动力',
+  '2': '认知架构：推理风格、决策偏好',
+  '3': '价值观与信念：行为选择背后的价值优先级',
+  '4': '行为模式：工作节奏、应对方式',
+  '5': '知识结构：知识领域、学习方式',
+  '6': '社会关系：信任模式、合作偏好',
+  '7': '叙事自我：自我认知、人生叙事',
+};
 
 // SVG params
 const cx = 150, cy = 150, r = 110;
 const n = layers.length;
-const startAngle = -Math.PI / 2; // start from top
+const startAngle = -Math.PI / 2;
 
 function getPoint(i: number, value: number) {
   const angle = startAngle + (2 * Math.PI * i) / n;
@@ -23,22 +34,19 @@ function getPoint(i: number, value: number) {
 
 const points = layers.map(([, layer], i) => getPoint(i, layer.fill_rate));
 const polygonPoints = points.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
-
-// Grid rings
 const rings = [25, 50, 75, 100];
 
-// Color by status
-function statusColor(status: string) {
-  return status === 'sparse' ? 'text-amber-500' : 'text-emerald-500';
-}
-function statusBg(status: string) {
-  return status === 'sparse' ? 'bg-amber-500/10' : 'bg-emerald-500/10';
+// Colors
+function colorForRate(rate: number): string {
+  if (rate >= 70) return 'emerald';
+  if (rate >= 50) return 'teal';
+  if (rate >= 30) return 'amber';
+  return 'red';
 }
 ---
 
 <Layout title="维度雷达图">
   <main class="min-h-screen px-6 py-12 max-w-4xl mx-auto">
-    <!-- Header -->
     <header class="mb-10">
       <a href={`${base}`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">← 首页</a>
       <h1 class="text-3xl font-bold mt-4 mb-2">维度雷达图</h1>
@@ -54,8 +62,8 @@ function statusBg(status: string) {
 
     <!-- Radar Chart -->
     <div class="flex flex-col lg:flex-row gap-8 items-start mb-12">
-      <div class="shrink-0">
-        <svg viewBox="0 0 300 300" class="w-[300px] h-[300px]" role="img" aria-label="七层维度雷达图">
+      <div class="shrink-0 relative group">
+        <svg viewBox="0 0 300 300" class="w-[320px] h-[320px]" role="img" aria-label="七层维度雷达图">
           <!-- Grid rings -->
           {rings.map(ring => (
             <polygon
@@ -65,27 +73,31 @@ function statusBg(status: string) {
               }).join(' ')}
               fill="none"
               stroke="currentColor"
-              class="text-zinc-200 dark:text-zinc-800"
+              class="text-zinc-200 dark:text-zinc-700"
               stroke-width="0.5"
             />
           ))}
           <!-- Axis lines -->
           {points.map(p => (
             <line x1={cx} y1={cy} x2={p.labelX - 15 * Math.cos(p.angle)} y2={p.labelY - 15 * Math.sin(p.angle)}
-              stroke="currentColor" class="text-zinc-300 dark:text-zinc-700" stroke-width="0.5" />
+              stroke="currentColor" class="text-zinc-300 dark:text-zinc-600" stroke-width="0.5" />
           ))}
           <!-- Data polygon -->
-          <polygon points={polygonPoints} fill="rgba(16,185,129,0.15)" stroke="rgb(16,185,129)" stroke-width="1.5" />
-          <!-- Data dots -->
-          {points.map(p => (
-            <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="3" fill="rgb(16,185,129)" />
+          <polygon points={polygonPoints} fill="rgba(16,185,129,0.12)" stroke="rgb(16,185,129)" stroke-width="1.5" />
+          <!-- Data dots with tooltip -->
+          {points.map((p, i) => (
+            <g>
+              <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="8" fill="transparent" class="cursor-pointer" />
+              <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="3" fill="rgb(16,185,129)" />
+              <title>L{layers[i][0]} {layers[i][1].name}：{layers[i][1].fill_rate}%（{layers[i][1].insight_count} 条洞察）</title>
+            </g>
           ))}
-          <!-- Labels -->
+          <!-- Layer number labels -->
           {points.map((p, i) => (
             <text
               x={p.labelX.toFixed(1)} y={p.labelY.toFixed(1)}
               text-anchor="middle" dominant-baseline="middle"
-              class="fill-zinc-600 dark:fill-zinc-400 text-[10px] font-medium"
+              class="fill-zinc-500 dark:fill-zinc-400 text-[10px] font-bold"
             >
               L{layers[i][0]}
             </text>
@@ -93,24 +105,33 @@ function statusBg(status: string) {
         </svg>
       </div>
 
-      <!-- Layer list -->
+      <!-- Layer detail list -->
       <div class="flex-1 space-y-3 w-full">
         {layers.map(([id, layer]) => (
           <div class="flex items-center gap-3 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-            <div class={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${layer.fill_rate > 30 ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-amber-500/20 text-amber-600 dark:text-amber-400'}`}>
+            <div class={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
+              layer.fill_rate >= 70 ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' :
+              layer.fill_rate >= 50 ? 'bg-teal-500/20 text-teal-600 dark:text-teal-400' :
+              layer.fill_rate >= 30 ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400' :
+              'bg-red-500/20 text-red-600 dark:text-red-400'
+            }`}>
               {id}
             </div>
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2">
                 <span class="text-sm font-medium truncate">{layer.name}</span>
-                <span class={`text-xs ${statusColor(layer.status)}`}>{layer.fill_rate}%</span>
+                <span class="text-xs text-zinc-400">{layer.fill_rate}%</span>
               </div>
               <div class="w-full h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 mt-1">
-                <div class={`h-full rounded-full transition-all ${layer.fill_rate > 30 ? 'bg-emerald-500' : 'bg-amber-500'}`}
-                  style={`width:${layer.fill_rate}%`}></div>
+                <div class={`h-full rounded-full transition-all ${
+                  layer.fill_rate >= 70 ? 'bg-emerald-500' :
+                  layer.fill_rate >= 50 ? 'bg-teal-500' :
+                  layer.fill_rate >= 30 ? 'bg-amber-500' :
+                  'bg-red-500'
+                }`} style={`width:${layer.fill_rate}%`}></div>
               </div>
               <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1">
-                {layer.insight_count} 条洞察
+                {layer.insight_count} 条洞察 · {layerDescriptions[id] || ''}
               </p>
             </div>
           </div>
@@ -118,7 +139,50 @@ function statusBg(status: string) {
       </div>
     </div>
 
-    <!-- Nav footer -->
+    <!-- Trend section (if history exists) -->
+    {dimensions.history && dimensions.history.length > 1 && (
+      <section class="mb-12">
+        <h2 class="text-xl font-semibold mb-4">趋势</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr class="border-b border-zinc-200 dark:border-zinc-800">
+                <th class="py-2 pr-4 text-zinc-400 font-normal">日期</th>
+                {layers.map(([id]) => (
+                  <th class="py-2 px-2 text-zinc-400 font-normal text-center">L{id}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {dimensions.history.slice().reverse().map((h: any) => (
+                <tr class="border-b border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900/50">
+                  <td class="py-2 pr-4 text-zinc-600 dark:text-zinc-300">{new Date(h.date).toLocaleDateString('zh-CN')}</td>
+                  {layers.map(([id]) => {
+                    const val = h.layers?.[id] ?? 0;
+                    const prev = dimensions.history[dimensions.history.indexOf(h) - 1]?.layers?.[id];
+                    const delta = prev ? val - prev : 0;
+                    return (
+                      <td class="py-2 px-2 text-center">
+                        <span class={delta > 0 ? 'text-emerald-500' : delta < 0 ? 'text-red-400' : 'text-zinc-400'}>
+                          {val}%
+                        </span>
+                        {delta !== 0 && (
+                          <span class={`text-[10px] ml-0.5 ${delta > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                            {delta > 0 ? '+' : ''}{delta}
+                          </span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    )}
+
+    <!-- Footer -->
     <footer class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex gap-6 text-sm text-zinc-400">
       <a href={`${base}`} class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">首页</a>
       <a href={`${base}/notes`} class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">笔记</a>

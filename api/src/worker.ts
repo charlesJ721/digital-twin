@@ -1,6 +1,6 @@
 /**
- * DT Hub — Cloudflare Worker API v2
- * Pull-Push + Review Gate: 所有外部推送进入待审队列，审核后入核心库
+ * DT Hub — Cloudflare Worker API v2.1
+ * Pull-Push + Review Gate + Notes endpoint
  */
 
 interface Env {
@@ -34,6 +34,14 @@ interface PostRequest {
   fill_rate_updates?: Record<string, number>;
 }
 
+interface Note {
+  id: string;
+  title: string;
+  body: string;
+  created_at: string;
+  source?: string;
+}
+
 // Trusted sources that auto-approve (Hermes cron job)
 const AUTO_APPROVE_SOURCES = ["hermes-cron", "hermes"];
 
@@ -51,6 +59,10 @@ function json(data: unknown, status = 200, extraHeaders?: HeadersInit): Response
     status,
     headers: { "Content-Type": "application/json", ...extraHeaders },
   });
+}
+
+function html(body: string, status = 200): Response {
+  return new Response(body, { status, headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
 
 function validateKey(key: string | null, env: Env): string | null {
@@ -74,7 +86,6 @@ function uid(): string {
 
 // ========== Validation ==========
 
-// 维度速查表：关键词 → layer ID
 const DIMENSION_MAP: Record<string, string> = {
   "开放性": "1", "尽责性": "1", "外向性": "1", "宜人性": "1",
   "情绪稳定": "1", "人格特质": "1", "动机结构": "1", "核心驱动力": "1",
@@ -104,9 +115,53 @@ function mapDimension(dimension: string): string | null {
 function validateInsight(insight: DimensionInsight): string | null {
   if (!insight.insight || insight.insight.length < 5) return "洞察文本过短";
   if (!insight.dimension) return "缺少维度标注";
-  if (!insight.confidence || !["high", "medium"].includes(insight.confidence)) return "置信度无效（需 high 或 medium）";
+  if (!insight.confidence || !["high", "medium"].includes(insight.confidence)) return "置信度无效";
   if (insight.insight.length > 200) return "洞察文本过长（>200字）";
-  return null; // valid
+  return null;
+}
+
+// ========== Notes: HTML rendering ==========
+
+function renderNoteHtml(note: Note): string {
+  // Basic markdown → HTML (handles headers, lists, bold, code, links)
+  let body = note.body
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/^### (.+)$/gm, "<h3>$1</h3>")
+    .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+    .replace(/^# (.+)$/gm, "<h1>$1</h1>")
+    .replace(/^- (.+)$/gm, "<li>$1</li>")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\n\n/g, "</p><p>")
+    .replace(/\n/g, "<br>");
+
+  return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${note.title} — DT Notes</title>
+<style>
+  body { max-width: 720px; margin: 2rem auto; padding: 0 1rem; font-family: -apple-system, system-ui, sans-serif; line-height: 1.7; color: #1a1a1a; background: #fafafa; }
+  h1 { font-size: 1.6rem; border-bottom: 2px solid #e0e0e0; padding-bottom: .5rem; }
+  h2 { font-size: 1.3rem; margin-top: 2rem; }
+  h3 { font-size: 1.1rem; }
+  code { background: #eee; padding: .15em .4em; border-radius: 3px; font-size: .9em; }
+  pre { background: #f0f0f0; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+  li { margin: .3em 0; }
+  .meta { color: #888; font-size: .85rem; margin-bottom: 1.5rem; }
+  a { color: #2563eb; }
+</style>
+</head>
+<body>
+<h1>${note.title}</h1>
+<div class="meta">${note.created_at.slice(0, 10)} · DT Hub Notes</div>
+<p>${body}</p>
+</body>
+</html>`;
 }
 
 // ========== GitHub helpers ==========
@@ -136,7 +191,7 @@ async function commitToGithub(path: string, content: string, message: string, en
     });
     if (infoRes.ok) sha = (await infoRes.json() as { sha?: string }).sha;
   }
-  const body: Record<string, string> = { message, content: btoa(content), branch: env.GITHUB_BRANCH };
+  const body: Record<string, string> = { message, content: btoa(unescape(encodeURIComponent(content))), branch: env.GITHUB_BRANCH };
   if (sha) body.sha = sha;
   const res = await fetch(url, {
     method: "PUT",
@@ -174,6 +229,17 @@ async function syncPublicToGithub(username: string, env: Env): Promise<void> {
   );
 }
 
+// Sync a note to GitHub Pages (accessible in China without proxy)
+async function syncNoteToGithub(username: string, note: Note, env: Env): Promise<string | null> {
+  const html = renderNoteHtml(note);
+  const path = `notes/${note.id}.html`;
+  const result = await commitToGithub(path, html, `note: ${note.title}`, env);
+  if (result) {
+    return `https://charlesj721.github.io/digital-twin/${path}`;
+  }
+  return null;
+}
+
 // ========== Route Handler ==========
 
 export default {
@@ -188,7 +254,96 @@ export default {
 
     // Health
     if (url.pathname === "/api/health") {
-      return json({ status: "ok", users: ["arslonga"], version: "v2-review-gate" }, 200, headers);
+      return json({ status: "ok", users: ["arslonga"], version: "v2.1-notes" }, 200, headers);
+    }
+
+    // ============================================================
+    // Notes endpoints (v2.1)
+    // ============================================================
+
+    // POST /api/user/:username/notes — 创建笔记
+    const notesPost = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/notes$/);
+    if (notesPost && request.method === "POST") {
+      const username = notesPost[1];
+      const authUser = validateKey(extractKey(request), env);
+      if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
+
+      try {
+        const body = await request.json() as { title: string; body: string; source?: string };
+        if (!body.title || !body.body) return json({ error: "title and body required" }, 400, headers);
+
+        const note: Note = {
+          id: uid(),
+          title: body.title,
+          body: body.body,
+          created_at: new Date().toISOString(),
+          source: body.source || "hermes",
+        };
+
+        // Store in KV, keep last 50 notes
+        const listKey = `notes:${username}`;
+        let existing: Note[] = [];
+        const raw = await env.DT_DATA.get(listKey);
+        if (raw) existing = JSON.parse(raw);
+        existing.unshift(note);
+        if (existing.length > 50) existing = existing.slice(0, 50);
+        await env.DT_DATA.put(listKey, JSON.stringify(existing));
+
+        // Sync to GitHub Pages (accessible from China without proxy)
+        const ghUrl = await syncNoteToGithub(username, note, env);
+
+        return json({
+          success: true,
+          id: note.id,
+          url: `https://dt-hub.chindowj721.workers.dev/api/user/${username}/notes/${note.id}`,
+          gh_url: ghUrl,
+        }, 201, headers);
+      } catch (e) {
+        return json({ error: String(e) }, 500, headers);
+      }
+    }
+
+    // GET /api/user/:username/notes — 列出所有笔记
+    const notesList = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/notes$/);
+    if (notesList && request.method === "GET") {
+      const username = notesList[1];
+      try {
+        const raw = await env.DT_DATA.get(`notes:${username}`);
+        const notes: Note[] = raw ? JSON.parse(raw) : [];
+        // Return list without full body
+        const summaries = notes.map(n => ({
+          id: n.id,
+          title: n.title,
+          created_at: n.created_at,
+          source: n.source,
+          preview: n.body.slice(0, 120) + (n.body.length > 120 ? "…" : ""),
+        }));
+        return json({ notes: summaries, count: summaries.length }, 200, headers);
+      } catch (e) {
+        return json({ error: String(e) }, 500, headers);
+      }
+    }
+
+    // GET /api/user/:username/notes/:id — 渲染单篇笔记
+    const notesGet = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/notes\/([a-zA-Z0-9]+)$/);
+    if (notesGet && request.method === "GET") {
+      const username = notesGet[1];
+      const noteId = notesGet[2];
+      try {
+        const raw = await env.DT_DATA.get(`notes:${username}`);
+        const notes: Note[] = raw ? JSON.parse(raw) : [];
+        const note = notes.find(n => n.id === noteId);
+        if (!note) return html("<h1>404</h1><p>Note not found</p>", 404);
+
+        // Check if client wants JSON
+        const accept = request.headers.get("Accept") || "";
+        if (accept.includes("application/json")) {
+          return json(note, 200, headers);
+        }
+        return html(renderNoteHtml(note));
+      } catch (e) {
+        return json({ error: String(e) }, 500, headers);
+      }
     }
 
     // ============================================================
@@ -212,7 +367,7 @@ export default {
     }
 
     // ============================================================
-    // POST /api/user/:username/insights — 推送洞察（入待审队列）
+    // POST /api/user/:username/insights — 推送洞察
     // ============================================================
     const postMatch = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/insights$/);
     if (postMatch && request.method === "POST") {
@@ -227,19 +382,16 @@ export default {
         const results: Record<string, unknown>[] = [];
         const autoApprove = AUTO_APPROVE_SOURCES.includes(body.source);
 
-        // 读取现有待审队列
         let pendingRaw = await env.DT_DATA.get(`review:${username}`);
         const pending: PendingInsight[] = pendingRaw ? JSON.parse(pendingRaw) : [];
 
         for (const raw of body.insights) {
-          // 验证
           const err = validateInsight(raw);
           if (err) {
             results.push({ insight: raw.insight?.slice(0, 30), status: "rejected", reason: err });
             continue;
           }
 
-          // 映射维度
           const mappedLayer = mapDimension(raw.dimension);
 
           const pendingItem: PendingInsight = {
@@ -251,7 +403,6 @@ export default {
           };
 
           if (autoApprove) {
-            // 自动审批：直接入核心库
             pendingItem.reviewed_at = pendingItem.pushed_at;
             await mergeToCore(username, pendingItem.insight, body.fill_rate_updates, env);
             pendingItem.status = "approved";
@@ -262,12 +413,10 @@ export default {
           }
         }
 
-        // 保存待审队列
         if (!autoApprove) {
           await env.DT_DATA.put(`review:${username}`, JSON.stringify(pending));
         }
 
-        // 记录日志
         await logReview(username, results, body.source, env);
 
         return json({
@@ -283,14 +432,13 @@ export default {
     }
 
     // ============================================================
-    // GET /api/user/:username/review — 查看待审队列
+    // Review endpoints (unchanged)
     // ============================================================
     const reviewGet = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/review$/);
     if (reviewGet && request.method === "GET") {
       const username = reviewGet[1];
       const authUser = validateKey(extractKey(request), env);
       if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
-
       try {
         const raw = await env.DT_DATA.get(`review:${username}`);
         const pending: PendingInsight[] = raw ? JSON.parse(raw) : [];
@@ -300,25 +448,18 @@ export default {
       }
     }
 
-    // ============================================================
-    // POST /api/user/:username/review/approve — 审批通过
-    // Body: { ids: ["id1", "id2"] }
-    // ============================================================
     const approveMatch = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/review\/approve$/);
     if (approveMatch && request.method === "POST") {
       const username = approveMatch[1];
       const authUser = validateKey(extractKey(request), env);
       if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
-
       try {
         const body = await request.json() as { ids: string[] };
         if (!body.ids?.length) return json({ error: "ids array required" }, 400, headers);
-
         const raw = await env.DT_DATA.get(`review:${username}`);
         let pending: PendingInsight[] = raw ? JSON.parse(raw) : [];
         const approved: PendingInsight[] = [];
         const remaining: PendingInsight[] = [];
-
         for (const item of pending) {
           if (body.ids.includes(item.id)) {
             item.status = "approved";
@@ -329,32 +470,25 @@ export default {
             remaining.push(item);
           }
         }
-
         await env.DT_DATA.put(`review:${username}`, JSON.stringify(remaining));
         await syncPublicToGithub(username, env);
         await logReview(username, approved.map(i => ({ id: i.id, action: "approved" })), "manual-review", env);
-
         return json({ approved: approved.length, remaining: remaining.length }, 200, headers);
       } catch (e) {
         return json({ error: String(e) }, 500, headers);
       }
     }
 
-    // ============================================================
-    // POST /api/user/:username/review/reject — 驳回
-    // ============================================================
     const rejectMatch = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/review\/reject$/);
     if (rejectMatch && request.method === "POST") {
       const username = rejectMatch[1];
       const authUser = validateKey(extractKey(request), env);
       if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
-
       try {
         const body = await request.json() as { ids: string[] };
         const raw = await env.DT_DATA.get(`review:${username}`);
         let pending: PendingInsight[] = raw ? JSON.parse(raw) : [];
         const rejected: PendingInsight[] = [];
-
         pending = pending.filter(item => {
           if (body.ids.includes(item.id)) {
             item.status = "rejected";
@@ -364,10 +498,8 @@ export default {
           }
           return true;
         });
-
         await env.DT_DATA.put(`review:${username}`, JSON.stringify(pending));
         await logReview(username, rejected.map(i => ({ id: i.id, action: "rejected" })), "manual-review", env);
-
         return json({ rejected: rejected.length, remaining: pending.length }, 200, headers);
       } catch (e) {
         return json({ error: String(e) }, 500, headers);
@@ -382,6 +514,9 @@ export default {
         "GET /api/user/:username/review",
         "POST /api/user/:username/review/approve",
         "POST /api/user/:username/review/reject",
+        "POST /api/user/:username/notes",
+        "GET /api/user/:username/notes",
+        "GET /api/user/:username/notes/:id",
         "GET /api/health",
       ]
     }, 404, headers);
@@ -393,11 +528,9 @@ export default {
 async function mergeToCore(username: string, insight: DimensionInsight, fillRateUpdates: Record<string, number> | undefined, env: Env): Promise<void> {
   let kvData = await env.DT_DATA.get(`user:${username}`);
   if (!kvData) {
-    // Try GitHub public version as base
     const pubRaw = await fetchFromGithub(`data/users/${username}/dimensions-public.json`, env);
     if (!pubRaw) return;
     const pub = JSON.parse(pubRaw);
-    // Convert public format to full format
     const layers: Record<string, Record<string, unknown>> = {};
     for (const [id, l] of Object.entries(pub.layers as Record<string, Record<string, unknown>>)) {
       layers[id] = { ...l as Record<string, unknown>, latest_insights: [] };
@@ -406,10 +539,7 @@ async function mergeToCore(username: string, insight: DimensionInsight, fillRate
   }
 
   const dims = JSON.parse(kvData);
-
-  // 匹配维度 → layer
   let targetLayer = mapDimension(insight.dimension) || "4";
-  // 如果 insight.dimension 已经包含 "→ L3" 格式，提取
   const arrowMatch = insight.dimension.match(/→ L(\d)/);
   if (arrowMatch) targetLayer = arrowMatch[1];
 
@@ -437,7 +567,6 @@ async function logReview(username: string, entries: Record<string, unknown>[], s
   const raw = await env.DT_DATA.get(key);
   const log: Record<string, unknown>[] = raw ? JSON.parse(raw) : [];
   log.push({ timestamp: new Date().toISOString(), source, entries });
-  // Keep last 500 entries
   if (log.length > 500) log.splice(0, log.length - 500);
   await env.DT_DATA.put(key, JSON.stringify(log));
 }
