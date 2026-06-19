@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-20T02:07:00.000000",
-  "total_sessions_processed": 10,
+  "last_extraction": "2026-06-19T18:07:20.229983+00:00",
+  "total_sessions_processed": 14,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -60,15 +60,6 @@
           "auto_diff": "🟢 与现有L2洞察（相变型更新、保持现状偏误、信息完整性强迫）无重叠——这是专业角色定位的全新维度。"
         },
         {
-          "date": "2026-06-16",
-          "dimension": "决策风格",
-          "insight": "三段式叙事框架：对不同受众自动切换说服框架——技术团队说能力下沉、业务团队说快捷键、管理层说可组合性资产，基于对各自底层语言的深层理解而非表面操纵",
-          "confidence": "high",
-          "evidence": "飞书会话：在规划CLI基础设施推进时，系统性地为三类受众分别设计了不同的叙事——对技术讲前后端分离架构的延伸、对业务把CLI藏起来只说AI助手、对管理层把命令集比喻为可组合资产",
-          "source": "hermes-cron",
-          "auto_diff": "🟢 与现有L6信任/关系洞察（安全测试、信任建立条件）无重叠——这是职场利益相关者管理策略，非亲密关系模式。"
-        },
-        {
           "date": "2026-06-19",
           "dimension": "元认知",
           "insight": "执行铁律确立——当发现自己在复杂任务中跳过Scout-Establish-Review流程，主动设计三条硬约束强制刹停：交付物前移（第一句话必须是scout报告）、外部刹车点（每步完成前主动问用户确认才前进）、Memory写入（铁律每轮自动注入context）。从知道但没做到创建外部约束确保做的元认知升级。",
@@ -103,6 +94,24 @@
           "evidence": "飞书会话(6/19 20:08): Hermes在回复中专门列出'审查者遗漏了什么'——指出审查未质疑核心架构、遗漏Phase 5.5知识沉淀机制、假设了服务化部署场景而非聊天界面。用户对此部分无异议，说明这正是他期望的评估深度。",
           "source": "hermes-cron",
           "auto_diff": "🟢 与L2元认知洞察（被人读懂是认识论驱动~15%同属元认知领域但方向不同；执行铁律~10%都是自我纠正机制但此是向上审视他者），与所有现有洞察均<20%。这是元认知域下的全新子维度：对外部智识来源的审查性评估。"
+        },
+        {
+          "date": "2026-06-20",
+          "dimension": "信息组织偏好",
+          "insight": "需求描述必须用自然语言而非技术解构，AI输出工程化项目文档时直接拒绝并示范正确格式",
+          "confidence": "high",
+          "evidence": "flclash会话：用户纠正AI输出格式，要求以自然语言描述需求",
+          "source": "hermes-cron",
+          "auto_diff": "GREEN: 与现有L2洞察均<15%，信息组织格式偏好是全新维度"
+        },
+        {
+          "date": "2026-06-20",
+          "dimension": "系统重构模式",
+          "insight": "递归式系统重构倾向，积累足够补丁后本能是完整重写编码全部教训而非增量修补",
+          "confidence": "high",
+          "evidence": "用户要求framework完整重写而非修补",
+          "source": "hermes-cron",
+          "auto_diff": "YELLOW: 与L2相变型更新~25%，同属非增量改变但这是系统设计域实例化"
         }
       ]
     },
@@ -191,6 +200,15 @@
           "evidence": "飞书会话(6/19 20:08): 在Hermes完成对三条审查建议的详细逆向分析（每条独立评估价值/问题/修正方向，并补充审查者遗漏点）后，用户仅回复'写吧'。无附加条件、无二次确认。Hermes随即写入三个补丁到skill文件。",
           "source": "hermes-cron",
           "auto_diff": "🟡 与L2保持现状偏误~25%（形成对称——这是确认后的快速行动端），与L4战略性放弃~30%（同一谱系的两端：不确定→不行动 vs 确认→即刻行动），与L4替代路径~15%（都是务实但方向不同）。整体<30%，是'决策速度'维度的新贡献而非已有洞察的重复。"
+        },
+        {
+          "date": "2026-06-20",
+          "dimension": "认知资源投资",
+          "insight": "愿意为思考质量支付真实成本，框架重写委托Claude加GPT对抗审查约0.30美元不求省",
+          "confidence": "high",
+          "evidence": "framework v2重写走完整A-SRE管线约0.30美元API成本",
+          "source": "hermes-cron",
+          "auto_diff": "GREEN: 与现有洞察均<10%"
         }
       ]
     },
@@ -220,14 +238,6 @@
           "insight": "Netflix Conductor的Decider-Worker分离原则适用LLM agent流水线：控制流决策由编排者自己做不委托，领域执行委托子代理。侦察阶段应拆为控制流判断+领域扫描两步而非混合。",
           "confidence": "high",
           "evidence": "Conductor核心架构，Orkes Agentic AI Explained文章。",
-          "source": "openclaw"
-        },
-        {
-          "date": "2026-06-15",
-          "dimension": "AI Agent架构",
-          "insight": "不同子代理角色的失败模式本质不同，重试策略应独立参数化而非一刀切：侦察失败因信息不可得（FIXED 2次），执行失败含瞬时故障（EXP_BACKOFF），审查者不应重试。社区实证超过2-3轮自反馈后模型振荡而非收敛。",
-          "confidence": "high",
-          "evidence": "Conductor Task Definition模式，Multi-Agent Reflexion论文，Metaswarm实践。",
           "source": "openclaw"
         },
         {
@@ -356,6 +366,19 @@
         "7": 45
       },
       "total_insights": 33
+    },
+    {
+      "date": "2026-06-19T18:07:20.229983+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 37
     }
   ]
 }
