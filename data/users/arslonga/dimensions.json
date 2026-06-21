@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-21T02:00:00.000000",
-  "total_sessions_processed": 16,
+  "last_extraction": "2026-06-21T18:02:09.772531+00:00",
+  "total_sessions_processed": 20,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -128,6 +128,13 @@
           "confidence": "high",
           "evidence": "用户在parallel-search修复后明确要求：'重新从phase1执行，保留现有内容，用parallel再来一遍，尽可能保证内容完整性'——此时浏览器通道已成功获取所有数据",
           "source": "hermes-cron"
+        },
+        {
+          "date": "2026-06-21",
+          "dimension": "认知架构",
+          "insight": "面对分类问题时本能采用双维正交标注而非单维替换——DT Hub升级时选择L1-L7层×memory_type五类的双轴结构，而非用新分类替代旧分类。反映认知偏好：吸收新模式时优先叠加而非替换，保留所有维度。",
+          "confidence": "high",
+          "evidence": "DT Hub升级方案原文：两条轴正交。本次升级的核心思路：为每条洞察新增Memory Type标签，叠加到现有L1-L7分类上。不替代，而是双维标注。"
         }
       ]
     },
@@ -297,6 +304,13 @@
           "evidence": "Telegram会话(6/18 22:09): Hermes分析typing indicator根因（race condition）后主动将结果贡献到GitHub issue #28004，补充三个维度的结构化信息并验证止血方案。",
           "source": "hermes-cron",
           "auto_diff": "🟢 与现有L5洞察均<10%——这是全新的知识外化行为模式（开源贡献），非方法论吸收或Agent架构。"
+        },
+        {
+          "date": "2026-06-21",
+          "dimension": "知识结构",
+          "insight": "Persona变体设计模式——将单一agent persona拆分为模型适配变体：DeepSeek用完整版(推理深度匹配)、Claude用精简版(三条底线去冗余)、GPT用头脑风暴版(发散优先)。不是'一个prompt适配所有模型'，而是根据模型特质定制交互协议，并在编排框架中显式标注每阶段的persona路由。",
+          "confidence": "high",
+          "evidence": "创建SOUL.md(78行)/SOUL-claude.md(37行)/SOUL-gpt.md(31行)；task-orchestration-framework SKILL.md模型分配矩阵新增Persona列。"
         }
       ]
     },
@@ -430,6 +444,19 @@
       },
       "total_insights": 40,
       "note": "No new insights. Sessions scanned: 20260619_200840_16abab5c (feishu, fully covered by prior extractions), 20260620_011318_d8f8786c (telegram, 118 msg, updated past last extraction at 22:58 but too large for cron parsing - marked for supplementary extraction in next interactive session). All behavioral patterns from these sessions (cross-model triangulation, 你怎么看+写吧 decision pulse, recursive framework review) already captured by 2026-06-20 runs."
+    },
+    {
+      "date": "2026-06-21T18:02:09.772531+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 42
     }
   ]
 }

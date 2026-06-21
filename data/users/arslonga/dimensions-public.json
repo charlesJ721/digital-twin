@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-20T18:01:27.308255",
-  "total_sessions_processed": 15,
+  "last_extraction": "2026-06-21T18:02:09.772531+00:00",
+  "total_sessions_processed": 20,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -13,7 +13,7 @@
       "name": "认知架构 (Cognitive Architecture)",
       "fill_rate": 60,
       "status": "partial",
-      "insight_count": 13
+      "insight_count": 14
     },
     "3": {
       "name": "价值观与信念 (Values & Beliefs)",
@@ -31,7 +31,7 @@
       "name": "知识结构 (Knowledge Structure)",
       "fill_rate": 70,
       "status": "partial",
-      "insight_count": 7
+      "insight_count": 8
     },
     "6": {
       "name": "社会关系 (Social Relations)",
@@ -98,6 +98,33 @@
         "7": 45
       },
       "total_insights": 40
+    },
+    {
+      "date": "2026-06-21T02:00:00.000000",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 40,
+      "note": "No new insights. Sessions scanned: 20260619_200840_16abab5c (feishu, fully covered by prior extractions), 20260620_011318_d8f8786c (telegram, 118 msg, updated past last extraction at 22:58 but too large for cron parsing - marked for supplementary extraction in next interactive session). All behavioral patterns from these sessions (cross-model triangulation, 你怎么看+写吧 decision pulse, recursive framework review) already captured by 2026-06-20 runs."
+    },
+    {
+      "date": "2026-06-21T18:02:09.772531+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 42
     }
   ]
 }
