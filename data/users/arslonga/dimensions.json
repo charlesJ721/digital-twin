@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-24T18:06:55.646049+00:00",
-  "total_sessions_processed": 28,
+  "last_extraction": "2026-06-25T18:09:27.495181+00:00",
+  "total_sessions_processed": 31,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -157,6 +157,72 @@
           "confidence": "medium",
           "evidence": "'我以为gateway影响的都只是涉及到飞书telegram的 本地终端也会被重启gateway影响到吗 我的意思是 有些改动其实是架构底层的 重启gateway能解决问题吗'——在Agent未显式建模分层时主动识别出跨层依赖",
           "source": "hermes-cron"
+        },
+        {
+          "id": "insight_2026-06-25T18-09-27-495181+00-00_0",
+          "date": "2026-06-25",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "调试中坚持溯源性证据链——面对异常不接受假设性解释，要求逐层硬证据验证。以delegate_task模型路由异常为例：系统prompt存储→state.db记录→API日志时间戳，三层交叉验证后才接受结论（micu API key缺少Opus/Gemini权限导致静默fallback）。推理链每一步必须有可验证的证据锚点，拒绝「可能是幻觉」类假设。",
+          "confidence": "high",
+          "evidence": "6/25会话：用户要求查系统prompt→查state.db→查API日志，三次工具调用逐层深入，拒绝表面假设",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260625_212449_2fa9e0",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260625_212449_2fa9e0",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-25T18:09:27.495181+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与L2「系统架构的分层直觉」(6/24)~20%（同属分层思维但领域不同：证据标准 vs 问题分解）；vs L2「信息完整性的主动冗余验证」(6/21)~15%"
+        },
+        {
+          "id": "insight_2026-06-25T18-09-27-495181+00-00_2",
+          "date": "2026-06-25",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "API Provider选型的冗余架构原则——非单点最优评估，而是设计多层容错：DeepSeek官方免费做日常主力+OpenRouter做Claude/GPT/Gemini高可靠补充通道。选型标准中稳定性权重远超价格（OpenRouter比No.1-API贵3倍但选前者），与已有的分层直觉同构但应用于API Provider域。",
+          "confidence": "medium",
+          "evidence": "6/25会话对比OpenRouter/No.1-API/micu/PackyAPI后的最终决策：DeepSeek官方+OpenRouter双通道",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260625_212449_2fa9e0",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.65,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260625_212449_2fa9e0",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-25T18:09:27.495181+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与L2「系统架构的分层直觉」(6/24)~30%重叠——降级medium标注部分重叠。同属分层冗余思维但应用域不同。"
         }
       ]
     },
@@ -284,6 +350,39 @@
           "confidence": "high",
           "evidence": "用户自述：'我抗拒结合工作构建自己的个人助理反而想在一台独立的pc上脱离工作构建（也就是你）'",
           "source": "hermes-cron"
+        },
+        {
+          "id": "insight_2026-06-25T18-09-27-495181+00-00_1",
+          "date": "2026-06-25",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "基础设施的预防性硬化——单次会话完成9项跨子系统修复，非被动响应故障而是主动识别系统性弱点并前置消除。修复覆盖插件层（tirith fail_close+Pattern 4a）、配置层（vision模型替换）、系统层（watchdog/guardian参数统一至90s/5次）、安全层（cron plist注入修复）、运维层（memory 93%→80%）。不等「出问题再修」，在正常运行时寻找并消除潜在弱点。",
+          "confidence": "high",
+          "evidence": "6/25会话一次性完成9项修复涉及config.yaml/plugin/多个脚本文件，跨5个层次",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260625_212449_2fa9e0",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260625_212449_2fa9e0",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-25T18:09:27.495181+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与L4「可逆性工程技术文档化」(6/15)~15%；vs L4「认知资源投资」(6/20)~10%"
         }
       ]
     },
@@ -568,6 +667,19 @@
         "7": 45
       },
       "total_insights": 50
+    },
+    {
+      "date": "2026-06-25T18:09:27.495181+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 53
     }
   ]
 }
