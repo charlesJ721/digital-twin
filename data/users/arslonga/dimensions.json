@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-25T18:09:27.495181+00:00",
-  "total_sessions_processed": 31,
+  "last_extraction": "2026-06-27T18:03:34.329104+00:00",
+  "total_sessions_processed": 38,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -223,6 +223,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与L2「系统架构的分层直觉」(6/24)~30%重叠——降级medium标注部分重叠。同属分层冗余思维但应用域不同。"
+        },
+        {
+          "id": "insight_2026-06-27T18-03-34-329104+00-00_0",
+          "date": "2026-06-27",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "过程真实性优先于名义完备——当系统宣称完成多模型对抗审查时，用户不接受报告标题和流程标签，而是追问实际执行模型是否真的不同。发现历史审查实际全跑在同一模型后，立即要求在当前已验证委托流程下重跑复盘。用户的质量标准不是“流程看起来完整”，而是“关键机制真实生效且可被证据验证”。",
+          "confidence": "high",
+          "evidence": "6/27-6/28 会话：用户指出“我发现这些审查报告并没有真实用不同模型对抗审查”，随后要求“重新启动当前确认有效的委托流程，重新针对session里提到的问题做完整复盘和解决方案规划”。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260627_202459_ddf20093",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260627_202459_ddf20093",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-27T18:03:34.329104+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L5『对抗审查的真实来源不是提示词而是不同模型+新会话』约35%重叠，但本条新增的是用户对“流程真实性/执行真实性”的验收标准，属于认知质量门的行为化表达，非单纯架构知识。"
+        },
+        {
+          "id": "insight_2026-06-27T18-03-34-329104+00-00_1",
+          "date": "2026-06-27",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "审查对象从方案扩展到已执行状态——面对历史整改复盘，用户明确要求不仅重新审查方案，还要审查“已经改完的任务是否合理、应不应该这么改、还有没有问题”。这体现其决策校验不止停留在事前规划，而会追溯到事后实施合理性，关注实际系统状态与原始意图之间是否发生偏移。",
+          "confidence": "high",
+          "evidence": "用户补充：“我注意到在之前的session里你已经把你规划的不需要我确认的任务都改完了……所以你重新审查也需要考虑这一点哈，改完之后是否合理，或者应不应该这么改，还有没有啥问题”。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260627_202459_ddf20093",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260627_202459_ddf20093",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-27T18:03:34.329104+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与 L4『基础设施预防性硬化』约15%、L2『外部审查的认知过滤双阶段』约20%相关，但本条新增“实施后合理性审计”这个明确质量门。"
+        },
+        {
+          "id": "insight_2026-06-27T18-03-34-329104+00-00_4",
+          "date": "2026-06-27",
+          "dimension": "元认知",
+          "layer": "L2",
+          "insight": "完整性校验会下钻到框架覆盖范围——当助手提出 Establisher/Designer/Reviewer 三角色时，用户立即追问“只有这三个角色，能满足完整的 SERI 需求吗，ASRE 能完整满足吗”。这说明用户不会被简洁三角色方案的优雅性满足，而会主动检查它是否覆盖完整方法论链条，尤其警惕把中段认知编排误称为完整工程交付管道。",
+          "confidence": "high",
+          "evidence": "用户问题：“只有这三个角色，能满足完整的 seri 需求吗  asre 能完整满足吗”。助手随后承认三角色只能覆盖 Establish→Design→Review，不能完整覆盖 SERI/A-SRE。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260627_202459_ddf20093",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260627_202459_ddf20093",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-27T18:03:34.329104+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与现有 L2 信息完整性洞察约20%，但本条是方法论覆盖完整性的校验，而非资料完整性或多通道验证。"
         }
       ]
     },
@@ -469,6 +568,72 @@
           "confidence": "high",
           "evidence": "'pending吧，加入到需要我手动操作的清单里，和之前的一些合并到一起' → 生成12项按五组依赖链分组的清单存入vault → '10 FlClash导入...已经完成了' → agent立即更新勾销状态",
           "source": "hermes-cron"
+        },
+        {
+          "id": "insight_2026-06-27T18-03-34-329104+00-00_2",
+          "date": "2026-06-27",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "框架内核化倾向——当 orchestrate_task 被讨论为工具时，用户主动纠正定位：它不应是 TOF 旁边的可选工具，而应成为 Task Orchestration Framework 的核心执行能力。用户倾向把有效实践从局部功能上升为系统运行内核：框架负责宪法/状态机/质量门，工具负责把框架真实执行出来。",
+          "confidence": "high",
+          "evidence": "用户原话：“我思考 orchestrate_task 的本质就是成为 TOF 的核心能力，所以我希望你是基于当前的 TOF 的架构来设计 OT 的框架”。随后要求重写为“OT 是 TOF 的核心执行内核”的完整架构文档。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260627_202459_ddf20093",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260627_202459_ddf20093",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-27T18:03:34.329104+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L2『递归式系统重构倾向』约30%、L5『工作流编排』约25%重叠；新增点是“从工具到运行时内核”的抽象升级模式，保留为 L5 知识结构。"
+        },
+        {
+          "id": "insight_2026-06-27T18-03-34-329104+00-00_3",
+          "date": "2026-06-27",
+          "dimension": "知识管理",
+          "layer": "L5",
+          "insight": "长内容交付的持久化优先规则被行为强化——当对话输出因长度限制被截断时，用户立即追问“文件呢？当前 sessionid”，要求把完整架构设计落到 Obsidian 文件而不是继续塞进聊天流。用户对复杂认知产物的默认期望是可检索、可引用、可延续的文件化交付，而不是一次性聊天回答。",
+          "confidence": "high",
+          "evidence": "6/28 会话中连续出现：“为什么到这里就断了？”、“⚠️ Response truncated due to output length limit”、“文件呢？”、“当前 sessionid”。随后生成 Obsidian 文件：AI 工具与配置/模型路由与子代理/2026-06-28 orchestrate_task 作为 TOF 执行内核架构设计.md。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "20260627_202459_ddf20093",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "20260627_202459_ddf20093",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-27T18:03:34.329104+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L5『结构化待办清单存入 Obsidian』约25%重叠，但本条聚焦长篇架构/认知产物的文件化交付偏好，不是待办管理。"
         }
       ]
     },
@@ -680,6 +845,19 @@
         "7": 45
       },
       "total_insights": 53
+    },
+    {
+      "date": "2026-06-27T18:03:34.329104+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 58
     }
   ]
 }
