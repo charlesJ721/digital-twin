@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-28T18:04:53.288147+00:00",
-  "total_sessions_processed": 39,
+  "last_extraction": "2026-06-29T18:05:23.921216+00:00",
+  "total_sessions_processed": 42,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -388,6 +388,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 现有L2洞察涵盖推理风格/决策风格/信息处理/元认知/信息组织/系统重构，无一涉及记忆系统架构设计。与L5「知识组织」(6/22)~15%相关但层面不同（L5是用户自身知识结构，L2是agent记忆架构设计原则）。完全独立的新维度"
+        },
+        {
+          "id": "insight_2026-06-29T18:05:23.921216+00:00_0",
+          "date": "2026-06-29",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "纪律优先于代码的最简原则——当preflight双实例bug有两种修复方案（A: wrapper加pgrep守卫/B: 记住用kickstart替代bootout+bootstrap），用户选择B：操作纪律优于代码复杂性。这与已有的「递归式系统重构倾向」形成镜像——面对同样的问题，本能不是「写更多代码来防范」，而是「不引入新代码，用纪律约束」。展现了对复杂性的清醒阈值意识：代码增长本身是成本，能用操作纪律解决的问题不应编码化",
+          "confidence": "high",
+          "evidence": "两个方案：A wrapper加pgrep守卫（防御性，保险），B 记住下次用kickstart而非bootout+bootstrap（操作性，更干净）。用户选B——'B吧'",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260629_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260629_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-29T18:05:23.921216+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与L2「递归式系统重构倾向」(6/20)~15%——这是反方向（不编码化 vs 完整重写）；与L2「ROI权衡本能」(6/28)~20%（同属成本意识但领域不同）。整体<25%，独立入库"
         }
       ]
     },
@@ -581,6 +614,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与L4「可逆性工程技术文档化」(6/15)~15%；vs L4「认知资源投资」(6/20)~10%"
+        },
+        {
+          "id": "insight_2026-06-29T18:05:23.921216+00:00_1",
+          "date": "2026-06-29",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "安全防护的精确校调而非粗暴开关——用户设计的preflight guardrail在vault文档写入场景产生误拦后，选择「调整规则放行管道」（添加安全路径白名单、将write_file拦截逻辑从OR改为AND）而非关闭防护。修复方案在保留安全网核心的同时消除了写作误报。与「可逆性工程」不同——后者是确保改动可回滚，这是精确校准安全边界而非全有或全无。展现了「信任但要调校」的工程态度",
+          "confidence": "high",
+          "evidence": "用户原话：'A 吧，或者你重新审查一下现在的规则，看看是不是可以调整一下放行管道'。修复后：write_file拦截从路径OR内容→路径AND内容，vault路径直接放行",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260629_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260629_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-29T18:05:23.921216+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与L4「可逆性工程」(6/15)~15%（都是预防性约束但领域不同）；与L4「基础设施预防性硬化」(6/25)~20%（同属系统加固但这是事后精确校调非前置预防）。整体<25%，独立入库"
+        },
+        {
+          "id": "insight_2026-06-29T18:05:23.921216+00:00_2",
+          "date": "2026-06-29",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "代理输出的独立验证机制——不接受agent的自我报告为事实，而是独立验证执行结果。在agent报告vault整理完成（67篇、0散落）后，用户手动检查发现文件误写到iCloud路径并自行拖文件修复。这不是不信任，而是一种健康的验证协议：agent的自我报告是一个信号而非事实，必须经独立通道确认。与「过程真实性优先于名义完备」(L2, 6/27)同构但应用于工具执行层（非模型推理层），表明验证机制已从认知域泛化到操作域",
+          "confidence": "medium",
+          "evidence": "用户原话：'我之所以刚才手动拖了一些文件进来，是因为我发现你有些文档写到了icloud目录里，而不是本地vault目录'。此前agent两次报告vault整理完成但未发现路径错误",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260629_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260629_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-29T18:05:23.921216+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与L2「过程真实性优先于名义完备」(6/27)~35%重叠（同一验证范式但应用域不同：模型输出验证 vs 工具执行验证）；降级medium。这是验证范式的跨域泛化证据"
         }
       ]
     },
@@ -733,6 +832,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 L5『结构化待办清单存入 Obsidian』约25%重叠，但本条聚焦长篇架构/认知产物的文件化交付偏好，不是待办管理。"
+        },
+        {
+          "id": "insight_2026-06-29T18:05:23.921216+00:00_3",
+          "date": "2026-06-29",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "教训工程化的完整闭环——6/23宕机事故→整改方案文档→preflight guardrail插件代码实现→6/29规则调优（安全路径白名单+AND逻辑）。完整展示了「单点故障→根因分析→系统性防护→持续改进」的工程化学习周期，每一步都有文档/代码/调优记录。与「基础设施预防性硬化」(6/25)互补——前者是前置消除潜在弱点，此是事故后的系统性防御建设+持续优化",
+          "confidence": "medium",
+          "evidence": "6/23宕机复盘文档→整改方案Phase 1: Pre-flight拦截模型升级→6/29 preflight插件调优session：添加safe write paths、修改OR→AND逻辑、重启gateway验证",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260629_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260629_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-29T18:05:23.921216+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与L4「基础设施预防性硬化」(6/25)~30%重叠——同属系统加固行为但方向不同（前置预防 vs 事后闭环），降级medium。这是防御性工程化学习闭环的完整实例"
         }
       ]
     },
@@ -1003,6 +1135,19 @@
         "7": 45
       },
       "total_insights": 62
+    },
+    {
+      "date": "2026-06-29T18:05:23.921216+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 66
     }
   ]
 }
