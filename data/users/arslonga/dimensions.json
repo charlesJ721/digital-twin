@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-29T18:05:23.921216+00:00",
-  "total_sessions_processed": 42,
+  "last_extraction": "2026-06-30T18:07:53.427368+00:00",
+  "total_sessions_processed": 48,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -421,6 +421,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与L2「递归式系统重构倾向」(6/20)~15%——这是反方向（不编码化 vs 完整重写）；与L2「ROI权衡本能」(6/28)~20%（同属成本意识但领域不同）。整体<25%，独立入库"
+        },
+        {
+          "id": "insight_2026-06-30T18:07:53.427368+00:00_1",
+          "date": "2026-06-30",
+          "dimension": "L2 认知架构 / 线性追溯验证",
+          "layer": "L2",
+          "insight": "面对技术问题时，用户倾向于从「历史成功案例」开始推理——「我曾经用 hermes 调通过」成为当前故障排查的起点。这显示出一种从已知工作状态向当前问题状态的线性对比分析思路。",
+          "confidence": "medium",
+          "evidence": "USER开场就说「先解决 claude 的问题，因为我曾经用 hermes 调通过」——将历史成功经验作为当前技术故障的诊断基准线。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260630_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260630_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-30T18:07:53.427368+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "这与已有的「第一性原理推理」洞察并不矛盾——用户会从成功案例回溯差异点，然后深入到底层原理。线性追溯是第一性原理分析的前置步骤。"
         }
       ]
     },
@@ -680,6 +713,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与L2「过程真实性优先于名义完备」(6/27)~35%重叠（同一验证范式但应用域不同：模型输出验证 vs 工具执行验证）；降级medium。这是验证范式的跨域泛化证据"
+        },
+        {
+          "id": "insight_2026-06-30T18:07:53.427368+00:00_0",
+          "date": "2026-06-30",
+          "dimension": "L4 行为模式 / 系统性归档",
+          "layer": "L4",
+          "insight": "用户在深度技术对话后习惯性要求「回顾」或「整理」——这次明确说「回顾一下你给delegate_task打的7个补丁，以及你给官方提的issue」。这表明用户将复杂信息的系统化梳理视为必要的认知闭环，不是可选的便利功能。",
+          "confidence": "high",
+          "evidence": "USER说「回顾一下你给delegate_task打的7个补丁，以及你给官方提的issue」——在一个包含362条消息、146次工具调用、成本$2.64的深度会话结束时，主动要求全局回顾和结构化整理。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260630_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260630_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-30T18:07:53.427368+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与已有的「系统性文档化」洞察相比，这次更聚焦于「技术实施后的归档回顾」——不只是做完记录，而是主动要求对复杂技术流程做结构化复盘。"
+        },
+        {
+          "id": "insight_2026-06-30T18:07:53.427368+00:00_3",
+          "date": "2026-06-30",
+          "dimension": "L4 行为模式 / 持续性技术跟进",
+          "layer": "L4",
+          "insight": "在长时间技术改进项目中（delegate_task的7个补丁+官方issue），用户会保持持续的项目状态跟踪意识，定期要求全局review而非仅关注当前问题点。这反映出项目管理中的系统性跟进习惯。",
+          "confidence": "high",
+          "evidence": "会话包含362条消息和$2.64成本，涉及复杂的delegate_task补丁工作，用户在过程中主动要求「回顾」所有技术改进，展现出对长期技术项目的整体把控意识。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260630_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260630_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-30T18:07:53.427368+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "这扩展了已有的「多阶段验证」洞察——不仅在技术实施中要求验证，在项目周期管理上也要求定期的全局回顾和状态同步。"
         }
       ]
     },
@@ -865,6 +964,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与L4「基础设施预防性硬化」(6/25)~30%重叠——同属系统加固行为但方向不同（前置预防 vs 事后闭环），降级medium。这是防御性工程化学习闭环的完整实例"
+        },
+        {
+          "id": "insight_2026-06-30T18:07:53.427368+00:00_2",
+          "date": "2026-06-30",
+          "dimension": "L5 知识结构 / 多模态信息整合",
+          "layer": "L5",
+          "insight": "用户在技术故障描述时会同时提供截图和文字说明（「还是这一堆」配合Telegram界面截图），表现出将视觉信息和语言描述并行使用来提高信息传递精度的习惯。",
+          "confidence": "medium",
+          "evidence": "USER发送了详细的Telegram界面截图（包含provider选择菜单、DeepSeek已选中等UI细节），同时用「还是这一堆」进行情绪化的文字补充说明。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260630_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260630_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-06-30T18:07:53.427368+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "这是对已有「结构化信息组织」洞察的补充——不仅要求信息结构化，在输入端也会主动提供多种信息模态来降低理解成本。"
         }
       ]
     },
@@ -1148,6 +1280,19 @@
         "7": 45
       },
       "total_insights": 66
+    },
+    {
+      "date": "2026-06-30T18:07:53.427368+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 70
     }
   ]
 }
