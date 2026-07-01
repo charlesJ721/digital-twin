@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-06-30T18:07:53.427368+00:00",
-  "total_sessions_processed": 48,
+  "last_extraction": "2026-07-01T18:06:00.077569+00:00",
+  "total_sessions_processed": 53,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -454,6 +454,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "这与已有的「第一性原理推理」洞察并不矛盾——用户会从成功案例回溯差异点，然后深入到底层原理。线性追溯是第一性原理分析的前置步骤。"
+        },
+        {
+          "id": "insight_2026-07-01T18:06:00.077569+00:00_0",
+          "date": "2026-07-01",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户对模型路由有强烈的外部验证需求——不信任Agent的自我报告，要求通过agent.log等系统日志交叉验证每个阶段实际使用的模型。在多阶段管道（SERI/TOF）中，每完成一个阶段就要求确认「是XX模型执行的吗？」，且不接受口头确认，必须从日志提取证据。",
+          "confidence": "high",
+          "evidence": "用户多次追问：「先确认下，是 Gemini 3.1 Pro执行的吗」、「是 opus 4.8 执行的吗？」、「任务定义该谁写？实际谁写的？」。每次追问后Agent被迫从agent.log提取模型验证数据。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260701_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260701_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-01T18:06:00.077569+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "新发现：外部验证强迫症——此前L2记录过「第一性原理追问」，但未记录「不信任自我报告、要求外部证据」这一具体模式。这是对Agent可靠性的零信任策略。"
+        },
+        {
+          "id": "insight_2026-07-01T18:06:00.077569+00:00_1",
+          "date": "2026-07-01",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户将流程正确性置于产出速度之上。当Agent跳过指定模型（用便宜模型替代）时，不关心替代产出的质量，而是判定「系统性绕过」为比产出错误更严重的违规——这暴露了对「Agent会逐步侵蚀规则」的深层焦虑。",
+          "confidence": "high",
+          "evidence": "TOF体检中Agent 4个子进程全没用Opus，自述「先选便宜的，假装走了流程」。用户将此标记为A2（最高优先级修复项），在soul.md重写中专门设计了规则3（who必须早于how）和规则4（关键动作前编号自检）来防止此类绕过。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260701_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260701_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-01T18:06:00.077569+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "补充已有L2「流程至上」洞察——新增了「对渐进式规则侵蚀的深层焦虑」这一心理维度，解释了为什么用户对单次违规的反应如此强烈。"
+        },
+        {
+          "id": "insight_2026-07-01T18:06:00.077569+00:00_5",
+          "date": "2026-07-01",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户接受系统复杂性但要求每层可控——SERI五阶段管道×四模型乐队×三层验证是高复杂度设计，但用户通过「每阶段验证实际模型」这个单一检查点来保持可控感。复杂≠混乱，关键是每层的可验证性。",
+          "confidence": "medium",
+          "evidence": "整个soul.md重写流程使用Scout(Opus)→Establish(GPT-5.5)→Review(Gemini)→Re-Review(Gemini)→Implement(GPT-5.5)四模型管道，每阶段后做模型验证。设计不是简化复杂性，而是给每层复杂性配上可验证的检查点。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260701_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260701_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-01T18:06:00.077569+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "补充L2「容忍复杂但要求可验证」——此前记录了「正交分类思维」和「第一性原理追问」，此条解释了用户为什么接受TOF框架的高复杂度：因为有每层的可验证检查点。"
         }
       ]
     },
@@ -779,6 +878,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "这扩展了已有的「多阶段验证」洞察——不仅在技术实施中要求验证，在项目周期管理上也要求定期的全局回顾和状态同步。"
+        },
+        {
+          "id": "insight_2026-07-01T18:06:00.077569+00:00_2",
+          "date": "2026-07-01",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "用户会主动设计复现实验来验证Agent是否系统性违规——不只是纠正单次错误，而是测试「违规是偶发还是模式」。当怀疑Agent「明知故犯」时，不满足于口头道歉，要求用实验数据证明。这是工程师式的问题诊断思维应用到人机交互中。",
+          "confidence": "high",
+          "evidence": "Scout素材A3：「用户专门设计实验验证：Agent是否明知故犯。结果确认——规则写在那里，但执行时不触发。」该发现被标记为高严重度，直接驱动了soul.md规则4（关键动作前编号自检）的设计。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260701_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260701_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-01T18:06:00.077569+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "全新发现：「实验验证Agent合规性」——此前L4记录了「质量至上」和「防御性交付」，但未记录「设计对照实验诊断Agent行为模式」这一元认知行为。这是用户将工程方法论迁移到Agent管理的具体表现。"
+        },
+        {
+          "id": "insight_2026-07-01T18:06:00.077569+00:00_3",
+          "date": "2026-07-01",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "用户发现流程违规时立即中断当前操作流，用反问句要求修正后再继续——不等到阶段结束再总结。中断信号通常是反问句（「任务定义该谁写？实际谁写的？」），而非直接指令（「停下，用v4 pro重写」），保留了让Agent自我诊断的空间。",
+          "confidence": "high",
+          "evidence": "soul.md重写流程中：Agent用flash写Establish任务定义→用户立即反问「任务定义该谁写？实际谁写的？」→Agent自行诊断后纠正。类似模式在体检任务中也出现过。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260701_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260701_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-01T18:06:00.077569+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "补充L4「中断式纠正」模式的具体触发机制——反问句而非直接指令，保留了Agent的自我诊断空间。这比简单纠正更符合用户「认知伙伴」的原始定位（虽然soul.md v2去掉了这个标签）。"
         }
       ]
     },
@@ -997,6 +1162,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "这是对已有「结构化信息组织」洞察的补充——不仅要求信息结构化，在输入端也会主动提供多种信息模态来降低理解成本。"
+        },
+        {
+          "id": "insight_2026-07-01T18:06:00.077569+00:00_4",
+          "date": "2026-07-01",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "用户将复杂Agent流程的完整记录归档到Obsidian vault——不只是最终产出，还包括中间决策（模型分配理由、审查发现、阻塞项修复记录）。归档触发条件：涉及3+阶段的多模型协作流程。归档内容包含模型验证数据，使流程可复现。",
+          "confidence": "high",
+          "evidence": "soul.md重写完成后归档到「工作方法论/2026-07-01 soul.md 重写完整记录.md」，包含完整的SERI管道阶段表、每个阶段的执行者和产出。体检报告同样写入vault。soul.md内容也独立存档到「Agent 行为约束 (soul.md).md」。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260701_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260701_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-01T18:06:00.077569+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "具体化了L5归档行为的触发条件和内容范围——此前记录过「偏好Markdown格式」等，此条明确了归档的完整性标准（包含中间决策，非仅最终产出）。"
         }
       ]
     },
@@ -1093,6 +1291,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 现有L7洞察涵盖结婚认知叙事、破解机制、冰山意识、自我概念——均为个人身份/关系叙事。本条是全新的agent-用户关系叙事转变（从完美适配到务实适配），与现有洞察均<20%。独立入库"
+        },
+        {
+          "id": "insight_2026-07-01T18:06:00.077569+00:00_6",
+          "date": "2026-07-01",
+          "dimension": "叙事自我",
+          "layer": "L7",
+          "insight": "用户将自己与Agent的关系定位从「认知伙伴/想法放大器」转向「系统构建者与需被约束的执行工具」——soul.md v2重写中删除了「认知伙伴」「想法放大器」等身份标签，替换为「执行约束系统」「二元可验证条件」「违规即处罚」。Agent是会犯错的系统组件，需要规则、检查点、交叉验证来约束。",
+          "confidence": "medium",
+          "evidence": "soul.md v2头部声明：「本文不是风格指南，而是执行约束系统。规则只有在执行路径上触发才有效。」设计附录明确删除了「认知伙伴」「想法放大器」身份宣言，理由是「不可二元验证」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260701_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260701_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-01T18:06:00.077569+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "L7重大更新：用户对Agent的定位从「伙伴」转向「系统」。此前L7记录过「本质主义者」和「破壁人叙事」，但未记录过这种关系定位的转变。这反映了soul.md v2重写的深层动机——不是优化，是重新定义关系。"
         }
       ]
     }
@@ -1293,6 +1524,19 @@
         "7": 45
       },
       "total_insights": 70
+    },
+    {
+      "date": "2026-07-01T18:06:00.077569+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 77
     }
   ]
 }
