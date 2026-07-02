@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-01T18:06:00.077569+00:00",
-  "total_sessions_processed": 53,
+  "last_extraction": "2026-07-02T18:05:53.693944+00:00",
+  "total_sessions_processed": 57,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -553,6 +553,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "补充L2「容忍复杂但要求可验证」——此前记录了「正交分类思维」和「第一性原理追问」，此条解释了用户为什么接受TOF框架的高复杂度：因为有每层的可验证检查点。"
+        },
+        {
+          "id": "insight_2026-07-02T18:05:53.693944+00:00_0",
+          "date": "2026-07-02",
+          "dimension": "信息组织偏好",
+          "layer": "L2",
+          "insight": "文件职责边界的精准修剪模式——用户对系统文件（soul.md/profile.md/working-memory.md）的职责边界敏感度不是抽象偏好而是操作实践。能主动指出具体越界实例（「核选项同时在两个文件」「结论先行被规则5和working-memory双重覆盖」），要求每次模糊带都「切一刀」而非容忍冗余。改动量极小（soul.md 144→140行，working-memory 删3行）但边界清晰度显著提升。这与L1「核选项=不修补直接重建」表面矛盾但实为不同域：基础设施用核选项重建，文档用精准手术修剪。",
+          "confidence": "high",
+          "evidence": "用户问「你觉得现在 soul.md profile.md 和 memory.md 内容之间的边界是清晰的了吗」——在agent分析出两处模糊带后立即确认修改：'要做吗？'→执行。整个改动不到10行，但职责边界清晰了。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260702_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260702_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-02T18:05:53.693944+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与现有L2洞察无重叠——文件边界敏感度是全新的子维度。与L2「信息完整性强迫」(4/16)不同（那是关于内容完整性，这是关于职责分离）；与L1「核选项」(3/30)表面矛盾但域不同（基础设施用重建，文档用修剪）；与L2「递归式系统重构」(6/20)~15%（都是改变系统但粒度相反：递归重构是粗粒度重写，精准修剪是细粒度手术）。整体<15%。"
+        },
+        {
+          "id": "insight_2026-07-02T18:05:53.693944+00:00_2",
+          "date": "2026-07-02",
+          "dimension": "元认知",
+          "layer": "L2",
+          "insight": "「先思考」作为实时认知刹车——当agent急于给出方案时（OT带工具→管道脚本化→外部watchguard），用户使用「别急着回答，先思考」作为对话中的元认知干预。这不是对具体方案的不满，是对思考节奏的纠正——识别到agent和自己都进入了快速模式、跳过了深层思考。连续推掉三个方案（「都不太行 都是一眼不可行的方案」）不是挑剔，是要求agent回到问题本质重新审视。这是元认知策略在实时对话中的应用：识别快速模式→喊停→强制更深层次思考后再输出。",
+          "confidence": "high",
+          "evidence": "用户说「在 tof 框架下，ot 带工具是必要的吗，别急着回答，先思考」→随后agent给出方向后用户说「继续想，结论呢」→agent给出三个方案后用户说「都不太行 都是一眼不可行的方案」。三次干预构成一个完整的元认知刹车循环。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260702_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260702_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-02T18:05:53.693944+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与L2「执行铁律」(6/19)~30%重叠——6/19洞察是他设计的系统级硬约束（交付物前移/外部刹车点/Memory注入），本洞察是对话中的实时干预行为。系统约束是预防性的、提前设计的；实时刹车是反应性的、在对话中即时触发的。两者互补：一是他设计的制度，一是他亲自执行的纠正。与L2「Agent行为校准」(6/21)~25%（都涉及纠正agent但6/21是事后表扬/纠正的行为塑造，本洞察是事中阻止思考偏轨）。整体25-30%，互补入库。"
         }
       ]
     },
@@ -944,6 +1010,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "补充L4「中断式纠正」模式的具体触发机制——反问句而非直接指令，保留了Agent的自我诊断空间。这比简单纠正更符合用户「认知伙伴」的原始定位（虽然soul.md v2去掉了这个标签）。"
+        },
+        {
+          "id": "insight_2026-07-02T18:05:53.693944+00:00_1",
+          "date": "2026-07-02",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "Drift Detector负担——用户在TOF管道中持续扮演不自愿的watchdog角色，明确表达了这一负担：「时不时需要盯着发现没有委托的时候 ctrl+c 或/stop 打断然后声明你委托」。这不是偶发事件，而是反复出现的模式——管道约束在agent推理链内部执行时存在系统性漂移漏洞，用户被迫成为人工fallback。与6/21「Agent行为校准的完整教学循环」互补：6/21洞察记录了他主动纠正+强化的行为塑造策略，本洞察揭示了这个策略的持续性成本——纠正是有效的但从未根除问题，用户仍在付出持续注意力。",
+          "confidence": "high",
+          "evidence": "用户说「现在 tof 的流程里，仍然时不时需要我盯着发现没有委托的时候 ctrl+c 或/stop 打断然后声明你委托」——注意「仍然时不时」表明这是一个持续性的、未被解决的模式。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260702_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260702_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-02T18:05:53.693944+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与L2「Agent行为校准的完整教学循环」(6/21)~40%语义重叠——6/21洞察记录了他设计纠正+强化机制的行为，本洞察记录的是该机制的持续性成本（未能根除问题）。两者互补：一是策略设计（他主动做什么），一是策略局限（为什么还在做）。与L2「执行铁律」(6/19)~30%（都是关于流程纪律但6/19是他自己设计外部约束，本洞察是他为agent当外部约束）。整体35-40%，互补入库。"
         }
       ]
     },
@@ -1537,6 +1636,19 @@
         "7": 45
       },
       "total_insights": 77
+    },
+    {
+      "date": "2026-07-02T18:05:53.693944+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 80
     }
   ]
 }
