@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-03T18:05:39.799829+00:00",
-  "total_sessions_processed": 59,
+  "last_extraction": "2026-07-04T18:04:43.456066+00:00",
+  "total_sessions_processed": 60,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -718,6 +718,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 vs L2「双维正交标注而非单维替换」(6/21)~15%（同属叠加优于拆分的认知偏好，但领域不同：分类体系vs仓库架构）；vs L2「递归式系统重构倾向」(6/20)~10%（方向相反：这是抗拒拆分偏好统一）；vs L5「吸星大法策略」(6/16)~5%。整体<20%，独立入库。"
+        },
+        {
+          "id": "insight_2026-07-04T18:04:43.456066+00:00_0",
+          "date": "2026-07-04",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "面对多个代码修复任务不逐个执行，而是先做全局分析——识别问题间的相互作用（P0修复后P1自动消失）、评估方案选项（3种prompt修复方案逐项对比风险/改动量）、确定实施顺序（依影响排序而非依编号）。用户明确说「还是一样，先思考，再实施」——表明此方法论已固化为标准操作流程，而非偶然策略。与「执行铁律」(6/19)互补：铁律是被动刹车（失败后创建外部约束），此是主动油门（实施前系统性分析）。",
+          "confidence": "high",
+          "evidence": "用户原话：「还是一样，先思考，再实施」——在收到4个遗留问题的修复方案前，要求agent先做全局分析而非逐个执行。随后agent产出了全局分析：问题归并（P0修复后P1自动消失）、方案对比（3种OT prompt修复方案A/B/C）、实施顺序（依影响排序）。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260704_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260704_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-04T18:04:43.456066+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 vs L2「执行铁律确立」(6/19)~25%（铁律是外部约束防流程跳过，此是主动方法论）；vs L2「正交标注」(6/21)~15%（同属全局思维但领域不同）。整体<30%，独立入库。"
+        },
+        {
+          "id": "insight_2026-07-04T18:04:43.456066+00:00_1",
+          "date": "2026-07-04",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "对AI的比较分析有不妥协的精确性标准。当AI将DC5和DC6描述为「网络质量基本持平」时，用户立即纠正为「dc5比dc6是全面更优」，要求逐维度精确对比而非模糊等价陈述。这种纠偏不是对结论不满，而是对分析粒度的要求——拒绝将多维差异压缩为单一模糊判断。反映去模糊化的认知偏好：宁可接受明确的优劣阶梯，也不接受「基本持平」的不精确等价。",
+          "confidence": "medium",
+          "evidence": "用户原话：「dc5 比 dc6 是全面更优」——当agent在VPS对比中说DC5和DC6「网络质量基本持平」时，用户立即纠正。随后agent重新审视并承认：「你说得对，我重新审视：DC5确实是全面压制DC6」，并展开6维度详细对比。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260704_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260704_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-04T18:04:43.456066+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 vs L2「过程真实性优先于名义完备」(6/27)~30%（同属不接受表面结论但前者关注流程执行、此关注分析精确性）；vs L2「信息完整性的主动冗余验证」(6/21)~20%（同属不满足于表面信息）。降级medium标注部分重叠。"
         }
       ]
     },
@@ -1827,6 +1893,19 @@
         "7": 45
       },
       "total_insights": 85
+    },
+    {
+      "date": "2026-07-04T18:04:43.456066+00:00",
+      "layers": {
+        "1": 35,
+        "2": 60,
+        "3": 50,
+        "4": 60,
+        "5": 70,
+        "6": 50,
+        "7": 45
+      },
+      "total_insights": 87
     }
   ]
 }
