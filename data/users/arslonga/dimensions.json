@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-05T18:04:42.339776+00:00",
-  "total_sessions_processed": 61,
+  "last_extraction": "2026-07-06T18:07:18.356132+00:00",
+  "total_sessions_processed": 62,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -59,7 +59,7 @@
     },
     "2": {
       "name": "认知架构 (Cognitive Architecture)",
-      "fill_rate": 60,
+      "fill_rate": 100,
       "status": "partial",
       "latest_insights": [
         {
@@ -784,6 +784,34 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 vs L2「过程真实性优先于名义完备」(6/27)~30%（同属不接受表面结论但前者关注流程执行、此关注分析精确性）；vs L2「信息完整性的主动冗余验证」(6/21)~20%（同属不满足于表面信息）。降级medium标注部分重叠。"
+        },
+        {
+          "dimension": "决策风格",
+          "layer": "L2",
+          "content": "决策中存在明确的「证据充分性阈值」——当证据达到证明逻辑等价性的程度后，偏好立即行动而非等待更多观察数据。DT v2 cron 切换决策中，shadow 验证新旧 pipeline 输出等价后，选择「今晚就切」而非 shadow-run 多天观察。核心逻辑：「多等几天不会发现新信息，因为 shadow 跑的不是更多数据，而是重复验证同一个逻辑——逻辑已经通过」。这与一般工程谨慎（先跑几天再说）形成对比——阈值判断替代了时间缓冲。",
+          "confidence": "high",
+          "date": "2026-07-07T02:00:00+00:00",
+          "evidence": "会话原文：'Shadow 已经证明了输出等价。多等几天不会发现新信息，因为 shadow 跑的不是「更多数据」，而是重复验证同一个逻辑——逻辑已经通过。你现在的 legacy cron 有已知缺陷：fill_rate 冻结（21 天未变）、Phase B 矛盾检测未接入、Schema 三处漂移。新 pipeline 修了这三个问题。每多跑一天 legacy，就多一天污染数据。'",
+          "memory_type": "preference",
+          "state": "provisional",
+          "provenance": {
+            "source_run_id": "cron_20260707_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260707_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-07T02:00:00+00:00"
+            }
+          ]
         }
       ]
     },
