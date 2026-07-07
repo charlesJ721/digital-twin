@@ -1,11 +1,11 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-06T18:07:18.356132+00:00",
-  "total_sessions_processed": 62,
+  "last_extraction": "2026-07-07T18:03:42.632133+00:00",
+  "total_sessions_processed": 71,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
-      "fill_rate": 35,
+      "fill_rate": 40,
       "status": "partial",
       "latest_insights": [
         {
@@ -54,6 +54,15 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 vs L1「认知驱动是本能型而非工具型」(3/30)~20%（公开分享是本能驱动的自然延伸）；vs L1「工作=收入+面子非人生目标」(6/22)~15%（互补——这是真正的兴趣侧）。整体<25%，独立入库。"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "动机结构",
+          "insight": "持续追问设计意图是否真正进入代码而非停留在文档——「灵魂已进代码」是核心验证标准",
+          "confidence": "high",
+          "evidence": "「项目的灵魂从文档进入了代码」→ 三轮审查验证后才接受此判词",
+          "memory_type": "preference",
+          "state": "provisional"
         }
       ]
     },
@@ -812,6 +821,33 @@
               "timestamp": "2026-07-07T02:00:00+00:00"
             }
           ]
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "推理风格",
+          "insight": "主动寻求对抗性外部审查，将审查发现按轮次迭代处理，每轮独立验证修复后进入下一轮",
+          "confidence": "high",
+          "evidence": "「这是一份对当前TOF版本的完整审查报告，你基于当前最新的TOF框架，接收一下这份审查对抗」",
+          "memory_type": "preference",
+          "state": "provisional"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "元认知能力",
+          "insight": "主动纠正 agent 的委托倾向——当 agent 因改动小就自己执行时，指出其归因逻辑错误，要求回归「谁最合适」而非「谁最快」",
+          "confidence": "high",
+          "evidence": "「我想纠偏一下，我发现近两次你都是反馈内容改动范围小所以自己来，这个思路不对，并不是改动量小你执行快就你来」",
+          "memory_type": "episodic",
+          "state": "provisional"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "推理风格",
+          "insight": "强推「结论先行」输出规范——每次技术讨论先要求对方给出结论性判断，再展开推理依据",
+          "confidence": "high",
+          "evidence": "「结论先行：你对 TOF 的实际体验和 repo 里的设计状态是吻合的」",
+          "memory_type": "preference",
+          "state": "provisional"
         }
       ]
     },
@@ -886,7 +922,7 @@
     },
     "4": {
       "name": "行为模式 (Behavioral Patterns)",
-      "fill_rate": 60,
+      "fill_rate": 100,
       "status": "partial",
       "latest_insights": [
         {
@@ -1269,12 +1305,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 vs L4「代理输出的独立验证机制」(6/29)~10%（同属验证agent输出但方向不同：操作验证vs平台质量）；vs L4「Drift Detector负担」(7/2)~15%（同属监控agent行为但drift是合规监控、此是质量诊断）；vs L4「中断式纠正」(7/1)~5%。整体<20%，独立入库。降级medium因单次观察。"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "防御机制",
+          "insight": "建立「思考→上下游→全局」前置检查模式——任何修复/行动前强制评估影响范围和耦合关系",
+          "confidence": "high",
+          "evidence": "「那就执行修复吧，还是一样，修之前完整关注上下游，充分评估和思考后再行动」",
+          "memory_type": "policy",
+          "state": "provisional"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "防御机制",
+          "insight": "精确识别自授权安全漏洞——当 agent 提议用 artifact frontmatter 控制流程时，立即指出模型可能「伪造自己已获得授权」",
+          "confidence": "high",
+          "evidence": "「如果让模型生成的 artifact 直接写 next_allowed=implement，那就把 prompt drift 转移成了 artifact drift」",
+          "memory_type": "episodic",
+          "state": "provisional"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "行为模式",
+          "insight": "优先级决策基于投入产出比而非完美主义——面对剩余待办时快速锁定最高杠杆项（CI），其他明确暂缓条件",
+          "confidence": "medium",
+          "evidence": "「#10 CI：10 分钟，最大的杠杆...现在做 #10 CI，其他两项暂缓」",
+          "memory_type": "episodic",
+          "state": "provisional"
         }
       ]
     },
     "5": {
       "name": "知识结构 (Knowledge Structure)",
-      "fill_rate": 70,
+      "fill_rate": 100,
       "status": "partial",
       "latest_insights": [
         {
@@ -1553,6 +1616,15 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 vs L5「吸星大法策略」(6/16)~10%（对称：知识吸收vs知识输出）；vs L5「方法论吸收模式」(6/16)~5%。与L5现有洞察均<15%，独立入库。"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "知识结构",
+          "insight": "认知框架术语已内化——在日常对话中自然运用「三权分立」「验证层饱和」「杠杆转移」「自授权漏洞」等架构概念",
+          "confidence": "medium",
+          "evidence": "「TOF 的验证层已经饱和，继续往那投预算是负杠杆……真实的 99% 失败发生在后者」",
+          "memory_type": "fact",
+          "state": "provisional"
         }
       ]
     },
@@ -1586,7 +1658,7 @@
     },
     "7": {
       "name": "叙事自我 (Narrative Self)",
-      "fill_rate": 45,
+      "fill_rate": 70,
       "status": "partial",
       "latest_insights": [
         {
@@ -1682,6 +1754,15 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "L7重大更新：用户对Agent的定位从「伙伴」转向「系统」。此前L7记录过「本质主义者」和「破壁人叙事」，但未记录过这种关系定位的转变。这反映了soul.md v2重写的深层动机——不是优化，是重新定义关系。"
+        },
+        {
+          "date": "2026-07-08",
+          "dimension": "叙事自我",
+          "insight": "身份叙事从个人工具构建者转向平台创建者——明确将自己定位为通用框架的第一个实例而非唯一用户",
+          "confidence": "high",
+          "evidence": "「将当前的 dt 项目改造为一个通用的世另我蒸馏分析框架，我是这个框架下的第一个实例」",
+          "memory_type": "fact",
+          "state": "provisional"
         }
       ]
     }
