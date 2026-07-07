@@ -1,0 +1,8 @@
+{
+  "default_user": "arslonga",
+  "display_name": "ArsLonga",
+  "title": "Digital Twin",
+  "description": "数字世界的另一个我——将一个人的认知结构与人格特质还原为可交互的数字镜像。",
+  "repo_url": "https://github.com/charlesJ721/digital-twin",
+  "api_base": "https://dt-hub.chindowj721.workers.dev"
+}

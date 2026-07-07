@@ -3,7 +3,8 @@
     "arslonga": {
       "display_name": "ArsLonga",
       "created": "2026-06-11",
-      "public": true
+      "public": true,
+      "api_key_env": "DT_API_KEY_ARSLONGA"
     }
   }
 }

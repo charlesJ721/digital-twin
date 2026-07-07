@@ -1,0 +1,42 @@
+version: "2.0"
+description: "Universal Digital Twin seven-layer dimension schema"
+layers:
+  "1":
+    key: personality
+    name: "Personality"
+    description: "Stable traits, core motivations, fears, temperament"
+    keywords: [personality, trait, motivation, drive, fear, temperament]
+  "2":
+    key: cognitive_architecture
+    name: "Cognitive Architecture"
+    description: "Reasoning style, decision patterns, metacognition, learning"
+    keywords: [reasoning, cognition, decision, metacognition, learning, creativity]
+  "3":
+    key: values_beliefs
+    name: "Values & Beliefs"
+    description: "Values, ethics, worldview, needs, belief priorities"
+    keywords: [values, beliefs, ethics, worldview, needs]
+  "4":
+    key: behavioral_patterns
+    name: "Behavioral Patterns"
+    description: "Habits, rhythms, defenses, energy, recurring actions"
+    keywords: [behavior, habit, rhythm, defense, energy, pattern]
+  "5":
+    key: knowledge_structure
+    name: "Knowledge Structure"
+    description: "Domains of expertise, information diet, knowledge organization"
+    keywords: [knowledge, expertise, information, domain]
+  "6":
+    key: social_relations
+    name: "Social Relations"
+    description: "Trust, collaboration, influence, intimacy, interaction style"
+    keywords: [social, relationship, trust, collaboration, influence, intimacy]
+  "7":
+    key: narrative_self
+    name: "Narrative Self"
+    description: "Self-concept, life story, turning points, identity narrative"
+    keywords: [narrative, self, identity, story, turning point]
+insight:
+  required: [date, dimension, insight, confidence, evidence]
+  confidence: [high, medium, low]
+  max_insight_chars: 2000

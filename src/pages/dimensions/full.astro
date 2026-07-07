@@ -1,10 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import siteConfig from '../../../site.config.json';
 const base = import.meta.env.BASE_URL;
+const username = siteConfig.default_user || 'arslonga';
+const apiBase = siteConfig.api_base || 'https://dt-hub.chindowj721.workers.dev';
 ---
 
 <Layout title="维度全视图">
-  <main class="min-h-screen px-6 py-12 max-w-4xl mx-auto">
+  <main data-dt-user={username} class="min-h-screen px-6 py-12 max-w-4xl mx-auto">
     <a href={`${base}/dimensions`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">← 维度雷达图</a>
     <h1 class="text-3xl font-bold mt-4 mb-2">维度全视图</h1>
     <p class="text-zinc-500 dark:text-zinc-400">完整的维度洞察数据，仅本人可访问。</p>
@@ -21,7 +24,7 @@ const base = import.meta.env.BASE_URL;
       </div>
       <p id="error-msg" class="text-xs text-red-500 mt-2 hidden"></p>
       <p class="text-xs text-zinc-400 mt-3">
-        API URL: <input id="api-url" type="text" value="https://dt-hub.chindowj721.workers.dev"
+        API URL: <input id="api-url" type="text" value={apiBase}
           class="bg-transparent border-b border-zinc-300 dark:border-zinc-700 text-zinc-500 text-xs w-64 focus:outline-none focus:border-emerald-500" />
       </p>
     </div>
@@ -43,7 +46,8 @@ const base = import.meta.env.BASE_URL;
 
 <script>
   const STORAGE_KEY = 'dt_api_key';
-  const DEFAULT_API = 'https://dt-hub.chindowj721.workers.dev';
+  const DEFAULT_API = (document.getElementById('api-url') as HTMLInputElement)?.defaultValue || 'https://dt-hub.chindowj721.workers.dev';
+  const USERNAME = (document.querySelector('[data-dt-user]') as HTMLElement)?.dataset.dtUser || 'arslonga';
 
   function getApiBase(): string {
     const input = document.getElementById('api-url') as HTMLInputElement;
@@ -56,7 +60,7 @@ const base = import.meta.env.BASE_URL;
 
   async function fetchFull(apiKey: string): Promise<any> {
     const base = getApiBase();
-    const res = await fetch(`${base}/api/user/arslonga?key=${encodeURIComponent(apiKey)}`);
+    const res = await fetch(`${base}/api/user/${USERNAME}?key=${encodeURIComponent(apiKey)}`);
     if (!res.ok) throw new Error(res.status === 401 ? 'API Key 无效' : '请求失败');
     return res.json();
   }
@@ -125,7 +129,7 @@ const base = import.meta.env.BASE_URL;
 
       document.getElementById('locked')!.classList.add('hidden');
       document.getElementById('unlocked')!.classList.remove('hidden');
-      document.getElementById('user-badge')!.textContent = '@arslonga';
+      document.getElementById('user-badge')!.textContent = '@' + USERNAME;
       document.getElementById('update-time')!.textContent = '最后更新: ' + (data.last_extraction || '未知');
 
       renderInsights(data);
@@ -146,7 +150,7 @@ const base = import.meta.env.BASE_URL;
       const data = await fetchFull(saved);
       document.getElementById('locked')!.classList.add('hidden');
       document.getElementById('unlocked')!.classList.remove('hidden');
-      document.getElementById('user-badge')!.textContent = '@arslonga';
+      document.getElementById('user-badge')!.textContent = '@' + USERNAME;
       document.getElementById('update-time')!.textContent = '最后更新: ' + (data.last_extraction || '未知');
       (document.getElementById('apikey') as HTMLInputElement).value = saved;
       renderInsights(data);

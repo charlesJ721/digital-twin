@@ -1,10 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import siteConfig from '../../../site.config.json';
 const base = import.meta.env.BASE_URL;
+const username = siteConfig.default_user || 'arslonga';
+const apiBase = siteConfig.api_base || 'https://dt-hub.chindowj721.workers.dev';
 ---
 
 <Layout title="维度审核">
-  <main class="min-h-screen px-6 py-12 max-w-4xl mx-auto">
+  <main data-dt-user={username} data-api-base={apiBase} class="min-h-screen px-6 py-12 max-w-4xl mx-auto">
     <a href={`${base}/dimensions`} class="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">← 维度雷达图</a>
     <h1 class="text-3xl font-bold mt-4 mb-2">审核队列</h1>
     <p class="text-zinc-500 dark:text-zinc-400 mb-2">AI 推送的洞察在此等待你的审批，通过后才会进入核心数据。</p>
@@ -36,19 +39,21 @@ const base = import.meta.env.BASE_URL;
 
 <script>
   const STORAGE_KEY = 'dt_api_key';
-  const API_BASE = 'https://dt-hub.chindowj721.workers.dev';
+  const ROOT = document.querySelector('[data-dt-user]') as HTMLElement;
+  const API_BASE = ROOT?.dataset.apiBase || 'https://dt-hub.chindowj721.workers.dev';
+  const USERNAME = ROOT?.dataset.dtUser || 'arslonga';
 
   async function fetchReview(): Promise<any> {
     const key = localStorage.getItem(STORAGE_KEY);
     if (!key) throw new Error('未登录');
-    const res = await fetch(`${API_BASE}/api/user/arslonga/review?key=${encodeURIComponent(key)}`);
+    const res = await fetch(`${API_BASE}/api/user/${USERNAME}/review?key=${encodeURIComponent(key)}`);
     if (!res.ok) throw new Error('加载失败');
     return res.json();
   }
 
   async function approve(ids: string[]) {
     const key = localStorage.getItem(STORAGE_KEY)!;
-    const res = await fetch(`${API_BASE}/api/user/arslonga/review/approve?key=${encodeURIComponent(key)}`, {
+    const res = await fetch(`${API_BASE}/api/user/${USERNAME}/review/approve?key=${encodeURIComponent(key)}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ids }),
@@ -58,7 +63,7 @@ const base = import.meta.env.BASE_URL;
 
   async function reject(ids: string[]) {
     const key = localStorage.getItem(STORAGE_KEY)!;
-    const res = await fetch(`${API_BASE}/api/user/arslonga/review/reject?key=${encodeURIComponent(key)}`, {
+    const res = await fetch(`${API_BASE}/api/user/${USERNAME}/review/reject?key=${encodeURIComponent(key)}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ids }),

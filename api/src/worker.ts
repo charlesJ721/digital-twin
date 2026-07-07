@@ -11,6 +11,13 @@ interface Env {
   DT_DATA: KVNamespace;
 }
 
+interface UserRecord {
+  display_name?: string;
+  public?: boolean;
+  api_key_env?: string;
+  api_key_hash?: string;
+}
+
 interface DimensionInsight {
   date: string;
   dimension: string;
@@ -65,10 +72,33 @@ function html(body: string, status = 200): Response {
   return new Response(body, { status, headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
 
-function validateKey(key: string | null, env: Env): string | null {
-  if (!key) return null;
-  if (key === env.DT_API_KEY_ARSLONGA) return "arslonga";
-  return null;
+async function sha256Hex(value: string): Promise<string> {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function loadRegistry(env: Env): Promise<Record<string, UserRecord>> {
+  const raw = await fetchFromGithub("data/users/registry.json", env);
+  if (!raw) return { arslonga: { display_name: "ArsLonga", public: true, api_key_env: "DT_API_KEY_ARSLONGA" } };
+  const parsed = JSON.parse(raw) as { users?: Record<string, UserRecord> };
+  return parsed.users || {};
+}
+
+async function validateKeyForUser(username: string, key: string | null, env: Env): Promise<boolean> {
+  if (!key) return false;
+  const registry = await loadRegistry(env);
+  const user = registry[username];
+  if (!user) return false;
+
+  // Backward-compatible path for the existing ArsLonga deployment.
+  if (username === "arslonga" && key === env.DT_API_KEY_ARSLONGA) return true;
+
+  if (user.api_key_hash) return await sha256Hex(key) === user.api_key_hash;
+  if (user.api_key_env) {
+    const envValue = (env as unknown as Record<string, string>)[user.api_key_env];
+    if (envValue && key === envValue) return true;
+  }
+  return false;
 }
 
 function extractKey(request: Request): string | null {
@@ -106,10 +136,21 @@ const DIMENSION_MAP: Record<string, string> = {
 };
 
 function mapDimension(dimension: string): string | null {
+  // 精确匹配已知维度
   for (const [keyword, layerId] of Object.entries(DIMENSION_MAP)) {
     if (dimension.includes(keyword)) return layerId;
   }
-  return null;
+  
+  // 层级关键词兜底匹配（允许更多自定义维度）
+  if (dimension.match(/人格|特质|动机|驱动|恐惧/)) return "1";
+  if (dimension.match(/推理|认知|思维|决策|学习|创造/)) return "2";
+  if (dimension.match(/价值|信念|伦理|世界观|需求/)) return "3";
+  if (dimension.match(/行为|习惯|模式|防御|能量|周期/)) return "4";
+  if (dimension.match(/知识|专长|信息|领域/)) return "5";
+  if (dimension.match(/社会|关系|互动|信任|影响|亲密/)) return "6";
+  if (dimension.match(/叙事|自我|概念|人生|转折|意识/)) return "7";
+  
+  return null; // 完全未知维度将在 mergeToCore 中默认归到 L4
 }
 
 function validateInsight(insight: DimensionInsight): string | null {
@@ -254,7 +295,8 @@ export default {
 
     // Health
     if (url.pathname === "/api/health") {
-      return json({ status: "ok", users: ["arslonga"], version: "v2.1-notes" }, 200, headers);
+      const users = Object.keys(await loadRegistry(env));
+      return json({ status: "ok", users, version: "v4-framework" }, 200, headers);
     }
 
     // ============================================================
@@ -265,8 +307,8 @@ export default {
     const notesPost = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/notes$/);
     if (notesPost && request.method === "POST") {
       const username = notesPost[1];
-      const authUser = validateKey(extractKey(request), env);
-      if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
+      const authenticated = await validateKeyForUser(username, extractKey(request), env);
+      if (!authenticated) return json({ error: "unauthorized" }, 401, headers);
 
       try {
         const body = await request.json() as { title: string; body: string; source?: string };
@@ -352,9 +394,9 @@ export default {
     const getMatch = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)$/);
     if (getMatch && request.method === "GET") {
       const username = getMatch[1];
-      const authUser = validateKey(extractKey(request), env);
+      const authenticated = await validateKeyForUser(username, extractKey(request), env);
       try {
-        if (authUser === username) {
+        if (authenticated) {
           const kvData = await env.DT_DATA.get(`user:${username}`);
           if (kvData) return json(JSON.parse(kvData), 200, headers);
         }
@@ -372,8 +414,8 @@ export default {
     const postMatch = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/insights$/);
     if (postMatch && request.method === "POST") {
       const username = postMatch[1];
-      const authUser = validateKey(extractKey(request), env);
-      if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
+      const authenticated = await validateKeyForUser(username, extractKey(request), env);
+      if (!authenticated) return json({ error: "unauthorized" }, 401, headers);
 
       try {
         const body = await request.json() as PostRequest;
@@ -437,8 +479,8 @@ export default {
     const reviewGet = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/review$/);
     if (reviewGet && request.method === "GET") {
       const username = reviewGet[1];
-      const authUser = validateKey(extractKey(request), env);
-      if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
+      const authenticated = await validateKeyForUser(username, extractKey(request), env);
+      if (!authenticated) return json({ error: "unauthorized" }, 401, headers);
       try {
         const raw = await env.DT_DATA.get(`review:${username}`);
         const pending: PendingInsight[] = raw ? JSON.parse(raw) : [];
@@ -451,8 +493,8 @@ export default {
     const approveMatch = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/review\/approve$/);
     if (approveMatch && request.method === "POST") {
       const username = approveMatch[1];
-      const authUser = validateKey(extractKey(request), env);
-      if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
+      const authenticated = await validateKeyForUser(username, extractKey(request), env);
+      if (!authenticated) return json({ error: "unauthorized" }, 401, headers);
       try {
         const body = await request.json() as { ids: string[] };
         if (!body.ids?.length) return json({ error: "ids array required" }, 400, headers);
@@ -482,8 +524,8 @@ export default {
     const rejectMatch = url.pathname.match(/^\/api\/user\/([a-zA-Z0-9_-]+)\/review\/reject$/);
     if (rejectMatch && request.method === "POST") {
       const username = rejectMatch[1];
-      const authUser = validateKey(extractKey(request), env);
-      if (authUser !== username) return json({ error: "unauthorized" }, 401, headers);
+      const authenticated = await validateKeyForUser(username, extractKey(request), env);
+      if (!authenticated) return json({ error: "unauthorized" }, 401, headers);
       try {
         const body = await request.json() as { ids: string[] };
         const raw = await env.DT_DATA.get(`review:${username}`);

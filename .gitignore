@@ -27,7 +27,15 @@ pnpm-debug.log*
 src/content/notes/
 
 # Private dimension data (full insights)
-data/users/*/dimensions.json
+data/users/*
+!data/users/registry.json
+!data/users/*/
+!data/users/*/dimensions-public.json
+
+# Local DT framework config and generated artifacts
+config.yaml
+.dt-shadow/
 
 # Cloudflare Workers local state
 api/.wrangler/
+__pycache__/

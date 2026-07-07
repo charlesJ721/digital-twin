@@ -1,13 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import siteConfig from '../../site.config.json';
 const base = import.meta.env.BASE_URL;
+const title = siteConfig.title || 'Digital Twin';
+const description = siteConfig.description || 'A cloneable digital-twin framework.';
+const repoUrl = siteConfig.repo_url || 'https://github.com/charlesJ721/digital-twin';
+const displayName = siteConfig.display_name || siteConfig.default_user || 'Digital Twin User';
 ---
 
-<Layout title="Digital Twin">
+<Layout title={title}>
   <main class="min-h-screen flex flex-col items-center justify-center text-center px-6 py-24">
-    <h1 class="text-5xl font-bold tracking-tight mb-4">Digital Twin</h1>
+    <h1 class="text-5xl font-bold tracking-tight mb-4">{title}</h1>
     <p class="text-lg text-zinc-500 dark:text-zinc-400 mb-12 max-w-xl leading-relaxed">
-      数字世界的另一个我——将一个人的认知结构与人格特质还原为可交互的数字镜像。
+      {description}
     </p>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl w-full mb-12">
@@ -35,13 +40,13 @@ const base = import.meta.env.BASE_URL;
       <a href={`${base}/dimensions`} class="px-5 py-2.5 rounded-lg border border-emerald-300 dark:border-emerald-700 text-emerald-600 dark:text-emerald-400 hover:border-emerald-400 dark:hover:border-emerald-500 transition-colors text-sm font-medium">
         维度雷达
       </a>
-      <a href="https://github.com/charlesJ721/digital-twin" class="px-5 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors text-sm">
+      <a href={repoUrl} class="px-5 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors text-sm">
         GitHub
       </a>
     </div>
 
     <footer class="mt-20 text-sm text-zinc-400 dark:text-zinc-500">
-      ArsLonga · {new Date().getFullYear()}
+      {displayName} · {new Date().getFullYear()}
     </footer>
   </main>
 </Layout>
