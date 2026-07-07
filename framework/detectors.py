@@ -115,11 +115,8 @@ def _get_openrouter_key() -> str:
 
 
 def _get_proxy() -> str | None:
-    """Get OpenRouter proxy URL from environment or Hermes session."""
-    proxy = os.environ.get("TOF_OPENROUTER_PROXY") or os.environ.get("https_proxy") or ""
-    if proxy:
-        return proxy
-    return "http://127.0.0.1:7897"  # default for author's environment
+    """Get OpenRouter proxy URL from environment variables."""
+    return os.environ.get("TOF_OPENROUTER_PROXY") or os.environ.get("https_proxy") or None
 
 
 def _embed_batch(texts: list[str], api_key: str | None = None) -> list[list[float]] | None:
@@ -269,28 +266,31 @@ class ContradictionDetector:
                 o_type = self._memory_type(old)
                 o_text = self._text(old)
 
-                # Near-duplicate: very high similarity
+                c_is_decl = c_type in DECLARATIVE_TYPES
+                c_is_behav = c_type in BEHAVIORAL_TYPES
+                o_is_decl = o_type in DECLARATIVE_TYPES
+                o_is_behav = o_type in BEHAVIORAL_TYPES
+                cross_type = (c_is_decl and o_is_behav) or (c_is_behav and o_is_decl)
+
+                # Cognitive conflict: cross-type pairs with high similarity
+                # take priority over near_duplicate. Genuine contradictions
+                # (e.g. "says X" vs "does ¬X") naturally share topic space and
+                # produce high cosine scores — checking conflict first prevents
+                # them from being swallowed by the duplicate threshold.
+                if cross_type and score >= self.semantic_conflict_threshold:
+                    findings.append(Contradiction(
+                        candidate, old, round(score, 4),
+                        "semantic_conflict_decl_vs_behav",
+                    ))
+                    continue
+
+                # Near-duplicate: very high similarity, same memory type
                 if score >= self.semantic_duplicate_threshold:
                     findings.append(Contradiction(candidate, old, round(score, 4), "near_duplicate"))
                     continue
 
-                # Cognitive conflict: medium-high similarity + memory_type clash
-                # (declarative vs behavioral — "says X but does ¬X")
+                # Negation tension as additional signal (same-type, medium similarity)
                 if score >= self.semantic_conflict_threshold:
-                    c_is_decl = c_type in DECLARATIVE_TYPES
-                    c_is_behav = c_type in BEHAVIORAL_TYPES
-                    o_is_decl = o_type in DECLARATIVE_TYPES
-                    o_is_behav = o_type in BEHAVIORAL_TYPES
-
-                    # Cross-type conflict: one is declarative, one is behavioral
-                    if (c_is_decl and o_is_behav) or (c_is_behav and o_is_decl):
-                        findings.append(Contradiction(
-                            candidate, old, round(score, 4),
-                            "semantic_conflict_decl_vs_behav",
-                        ))
-                        continue
-
-                    # Negation tension as additional signal
                     if self._lightweight.has_negation_tension(c_text, o_text):
                         findings.append(Contradiction(
                             candidate, old, round(score, 4),

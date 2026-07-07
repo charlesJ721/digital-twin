@@ -8,9 +8,13 @@ the Python framework's schema.py behavior exactly.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import yaml
+
+# Work from any cwd: add the framework/ parent to sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from schema import ZH_LAYER_HINTS, DimensionSchema
 
