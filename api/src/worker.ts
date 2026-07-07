@@ -90,9 +90,6 @@ async function validateKeyForUser(username: string, key: string | null, env: Env
   const user = registry[username];
   if (!user) return false;
 
-  // Backward-compatible path for the existing ArsLonga deployment.
-  if (username === "arslonga" && key === env.DT_API_KEY_ARSLONGA) return true;
-
   if (user.api_key_hash) return await sha256Hex(key) === user.api_key_hash;
   if (user.api_key_env) {
     const envValue = (env as unknown as Record<string, string>)[user.api_key_env];
@@ -115,42 +112,64 @@ function uid(): string {
 }
 
 // ========== Validation ==========
+// Dimension mapping — unified source of truth.
+// Auto-generated from framework/schema/7-layer-schema.yaml + ZH_LAYER_HINTS.
+// Regenerate: python3 framework/generate_dimension_map.py
+// Generated at: 2026-07-07T11:52:35.627250+00:00
 
-const DIMENSION_MAP: Record<string, string> = {
-  "开放性": "1", "尽责性": "1", "外向性": "1", "宜人性": "1",
-  "情绪稳定": "1", "人格特质": "1", "动机结构": "1", "核心驱动力": "1",
-  "核心恐惧": "1", "诚实": "1", "谦逊": "1",
-  "推理风格": "2", "认知偏误": "2", "心智模型": "2", "元认知": "2",
-  "信息处理": "2", "创造力": "2", "system": "2", "双过程": "2",
-  "认知架构": "2", "决策风格": "2", "学习方式": "2",
-  "价值观": "3", "信念": "3", "世界假设": "3", "伦理": "3",
-  "价值排序": "3", "核心需求": "3", "被需要感": "3",
-  "行为模式": "4", "习惯": "4", "节律": "4", "应激": "4",
-  "防御机制": "4", "能量周期": "4", "矛盾表达": "4",
-  "战略性放弃": "4",
-  "知识结构": "5", "领域专长": "5", "信息食谱": "5",
-  "社会关系": "6", "互动模式": "6", "信任建立": "6",
-  "影响力": "6", "安全测试": "6", "亲密关系": "6",
-  "叙事自我": "7", "自我概念": "7", "人生叙事": "7",
-  "关键转折": "7", "自我叙事": "7", "冰山意识": "7",
+const EXACT_MATCHES: Record<string, string> = {
+  "behavior": "4", "behavioral patterns": "4", "behavioral_patterns": "4",
+  "beliefs": "3", "cognition": "2", "cognitive architecture": "2",
+  "cognitive_architecture": "2", "collaboration": "6", "creativity": "2",
+  "decision": "2", "defense": "4", "domain": "5", "drive": "1",
+  "energy": "4", "ethics": "3", "expertise": "5", "fear": "1",
+  "habit": "4", "identity": "7", "influence": "6", "information": "5",
+  "intimacy": "6", "knowledge": "5", "knowledge structure": "5",
+  "knowledge_structure": "5", "learning": "2", "metacognition": "2",
+  "motivation": "1", "narrative": "7", "narrative self": "7",
+  "narrative_self": "7", "needs": "3", "pattern": "4", "personality": "1",
+  "reasoning": "2", "relationship": "6", "rhythm": "4", "self": "7",
+  "social": "6", "social relations": "6", "social_relations": "6",
+  "story": "7", "temperament": "1", "trait": "1", "trust": "6",
+  "turning point": "7", "values": "3", "values & beliefs": "3",
+  "values_beliefs": "3", "worldview": "3",
+  "专长": "5", "世界观": "3", "习惯": "4", "互动": "6", "亲密": "6",
+  "人格": "1", "人生": "7", "价值": "3", "伦理": "3", "信任": "6",
+  "信念": "3", "信息": "5", "元认知": "2", "关系": "6", "决策": "2",
+  "创造": "2", "动机": "1", "叙事": "7", "合作": "6", "周期": "4",
+  "学习": "2", "影响": "6", "思维": "2", "恐惧": "1", "推理": "2",
+  "故事": "7", "模式": "4", "气质": "1", "特质": "1", "知识": "5",
+  "社会": "6", "能量": "4", "自我": "7", "节律": "4", "行为": "4",
+  "认知": "2", "身份": "7", "转折": "7", "防御": "4", "需求": "3",
+  "领域": "5", "驱动": "1",
+};
+
+const REGEX_FALLBACK: Record<string, RegExp> = {
+  "1": /人格|特质|动机|驱动|恐惧|气质/,
+  "2": /推理|认知|思维|决策|学习|创造|元认知/,
+  "3": /价值|信念|伦理|世界观|需求/,
+  "4": /行为|习惯|模式|防御|能量|周期|节律/,
+  "5": /知识|专长|信息|领域/,
+  "6": /社会|关系|互动|信任|影响|亲密|合作/,
+  "7": /叙事|自我|身份|人生|转折|故事/,
 };
 
 function mapDimension(dimension: string): string | null {
-  // 精确匹配已知维度
-  for (const [keyword, layerId] of Object.entries(DIMENSION_MAP)) {
+  // Arrow pattern (L1-L7 or "layer 1-7") — matches Python schema.py behavior
+  const arrow = dimension.match(/(?:L|layer\s*)([1-7])/i);
+  if (arrow) return arrow[1];
+
+  // Exact keyword match (includes check) — English + Chinese
+  for (const [keyword, layerId] of Object.entries(EXACT_MATCHES)) {
     if (dimension.includes(keyword)) return layerId;
   }
-  
-  // 层级关键词兜底匹配（允许更多自定义维度）
-  if (dimension.match(/人格|特质|动机|驱动|恐惧/)) return "1";
-  if (dimension.match(/推理|认知|思维|决策|学习|创造/)) return "2";
-  if (dimension.match(/价值|信念|伦理|世界观|需求/)) return "3";
-  if (dimension.match(/行为|习惯|模式|防御|能量|周期/)) return "4";
-  if (dimension.match(/知识|专长|信息|领域/)) return "5";
-  if (dimension.match(/社会|关系|互动|信任|影响|亲密/)) return "6";
-  if (dimension.match(/叙事|自我|概念|人生|转折|意识/)) return "7";
-  
-  return null; // 完全未知维度将在 mergeToCore 中默认归到 L4
+
+  // Regex fallback — broader Chinese character class matching
+  for (const [layerId, pattern] of Object.entries(REGEX_FALLBACK)) {
+    if (pattern.test(dimension)) return layerId;
+  }
+
+  return null; // unknown dimensions default to L4 in mergeToCore
 }
 
 function validateInsight(insight: DimensionInsight): string | null {
@@ -581,9 +600,7 @@ async function mergeToCore(username: string, insight: DimensionInsight, fillRate
   }
 
   const dims = JSON.parse(kvData);
-  let targetLayer = mapDimension(insight.dimension) || "4";
-  const arrowMatch = insight.dimension.match(/→ L(\d)/);
-  if (arrowMatch) targetLayer = arrowMatch[1];
+  const targetLayer = mapDimension(insight.dimension) || "4";
 
   const layer = (dims.layers as Record<string, Record<string, unknown>>)[targetLayer];
   if (layer) {
@@ -594,6 +611,16 @@ async function mergeToCore(username: string, insight: DimensionInsight, fillRate
   dims.last_extraction = new Date().toISOString();
   dims.total_sessions_processed = (dims.total_sessions_processed || 0) + 1;
 
+  // Auto-recalculate fill_rate for all layers based on actual insight counts.
+  // Formula: max(existing_rate, insight_count * 10), cap 100.
+  // Explicit fillRateUpdates still override (for manual corrections).
+  for (const [lid, l] of Object.entries(dims.layers as Record<string, Record<string, unknown>>)) {
+    const insights = (l.latest_insights as unknown[]) || [];
+    const count = insights.length;
+    const currentRate = (l.fill_rate as number) || 0;
+    const computedRate = Math.min(100, Math.max(currentRate, count * 10));
+    l.fill_rate = computedRate;
+  }
   if (fillRateUpdates) {
     for (const [lid, rate] of Object.entries(fillRateUpdates)) {
       const l = (dims.layers as Record<string, Record<string, unknown>>)[lid];

@@ -1,3 +1,6 @@
-#!/usr/bin/env python3
-from framework.cli import main
-raise SystemExit(main())
+#!/bin/bash
+# Digital Twin v2 CLI — bootstrap entry point.
+# Works from any working directory by resolving the repo root relative to this script.
+set -euo pipefail
+cd "$(dirname "$0")/.." || exit 1
+exec python3 -m framework.cli "$@"

@@ -53,10 +53,28 @@ def main(argv: list[str] | None = None) -> int:
     init = sub.add_parser("init", help="initialize a user data directory")
     init.add_argument("--config", default="config.yaml")
     init.add_argument("--force", action="store_true")
+
+    bootstrap = sub.add_parser("bootstrap", help="generate Persona Profile from Hermes sessions")
+    bootstrap.add_argument("--from-hermes", action="store_true", help="extract from state.db (Path B)")
+    bootstrap.add_argument("--days", type=int, default=90, help="days of history to analyze")
+    bootstrap.add_argument("--call-llm", action="store_true", help="call LLM API to generate insights")
+    bootstrap.add_argument("--model", default="deepseek-chat")
+    bootstrap.add_argument("--config", default="config.yaml")
+
     args = parser.parse_args(argv)
     if args.command == "init":
         print(json.dumps(init_user(args.config, force=args.force), ensure_ascii=False, indent=2))
         return 0
+    if args.command == "bootstrap":
+        from .bootstrap import bootstrap_from_hermes
+        if args.from_hermes:
+            result = bootstrap_from_hermes(
+                args.config, days=args.days, call_llm=args.call_llm, model=args.model,
+            )
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        bootstrap.print_help()
+        return 2
     return 2
 
 
