@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml pytest
+
+      - name: Run tests
+        run: python3 -m pytest tests/ -v
+
+      - name: Check dimension-map consistency
+        run: |
+          python3 framework/generate_dimension_map.py
+          git diff --exit-code api/src/dimension-map.json || {
+            echo "::error::dimension-map.json is out of sync with 7-layer-schema.yaml"
+            echo "Run: python3 framework/generate_dimension_map.py"
+            exit 1
+          }
+
+      - name: Check demo isolation
+        run: python3 tests/test_demo_isolation.py
