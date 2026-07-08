@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-07T18:03:42.632133+00:00",
-  "total_sessions_processed": 71,
+  "last_extraction": "2026-07-08T18:03:54.362137+00:00",
+  "total_sessions_processed": 78,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -848,12 +848,40 @@
           "evidence": "「结论先行：你对 TOF 的实际体验和 repo 里的设计状态是吻合的」",
           "memory_type": "preference",
           "state": "provisional"
+        },
+        {
+          "date": "2026-07-09",
+          "dimension": "推理风格",
+          "insight": "以「机械防御 vs 文档约束」二分法为工程框架评估的核心透镜——最赞赏框架敢于诚实标注哪些承诺已机械化兑现、哪些仅停留在文档层面",
+          "confidence": "high",
+          "evidence": "「明确承认 TOF solves what it can with tools, and clearly documents what it cannot...一个框架敢于公开声明'我的头号敌人目前没有机械防御'，比假装全覆盖要可信得多」"
+        },
+        {
+          "date": "2026-07-09",
+          "dimension": "决策模式",
+          "insight": "在技术评估中坚持独立核验而非信任二次总结——对 AI 生成的 gap 修复报告做逐项独立核验表格，每项有「声称」和「独立核验」两列",
+          "confidence": "high",
+          "evidence": "用户消息：「Gap 修复核验报告(commit 66c70ce)...三个 gap 逐项核验」，并构建了包含独立核验列的验证表格"
+        },
+        {
+          "date": "2026-07-09",
+          "dimension": "学习方式",
+          "insight": "从外部方案借鉴时采取「只取设计思路而不搬代码」策略——三层上下文窗口改造明确「不搬 Cogito 代码，只取设计思路」",
+          "confidence": "high",
+          "evidence": "「三层上下文窗口不搬 Cogito 代码，只取设计思路改造 MEMORY.md/USER.md 注入层次」"
+        },
+        {
+          "date": "2026-07-09",
+          "dimension": "认知架构",
+          "insight": "对系统瓶颈的诊断采用「饱和-空白」对立框架——从「验证层有四道防线但触发层空白」出发推导架构缺口，而非从功能清单出发",
+          "confidence": "high",
+          "evidence": "「审查官诊断：验证层饱和，触发层空白」——由此推导出五步触发层架构"
         }
       ]
     },
     "3": {
       "name": "价值观与信念 (Values & Beliefs)",
-      "fill_rate": 50,
+      "fill_rate": 70,
       "status": "partial",
       "latest_insights": [
         {
@@ -917,6 +945,20 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 现有L3洞察涵盖被需要感、无条件接纳、知识公平性、认知价值观——均为内在心理需求/道德偏好。本条是全新的外在工具价值观维度（agent评价标准），与现有洞察均<15%。独立入库"
+        },
+        {
+          "date": "2026-07-09",
+          "dimension": "价值观",
+          "insight": "高度看重工程诚信——认为框架公开承认局限性（「我的头号敌人目前没有机械防御」）比假装全覆盖更可信，视诚实为成熟标志而非弱点",
+          "confidence": "high",
+          "evidence": "「一个框架敢于公开声明'我的头号敌人目前没有机械防御'，比假装全覆盖要可信得多」"
+        },
+        {
+          "date": "2026-07-09",
+          "dimension": "价值观",
+          "insight": "偏好「为每个约束付费并保留收据」的工程文化——认为 FAILURE_MODES.md 作为事故日志、每个机制注明修复了哪个故障，让后来者敢动这套约束",
+          "confidence": "high",
+          "evidence": "「FAILURE_MODES.md 作为事故日志。8 个 FM 每个都有 symptoms/root cause/fix...这种'为每个约束付费、并保留收据'的工程文化，是这个 repo 最有价值的东西」"
         }
       ]
     },
@@ -1332,6 +1374,13 @@
           "evidence": "「#10 CI：10 分钟，最大的杠杆...现在做 #10 CI，其他两项暂缓」",
           "memory_type": "episodic",
           "state": "provisional"
+        },
+        {
+          "date": "2026-07-09",
+          "dimension": "行为模式",
+          "insight": "在 GitHub 仓库整理中体现「保持 portfolio 简洁」的偏好——对存在价值模糊的项目（hermes-agent fork、StatusDot）果断处理，不保留冗余",
+          "confidence": "medium",
+          "evidence": "用户消息：「帮我整理下我的github仓库吧，1.hermes-agent为啥会存在？2.statusdot感觉可以删了」"
         }
       ]
     },
@@ -2029,5 +2078,17 @@
       },
       "total_insights": 87
     }
+  ],
+  "behavior": {
+    "checked_at": "2026-07-08T18:03:54.362413+00:00",
+    "warnings": [],
+    "insight_count": 7
+  },
+  "_last_agent_insights": [
+    "高度看重工程诚信——认为框架公开承认局限性（「我的头号敌人目前没有机械防御」）比假装全覆盖更可信，视诚实为成熟标志而非弱点",
+    "从外部方案借鉴时采取「只取设计思路而不搬代码」策略——三层上下文窗口改造明确「不搬 Cogito 代码，只取设计思路」",
+    "对系统瓶颈的诊断采用「饱和-空白」对立框架——从「验证层有四道防线但触发层空白」出发推导架构缺口，而非从功能清单出发",
+    "偏好「为每个约束付费并保留收据」的工程文化——认为 FAILURE_MODES.md 作为事故日志、每个机制注明修复了哪个故障，让后来者敢动这套约束",
+    "在 GitHub 仓库整理中体现「保持 portfolio 简洁」的偏好——对存在价值模糊的项目（hermes-agent fork、StatusDot）果断处理，不保留冗余"
   ]
 }
