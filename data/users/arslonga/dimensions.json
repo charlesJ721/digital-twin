@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-08T18:03:54.362137+00:00",
-  "total_sessions_processed": 78,
+  "last_extraction": "2026-07-09T18:04:26.998134+00:00",
+  "total_sessions_processed": 85,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -876,6 +876,56 @@
           "insight": "对系统瓶颈的诊断采用「饱和-空白」对立框架——从「验证层有四道防线但触发层空白」出发推导架构缺口，而非从功能清单出发",
           "confidence": "high",
           "evidence": "「审查官诊断：验证层饱和，触发层空白」——由此推导出五步触发层架构"
+        },
+        {
+          "date": "2026-07-10",
+          "dimension": "元认知监控",
+          "insight": "用户主动中断Agent执行以强制流程纪律——两次打断TOF管道执行：一次要求扩展检查范围，一次要求严格委托。",
+          "confidence": "high",
+          "evidence": "「继续打断  你委托了吗？  严格走 TOF 管道」「如果在 6层之外你有觉得应该检查但是我没有想到的，直接一起包进去，要求全面系统完整」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": ""
+        },
+        {
+          "date": "2026-07-10",
+          "dimension": "推理风格",
+          "insight": "用户拒绝「路径依赖」式捷径答案，要求从第一性原理全面推演。OS选型时推翻Agent的「与现有BWG一致」建议，要求重新评估。",
+          "confidence": "high",
+          "evidence": "「考虑长期使用的完整性 延展性 和综合性能」「你再仔细思考下，考虑长期使用，场景拓展，稳定性，合理性，全面分析，给我一个完整选择推荐」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": ""
+        },
+        {
+          "date": "2026-07-10",
+          "dimension": "推理风格",
+          "insight": "用户对Agent输出保持主动验证而非被动消费——发现并纠正Agent的Debian版本错误和AN5产品线虚构。",
+          "confidence": "high",
+          "evidence": "「为啥不是 Debian13」「an5 只有 mini 起跳   没有 tiny 和 pocket」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": ""
+        },
+        {
+          "date": "2026-07-10",
+          "dimension": "决策风格",
+          "insight": "用户拒绝Agent限定的选项范围，要求扩大比较集——「套餐你也应该综合考虑，没有限定死 tiny 可以升级」",
+          "confidence": "high",
+          "evidence": "「套餐你也应该综合考虑，没有限定死 tiny 可以升级」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": ""
+        },
+        {
+          "date": "2026-07-10",
+          "dimension": "认知架构",
+          "insight": "用户在同一会话内自如切换抽象架构讨论与具体购买决策——从Cogito Engine意识体系统回顾无缝转向DMIT VPS选购。",
+          "confidence": "high",
+          "evidence": "Session 1对话流：「回顾一下 cogito engine 移植的完整内容」→Agent产出完整技术回顾→用户的下一句：「dmit lax as3 pro 开放购买了，我要买 tiny 或者 pocket 吗」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": ""
         }
       ]
     },
@@ -1381,6 +1431,16 @@
           "insight": "在 GitHub 仓库整理中体现「保持 portfolio 简洁」的偏好——对存在价值模糊的项目（hermes-agent fork、StatusDot）果断处理，不保留冗余",
           "confidence": "medium",
           "evidence": "用户消息：「帮我整理下我的github仓库吧，1.hermes-agent为啥会存在？2.statusdot感觉可以删了」"
+        },
+        {
+          "date": "2026-07-10",
+          "dimension": "行为模式",
+          "insight": "关键操作被阻塞时用户立即切换至直接操作模式——VNC Console中亲自键入命令恢复SSH密钥，不等待Agent远程解决。",
+          "confidence": "high",
+          "evidence": "「mdkir command not found」「mkdir command not found」「ls /etc/ssh/sshd_config.d/」——用户直接在DMIT VNC终端输入命令",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": ""
         }
       ]
     },
@@ -1674,6 +1734,16 @@
           "evidence": "「TOF 的验证层已经饱和，继续往那投预算是负杠杆……真实的 99% 失败发生在后者」",
           "memory_type": "fact",
           "state": "provisional"
+        },
+        {
+          "date": "2026-07-10",
+          "dimension": "知识管理",
+          "insight": "用户将TOF管道视为质量闸门而非流程——当Agent跳过委托时立即打断，体现管道是认知对抗工具而非行政流程。",
+          "confidence": "high",
+          "evidence": "「继续打断  你委托了吗？  严格走 TOF 管道」——打断时机在Agent自行收集数据而未委托Scout/Establish/Review时",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": ""
         }
       ]
     },
@@ -2077,18 +2147,31 @@
         "7": 45
       },
       "total_insights": 87
+    },
+    {
+      "date": "2026-07-09T18:04:26.998134+00:00",
+      "layers": {
+        "1": 4,
+        "2": 47,
+        "3": 7,
+        "4": 25,
+        "5": 18,
+        "6": 3,
+        "7": 7
+      },
+      "total_insights": 111
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-08T18:03:54.362413+00:00",
+    "checked_at": "2026-07-09T18:03:48.372447+00:00",
     "warnings": [],
     "insight_count": 7
   },
   "_last_agent_insights": [
-    "高度看重工程诚信——认为框架公开承认局限性（「我的头号敌人目前没有机械防御」）比假装全覆盖更可信，视诚实为成熟标志而非弱点",
-    "从外部方案借鉴时采取「只取设计思路而不搬代码」策略——三层上下文窗口改造明确「不搬 Cogito 代码，只取设计思路」",
-    "对系统瓶颈的诊断采用「饱和-空白」对立框架——从「验证层有四道防线但触发层空白」出发推导架构缺口，而非从功能清单出发",
-    "偏好「为每个约束付费并保留收据」的工程文化——认为 FAILURE_MODES.md 作为事故日志、每个机制注明修复了哪个故障，让后来者敢动这套约束",
-    "在 GitHub 仓库整理中体现「保持 portfolio 简洁」的偏好——对存在价值模糊的项目（hermes-agent fork、StatusDot）果断处理，不保留冗余"
+    "用户对Agent输出保持主动验证而非被动消费——发现并纠正Agent的Debian版本错误和AN5产品线虚构。",
+    "用户拒绝Agent限定的选项范围，要求扩大比较集——「套餐你也应该综合考虑，没有限定死 tiny 可以升级」",
+    "关键操作被阻塞时用户立即切换至直接操作模式——VNC Console中亲自键入命令恢复SSH密钥，不等待Agent远程解决。",
+    "用户在同一会话内自如切换抽象架构讨论与具体购买决策——从Cogito Engine意识体系统回顾无缝转向DMIT VPS选购。",
+    "用户将TOF管道视为质量闸门而非流程——当Agent跳过委托时立即打断，体现管道是认知对抗工具而非行政流程。"
   ]
 }
