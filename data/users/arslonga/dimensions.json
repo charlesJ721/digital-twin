@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-09T18:04:26.998134+00:00",
-  "total_sessions_processed": 85,
+  "last_extraction": "2026-07-10T18:03:38.434611+00:00",
+  "total_sessions_processed": 87,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -63,6 +63,39 @@
           "evidence": "「项目的灵魂从文档进入了代码」→ 三轮审查验证后才接受此判词",
           "memory_type": "preference",
           "state": "provisional"
+        },
+        {
+          "id": "insight_2026-07-10T18:03:38.434611+00:00_3",
+          "date": "2026-07-10",
+          "dimension": "动机结构",
+          "layer": "L1",
+          "insight": "基础设施探索是纯粹的兴趣驱动——VPS 选型、IP 质量检测、路由分析、社区实践调研全部在非工作时间展开，与职业角色无关。网络和 AI 工具链是真正的「自己的项目」",
+          "confidence": "high",
+          "evidence": "会话时间为深夜至凌晨（21:21-23:45），内容全部是个人 VPS 比较、模型订阅策略、社区实践研究。与 L1 已有洞察「工作=收入+面子非人生目标」一致——这些探索才是真正的兴趣归属",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260710_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260710_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-10T18:03:38.434611+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L1「工作=收入+面子非人生目标」(6/22) 互补 15%——本次用具体行为（深夜 VPS 研究）验证了「真正的兴趣在工作之外」"
         }
       ]
     },
@@ -926,6 +959,105 @@
           "memory_type": "fact",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "id": "insight_2026-07-10T18:03:38.434611+00:00_0",
+          "date": "2026-07-10",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "流程纪律优先——当 agent 偏离 TOF 管道规范时，主动打断并纠正：「继续打断  你委托了吗？  严格走 TOF 管道」。不是 micromanagement——是确保多模型分布式推理的质量门不被跳过",
+          "confidence": "high",
+          "evidence": "用户：「继续打断  你委托了吗？  严格走 TOF 管道」；agent 后续验证了 Scout(Opus)→Establish(GPT-5.5)→Review(Gemini)→Verify(DeepSeek) 模型路由全部正确",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260710_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260710_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-10T18:03:38.434611+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L2「对 agent 行为有精确预期并主动纠正」(~25%) 互补——本次是 TOF 管道流程纪律的新维度"
+        },
+        {
+          "id": "insight_2026-07-10T18:03:38.434611+00:00_2",
+          "date": "2026-07-10",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "多维度系统对比决策——评估 VPS 时构建「线路/价格/IP 质量/硬件/适用场景」五维对比矩阵，不依赖单一点做判断。BWG vs DMIT 的结论基于实际测试数据而非品牌印象",
+          "confidence": "high",
+          "evidence": "agent 产出了 BWG vs DMIT 的多维对比表（IP 质量、线路、价格、风险评分、流媒体解锁），用户基于这些数据决定「退 DMIT 留 BWG」。后续又对比了静态住宅 IP + 订阅方案的月费",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260710_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260710_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-10T18:03:38.434611+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L2「正交分类思维」30%——本次是多维对比矩阵用于消费决策的具体案例"
+        },
+        {
+          "id": "insight_2026-07-10T18:03:38.434611+00:00_5",
+          "date": "2026-07-10",
+          "dimension": "认知架构",
+          "layer": "L2",
+          "insight": "架构简化本能——从复杂的多模型 API 调用链收束为「Hermes 回归调度器+日常，Claude Code 做深活，Codex 做生成」的三层干净架构。主动研究社区实践验证思路后，确认方向不是凭空想象",
+          "confidence": "high",
+          "evidence": "用户：「也就是，需要 claude 的调 cc cli 来实现，需要 gpt 的调 codex cli 来实现，hermes 回归调度器和日常？」→ 后续搜了社区实践确认「你的方案不是凭空想出来的——社区已经有成熟的实践」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260710_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260710_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-10T18:03:38.434611+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L2「正交分类思维」35%——本次是从消费侧（订阅 vs API）倒推技术架构简化的具体案例"
         }
       ]
     },
@@ -1441,6 +1573,72 @@
           "memory_type": "episodic",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "id": "insight_2026-07-10T18:03:38.434611+00:00_1",
+          "date": "2026-07-10",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "实测验证后再决策——购买 DMIT VPS 后不满足于规格参数，主动运行 IP 质量脚本、检查实际路由路径（发现联通 4837 缩水），确认问题后决定退货。全链路：买→测→发现缺陷→退货",
+          "confidence": "high",
+          "evidence": "用户：「我怎么检测自己的 ip 质量  就像之前发你截图那个」→ agent 在 DMIT 上跑了 xykt/IPQuality 脚本，发现「联通出向走 4837」「Maxmind 归属巴西」等问题。用户随后决定退掉 DMIT",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260710_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260710_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-10T18:03:38.434611+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L4「先跑通再优化」25%——本次是购买决策中的实测验证模式，更偏消费者行为"
+        },
+        {
+          "id": "insight_2026-07-10T18:03:38.434611+00:00_4",
+          "date": "2026-07-10",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "自愈基础设施带来满足感——macOS 自动更新重启后所有服务（Hermes/Tailscale/frp/mihomo）全部自动恢复，用户反应「居然重启后全都自动恢复了」，并主动追问「有什么遗漏没拉起来的吗」——对系统韧性的关注是持续性的",
+          "confidence": "high",
+          "evidence": "用户：「居然重启后全都自动恢复了」→「有什么遗漏没拉起来的吗」。agent 全面检查后确认 launchd 三个 plist 全部正常、VPS 连通性正常、frp 隧道正常",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260710_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260710_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-10T18:03:38.434611+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L4「防御机制」(25%) 互补——本次体现了用户将基础设施韧性转化为正向反馈的独特心理模式"
         }
       ]
     },
@@ -1744,6 +1942,39 @@
           "memory_type": "policy",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "id": "insight_2026-07-10T18:03:38.434611+00:00_6",
+          "date": "2026-07-10",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "主动拓展 AI agent 基础设施知识边界——从按量 API 到订阅 CLI 工具的认知跃迁：发现 Claude Code 和 Codex CLI 支持 Pro/Max 订阅后，立即重构工具链架构。在采纳前先搜索 Reddit/GitHub 社区实践验证",
+          "confidence": "high",
+          "evidence": "agent parallel_search 了「Claude Code CLI subscription」「Codex CLI ChatGPT Plus」→ 确认两家 CLI 都绑定订阅、不消耗 API。用户随后搜索「社区实践」「混合模型场景」寻找参考案例",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260710_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260710_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-10T18:03:38.434611+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L5「信息食谱广泛覆盖 AI 工具生态」25%——本次是订阅制 CLI 工具这一新知识领域的首次探索"
         }
       ]
     },
@@ -2160,6 +2391,19 @@
         "7": 7
       },
       "total_insights": 111
+    },
+    {
+      "date": "2026-07-10T18:03:38.434611+00:00",
+      "layers": {
+        "1": 40,
+        "2": 100,
+        "3": 70,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 70
+      },
+      "total_insights": 118
     }
   ],
   "behavior": {
