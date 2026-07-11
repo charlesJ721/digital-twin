@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-10T18:03:38.434611+00:00",
-  "total_sessions_processed": 87,
+  "last_extraction": "2026-07-11T18:04:25.267916+00:00",
+  "total_sessions_processed": 97,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1058,6 +1058,62 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与 L2「正交分类思维」35%——本次是从消费侧（订阅 vs API）倒推技术架构简化的具体案例"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "推理风格",
+          "insight": "用户不信任 Agent 的配置变更声明，要求实际验证而非口头确认——发现 Agent 声称已修改但实际未生效的系统性 bug",
+          "confidence": "high",
+          "evidence": "用户：「确认改好了？fallback 这个上次你也说改好了，为啥没生效？」Agent 随后发现 hermes config set 将列表存储为 YAML 字符串而非原生列表，导致 fallback 机制静默失效。",
+          "memory_type": "episodic"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "推理风格",
+          "insight": "用户基于 benchmark 数据而非直觉做技术决策——在 Implement 阶段拒绝 Terra（TB 82.5%）选择 GPT-5.5（TB 82%）以保证实现质量",
+          "confidence": "high",
+          "evidence": "用户在看到完整 benchmark 对比后说：「要不 implement 还是换回 5.5 吧」。Agent 总结：「Terra 的半价确实香，但 Implement 阶段的质量不能打折——TB 82.5% vs 88% 的差距在写代码时是实打实的。」",
+          "memory_type": "fact"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "推理风格",
+          "insight": "用户在成本优化中采用分层策略——非关键阶段激进降本（Scout 用 Gemini），关键阶段保留质量（Implement 用 GPT-5.5，Establish 用 Sol）",
+          "confidence": "high",
+          "evidence": "TOF 管道最终配置：Scout→Gemini 3.1 Pro ($2), Establish→GPT-5.6 Sol ($5), Review→Claude Opus 4.8 ($5), Implement→GPT-5.5 ($5)。从 Terra 换回 GPT-5.5 体现质量优先于成本。",
+          "memory_type": "fact"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "决策风格",
+          "insight": "用户在技术选型中要求基于最新 benchmark 的全面审核，而非接受静态配置——主动要求回顾模型分配是否最优",
+          "confidence": "high",
+          "evidence": "用户：「你基于当前各模型 benchmark，回顾一下目前的模型分配是最优的吗，覆盖了各领域最强模型吗？各模型分布和对应任务是最匹配的吗？」Agent 随后搜索了 2026 年 7 月 SWE-bench、Terminal-Bench、GPQA Diamond 等最新数据。",
+          "memory_type": "episodic"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "决策风格",
+          "insight": "用户在 VPS 选型中要求多维度定量对比而非定性推荐——需要 IP 信誉、延迟丢包、线路、硬件的全面数据后再做决策",
+          "confidence": "high",
+          "evidence": "用户：「你分别 ssh 到我的 dmit 和 bwg 的 vps 上，然后分别跑一下 ip 检测脚本，包括被标记识别情况和延迟丢包情况，然后再结合两者的线路和硬件配置，给我一个完整对比和去留推荐」",
+          "memory_type": "episodic"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "推理风格",
+          "insight": "用户在做决策前会确认看似无关的细节以排除盲区——在 VPS 对比中追问 25 端口和邮局连通性的实际影响",
+          "confidence": "medium",
+          "evidence": "用户：「25 端口和邮局那条具体是啥」「我的场景里有 vps 发邮件的吗」。Agent 确认用户 VPS 场景中完全没有邮件发送路径，25 端口差异无关。",
+          "memory_type": "episodic"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "决策风格",
+          "insight": "用户发现退款窗口即将关闭时立即行动而非等待——BWG 30 天退款窗口最后一天，系统拒退后立即提交人工 ticket",
+          "confidence": "medium",
+          "evidence": "Agent 分析：「今天（7月12日）是第 30 天——刚好卡在截止线上」。用户：「说不能自动退，我提了 ticket」。Agent：「建议：立刻去申请，不要等。30 天窗口还剩最后几小时。」",
+          "memory_type": "episodic"
         }
       ]
     },
@@ -1639,6 +1695,14 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与 L4「防御机制」(25%) 互补——本次体现了用户将基础设施韧性转化为正向反馈的独特心理模式"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "防御机制",
+          "insight": "用户对 Agent 错误保持零容忍验证态度——发现推错 git 仓库后立即打断，并要求回溯验证之前的修改是否真实生效",
+          "confidence": "high",
+          "evidence": "用户：「我注意到刚才我让你推 git，你推到了 hermes-kit，但是我明明之前让你把 tof 拎出来作为一个独立 repository 了」。随后追问 fallback：「确认改好了？fallback 这个上次你也说改好了，为啥没生效？」",
+          "memory_type": "episodic"
         }
       ]
     },
@@ -1975,6 +2039,22 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与 L5「信息食谱广泛覆盖 AI 工具生态」25%——本次是订阅制 CLI 工具这一新知识领域的首次探索"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "信息食谱",
+          "insight": "用户主动探索新工具生态——发现 kepano/obsidian-skills 并要求研究其能否替代现有 MCP obsidian 集成",
+          "confidence": "high",
+          "evidence": "用户：「你研究一下这个 https://github.com/kepano/obsidian-skills」「是不是装了这个，就可以把 mcp 的 obsidian 完全替代掉了」。后续同意安装并要求通过 OS 权限直接启用 Obsidian CLI。",
+          "memory_type": "episodic"
+        },
+        {
+          "date": "2026-07-12",
+          "dimension": "知识组织",
+          "insight": "用户发现并修复了 Agent 未能发现的系统性 bug——hermes config set 将 YAML 列表序列化为字符串导致配置静默失效",
+          "confidence": "high",
+          "evidence": "Agent 分析结果：「fallback_providers 被存成了 JSON 字符串而不是 YAML 列表——这就是上次没生效的原因。YAML 解析器把 fallback_providers 读成了字符串类型，不是列表。这会导致 fallback 机制静默失效——和上次一模一样。」",
+          "memory_type": "episodic"
         }
       ]
     },
@@ -2407,15 +2487,15 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-09T18:03:48.372447+00:00",
+    "checked_at": "2026-07-11T18:04:25.268220+00:00",
     "warnings": [],
-    "insight_count": 7
+    "insight_count": 10
   },
   "_last_agent_insights": [
-    "用户对Agent输出保持主动验证而非被动消费——发现并纠正Agent的Debian版本错误和AN5产品线虚构。",
-    "用户拒绝Agent限定的选项范围，要求扩大比较集——「套餐你也应该综合考虑，没有限定死 tiny 可以升级」",
-    "关键操作被阻塞时用户立即切换至直接操作模式——VNC Console中亲自键入命令恢复SSH密钥，不等待Agent远程解决。",
-    "用户在同一会话内自如切换抽象架构讨论与具体购买决策——从Cogito Engine意识体系统回顾无缝转向DMIT VPS选购。",
-    "用户将TOF管道视为质量闸门而非流程——当Agent跳过委托时立即打断，体现管道是认知对抗工具而非行政流程。"
+    "用户主动探索新工具生态——发现 kepano/obsidian-skills 并要求研究其能否替代现有 MCP obsidian 集成",
+    "用户在 VPS 选型中要求多维度定量对比而非定性推荐——需要 IP 信誉、延迟丢包、线路、硬件的全面数据后再做决策",
+    "用户在做决策前会确认看似无关的细节以排除盲区——在 VPS 对比中追问 25 端口和邮局连通性的实际影响",
+    "用户发现退款窗口即将关闭时立即行动而非等待——BWG 30 天退款窗口最后一天，系统拒退后立即提交人工 ticket",
+    "用户发现并修复了 Agent 未能发现的系统性 bug——hermes config set 将 YAML 列表序列化为字符串导致配置静默失效"
   ]
 }
