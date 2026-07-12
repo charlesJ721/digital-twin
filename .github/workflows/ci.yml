@@ -25,11 +25,25 @@ jobs:
       - name: Check dimension-map consistency
         run: |
           python3 framework/generate_dimension_map.py
-          git diff --exit-code api/src/dimension-map.json || {
+          # Strip generated_at timestamps before comparing (timestamps always differ)
+          python3 -c "
+          import json
+          with open('api/src/dimension-map.json') as f:
+              d = json.load(f)
+          d.pop('generated_at', None)
+          print(json.dumps(d, indent=2, sort_keys=True))
+          " > /tmp/new_map.json
+          git show HEAD:api/src/dimension-map.json | python3 -c "
+          import sys, json
+          d = json.load(sys.stdin)
+          d.pop('generated_at', None)
+          print(json.dumps(d, indent=2, sort_keys=True))
+          " > /tmp/old_map.json
+          if ! diff /tmp/old_map.json /tmp/new_map.json; then
             echo "::error::dimension-map.json is out of sync with 7-layer-schema.yaml"
-            echo "Run: python3 framework/generate_dimension_map.py"
+            echo "Run: python3 framework/generate_dimension_map.py && git add api/src/dimension-map.json && git commit -m 'sync dimension-map'"
             exit 1
-          }
+          fi
 
       - name: Check demo isolation
         run: python3 tests/test_demo_isolation.py
