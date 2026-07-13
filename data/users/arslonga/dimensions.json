@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-12T18:03:15.439983+00:00",
-  "total_sessions_processed": 103,
+  "last_extraction": "2026-07-13T18:03:47.852425+00:00",
+  "total_sessions_processed": 108,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1135,6 +1135,36 @@
           "insight": "能快速识别方案中的逻辑死循环并否决——代理监控走代理推送是悖论，删 cron 不犹豫",
           "confidence": "high",
           "evidence": "Agent 创建 Proxy Health Monitor cron → 用户立即指出「真断线了我 telegram 也访问不了 推送没啥意义」→ 命令删除 cron"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "用户做技术选型决策时偏好矩阵式多维度对比（IP质量/延迟线路/硬件配置/价格四维），而非单维度直觉判断。在 DMIT vs BWG 对比中自发构建了 6 项指标的对比矩阵，最终以「全维度碾压」为结论框架",
+          "confidence": "high",
+          "evidence": "Session「DMIT与BWG全面对比」: 用户要求「结合两者的线路和硬件配置，给我一个完整对比和去留推荐」→ Agent 产出四维对比表（IP质量/延迟丢包/硬件/价格）→ 用户逐一追问细节后确认结论",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与 L2 已有洞察「用户偏好系统性对比而非单一方案评估」语义重叠度 ~30%——本洞察强调矩阵式量化框架的具体形式，非一般性对比偏好"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "用户对 Agent 框架纪律有元认知监控——不仅设计约束系统（TOF 管道五步方案），还会定期追问实际执行效果。当观察到 Agent 可能未遵守自己设计的框架时，主动发起审计式追问",
+          "confidence": "high",
+          "evidence": "Session「回顾TOF管道五大约束」: 用户先要求回顾五步方案 → 提供正确表格纠正 Agent 的错误回忆 → 追问「自从这五步生效之后，对你产生的实际约束效果…你仍然好像一次TOF委托都没做」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": "与 L2 已有洞察「用户要求 Agent 行为可验证可审计」高度相关但非重复——本洞察聚焦于元认知监控的主动触发行为，而非被动规则执行"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "用户在做架构决策（如是否关闭 IPv6）前，要求先验证实际调用路径再判断，而非基于社区「普遍反馈」直接行动。最终发现 DMIT IPv6 虽开启但实际 API 调用走 BWG 代理（纯 IPv4），关不关都无影响",
+          "confidence": "high",
+          "evidence": "Session「DMIT 双栈状态确认」: 用户问「要不要把ipv6关了，因为我看普遍反馈有些服务如果走ipv6会报错」→ Agent 先查 clash 配置和实际调用链 → 结论「当前不需要关，因为实际调用链根本没走 DMIT IPv6」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与 L2 已有洞察「决策前要求实证验证」重叠度 ~25%——本洞察聚焦于「区分名义配置与实际执行路径」的方法论，非一般性求证偏好"
         }
       ]
     },
@@ -1731,6 +1761,16 @@
           "insight": "能识别 VPS 囤积心态的心理驱动因素并主动反制——理解为什么别人囤，然后退掉自己不需要的",
           "confidence": "high",
           "evidence": "用户问「为什么那么多人喜欢囤vps」→ Agent 分析四层心理 → 用户刚退了 BWG，从双持回到单栈 DMIT；Agent 总结「这才是理性的终点——需要几台留几台，多余的退掉」"
+        },
+        {
+          "dimension": "行为模式",
+          "layer": "L4",
+          "content": "用户在服务退款/取消类决策中存在「最后一天执行」模式——BWG VPS 30 天退款窗口恰好第 30 天才申请，导致自动系统拒绝需人工 ticket 介入。非拖延而是倾向于在截止线前收集完整信息后再行动",
+          "confidence": "medium",
+          "evidence": "Session「DMIT与BWG全面对比」: Agent 分析退款窗口时指出「今天是第 30 天——刚好卡在截止线上」→ 用户提交后退款系统回复「不能自动退」→ 用户「提了 ticket」→ 客服回复要求在 ticket 中确认",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": "新增洞察，未检测到已有 L4 洞察覆盖「决策延迟但非拖延」的具体行为模式"
         }
       ]
     },
@@ -2097,6 +2137,16 @@
           "insight": "偏好一手信息源而非二手转发——主动寻找官方渠道订阅而非依赖群聊转发",
           "confidence": "medium",
           "evidence": "用户看到别人群里转发的 DMIT 维护通告后问「有官方运维群啥的吗」→ Agent 找到 4 个官方 Telegram 频道/群 → 用户采纳"
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "content": "用户对 AI API 定价模型有深层结构理解——在评估「订阅分流 ROI」时自发识别出关键陷阱：Claude Max/ChatGPT Pro 是「给人用的 Web 订阅」而非「给 Agent 用的 API token」，不只看价格标签而关注访问模式的本质差异",
+          "confidence": "high",
+          "evidence": "Session「模型订阅分流ROI评估」: Agent 分析后指出「订阅≠API 访问。这些订阅是给人用的，不是给 Agent 用的」→ 用户未反驳此核心判断 → 最终方案转向在 DMIT + NodeMaven 静态 IP 上走官方 API 而非订阅",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": "与 L5 已有洞察「用户对 API 中转站倍率体系有深入理解」互补——本洞察聚焦于订阅 vs API 的访问模式区分，非价格倍率分析"
         }
       ]
     },
@@ -2542,15 +2592,19 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-12T18:03:15.440212+00:00",
-    "warnings": [],
-    "insight_count": 6
+    "checked_at": "2026-07-13T18:03:47.852574+00:00",
+    "warnings": [
+      "high short-response ratio (3/3)",
+      "high short-response ratio (4/4)",
+      "high short-response ratio (5/5)"
+    ],
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "不接受表面解释，主动推动更深层诊断直至根因确证——从 Mac 问题推到联通路由再推到交换机固件 bug",
-    "能识别 VPS 囤积心态的心理驱动因素并主动反制——理解为什么别人囤，然后退掉自己不需要的",
-    "网络运维知识从单 VPS 使用扩展到完整评估框架——IP 信誉/线路/硬件/价格四维对比 + 退款政策分析 + 拓扑审计 + 配置残留清理",
-    "能快速识别方案中的逻辑死循环并否决——代理监控走代理推送是悖论，删 cron 不犹豫",
-    "偏好一手信息源而非二手转发——主动寻找官方渠道订阅而非依赖群聊转发"
+    "",
+    "",
+    "",
+    "",
+    ""
   ]
 }
