@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-13T18:03:47.852425+00:00",
-  "total_sessions_processed": 108,
+  "last_extraction": "2026-07-14T18:03:47.159393+00:00",
+  "total_sessions_processed": 113,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -13,7 +13,7 @@
       "name": "认知架构 (Cognitive Architecture)",
       "fill_rate": 100,
       "status": "partial",
-      "insight_count": 63
+      "insight_count": 65
     },
     "3": {
       "name": "价值观与信念 (Values & Beliefs)",
@@ -25,13 +25,13 @@
       "name": "行为模式 (Behavioral Patterns)",
       "fill_rate": 100,
       "status": "partial",
-      "insight_count": 30
+      "insight_count": 31
     },
     "5": {
       "name": "知识结构 (Knowledge Structure)",
       "fill_rate": 100,
       "status": "partial",
-      "insight_count": 24
+      "insight_count": 26
     },
     "6": {
       "name": "社会关系 (Social Relations)",
@@ -346,6 +346,28 @@
         "7": 70
       },
       "total_insights": 128
+    },
+    {
+      "date": "2026-07-14T18:05:11Z",
+      "layers": {
+        "1": 5,
+        "2": 65,
+        "3": 7,
+        "4": 31,
+        "5": 26,
+        "6": 3,
+        "7": 7
+      },
+      "total_insights": 144,
+      "fill_rate": {
+        "1": 40,
+        "2": 100,
+        "3": 70,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 70
+      }
     }
   ]
 }
