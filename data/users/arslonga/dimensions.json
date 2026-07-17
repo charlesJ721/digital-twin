@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-16T18:05:20Z",
-  "total_sessions_processed": 123,
+  "last_extraction": "2026-07-17T18:05:09.120337+00:00",
+  "total_sessions_processed": 129,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1245,6 +1245,39 @@
           "memory_type": "episodic",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "id": "insight_2026-07-17T18:05:09.120337+00:00_0",
+          "date": "2026-07-17",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "「零信任安全」设计哲学——在平台权限配置中展现从零开始的系统性安全思维。不为便利性妥协，明确要求「从0到1，先封禁所有能力，我按需开放」，而非逐工具禁用（后者容易遗漏）。在Agent建议临时补丁方案时，主动要求推倒重来——「重新思考一下，给我一个完整的长期稳定方案，不要着急执行」。核心不是拒绝自动化，而是拒绝「看起来解决了问题但没有解决根源」的局部最优解。",
+          "confidence": "high",
+          "evidence": "Session 飞书工具权限: 用户说「从0到1，先封禁所有能力，我按需开放」。Session 飞书Bot约束回顾: 用户说「重新思考一下，给我一个完整的方案...长期稳定不会对核心配置有任何影响的准确方案，不要着急执行」。最终方案「no_mcp」是框架原生机制而非补丁。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260717_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260717_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-17T18:05:09.120337+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与现有L2「第一性原理追问模式」(7/17)互补——追问模式是理解机制，零信任安全是将理解转化为系统设计约束。"
         }
       ]
     },
@@ -1871,6 +1904,39 @@
           "memory_type": "fact",
           "state": "provisional",
           "auto_diff": "与已有L4洞察「网络基础设施的审慎管理」可能存在语义重叠，需语义去重判断"
+        },
+        {
+          "id": "insight_2026-07-17T18:05:09.120337+00:00_1",
+          "date": "2026-07-17",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "全局框架优先于局部执行的认知覆盖模式——当Agent在具体问题上陷入试错循环时，用户会主动触发「暂停→重新架构」的元认知中断。不满足于单个问题被解决，要求Agent先阐明完整框架再执行。具体信号：对Agent反复操作同一类问题时发出「你能不能别猛猛干，遇到问题可以先搜一搜有没有其他人反馈」的纠正——要求Agent在工具执行前增加信息收集阶段。这与「零容忍验证」(7/17)不同——验证是事后对照，全局框架优先是事前的认知路线修正。",
+          "confidence": "high",
+          "evidence": "Session 飞书工具权限: 用户说「你能不能别猛猛干，遇到问题可以先搜一搜有没有其他人反馈」。Session 飞书Bot约束回顾: 用户说「我希望你能重新思考一下，给我一个完整的方案...不要着急执行」。Session 网络TCP优化: 用户说「先执行123，执行完后再和我详细讲讲4是干啥的，我再判断要不要做」——分段执行而非全量推进。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260717_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260717_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-17T18:05:09.120337+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与L4「零容忍验证态度」(7/17)互补——零容忍验证是事后验证已执行的修改是否真实生效，全局框架优先是事前阻止方向性错误。"
         }
       ]
     },
@@ -2287,6 +2353,39 @@
           "state": "provisional",
           "evidence": "在「静态住宅IP养号建议」和「NodeMaven 代理 IP 质量验证」两个会话中，Agent 输出了完整的四层检测框架（从 ipinfo.io ISP 验证到 Netflix 实测），用户要求对具体 IP 跑完整检测",
           "auto_diff": ""
+        },
+        {
+          "id": "insight_2026-07-17T18:05:09.120337+00:00_2",
+          "date": "2026-07-17",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "对抗审查作为标准交付门禁——在知识产品化过程中建立了制度化的质量审查流程。Session 6中用户要求「允许你搜索、汇编、委托、审查、对抗」输出白皮书级交付物，将对抗审查从可选优化提升为强制交付门禁。具体体现：(1)REVIEW.md作为独立文档保留全部审查记录(22 findings→8 blocking→v1.1修复→v1.2补全)；(2)对抗视角明确为「adversarial_investor_cto_cio」——预设投资人/CTO/CISO三方质疑；(3)修复后更新REVIEW.md而非删除——保留可审计的质量演进历史。与L5现有「第一性原理体系」(7/16)互补——体系是框架构建能力，对抗审查是框架验证机制。",
+          "confidence": "high",
+          "evidence": "Session AI原生组织形态白皮书: 用户要求「允许你搜索、汇编、委托、审查、对抗」。REVIEW.md verdict从'BLOCKING'变为'PASS (条件性)'，保留22条finding的完整修复历史。Repository版本演进: v1.0(12文件/95KB)→v1.1(16文件/149KB/8阻塞修复)→v1.2(20文件/178KB/5补充)。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260717_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260717_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-17T18:05:09.120337+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与L5「第一性原理体系」(7/16)互补——体系是框架构建，对抗审查是框架验证。与L5「控制平面与数据平面分离」(7/17)互补——前者是架构概念，后者是交付实践。"
         }
       ]
     },
@@ -2774,6 +2873,19 @@
         "7": 70
       },
       "total_insights": 154
+    },
+    {
+      "date": "2026-07-17T18:05:09.120337+00:00",
+      "layers": {
+        "1": 40,
+        "2": 100,
+        "3": 70,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 70
+      },
+      "total_insights": 157
     }
   ],
   "behavior": {
