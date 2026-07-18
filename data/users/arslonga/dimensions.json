@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-17T18:05:09.120337+00:00",
-  "total_sessions_processed": 129,
+  "last_extraction": "2026-07-18T18:03:18.990185+00:00",
+  "total_sessions_processed": 130,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -96,6 +96,38 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与 L1「工作=收入+面子非人生目标」(6/22) 互补 15%——本次用具体行为（深夜 VPS 研究）验证了「真正的兴趣在工作之外」"
+        },
+        {
+          "id": "insight_2026-07-18T18:03:18.990185+00:00_6",
+          "date": "2026-07-18",
+          "dimension": "动机结构",
+          "layer": "L1",
+          "insight": "总量成本优化驱动：决策时习惯性计算全栈总月费（TCO），基于边际成本而非绝对价格做取舍。$7.24/月的增量在 $200-250 的月预算内「没问题」，但会主动识别「$0.92/月留 London VPS 当保险」的更优边际方案。",
+          "confidence": "high",
+          "evidence": "「每月多花 $7.24，每年多 $87。在你月预算 $200-250 内，没问题」「RackNerd London $11/年 ($0.92/月) → 仅 giffgaff 场景」「总成本更低、效果更好」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260718_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260718_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-18T18:03:18.990185+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -1278,6 +1310,70 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与现有L2「第一性原理追问模式」(7/17)互补——追问模式是理解机制，零信任安全是将理解转化为系统设计约束。"
+        },
+        {
+          "id": "insight_2026-07-18T18:03:18.990185+00:00_0",
+          "date": "2026-07-18",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "基础设施中心化决策框架：评估任何工具/服务时，首先对标现有架构（「我的 DMIT+NodeMaven 体系已经有了什么」），而非孤立评估工具本身优劣。这导致决策结论高度依赖当前架构状态——同一工具在不同架构阶段会被不同评估。",
+          "confidence": "high",
+          "evidence": "「Proton VPN 能给你的，你的体系基本都有」「关键问题：你现在已经有了完整的分层代理体系」「替换 RackNerd 三台小机可行，替换不了 DMIT + NodeMaven」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260718_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260718_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-18T18:03:18.990185+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-07-18T18:03:18.990185+00:00_1",
+          "date": "2026-07-18",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "迭代式约束澄清：初始提问常为简化版场景（如「NodeMaven 崩了」），在对话推进中通过追问逐步暴露真实约束（「DMIT 和 NodeMaven 同时崩了」）。Agent 需主动探测隐藏的更深层假设，而非仅回应表面问题。",
+          "confidence": "high",
+          "evidence": "首次「NodeMaven ISP ↓崩了」→ Agent 分析后 → 用户澄清「如果我的 dmit 和 nodemaven 同时崩了」→ 完全不同的分析路径",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260718_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260718_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-18T18:03:18.990185+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -1361,6 +1457,38 @@
           "insight": "偏好「为每个约束付费并保留收据」的工程文化——认为 FAILURE_MODES.md 作为事故日志、每个机制注明修复了哪个故障，让后来者敢动这套约束",
           "confidence": "high",
           "evidence": "「FAILURE_MODES.md 作为事故日志。8 个 FM 每个都有 symptoms/root cause/fix...这种'为每个约束付费、并保留收据'的工程文化，是这个 repo 最有价值的东西」"
+        },
+        {
+          "id": "insight_2026-07-18T18:03:18.990185+00:00_4",
+          "date": "2026-07-18",
+          "dimension": "价值观",
+          "layer": "L3",
+          "insight": "自主可控优先于便利性：拒绝密码管理器不是因为不认可安全性，而是因为「一旦最基本的密码管理服务崩了 我就瞎了」——核心恐惧是失去对关键访问路径的控制权。偏好任何场景下都能独立恢复的方案（确定性密码生成、本地 KeePass 文件、物理纸备份）。",
+          "confidence": "high",
+          "evidence": "「密码管理软件感觉也很麻烦 意味着我几乎完全不知道自己各个服务的密码 一旦最基本的密码管理服务崩了 我就瞎了」「你不需要数据库、不需要同步、不需要备份任何东西」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260718_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260718_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-18T18:03:18.990185+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -1937,6 +2065,70 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与L4「零容忍验证态度」(7/17)互补——零容忍验证是事后验证已执行的修改是否真实生效，全局框架优先是事前阻止方向性错误。"
+        },
+        {
+          "id": "insight_2026-07-18T18:03:18.990185+00:00_2",
+          "date": "2026-07-18",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "默认冗余架构思维：基础设施设计本能性地构建多层后备——主力 (DMIT) + 住宅出口 (NodeMaven) + 应急池 (Proton VPN/RackNerd)。每一层解决不同类型的失效模式（直连中断 vs 出口 IP 类型 vs 地区覆盖），而非简单堆叠。",
+          "confidence": "high",
+          "evidence": "「DMIT 好 + NodeMaven 崩 → DMIT 做跳板, 148 国出口选取」「DMIT + NodeMaven 都崩 → 中国直连翻墙」「Proton VPN 148 国 → Clash WireGuard 接入」——三层容灾链的明确分级",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260718_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260718_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-18T18:03:18.990185+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-07-18T18:03:18.990185+00:00_5",
+          "date": "2026-07-18",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "失败驱动的架构演进：过去的操作失误（Google 账号因乱用 VPN 导致「脏」）直接转化为未来的设计约束——新账号注册阶段走 NodeMaven 住宅 IP（最干净），日常登录固定 DMIT（IP 不变），不同 IP 间不切换。失败经验被系统性地编码为架构规则而非简单规避。",
+          "confidence": "high",
+          "evidence": "「曾经乱用 vpn 导致基本脏的不能用了」→「注册阶段 → NodeMaven（干净,新建账号友好）」「日常使用 → DMIT（稳定,长期不变）」「不要在不同 IP 间切换登录」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260718_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260718_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-18T18:03:18.990185+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -2386,6 +2578,38 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与L5「第一性原理体系」(7/16)互补——体系是框架构建，对抗审查是框架验证。与L5「控制平面与数据平面分离」(7/17)互补——前者是架构概念，后者是交付实践。"
+        },
+        {
+          "id": "insight_2026-07-18T18:03:18.990185+00:00_3",
+          "date": "2026-07-18",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "密码领域采用「域名索引」而非「密码存储」策略：只记录注册时使用的域名（因为域名是前缀来源），不记录密码本身。这与确定性密码生成思想一致——密码可从域名+词根现场推导，无需存储。",
+          "confidence": "medium",
+          "evidence": "「把域名记下来，但不需要记密码」「不存密码，只存哪个服务对应哪个域名」「密码域名索引.md」——Agent 提议后被接受为可行方案",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260718_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260718_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-18T18:03:18.990185+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -2886,6 +3110,19 @@
         "7": 70
       },
       "total_insights": 157
+    },
+    {
+      "date": "2026-07-18T18:03:18.990185+00:00",
+      "layers": {
+        "1": 40,
+        "2": 100,
+        "3": 70,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 70
+      },
+      "total_insights": 164
     }
   ],
   "behavior": {
