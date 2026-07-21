@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-20T18:05:20.034928+00:00",
-  "total_sessions_processed": 139,
+  "last_extraction": "2026-07-21T18:04:06.119488+00:00",
+  "total_sessions_processed": 144,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1424,6 +1424,45 @@
           "memory_type": "fact",
           "state": "provisional",
           "auto_diff": "LOW OVERLAP: 与「迭代式约束澄清」(7/18)形成互补——渐进式vs一次性完整表达两种约束沟通模式。"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "分类学构建作为认知前置——在执行任何具体操作（配置工具、构建知识库）之前，先构建领域分类体系。OPML博客分析中立即建立三维分类（类型/领域/建造者身份），AI Agent知识图谱构建中严格按四类页面（entity/concept/comparison/query）组织。分类不是工具性步骤，而是认知摄入的必要前置——不先分类就无法开始理解。",
+          "confidence": "high",
+          "evidence": "OPML分析：构建「独立博客 vs Substack vs 机构」、七领域矩阵（安全/AI/系统/文化/语言/基础设施/创业）、「建造者即作者」框架。Wiki构建：严格按SCHEMA.md四类页面，22页严整归类。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": {
+            "overlap_pct": 0,
+            "closest_match": null
+          }
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "工具失败时的替代构建模式——当主路径工具（blogwatcher Go二进制）因macOS loopback代理限制失败时，不等待上游修复，立即用curl+Python自建替代方案。多次迭代调试（限速检测、格式解析、头体分割）直到脚本稳定。体现「自己能造就不依赖」的底层逻辑，而非「等待工具成熟」的消费者心态。",
+          "confidence": "high",
+          "evidence": "agent诊断：「Go二进制在macOS上无法使用127.0.0.1的SOCKS/HTTP代理（系统安全策略）」→主动写curl+Python脚本绕过。经过3次迭代：初版格式检测失败→修复头体分割→添加限速退避。最终创建cron job e7b677e1afd1。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": {
+            "overlap_pct": 0,
+            "closest_match": null
+          }
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "多层系统归因——面对网络失败不归咎于表面原因（「网络问题」「工具bug」），而是精确定位到三层根因链：Go HTTP客户端→macOS loopback安全策略→Clash代理拓扑。通过交叉验证（curl直接请求 vs Go二进制）排除假阳性，系统性测试多个代理端口（7897 SOCKS, 7890 HTTP）缩小问题空间。",
+          "confidence": "high",
+          "evidence": "agent诊断链：「Go二进制在macOS上无法使用127.0.0.1的SOCKS/HTTP代理（系统安全策略）」→「Rachel Feed本身可访问（curl返回200），是Go二进制的proxy loopback限制」→尝试HTTP_PROXY=7890和no_proxy两种绕过。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": {
+            "overlap_pct": 0,
+            "closest_match": null
+          }
         }
       ]
     },
@@ -2209,6 +2248,19 @@
           "memory_type": "episodic",
           "state": "provisional",
           "auto_diff": "LOW OVERLAP: 与「零容忍验证」(7/17, L4)共享「不相信Agent的声明、自己验证」特质，但行为模式不同——验证是被动对照，审计是主动构造测试场景挑战Agent的设计假设。"
+        },
+        {
+          "dimension": "行为模式",
+          "layer": "L4",
+          "content": "信息消费的选择性克制——面对92个博客的完整列表，不是FOMO式全订阅，而是精选过滤：92→10（精选）→8（移除技术不可达）。主动统一标记516篇历史文章已读，避免初始信息轰炸。与L1「不能忍受持有别人嚼过的认知」互补——精选不是懒惰，是为了保留认知带宽给深度处理。",
+          "confidence": "high",
+          "evidence": "从92个中精选10个最值得关注的（Simon Willison, Mitchell Hashimoto, matklad等）。主动移除2个技术不可达的（Rachel/Chris因代理+限速），统一标记516篇已读。创建cron d5a51e8af360每日9点扫描。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": {
+            "overlap_pct": 0,
+            "closest_match": null
+          }
         }
       ]
     },
@@ -2700,6 +2752,19 @@
           "memory_type": "episodic",
           "state": "provisional",
           "auto_diff": "new"
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "content": "知识摄入三部曲（Read→Model→CrossReference）——面对618页两本技术书籍，采用固定三阶段模式：(1)逐字通读全文，不跳过不概要；(2)分批构建概念页（Ch1-2→Ch3→Ch4→Ch5-6）；(3)建立跨书交叉引用框架（Pi=纵深实现解剖 vs 李=广谱设计方法论）。知识吸收不是被动阅读，而是主动结构化输出——最终产出22页概念页+87条wikilinks。",
+          "confidence": "high",
+          "evidence": "用户明确指令「逐字通读全文，不许遗漏跳过或概要」。执行过程：分批read_file(offset推进)→提炼概念→write_file建页→交叉引用补全→最终lint(22页87链接0孤立0断裂)。最终建立互补框架声明。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": {
+            "overlap_pct": 0,
+            "closest_match": null
+          }
         }
       ]
     },
@@ -3247,14 +3312,16 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-20T18:05:20.035068+00:00",
+    "checked_at": "2026-07-21T18:04:06.119631+00:00",
     "warnings": [
       "high short-response ratio (3/3)",
-      "high short-response ratio (4/4)"
+      "high short-response ratio (4/4)",
+      "high short-response ratio (5/5)"
     ],
-    "insight_count": 4
+    "insight_count": 5
   },
   "_last_agent_insights": [
+    "",
     "",
     "",
     "",
