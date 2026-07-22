@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-21T18:04:33.381328+00:00",
-  "total_sessions_processed": 144,
+  "last_extraction": "2026-07-22T18:03:40.955058+00:00",
+  "total_sessions_processed": 151,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1463,6 +1463,26 @@
             "overlap_pct": 0,
             "closest_match": null
           }
+        },
+        {
+          "dimension": "工程决策优先级",
+          "layer": "L2",
+          "content": "工程决策中「硬约束先于软选择」的优先级模式：面对「深色/浅色背景都好看的字体颜色」问题时，不是从审美出发，而是先算 WCAG 数学约束——相对亮度必须在 [0.175, 0.183] 的 0.008 窄窗内才能同时对黑底和白底满足 AA 4.5:1 对比度。在约束空间内再谈选择（偏蓝/偏紫利用人眼色觉敏感度差异）。这种「先算边界，再谈选择」的方法论在多个场景中反复出现。",
+          "confidence": "high",
+          "evidence": "Agent：「结论先行：纯数学约束决定了只有一个很窄的亮度窗口能同时满足 WCAG AA——相对亮度必须在 0.175~0.183 之间。这是物理约束，跟审美无关...WCAG 对比度公式：(L_lighter + 0.05) / (L_darker + 0.05)。黑色背景（L=0）：要求 L_text >= 0.175。白色背景（L=1）：要求 L_text <= 0.183。所以字体颜色的相对亮度必须在 [0.175, 0.183] 这个 0.008 的窄窗里。」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与已存在洞察「偏好：先理解全貌再出方案，遇阻重审约束不补丁」形成方法论的横向补充——都是「先框定约束再在约束内求解」。"
+        },
+        {
+          "dimension": "行为约束的认知分离",
+          "layer": "L7",
+          "content": "对「假遵守」（false compliance）问题提出了结构性解法——观察者效应在 Agent 系统中的翻译。三个层次：(1) L1 文本规则——执行者自己解释规则，无效；(2) L2 门禁/Triage 自评分——执行者同时打分，伪分离，能发现但不能阻止；(3) L3 认知空间分离——观察者在执行者决策完成后产生输出，且不馈回当前轮决策（只写入记忆+用户审计），执行者预知被观察→行为前置改变。关键设计约束：观察者输出不能馈回同一轮决策，否则退化为延迟纠错回路。此模式与提示注入防御的「上下文之外的机制复核」结构同构。",
+          "confidence": "high",
+          "evidence": "用户：「我想知道，对此有没有根源解法，引入一个观察者，利用观察者效应来实现监督闭环」→ Agent：「真正有效的防御在执行层——让另一个上下文来做复核...观察者效应在 Agent 系统中的翻译：物理学中观测行为改变被观测系统状态，行为学中被观察的预知改变观察发生前的行为。关键不是被看着，是知道自己会被看着。观察者的输出不能馈回同一轮决策——如果观察者说违规，执行者说那我改一下，观察者立刻失效，退化为延迟纠错回路。」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": "与已存在洞察「Agent 与 Skill 统合框架：三柱认知模型」有理论交叉（都涉及 agent 架构设计），但本条聚焦「行为约束的认知机制」，统合框架聚焦「agent/skill 关系模型」。重叠度估算 <25%，互补关系。"
         }
       ]
     },
@@ -2261,6 +2281,46 @@
             "overlap_pct": 0,
             "closest_match": null
           }
+        },
+        {
+          "dimension": "系统设计方法论",
+          "layer": "L2",
+          "content": "用户系统设计偏好：拒绝一次性工程，要求「可持续、可长期拓展维护」的机制。选择方案的优先标准：(1) 机制 > 结构——不是「抄什么结构」，而是「维护动力从哪来」；(2) 被动 > 主动——衰减/排序应自动发生，不依赖人工整理；(3) 使用驱动 > 时间驱动——活跃度由实际使用次数决定，非 cron 批量扫描。在面对社区成熟方案（PARA、MOC、Zettelkasten）时，用户明确拒绝照抄，要求从第一原理重新推导适配 agent 场景的维护模型。",
+          "confidence": "high",
+          "evidence": "用户：「不要一味照抄...需要回答的问题是，是否是一个稳定的模式，可长期拓展维护，不能单独为了做这一次而做」→ Agent：「维护成本随知识增长而下降，不是上升。因为使用本身在维护，越是活跃的页面越健康，不活跃的自动淘汰。」用户：「充分思考，周度和日度哪个更合适...记忆本身的重要性也应该考量，且尘封记忆被重新激活，激活后直接回到 memory 顶部吗？」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与已存在洞察「偏好：先理解全貌再出方案」互补——本条聚焦在「机制设计的可持续性」维度，是同一推理模式的更具体实例。"
+        },
+        {
+          "dimension": "记忆系统架构",
+          "layer": "L5",
+          "content": "设计了两层记忆衰减模型：(1) 保护层（安全/身份/偏好事实）——设底分 ≥0.3，不受衰减影响，对应 memory target=user；(2) 流动层（工具/Tips/临时共识）——正常衰减 trust × e^(-days_since_update/43)，对应 memory target=memory。fact_store 存所有事实作为真相源，MEMORY.md 只存「热缓存」（按热度排序，超出 2200 字符截断末尾，被截断的事实在 fact_store 中保留不删）。衰减机制与社区方案印证：Hermes 官方哲学（MEMORY.md 是便签非档案柜）、Ebbinghaus 遗忘曲线实践（CallSphere 2026）、Claude Code 分层记忆（CLAUDE.md 人手写不衰减 + MEMORY.md AI 自动发现有时效性）。",
+          "confidence": "high",
+          "evidence": "用户：「memory.md 文件里的内容，现在的更新模式是怎么样的，有衰减逻辑吗...比如每天有一个 memory self audit，基于最新的记忆内容调用情况，对内容按热度做衰减排序，超出比例要精简时从末尾 pop」→ Agent：「GATE 层（user target 的事实，如安全/身份/偏好）设底分 0.3，不受衰减影响。OPERATION/CONTEXT 层正常衰减...按最终分排序→重写 MEMORY.md（热顶冷底）。」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": "与已存在洞察「用户要求所有 Python 脚本先写文件再执行」同属 policy 类型，但领域完全不同（记忆系统 vs 脚本执行）。无重叠。"
+        },
+        {
+          "dimension": "安全风险评估模式",
+          "layer": "L4",
+          "content": "系统性威胁建模方法论：面对「代注册 Plasma One」问题时，未停留在表面风险描述，而是：(1) 识别核心攻击面——非托管钱包 Recovery Key 的不可撤销性；(2) 枚举完整攻击向量——私钥留存、KYC 身份冒用、客服通道恢复、iCloud 备份同步；(3) 区分风险等级——资金层（私钥控制）> 身份层（KYC 冻结）> 设备层（iCloud 同步）；(4) 给出明确止损建议——不往该账户存放任何资产。风险分析不依赖主观判断，而是基于系统机制（非托管钱包的 Recovery Key 恢复机制、Sumsub KYC 合规要求）做推导。",
+          "confidence": "high",
+          "evidence": "用户：「如果是找代注册帮我申请的 plasma one 账户，通常会有什么风险（我已经看到他在手机端退出了）」→ Agent 结论：「风险极大，不建议往这个账户里放任何资产。核心风险：Recovery Key 在对方手里。代注册的人在注册时生成了私钥→他可能已经导出 Recovery Key。即使他退出登录，Recovery Key 是 12/24 个单词，可以记录在任何地方。他随时可以用 Recovery Key 恢复账户，转走所有资产。」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": "无重复。与已存在的「安全验证步骤」偏好形成实例级互补。"
+        },
+        {
+          "dimension": "概念整合与映射",
+          "layer": "L2",
+          "content": "擅长将抽象理论框架映射到自己的具体实现上：当读到社区热议的「loop engineering」和「graph engineering」时，立即识别出 Graph 五大原语（Typed State/Conditional Edges/Checkpointing/Human-in-the-Loop/Subgraphs）与自己的 Kanban skill 之间的精确对应——任务卡片状态机=Typed State，parents 依赖=Conditional Edges，SQLite 持久化=Checkpointing，kanban_block=interrupt()，fan-out+fan-in=Subgraphs。不满足于理论理解，必须找到「我的系统里哪个东西是这个理论的实例」。",
+          "confidence": "high",
+          "evidence": "用户：「所以 graph engineering 相关的是 kanban 是 agent swarm」→ Agent：「对，你的直觉完全正确。Graph Engineering → Kanban → Agent Swarm 是一条从抽象到具体的实现链。Kanban 的反诱惑规则几乎逐字对应 graph engineering 的生产纪律：'Do not execute the work yourself. Route, don't implement.' 'Split multi-lane requests before creating cards.' 这些不是在说怎么用工具，而是在说怎么设计执行图。」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "可能与已存在洞察「正交分类思维」部分重叠——都是将抽象框架映射到具体实践。但本条聚焦「理论→实现」的映射能力，正交分类更偏向知识组织方式。重叠度估算 <30%，可共存。"
         }
       ]
     },
@@ -2765,6 +2825,16 @@
             "overlap_pct": 0,
             "closest_match": null
           }
+        },
+        {
+          "dimension": "知识管理哲学",
+          "layer": "L2",
+          "content": "知识维护的核心洞察：AI agent 生成的知识不能依赖「额外维护任务」（如 cron 扫描），必须设计为「使用本身即维护」。核心机制：(1) 引用追踪——每次 agent 使用某知识页回答问题，更新 last_referenced + reference_count；(2) 当场修复——引用时发现过时/断裂/遗漏，当场修正而非标记 TODO；(3) 被动衰减——90天无人引用→stale，再90天→archive。维护成本随知识增长而下降，不随页面数量增长。这与社区方案（PARA/MOC/Zettelkasten 依赖「人维护」）的本质区别在于：agent 场景中维护动力只能来自使用本身，而非定期整理。",
+          "confidence": "high",
+          "evidence": "用户：「不要一味照抄，这不是一个一次性工程，你需要考虑...1.打基础，2.定机制，3.保执行，4.勤复盘，5.常迭代」→ Agent：「核心问题不是怎么组织，而是谁来维护...使用知识的过程本身就是维护知识的过程。用的时候发现腐烂→当场修，用的时候发现断裂→当场连，不用的页面自动降级。」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": "无重复。与已存在的「知识管理三层架构」形成互补而非重叠——三层架构关注的是结构分层（raw/wiki/meta），本条关注的是维护动力机制。"
         }
       ]
     },
@@ -3325,13 +3395,15 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-21T18:04:06.119631+00:00",
+    "checked_at": "2026-07-22T18:03:40.955199+00:00",
     "warnings": [
       "high short-response ratio (3/3)",
       "high short-response ratio (4/4)",
+      "high short-response ratio (5/5)",
+      "high short-response ratio (5/5)",
       "high short-response ratio (5/5)"
     ],
-    "insight_count": 5
+    "insight_count": 7
   },
   "_last_agent_insights": [
     "",
