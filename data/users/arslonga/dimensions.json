@@ -1,11 +1,11 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-22T18:03:40.955058+00:00",
-  "total_sessions_processed": 151,
+  "last_extraction": "2026-07-23T18:02:51.376415+00:00",
+  "total_sessions_processed": 155,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
-      "fill_rate": 40,
+      "fill_rate": 70,
       "status": "partial",
       "latest_insights": [
         {
@@ -128,6 +128,16 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "dimension": "动机结构",
+          "layer": "L1",
+          "content": "用户对 AI 行业的关注是「战略层理解」而非「新闻消费」。主动要求深度分析 DeepSeek 四小时投资人会议实录（52 条言论的系统性整理），而非浏览摘要。研究 AI Agent 书时关注的也是框架层架构判断而非实现细节。",
+          "confidence": "high",
+          "evidence": "用户请求：「看看这篇文章，帮我整理核心内容，尤其是值得重点关注的」→ agent 产出了六大板块系统性分析；对李博杰书 agent 建议「框架层仍然有效，实现层大概率已过时，判断层最值钱」→ 用户未反驳",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": "新洞察：具体化了 L1 动机——不是泛泛的「关注 AI」，而是「战略层理解」这一特定动机"
         }
       ]
     },
@@ -1483,6 +1493,26 @@
           "memory_type": "policy",
           "state": "provisional",
           "auto_diff": "与已存在洞察「Agent 与 Skill 统合框架：三柱认知模型」有理论交叉（都涉及 agent 架构设计），但本条聚焦「行为约束的认知机制」，统合框架聚焦「agent/skill 关系模型」。重叠度估算 <25%，互补关系。"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "用户偏好自建模块化系统而非集成一体化平台。在评估 Nous Portal 时，认为已有「OR + DS 直连 + 自配工具体系」已成熟，Portal「主要面向不想折腾配置的用户」，对自己价值不大。体现为「控制优先于便利」的技术决策模式。",
+          "confidence": "high",
+          "evidence": "agent 评估结论：「对你来说价值不大——你已经有一套成熟的 OR + DS 直连 + 自配工具体系，Portal 主要面向不想折腾配置的用户。」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与已有 L2 中偏好自建系统的洞察互补——本条从具体产品评估（Nous Portal vs 现有栈）提供新证据"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "用户采用「结构化精读」而非线性阅读策略。面对 306 页技术书籍时，默认不逐字阅读，而是寻求「三层过滤」：先读已有沉淀→按框架跳读→交叉验证。体现为效率优先、框架驱动的信息摄入模式。",
+          "confidence": "high",
+          "evidence": "用户明确询问「需要逐字阅读吗」；agent 的回应「不需要逐字。用结构化精读策略」精准命中用户偏好",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "补充 L2 中已有的「效率优先」偏好——从「工具选型」扩展到「信息摄入」领域"
         }
       ]
     },
@@ -2835,6 +2865,16 @@
           "memory_type": "policy",
           "state": "provisional",
           "auto_diff": "无重复。与已存在的「知识管理三层架构」形成互补而非重叠——三层架构关注的是结构分层（raw/wiki/meta），本条关注的是维护动力机制。"
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "content": "用户的知识管理体系采用「多源交叉验证矩阵」方法：将不同作者/来源的同类内容进行交叉对比，标注独特贡献和盲区。已应用于两本 AI Agent 书的对比，形成 wiki 中的交叉验证矩阵。",
+          "confidence": "high",
+          "evidence": "vault 已有 wiki/concepts/agent-skill-unified-model.md（7/14 对话 × 两本书的交叉验证矩阵）；agent 建议阅读策略时明确引用了「两本书的交叉验证矩阵」作为第一层过滤",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": "新洞察：具体化了 L5 中的知识组织方法——不仅是归档，而是「交叉验证矩阵」这一特定模式"
         }
       ]
     },
@@ -3395,18 +3435,14 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-22T18:03:40.955199+00:00",
+    "checked_at": "2026-07-23T18:02:51.376572+00:00",
     "warnings": [
       "high short-response ratio (3/3)",
-      "high short-response ratio (4/4)",
-      "high short-response ratio (5/5)",
-      "high short-response ratio (5/5)",
-      "high short-response ratio (5/5)"
+      "high short-response ratio (4/4)"
     ],
-    "insight_count": 7
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "",
     "",
     "",
     "",
