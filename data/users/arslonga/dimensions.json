@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-24T18:03:31.946979+00:00",
-  "total_sessions_processed": 160,
+  "last_extraction": "2026-07-25T18:03:12.882188+00:00",
+  "total_sessions_processed": 165,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1533,6 +1533,36 @@
           "memory_type": "episodic",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "在 VPS 选型中，用户采用结构化对比矩阵（表格）作为核心推理工具，而非依赖单项指标排序。决策依据为多层标准：线路质量 > 价格 > 冗余性，每层独立评估后综合。特别强调「fallback 走不同线路才是真正冗余」——不使用同线路节点做冗余备份。",
+          "confidence": "high",
+          "evidence": "用户问：「回顾一下当前网络配置，流量规则，结合我的实际需求，偏好，最终给我一分完整的 vps 方案」——随后 Agent 输出的方案中用户确认了「主力+fallback+补充」三层架构，且 fallback 选择 EB 系列（CMIN2+9929）而非 Pro 系列（同为 CN2 GIA），因为「同线路的 Pro 特价如果 CN2 GIA 骨干出问题一样挂」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "用户偏好结构化决策框架，且对网络冗余有清晰的技术理解——不是「多一个节点」而是「多一条不同线路的节点」"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "在 Meta LOOP Worker 工具化实验中，用户展现出迭代调试的纪律性：每次失败后立即隔离根因（DDG 慢→换 Firecrawl；Firecrawl 快但 Worker 超时→增大超时；语法正确但仍失败→识别出 Hermes OT 模式对工具调用的激进性是根本限制），最终主动回退而非沉没成本继续。",
+          "confidence": "high",
+          "evidence": "用户说：「回退。三次尝试三种模式全失败——不是改参数能解决的」。「你说得对。不强行融合。」确认了「Meta LOOP 在 Hermes 上能跑但永远有阻抗不匹配」的判断，并选择了「当前状态就是正确状态：skill 可用 + 验证过 + 需要时手动触发」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": "用户对实验失败有清晰的止损标准：识别出「平台限制」而非「参数问题」时果断停止，不投入更多优化资源"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "用户在阅读外部框架时采用「批判性吸收」模式：先完整理解核心主张，再逐层拆解有价值洞察，最后识别不足和未讨论的盲点。对 Ng 的 Graph Engineering 文章，用户同时识别了四个最有价值的洞察和两个框架盲点（弱评估者问题、图是约束不只是赋能），并将自己的 TOF 多模型管道作为更进一步的实践案例。",
+          "confidence": "high",
+          "evidence": "用户回应的思考中明确分三部分：「一、核心主张的结构」「二、最有价值的几个洞察」「三、我看到的不足和未讨论的问题」——在不足部分指出「Multi-agent 用角色分工部分解决了这个问题，但如果所有 agent 跑同一个底层模型，它们的盲点在统计上仍然相关。真正的独立性需要模型多样性，而不只是 prompt 多样性。这是我的 TOF pipeline 实际上走得更远的地方」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": "用户的阅读模式是「映射到自身实践」而非「被动接收」——读完立即反思自己的系统在哪些方面印证或超越了文中框架"
         }
       ]
     },
@@ -2371,6 +2401,16 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": "可能与已存在洞察「正交分类思维」部分重叠——都是将抽象框架映射到具体实践。但本条聚焦「理论→实现」的映射能力，正交分类更偏向知识组织方式。重叠度估算 <30%，可共存。"
+        },
+        {
+          "dimension": "行为模式",
+          "layer": "L4",
+          "content": "用户采纳「架构 > 模型」但附加了经济学约束：Ng 的 token 速度论述——「generating more tokens quickly from even a slightly lower quality LLM might give good results compared to slower tokens from a better LLM」——被用户理解为经济学论点而非纯技术论点。用户在 OR API 消耗优化会话中已经应用了这一原则：用更便宜更快的模型做 Worker 的批量推理。",
+          "confidence": "medium",
+          "evidence": "用户在中转 API 消耗优化会话中追问 OR 消耗过快的原因，Agent 分析后用户接受「Worker 用 DS V4 Flash 直连（快+便宜），Operators 用 GPT-5.6-sol（贵+强）」的分层策略。这与 Ng 的「快速推理是能力乘数」论点高度一致。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": "用户的理解超越了「用便宜模型省钱」——把快速推理理解为实现 compound architecture 可行性的必要条件，而非单纯的成本优化"
         }
       ]
     },
@@ -2905,6 +2945,16 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "content": "用户维护严格的知识分层管道：原始素材（raw/）→编译知识（wiki/）→索引维护。对 Andrew Ng 多智能体图工程文章的归档中，用户主动要求分类归档原文和分析，并追问归属逻辑（「为啥原文没放在 raw/papers 而是新建了一个 articles」），展现出对知识分类体系的元认知监控。",
+          "confidence": "high",
+          "evidence": "用户问：「把原文和你的认知思考都记录到本地，你看看放 vault 哪个位置合适」→随后追问：「为啥原文没放在 raw/papers 而是新建了一个 articles」→Agent 解释了 articles vs papers 的分类依据后用户接受。整个过程是用户主动触发、主动审查知识归属的。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "用户对知识分类有主动的元监控——不只依赖 Agent 判断，会审查和追问归属逻辑"
         }
       ]
     },
@@ -3482,10 +3532,33 @@
         "7": 7
       },
       "total_insights": 178
+    },
+    {
+      "date": "2026-07-25T18:03:31Z",
+      "layers": {},
+      "total_insights": 0
+    },
+    {
+      "date": "2026-07-25T18:03:35Z",
+      "layers": {},
+      "total_insights": 0
+    },
+    {
+      "date": "2026-07-25T18:03:52Z",
+      "layers": {
+        "1": 7,
+        "2": 91,
+        "3": 8,
+        "4": 44,
+        "5": 36,
+        "6": 4,
+        "7": 9
+      },
+      "total_insights": 199
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-24T18:03:31.947175+00:00",
+    "checked_at": "2026-07-25T18:03:12.882399+00:00",
     "warnings": [
       "high short-response ratio (3/3)",
       "high short-response ratio (4/4)",
