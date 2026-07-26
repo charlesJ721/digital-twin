@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-25T18:03:12.882188+00:00",
-  "total_sessions_processed": 165,
+  "last_extraction": "2026-07-26T18:03:58.915624+00:00",
+  "total_sessions_processed": 169,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1563,6 +1563,36 @@
           "memory_type": "fact",
           "state": "provisional",
           "auto_diff": "用户的阅读模式是「映射到自身实践」而非「被动接收」——读完立即反思自己的系统在哪些方面印证或超越了文中框架"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "源材料求真——不满足于二手提炼，主动寻求一手原文的完整质感。在阅读梁文锋投资人会议时，先看了 elsewhere.news 的 52 条提炼版，随后主动获取硅基流动发布的完整四小时逐字记录。读完后的关键反馈是：提炼版丢失了说话方式本身的信号（「随性、不包装、偶尔自相矛盾」）、逻辑链条的完整性（十个月回本→钱存银行不如全换卡）、叙事的迭代过程（落后12-18个月→1-2年→目标缩到3-6个月）。对 Agent 的分析也从「二手加工」明确定位为「一手提炼基础上的二手加工」。这种求真不是信息收集癖——是认为源材料的质感（语气、节奏、修正过程）本身携带认知信号，不可被提炼替代。",
+          "confidence": "high",
+          "evidence": "用户：「为啥原文没放在 raw/papers 而是新建了一个 articles」→追问分类精确性；「当时发你的是原文还是精简提炼」→追问信息保真度；随后主动粘贴完整版全文（硅基流动发布的四小时逐字记录），Agent 对比分析后用户要求「做一份新的深度分析思考，可以和之前的版本互相映照。完整原文也保存下来」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与已有 L2 insight「核心是不被蒙蔽——建立自己最原始真实的看法」(3/30) 互补：旧 insight 描述动机，新 insight 描述具体行为模式——从「不被蒙蔽」到「主动溯源一手材料」。不重复。"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "定义追问——当 Agent 给出「不存在统一定义」的回避性回答时，用户用精准类比（「c 是拼音、c 是字母、c 是碳」→风马牛不相及）迫使 Agent 承认「确实存在一个最小共识核心」。用户不接受「没有标准答案」作为终点——要求区分「概念共识」和「操作化分歧」，迫使 Agent 将 AGI 的定义从「三大流派各自为政」升级为「最小共识 + 操作化分歧」的两层模型。这种追问模式不是抬杠，是拒绝接受模糊共识作为思考终点——必须把分歧定位到它真正发生的层级。",
+          "confidence": "high",
+          "evidence": "用户：「我的意思是，大家都在追求和探索 AGI，那至少有一个目标定义吧……否则不就变成了你在追求 C，但是你的语义里 c 是拼音，我的语义里 c 是字母，他的语义里 c 是碳，风马牛不相及啊」→Agent 随后修正为「确实存在一个最小共识核心……分歧不是发生在概念层，而是发生在操作层」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "全新。已有 L2 insights 中无类似「追问定义直到共识出现」的模式。与「反早熟收敛」(06/22) 精神一致（拒绝过早接受一个看似完整的答案），但表现形态不同：不是在多个方案中保持开放，而是在单一问题上向下钻探直到触及真正共识。"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "Agent 执行质量的元监控——用户不仅关注任务输出，更主动检测 Agent 规则执行的系统性偏差。在 delegation_score 记分机制中，用户独立发现了三个结构化问题：(1) 跨平台（Telegram/飞书/终端）独立记分而非全 session 共享；(2) delegate_task 和 TOF 管道被混为一谈都只加 +2；(3) 历史分数归零。这不仅是纠错——用户对这种「规则写对但执行走样」的模式高度敏感，且能快速定位根因（「MEMORY.md 从未写入」）而不只是描述症状。",
+          "confidence": "high",
+          "evidence": "用户：「1.我期望是全 session 共享，但是我注意到在本地终端 telegram 和飞书你分别从 100 开始独立记分；2.我说 delegate_task 加 2 分，tof+3 分，你好像只要委托都只加 2 分；3.上面这个任务，你直接归零开始记分了，是历史计数归零了？」→Agent 确认「delegation_score 从未被写入 MEMORY.md」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": "全新。与已有 L2 insight「信任但验证」(05/14) 互补：旧 insight 是对 Agent 输出的验证，新 insight 是对 Agent 元规则执行的系统性审计。后者层次更高——不是验证单个输出，而是检查规则引擎本身是否正常运行。"
         }
       ]
     },
@@ -2955,6 +2985,16 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": "用户对知识分类有主动的元监控——不只依赖 Agent 判断，会审查和追问归属逻辑"
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "content": "知识分类精度的元认知——用户对 vault 的分类体系有明确的精度要求，且会主动追问分类决策的边界。当 Agent 将「Graph Engineering」原文放入 raw/articles/（而非 raw/papers/）时，用户追问「为啥原文没放在 raw/papers 而是新建了一个 articles」。这不是质疑结果，是要求 Agent 明确说出分类标准。Agent 随后给出了 articles vs papers 的区分（正式学术出版物 vs 独立编译/博客/指南），用户接受。这种追问模式表明用户将知识分类本身视为认知行为——分类标准必须可被表述、可被质疑、可被改进。",
+          "confidence": "high",
+          "evidence": "用户：「为啥原文没放在 raw/papers 而是新建了一个 articles」→Agent：「分类依据……raw/papers/ 放正式学术论文、书籍、有 peer-review 的出版物；raw/articles/ 放博客文章、独立编译、Substack、行业指南」→用户接受",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与已有 L5 insight「偏好 Markdown 格式」(基础偏好) 不同——新 insight 更高层：不是偏好某种格式，而是要求分类体系本身可被审计。与「知识管理=信息整理→认知基础设施」的 L5 核心主线一致。"
         }
       ]
     },
@@ -3558,16 +3598,14 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-25T18:03:12.882399+00:00",
+    "checked_at": "2026-07-26T18:03:58.915785+00:00",
     "warnings": [
       "high short-response ratio (3/3)",
-      "high short-response ratio (4/4)",
-      "high short-response ratio (5/5)"
+      "high short-response ratio (4/4)"
     ],
-    "insight_count": 5
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "",
     "",
     "",
     "",
