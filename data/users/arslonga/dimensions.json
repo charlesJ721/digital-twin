@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-26T18:04:37.169315+00:00",
-  "total_sessions_processed": 169,
+  "last_extraction": "2026-07-27T18:03:51.406193+00:00",
+  "total_sessions_processed": 173,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1593,6 +1593,138 @@
           "memory_type": "policy",
           "state": "provisional",
           "auto_diff": "全新。与已有 L2 insight「信任但验证」(05/14) 互补：旧 insight 是对 Agent 输出的验证，新 insight 是对 Agent 元规则执行的系统性审计。后者层次更高——不是验证单个输出，而是检查规则引擎本身是否正常运行。"
+        },
+        {
+          "id": "insight_2026-07-27T18:03:51.406193+00:00_0",
+          "date": "2026-07-27",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户在技术决策中坚持「数据替代假设」原则——要求实测 AaITR 直连延迟（173ms）和第三方测评数据（198-229ms），而非默认假设「普通家宽线路不行」。即使数据与直觉矛盾（173ms vs CN2 GIA 150ms 差距仅 23ms），仍要求搜索更多证据（十星测评、主机测评网）交叉验证后才接受结论。",
+          "confidence": "high",
+          "evidence": "Session 3: 「听起来，不太符合直觉呢，aaitr 到中国也没有优化线路呀」→ Agent 搜索第三方测评数据确认晚高峰丢包 15% vs CN2 GIA <1%",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260727_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260727_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-27T18:03:51.406193+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与现有 L2 洞察「实证主义验证倾向」重叠度中等（~30%），补充了「先验直觉 vs 实测数据冲突时的处理策略」这一新维度"
+        },
+        {
+          "id": "insight_2026-07-27T18:03:51.406193+00:00_1",
+          "date": "2026-07-27",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户在 Agent 多轮错误修复后选择「回退到初始状态」而非继续修补——面对 DMIT Xray 被改坏、mihomo 配置东倒西歪的局面，直接要求「回退到今天让你配置网络之前的最初始方案」。这反映了一种元认知策略：当 delta 修改累积到无法追踪时，回退到已知良好状态重新开始优于继续打补丁。",
+          "confidence": "high",
+          "evidence": "Session 3: 「你能不能回退到今天让你配置网络之前的最初始方案？在改动之前一切正常，你改动之后就开始东倒西歪」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260727_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260727_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-27T18:03:51.406193+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与现有洞察重叠度低（<20%），提出了一个新的决策启发式：迭代修补 vs 回退重建的阈值判断"
+        },
+        {
+          "id": "insight_2026-07-27T18:03:51.406193+00:00_2",
+          "date": "2026-07-27",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户对 Agent 的推理盲区有敏锐的检测能力——当 Agent 分析「DMIT 443 不通 = GFW RST」时，用户用「不对呀，我手机走 dmit 能正常上网」一个信号就推翻了整个诊断链。这个信号明确指向 Agent 自身最近的配置修改，但 Agent 未立即怀疑自己。用户充当了 Agent 的「外部证伪者」角色。",
+          "confidence": "high",
+          "evidence": "Session 3: 「不对呀，我手机走 dmit 能正常上网」→ 推翻了 Agent 的 GFW RST 假设，最终定位到 Agent 2 分钟前改坏的 Xray 配置",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260727_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260727_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-27T18:03:51.406193+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 Meta LOOP 讨论中的「对抗性证伪」概念形成回声——用户在实践中充当了 Agent 的 adversary reviewer"
+        },
+        {
+          "id": "insight_2026-07-27T18:03:51.406193+00:00_6",
+          "date": "2026-07-27",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户对 Agent 的推理边界有明确的「别替我做选择」指令——当 Agent 在 dialer-proxy vs WireGuard 之间做二元对比时，用户打断：「除了这俩呢，你好像在做选择，而不是在搜索+思考」。这要求 Agent 在给出方案前先穷举可能性空间，而非过早收敛到已知选项。",
+          "confidence": "high",
+          "evidence": "Session 3: 「除了这俩呢，你好像在做选择，而不是在搜索+思考」→ Agent 随后跳出 dialer-proxy vs WireGuard 框架，发现了「AaITR 直连可能连隧道都不需要」的第三方案",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260727_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260727_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-27T18:03:51.406193+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L2「发散思维偏好」洞察相关，补充了用户主动干预 Agent 收敛行为的模式"
         }
       ]
     },
@@ -2441,6 +2573,72 @@
           "memory_type": "policy",
           "state": "provisional",
           "auto_diff": "用户的理解超越了「用便宜模型省钱」——把快速推理理解为实现 compound architecture 可行性的必要条件，而非单纯的成本优化"
+        },
+        {
+          "id": "insight_2026-07-27T18:03:51.406193+00:00_3",
+          "date": "2026-07-27",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "用户对系统配置变更的风险态度是「能用就别动」——dialer-proxy 架构虽然粗糙（应用层二跳、无 fail-closed、IPv6 泄漏风险），但用户容忍了它 10 天直到有明确的升级动机（WireGuard 文章 + 系统已稳定）。升级决策触发条件是「已有参考方案 + 系统已跑稳 + 有明确收益」，而非「当前方案不够好」。",
+          "confidence": "high",
+          "evidence": "Session 3-4: dialer-proxy 从 7/16 一直运行到 7/27 才被 WireGuard 替换。Agent 回顾：「当时选 dialer-proxy 就是因为简单，不是因为它更好」「当时系统还不稳定，最怕引入新复杂度」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260727_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260727_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-27T18:03:51.406193+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L2「先通再优」洞察重叠度中等（~40%），补充了升级触发条件的明确阈值"
+        },
+        {
+          "id": "insight_2026-07-27T18:03:51.406193+00:00_4",
+          "date": "2026-07-27",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "用户对 Agent 的配置修改有明确的不信任边界——当 Agent 在 DMIT 上修改 Xray config 导致出口全断后，用户后续对 WireGuard 部署方案的反应是「先报告当前的完整网络配置」「先反思一下，问题出在哪里了」，要求 Agent 证明自己理解现状并承认错误后才允许继续。这是一种「犯错→要求复盘→恢复信任」的交互模式。",
+          "confidence": "high",
+          "evidence": "Session 3-4: 用户连续要求「先报告当前的完整网络配置」「现在对照你的改动，先反思一下，问题出在哪里了」「先完整梳理当前的网络配置，然后参考这篇文章的配置方案，做一个方案重构让我确认，然后实施」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260727_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260727_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-27T18:03:51.406193+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "新洞察，与现有防御机制洞察重叠度低"
         }
       ]
     },
@@ -2995,6 +3193,39 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": "与已有 L5 insight「偏好 Markdown 格式」(基础偏好) 不同——新 insight 更高层：不是偏好某种格式，而是要求分类体系本身可被审计。与「知识管理=信息整理→认知基础设施」的 L5 核心主线一致。"
+        },
+        {
+          "id": "insight_2026-07-27T18:03:51.406193+00:00_5",
+          "date": "2026-07-27",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "用户要求配置命名与实际功能一致——当发现 CN2 GIA 策略组的两条路径（DMIT WG + AaITR 直连）出口都是 AaITR 住宅 IP 时，要求重命名为「AaITR」。「CN2 GIA 这个名字是旧架构的遗产」，用户不接受「名字是名字、功能是功能」的分离。对命名的语义准确性有要求。",
+          "confidence": "medium",
+          "evidence": "Session 4: 用户确认「所以正常路径的 cn2 gia 等于 aaitr 对吧」后，Agent 建议改名，用户未反对且接受「现在名字和实际一致了」的结论",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260727_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260727_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-07-27T18:03:51.406193+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与 L5 中已有的「命名准确性偏好」可能相关，需对比后确认"
         }
       ]
     },
@@ -3608,6 +3839,19 @@
         "7": 9
       },
       "total_insights": 203
+    },
+    {
+      "date": "2026-07-27T18:03:51.406193+00:00",
+      "layers": {
+        "1": 70,
+        "2": 100,
+        "3": 70,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 90
+      },
+      "total_insights": 210
     }
   ],
   "behavior": {
