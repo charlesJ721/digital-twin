@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-07-29T18:03:04.537991+00:00",
-  "total_sessions_processed": 180,
+  "last_extraction": "2026-07-31T18:08:55.216027+00:00",
+  "total_sessions_processed": 184,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -1745,6 +1745,28 @@
           "memory_type": "episodic",
           "state": "provisional",
           "auto_diff": "NEW: 委托从『偶尔用』变为『连续使用』模式。此前pitfall记录过『委托缺失』，此信号表明行为已转变"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "配置修改后采用「委托→审计」闭环模式：先给出方向性指令让 Agent 执行，执行完成后系统审查产出（而非逐步监督过程）。在 fallback 链路修改和 approvals 恢复默认两次操作中均观察到该模式。",
+          "confidence": "high",
+          "date": "2026-07-31T18:04:00+00:00",
+          "evidence": "Session 1: 用户说「改一下fallback链路」→ Agent 执行 → 用户立即「检查并报告最新的模型配置完整框架」。approvals 恢复默认后接受验证报告。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "现有 L2 洞察中无描述此特定审查模式的内容，属新发现。"
+        },
+        {
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "在系统加固方案选择中，偏好增强现有基础设施而非新增独立组件。面对 watchdog 分支补全 vs 新增 cron 存活探测两个选项时，选择了前者拒绝后者，理由可归纳为「现有框架内解决问题 > 引入新监控面」。",
+          "confidence": "high",
+          "date": "2026-07-31T18:04:00+00:00",
+          "evidence": "Session 1: 两个加固建议（1.watchdog 补 UNRESPONSIVE 分支 2.Telegram adapter 存活探测 cron），用户选 1 不选 2。Agent 确认「选了 1 不选 2」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与已有 L2 洞察「工具选型优先考虑延展性」一致但具体化为基础设施层面的选择偏好，补充了新的经验证据。"
         }
       ]
     },
@@ -3276,6 +3298,17 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与 L5 中已有的「命名准确性偏好」可能相关，需对比后确认"
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "学习新系统时采用渐进深入路径：从实用命令（/yolo）→ 配置参数（approvals.mode 枚举）→ 配置管理（恢复默认）→ 原理解释（cron_mode）→ 功能对比（/plan 等价物）→ 生态探索（Skills Hub）→ 概念追问（official 含义）。从操作层到概念层、从具体到抽象的逐层深入。",
+          "confidence": "medium",
+          "date": "2026-07-31T18:04:00+00:00",
+          "evidence": "Session 2 完整轨迹：/yolo → approvals.mode → 恢复默认 → cron_mode/destructive_slash_confirm → /plan → /rubber duck → Skills Hub 推荐 → 「official skills 是官方推荐认证的？」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": "与已有 L5 洞察「偏好 Markdown 格式」互补——此为学习方法论层面观察，非内容格式偏好。"
         }
       ]
     },
@@ -3464,6 +3497,17 @@
           "memory_type": "trace",
           "state": "provisional",
           "auto_diff": "NEW: 元认知兴趣此前未被系统捕捉。与L5知识结构维度中的『方法论爱好者』标签可能产生交叉，但此处更偏哲学层面"
+        },
+        {
+          "dimension": "叙事/自我",
+          "layer": "L7",
+          "insight": "主动维护 Digital Twin 画像的准确性。当 Agent 基于错误身份假设（去哪儿 PM、HA 计划）做出推荐时，用户立即纠正并明确指出错误信息来源（「这是曾经我家人和你对话时她的自我介绍」）。反映对数字孪生准确性的重视——不仅纠正当前错误，还追溯了污染源。",
+          "confidence": "high",
+          "date": "2026-07-31T18:04:00+00:00",
+          "evidence": "Session 2: 「我想先纠正你一下：1.我已经不折腾 HA 了，2.我不是去哪儿 pm（这是曾经我家人和你对话时她的自我介绍）」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "新维度洞察，现有 L7 无相关内容。补充了对画像维护行为的元认知观察。"
         }
       ]
     }
@@ -3922,18 +3966,30 @@
         "7": 90
       },
       "total_insights": 210
+    },
+    {
+      "date": "2026-07-31T18:08:55.216027+00:00",
+      "layers": {
+        "1": 8,
+        "2": 101,
+        "3": 9,
+        "4": 48,
+        "5": 39,
+        "6": 4,
+        "7": 12
+      },
+      "total_insights": 221
     }
   ],
   "behavior": {
-    "checked_at": "2026-07-29T18:03:04.538175+00:00",
-    "warnings": [
-      "high short-response ratio (3/3)"
-    ],
-    "insight_count": 3
+    "checked_at": "2026-07-31T18:08:27.319599+00:00",
+    "warnings": [],
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "",
-    "",
-    ""
+    "配置修改后采用「委托→审计」闭环模式：先给出方向性指令让 Agent 执行，执行完成后系统审查产出（而非逐步监督过程）。在 fallback 链路修改和 approvals 恢复默认两次操作中均观察到该模式。",
+    "在系统加固方案选择中，偏好增强现有基础设施而非新增独立组件。面对 watchdog 分支补全 vs 新增 cron 存活探测两个选项时，选择了前者拒绝后者，理由可归纳为「现有框架内解决问题 > 引入新监控面」。",
+    "主动维护 Digital Twin 画像的准确性。当 Agent 基于错误身份假设（去哪儿 PM、HA 计划）做出推荐时，用户立即纠正并明确指出错误信息来源（「这是曾经我家人和你对话时她的自我介绍」）。反映对数字孪生准确性的重视——不仅纠正当前错误，还追溯了污染源。",
+    "学习新系统时采用渐进深入路径：从实用命令（/yolo）→ 配置参数（approvals.mode 枚举）→ 配置管理（恢复默认）→ 原理解释（cron_mode）→ 功能对比（/plan 等价物）→ 生态探索（Skills Hub）→ 概念追问（official 含义）。从操作层到概念层、从具体到抽象的逐层深入。"
   ]
 }
