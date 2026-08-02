@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-01T18:03:17.565611+00:00",
-  "total_sessions_processed": 189,
+  "last_extraction": "2026-08-02T18:03:30.021734+00:00",
+  "total_sessions_processed": 190,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3384,6 +3384,70 @@
               "timestamp": "2026-08-01T18:04:23+00:00"
             }
           ]
+        },
+        {
+          "id": "insight_2026-08-02T18:03:30.021734+00:00_0",
+          "date": "2026-08-02",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "学术论文批判性阅读采用五维框架：(1) 缺失有利证据——作者未引用的、对自己有利的第一手材料（如漏引爱因斯坦致Hadamard信中「视觉和肌肉型思维」的完整表述）；(2) 未回应反方——核心对立观点被遗漏（如Norton主张思想实验只是装饰性论证，可还原为逻辑推理）；(3) 论证过强——措辞超出证据支持范围（如「structurally incapable」）；(4) 事实性错误——具体史实/数据标注错误（如水星进动年代1845应修正为1859）；(5) 自我指涉矛盾——论文的批判逻辑反噬自身（批评AI Scientist是「中文房间」但未给出「什么算真跳了」的操作判据）。每个批判点需经原始文献查证后方能发表。",
+          "confidence": "high",
+          "evidence": "论文批判部分列出5个可攻击点：漏引爱因斯坦完整信件（Hadamard 1945 Appendix II，已核验原文）、未回应Norton还原论主张（1991/1996/2004）、structurally incapable措辞过强、水星进动年代标注错误（1845→1859）、批评AI Scientist是「中文房间」但未给出操作判据。用户说「我的批判（已逐条验证）」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260802_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260802_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-02T18:03:30.021734+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-08-02T18:03:30.021734+00:00_1",
+          "date": "2026-08-02",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "复杂分析采用四段式输出结构：结论先行（一句话判断）→分层论证链（依据/推理/判断明确分离）→不确定性显性标注（⚠️ 标注不确定处，列出估算值/资料冲突/未实测信息）→下一步方向（延伸阅读/深挖邀请）。各段不混写——事实来自哪里、推理为什么这样推、判断依据什么取舍，均可独立审计。",
+          "confidence": "high",
+          "evidence": "论文分析输出结构：「## 一句话结论 → ## 论证链（三段式）→ ## 我的批判（已逐条验证）→ ## 对你我的 agent 设计启示」。iPhone选购输出结构：「## 直接结论 → ## 关键数据（已多源核验）→ ## 两个方案 → ## 我的推荐 → ⚠️ 标注不确定处」。两部分均严格分离事实/推理/判断",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260802_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260802_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-02T18:03:30.021734+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -5082,6 +5146,38 @@
               "timestamp": "2026-08-01T18:04:23+00:00"
             }
           ]
+        },
+        {
+          "id": "insight_2026-08-02T18:03:30.021734+00:00_2",
+          "date": "2026-08-02",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "不确定性显性标注作为认知边界防护——在判断输出中主动用「⚠️ 标注不确定处」将估计/未验证内容与已验证事实明确分离。标注内容通常三类：(1) 估算值（如二手价格行情）、(2) 存在冲突的资料（如港版eSIM规格的多源冲突）、(3) 未实测的信息。目的是避免流畅表达掩盖认知边界，降低过度自信导致的错误风险外溢。",
+          "confidence": "high",
+          "evidence": "iPhone选购建议结尾：「⚠️ 标注不确定处：二手价格是按2026年市场行情估算，未实测；港版iPhone 13-16是否部分带eSIM存在资料冲突（我按Apple官方支持文档为准，即双实体无eSIM）；iPhone 17港版全新价较高（¥5999起），不符合性价比」。论文分析中也标注验证状态",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260802_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260802_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-02T18:03:30.021734+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -7213,6 +7309,19 @@
         "7": 12
       },
       "total_insights": 221
+    },
+    {
+      "date": "2026-08-02T18:03:30.021734+00:00",
+      "layers": {
+        "1": 80,
+        "2": 100,
+        "3": 90,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 229
     }
   ],
   "behavior": {
