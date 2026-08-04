@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-03T18:03:44.626355+00:00",
-  "total_sessions_processed": 192,
+  "last_extraction": "2026-08-04T18:02:57.074217+00:00",
+  "total_sessions_processed": 195,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3468,6 +3468,26 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": "与 L2「信息完整性强迫」(4/16) ~15%（都是深层加工但方向不同——那是广度驱动，这是深度驱动）；与 L2「相变型更新者」(3/30) ~10%（都涉及认知改变机制但此是追问链、彼是信念更新模式）；与 L2「元认知执行铁律」(6/19) ~5%（都是自我调节但此是认知探索模式、彼是行为约束机制）。整体 <20%，独立入库。"
+        },
+        {
+          "dimension": "决策风格",
+          "layer": "L2",
+          "content": "决策判据的显式优先级排序——在iPhone选型中明确构建了多准则层级：卡槽 > 价格 > 可靠性 > 续航，并显式排除相机/屏幕/MagSafe等干扰项（「这些全不要」）。非直觉式权衡，而是将「终端场景」定义为约束条件、逐层过滤候选项的系统性排除法。与已有「API Provider选型的冗余架构原则」互补：后者面对功能维度（可用性/价格/生态）做权衡，本条面对设备选型（硬件约束/成本/可靠性）做层级排序——同属结构化多准则决策，但适用域不同。",
+          "confidence": "high",
+          "evidence": "用户对话：「判据：卡槽 > 价格 > 可靠性 > 续航，相机/屏幕/MagSafe 全不计」；当被问「全市场最优解吗」时，Agent 按该层级跨平台验证 Android 方案，最终因 WiFi Calling 命门（卡槽可靠性约束）否决更便宜的 Android",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "🟢 与 L2「API Provider选型的冗余架构原则」(6/25)~20%（同属结构化多准则决策，但本条是层级排序排除法而非分层冗余）；与 L2「保持现状偏误」(3/30)~10%（决策框架不同：本条是主动构建判据体系）"
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "框架外自我挑战的本能——当已有结论（iPhone 16e 是三款 iPhone 中最优）被用户接受后，不满足于局部最优判断，自动追问「全市场全平台最优解吗」。主动跳出 iPhone 框架、诚实验证 Android 方案并承认「不是全市场最优」。但验证后未盲目转向更便宜的 Android，而是识别出 WiFi Calling 可靠性是不容妥协的硬约束（命门）。展现三阶段模式：局部结论→主动外部挑战→硬约束过滤→最终裁决。",
+          "confidence": "high",
+          "evidence": "用户问「我的场景需求，iPhone16e 是全市场全平台机型最优解吗」；Agent 回答「不是。iPhone 16e 是「iPhone 生态内」的最优解，不是全市场最优解——但全市场更便宜的 Android 方案被一个命门一票否决了」；随后搜索验证 Ultra PayGo WiFi Calling 的 Android 支持",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": "🟡 与 L2「过程真实性优先于名义完备」(6/27)~30%（同属不满足表面结论，但本条是主动拓宽搜索空间而非审计已有流程）；与 L2「信息完整性的主动冗余验证」(6/21)~20%（同属多通道验证但方向不同：横向跨平台而非纵向深度确认）"
         }
       ]
     },
@@ -5198,6 +5218,16 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "dimension": "防御机制",
+          "layer": "L4",
+          "content": "硬约束的快速锁定能力——面对复杂决策时能迅速区分「可妥协变量」和「一票否决条件」。WiFi Calling 保号可靠性在 Android 方案中被识别为绝对不可妥协的硬红线——即使 Android 更便宜/配置更简单（flclash 直搬），一旦硬约束不满足则立即否决全方案。类似地，链上操作中「网络选择必须正确」被设为零容忍红线（「选错网络资产飞了」）。硬约束思维不同于风险厌恶——不是回避所有风险，而是精确识别出哪些风险一旦发生就不可逆且无法修复。",
+          "confidence": "high",
+          "evidence": "Agent 分析：「Android 方案等于把核心收码功能押在「这台具体机型是否被 T-Mobile 白名单 + 能否触发 provisioning」的赌博上」→立即否决；提现错误后：「网络那行是最容易手滑的，选错就是这种结局」→设立红线教训",
+          "memory_type": "policy",
+          "state": "provisional",
+          "auto_diff": "🟢 与 L2「决策判据的显式优先级排序」互补（本条是同一决策过程的另一角度：硬约束识别 vs 多准则排序）；与 L4「能量周期」已有洞察 ~5%（领域完全不同）"
         }
       ]
     },
@@ -7358,11 +7388,14 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-08-03T18:03:44.626507+00:00",
-    "warnings": [],
-    "insight_count": 2
+    "checked_at": "2026-08-04T18:02:57.074387+00:00",
+    "warnings": [
+      "high short-response ratio (3/3)"
+    ],
+    "insight_count": 3
   },
   "_last_agent_insights": [
+    "",
     "",
     ""
   ]
