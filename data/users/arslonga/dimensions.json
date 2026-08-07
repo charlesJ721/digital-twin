@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-06T18:02:48.119391+00:00",
-  "total_sessions_processed": 203,
+  "last_extraction": "2026-08-07T18:03:52.781997+00:00",
+  "total_sessions_processed": 207,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3538,6 +3538,16 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "dimension": "推理风格",
+          "layer": "L2",
+          "content": "第一原理诊断：拒绝症状补丁，追求根因修正。Tech Radar watchdog 昨天修了反引号兼容（正则补丁），今天因 LLM 输出格式漂移为 Markdown 加粗再次误报——诊断结论为「追着 LLM 输出文本格式打补丁永远打不完」，彻底放弃解析输出文本，改为检查 vault 文件系统事实作为判定信号。从「修正则」到「换判定哲学」是一次认知跃迁。",
+          "confidence": "high",
+          "evidence": "「昨天修复只兼容了反引号格式。但 cron agent 是 LLM，输出格式今天又漂移成 Markdown 加粗——追着 LLM 输出文本格式打补丁永远打不完。正确修法是：判定信号改为 vault 文件系统事实，不解析输出文本」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "与现有 L2「复杂分析采用四段式输出结构」「矩阵式多维度对比」不同——这条关注的是修复策略选择（症状 vs 根因），是元认知层面的诊断框架。互补。"
         }
       ]
     },
@@ -5288,6 +5298,26 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "dimension": "行为模式",
+          "layer": "L4",
+          "content": "工具约束下的自适应策略：terminal 被安全策略拦截时不等待、不放弃、换通道——ps eww 被硬拦截后立即切换 search_files 做同义查询；GITHUB_TOKEN 字符串触发命令扫描后改用 search_files 工具（不经 terminal）；secret redaction 层阻隔 token 替换时，用 Python heredoc 进程内字节操作直接修改文件。三个实例均在同一会话中，形成「受阻→判断替代通道→即时切换」的稳定模式。",
+          "confidence": "high",
+          "evidence": "「ps eww 被硬拦截了（ps 命令列环境变量属于敏感操作）。换方法」→ 立即用 search_files 查 GITHUB_TOKEN 引用；「token 替换不能经 redaction 层」→ Python 字节级替换 ~/.hermes/.env 第 380 行",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": "与现有 L4「决策前验证实际调用链」不同——那条是决策验证，这条是工具执行通道切换。互补不冲突。"
+        },
+        {
+          "dimension": "防御机制",
+          "layer": "L4",
+          "content": "系统性追溯：单个问题暴露后立即批量排查同类问题。GFW DPI cron 的 #44585 错误暴露后，不是只修这一个 job，而是排查全部 agent 模式 cron（发现共 3 个 unpinned job：GFW DPI、Reality 指纹轮换、Frontier IP Quality Check），批量 pin model 修复。8/1 起已静默失败至少 6 天无人察觉——发现后的第一反应是「还有没有别的」，而非「这个修好了」。",
+          "confidence": "high",
+          "evidence": "「排查发现共 3 个同类问题（model: null 的 agent 模式 job），全部 pin 到 deepseek-v4-flash」——从 cronjob list 中逐个对比 model 字段，主动发现并修复了另外两个从 8/1 起就 error 的 job",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "auto_diff": "与现有 L4「最后一天执行模式」「不确定性显性标注作为认知边界防护」不同——这条是关于「发现一个问题后的系统性回溯行为」，是一种预防性防御模式。互补。"
         }
       ]
     },
@@ -6499,6 +6529,16 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "dimension": "知识管理",
+          "layer": "L5",
+          "content": "技能驱动知识沉淀：每次修复后立即将教训写入技能文件的 pitfall 条目——watchdog 文件系统事实判定 → hermes-operations pitfall #30，unpinned model drift → pitfall #31。不只是「记下来」，而是格式化为可被未来 agent 加载的结构化知识（包含症状/根因/解决方案），且绕过 obsidian vault 直接归档到技能系统（更高优先级的知识层）。",
+          "confidence": "high",
+          "evidence": "「两个 pitfall（watchdog 文件系统事实判定 #30、unpinned model drift #31）已写入 hermes-operations 技能」——每次修复后立即调 skill_manage patch，而非延迟到「稍后整理」",
+          "memory_type": "trace",
+          "state": "provisional",
+          "auto_diff": "与现有 L5「控制平面与数据平面的Agent架构分离」「Agent容器权限理论」不同——这条关注的是知识沉淀的触发时机和归档目标选择（技能系统 > vault）。互补。"
         }
       ]
     },
@@ -7512,16 +7552,14 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-08-06T18:02:48.119556+00:00",
+    "checked_at": "2026-08-07T18:03:52.782156+00:00",
     "warnings": [
       "high short-response ratio (3/3)",
-      "high short-response ratio (4/4)",
-      "high short-response ratio (5/5)"
+      "high short-response ratio (4/4)"
     ],
-    "insight_count": 5
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "",
     "",
     "",
     "",
