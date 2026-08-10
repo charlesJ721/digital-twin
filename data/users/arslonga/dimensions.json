@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-09T18:03:23.768555+00:00",
-  "total_sessions_processed": 217,
+  "last_extraction": "2026-08-10T18:02:57.715242+00:00",
+  "total_sessions_processed": 219,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5508,6 +5508,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "novel"
+        },
+        {
+          "id": "insight_2026-08-10T18:02:57.715242+00:00_0",
+          "date": "2026-08-10",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "用户已将「发现原方案有缺陷→中止执行→提供替代方案」固化为 Agent 的显式执行纪律。当用户批准 DMIT 防火墙固定 IP 白名单时，Agent 侦察发现用户出口 IP 是动态多源的（近7天 10+ 不同源 IP），固定白名单会在 IP 变化时锁死用户。Agent 显式引用此准则中止了防火墙白名单执行，仅完成 UUID 分离并给出替代结论「当前配置已是防偷流量的正确形态」",
+          "confidence": "high",
+          "evidence": "按行为准则(发现原方案有缺陷→指出不执行→给替代),UUID 分离照做(无争议、低风险),防火墙固定 IP 白名单我建议不做——实测证明它会把动态 IP 的你锁在门外",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260810_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260810_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-10T18:02:57.715242+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "新发现：此行为模式在本次会话中被显式引用为执行纪律，说明已从 implicit 偏好固化为 explicit 准则"
+        },
+        {
+          "id": "insight_2026-08-10T18:02:57.715242+00:00_1",
+          "date": "2026-08-10",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "用户对网络安全信号的反应模式是「零延迟全量审计」：看到论坛帖子讨论 VLESS Reality 偷流量漏洞→立即要求审计自身配置→Agent SSH 到两台服务器实测配置+搜索日志中 cdn-cgi/trace 探测痕迹+分析近7天连接源 IP+对照攻击机制逐条排查。不是「知道了有空再看」，而是即时验证",
+          "confidence": "high",
+          "evidence": "注意到这个帖子，我们现在的网络配置有问题吗 → Agent 立即 SSH 实测 DMIT 和 AaITR 的 Reality SNI 配置 + 查近7天日志 + 全量源 IP 分析",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260810_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260810_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-10T18:02:57.715242+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "与已有的「安全敏感」insight 互补而非重复：此条聚焦于「外部信号→立即全量审计」的具体触发-响应模式，而非泛化的安全意识"
         }
       ]
     },
@@ -6771,6 +6837,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "partial_overlap"
+        },
+        {
+          "id": "insight_2026-08-10T18:02:57.715242+00:00_2",
+          "date": "2026-08-10",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "用户要求 Agent 在发现 vault 知识库文档过时时主动修订而非仅口头告知。当 Agent 发现「VPS 传家宝横向对比.md」中的THE PLAN 规格已过时（实际 V2 为 2T 流量而非 1T），Agent 主动向该文档追加修订章节（第6章 2026-08-09 增补+6.6 节 V2 勘误）并同步更新 skill 坑清单",
+          "confidence": "high",
+          "evidence": "vault 已有 2026-07-28 传家宝对比文档(部分结论已过时,本会话有重大新发现)。策略:更新合并而非新建 → obsidian append 追加第 6 章 + 6.6 节 V2 勘误 + 更新 shadowrocket-ios-proxy skill 坑清单",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260810_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260810_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-10T18:02:57.715242+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "新发现：这是主动知识维护行为，区别于被动归档（auto-save rule 触发）。Agent 在发现文档不一致时主动修正而非仅报告"
         }
       ]
     },
@@ -7820,6 +7919,19 @@
         "7": 12
       },
       "total_insights": 256
+    },
+    {
+      "date": "2026-08-10T18:02:57.715242+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 90,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 259
     }
   ],
   "behavior": {
