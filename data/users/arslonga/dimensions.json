@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-10T18:02:57.715242+00:00",
-  "total_sessions_processed": 219,
+  "last_extraction": "2026-08-11T18:04:05.200342+00:00",
+  "total_sessions_processed": 221,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3706,6 +3706,70 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "partial_overlap"
+        },
+        {
+          "id": "insight_2026-08-11T18:04:05.200342+00:00_0",
+          "date": "2026-08-11",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "系统化诊断中的错误修正闭环：提出假设→实验验证→当数据证伪假设时，主动做纯净对照实验→公开推翻自己的结论→同步修正所有持久化记录（fact_store/技能/MEMORY）。案例：Agent 断言 mihomo fallback 组是「粘性」不回切，用户质疑后做零干预纯净实验（停BWG→恢复→观察300s→自动回切发生），证明此前结论被 config reload 操作污染，即刻修正 network-incident-playbook §2.2/2.3 + fact 88 + MEMORY。此模式与「被数据推翻立刻认错调整」的用户元认知规则一致，是其实战执行形态。",
+          "confidence": "high",
+          "evidence": "TG会话：Agent先断言「mihomo fallback 组是粘性的——BWG 恢复后不会自动回切首选」，用户追问「这个解决了吗」，Agent重做干净实验（22:55停BWG→22:56恢复→零干预观察→23:00:03自动回切BWG-PLAN），结论「我之前的结论是错的，你这一问问出了真相」，随后修正三处记录。",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260811_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260811_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-11T18:04:05.200342+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-08-11T18:04:05.200342+00:00_1",
+          "date": "2026-08-11",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "基础设施决策中的「角色分离」原则：一台机器不兼任两个存在内在冲突的角色。当提议 BWG 迁移 HK_3 同时做「香港注册节点+容灾节点」时，拒绝依据不是「技术上不可行」，而是拆解三个不可调和的冲突维度——线路优化方向（联通 CUP 原生精品 vs CMI 借道）、IP 声誉要求（注册需干净 IP vs BWG 段 99 高风险）、迁移隐性成本（IP 变更需全量重配+流量倍率未知）。辅助量化成本账（DMIT HKG $36.9/年 vs 搬迁折腾）+ 反问「你更需要容灾节点还是注册节点」引导决策。",
+          "confidence": "high",
+          "evidence": "TG会话：用户问「bwh的备选dc里有HK_3，那我是不是可以考虑日常把bwh这个作为香港+容灾节点」，Agent回复「不建议兼任，而且对你（联通用户）来说，这会牺牲BWG这台机器最值钱的资产」，逐层拆解冲突并反问「后者每天7毛钱就能买到确定性」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260811_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260811_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-11T18:04:05.200342+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -5574,6 +5638,38 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "与已有的「安全敏感」insight 互补而非重复：此条聚焦于「外部信号→立即全量审计」的具体触发-响应模式，而非泛化的安全意识"
+        },
+        {
+          "id": "insight_2026-08-11T18:04:05.200342+00:00_2",
+          "date": "2026-08-11",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "经验教训的即时持久化纪律：每次踩坑后在同会话内立即补入相关技能，格式为「Pitfall 编号 + 症状 + 根因 + 判别法」，而非事后汇总。8/11 BWG 全流程会话中连续补入多条：SSH 默认模板状态（开密码登录/无防火墙）、GFW 22 端口黑洞判别法（ICMP 通/TCP SYN 超时）、/30 子网广播地址坑、Table=off 防 wg-quick 全流量接管、base64 公钥 1/l 混淆判别。所有补坑在发现后数分钟内完成，不等「回头整理」。",
+          "confidence": "high",
+          "evidence": "CLI+BWG会话：加固后即补 vps-management（SSH默认状态/GFW黑洞/expect密码登录）；WG隧道修复后补 vps-management（Table=off/30子网/公钥1-l）；mihomo行为验证后补 network-incident-playbook §2.2/2.3。Agent说「这是今天的第3条教训——稍后一起补进技能」→实际是发现一条补一条。",
+          "memory_type": "trace",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260811_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260811_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-11T18:04:05.200342+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -7932,6 +8028,19 @@
         "7": 100
       },
       "total_insights": 259
+    },
+    {
+      "date": "2026-08-11T18:04:05.200342+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 90,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 262
     }
   ],
   "behavior": {
