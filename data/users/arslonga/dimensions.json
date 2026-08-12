@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-11T18:04:05.200342+00:00",
-  "total_sessions_processed": 221,
+  "last_extraction": "2026-08-12T18:07:42.712827+00:00",
+  "total_sessions_processed": 223,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3770,6 +3770,39 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-08-12T18:07:42.712827+00:00_1",
+          "date": "2026-08-12",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "「充分确定」式拍板——用户用口头断言终止论证并推进决策，覆盖 agent 的谨慎建议（「稳定跑 1-2 周再切」）。agent 收到信号后停止劝说，但仍把破坏性/不可逆操作（主路径切换）留到检测数据验证后。决策权威与风险缓冲分离，而非盲目执行。",
+          "confidence": "high",
+          "evidence": "用户「我充分确定搬瓦工节点的稳定性，你先按照我上面说的整理思路吧，bwh-wg-aaitr，dmit 独立出来直连 fallback」；agent「好，按你的拍板整理完整方案…实施等检测报告出来后执行」及「主路径要不要最终切…等两个数据出来再定」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260812_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260812_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-12T18:07:42.712827+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与「证据充分性阈值」(7/07) 部分相关但角度不同——7/07 是证据达到阈值即行动，本条是主观「充分确定」覆盖 agent 的观察期建议，聚焦决策权威的表达与响应边界"
         }
       ]
     },
@@ -5670,6 +5703,39 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-08-12T18:07:42.712827+00:00_2",
+          "date": "2026-08-12",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "配置变更的跨平台一致性诉求——单端问题（安卓 Apple Music 分流）立即触发用户对其他端点（Mac/iPhone）的主动排查，且要求 agent 以「该端是否实测复现」作为改动依据，而非默认统一配置。体现「全端覆盖」与「逐端验证必要性」的双重要求。",
+          "confidence": "medium",
+          "evidence": "用户「mac 端你觉得需要改吗」「那我 iphone 的 shadowrocket 也得改咯」；agent 回应「Mac 端应该改，但理由不是统一…是 Mac 端实测同样坏」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260812_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260812_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-12T18:07:42.712827+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与「配置统一」原则相关但存量无「单端问题→主动跨端排查」这一触发模式，非重复"
         }
       ]
     },
@@ -6966,6 +7032,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "新发现：这是主动知识维护行为，区别于被动归档（auto-save rule 触发）。Agent 在发现文档不一致时主动修正而非仅报告"
+        },
+        {
+          "id": "insight_2026-08-12T18:07:42.712827+00:00_0",
+          "date": "2026-08-12",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "委托 context 是错误放大器——幻觉或错误锚点写入 delegate_task 的 context 后，会随 fan-out 污染所有子 agent 的产出及下游文档。本次将「用户使用 AaITR 2 年+」误写进委托 context（实为商家运营 2 年、用户 7/19 迁移至今仅 3 周），导致子 agent 报告和两份 vault 文档全部基于错误前提，需追溯污染链批量修正。教训：写委托 context 前先校验关键事实，而非事后补救。",
+          "confidence": "high",
+          "evidence": "用户「你幻觉有点严重啊 我 aaitr 总共还没超过 1 个月」；agent 追溯「这个错误还被我写进了委托 context，污染了子 agent 报告和两份 vault 文档，现在修正」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260812_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260812_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-12T18:07:42.712827+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新机制——存量有「主动验证/纠错」(7/10、8/01) 但无「委托 context 放大错误」这一传播机制，非重复"
         }
       ]
     },
@@ -8041,6 +8140,19 @@
         "7": 100
       },
       "total_insights": 262
+    },
+    {
+      "date": "2026-08-12T18:07:42.712827+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 90,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 265
     }
   ],
   "behavior": {
