@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-13T18:08:09.221324+00:00",
-  "total_sessions_processed": 226,
+  "last_extraction": "2026-08-14T18:07:22.205824+00:00",
+  "total_sessions_processed": 229,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3836,6 +3836,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 新域：跨境订阅消费支付（属地税+通道枚举），区别于 L1「总量成本优化」（基础设施 TCO）与 L4「边界内等价替代路径」（网络/VPS）"
+        },
+        {
+          "id": "insight_2026-08-14T18:07:22.205824+00:00_0",
+          "date": "2026-08-14",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "在自认熟悉的核心领域（VPS/网络）带独立判断、不被动接受推荐：会主动指出调研遗漏（「怎么不提 Irvine」——追问被漏掉的 DMIT 产品线），并引入外部信息要求交叉验证（「我看最推荐的是 bybit eu」——带出他人推荐来质证）。",
+          "confidence": "high",
+          "evidence": "「怎么不提 Irvine」（用户指出漏掉 DMIT Irvine 产品线）；「我看最推荐的是 bybit eu」（用户引入外部推荐质证）",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260814_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260814_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-14T18:07:22.205824+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与现有 L2 决策洞察（跨境订阅组合优化/充分确定拍板）无重叠，主题是「核心领域独立纠偏」"
         }
       ]
     },
@@ -5802,6 +5835,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与「配置统一」原则相关但存量无「单端问题→主动跨端排查」这一触发模式，非重复"
+        },
+        {
+          "id": "insight_2026-08-14T18:07:22.205824+00:00_1",
+          "date": "2026-08-14",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "VPS/网络资源配置取向「硬件优先、带宽流量次之」：选型时明确「硬件配置得拉起来，流量反而还好」，并在同硬件档对比时拒绝为更高带宽/流量额溢价（Irvine 比 PalmSpring 多 5Gbps/3T 但同为 2C2G，判定 $59 溢价不值）。",
+          "confidence": "high",
+          "evidence": "「我感觉 dmit 硬件配置上得拉起来，流量反而还好」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260814_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260814_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-14T18:07:22.205824+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与现有 L4 洞察（缺陷中止/安全审计/跨平台一致性）无重叠，主题是「资源配置硬件优先」"
         }
       ]
     },
@@ -7164,6 +7230,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 新域：加密自托管金融基础设施，DT 现有 L5/L6 无加密金融覆盖"
+        },
+        {
+          "id": "insight_2026-08-14T18:07:22.205824+00:00_2",
+          "date": "2026-08-14",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "面对自认盲区领域采用「选定一个服务深潜」的深度优先学习策略，而非泛泛对比：明确「想选定服务深入研究」，偏好一次选定后单点深潜（官方文档+核心概念+风险地图），不要开放式多选结论。",
+          "confidence": "medium",
+          "evidence": "「因为我发现这对我来说是个盲区领域 所以想选定服务深入研究下」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260814_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260814_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-14T18:07:22.205824+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 8/14 L5「加密自托管金融基础设施」同域但角度不同：8/14 记「是什么」，本条记「如何学（深潜策略）」"
         }
       ]
     },
@@ -8265,6 +8364,19 @@
         "7": 100
       },
       "total_insights": 268
+    },
+    {
+      "date": "2026-08-14T18:07:22.205824+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 271
     }
   ],
   "behavior": {
