@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-14T18:07:22.205824+00:00",
-  "total_sessions_processed": 229,
+  "last_extraction": "2026-08-15T18:09:01.058585+00:00",
+  "total_sessions_processed": 232,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3869,6 +3869,38 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与现有 L2 决策洞察（跨境订阅组合优化/充分确定拍板）无重叠，主题是「核心领域独立纠偏」"
+        },
+        {
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "主动跟进新模型发布节奏并快速采用——Gemini 3.7 Flash 发布次日即要求替换辅助模型配置（3.6 到 3.7），且替换后要求读回验证，体现「新模型发布即评估替换」的模型生命周期管理倾向。",
+          "confidence": "medium",
+          "evidence": "gemini 3.7 flash 是不是发布了   可以把 3.6 替换了",
+          "memory_type": "preference",
+          "state": "provisional",
+          "date": "2026-08-16",
+          "id": "insight_2026-08-16T02:00:00+00:00_g7h8i9",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.8,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T02:00:00+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -5868,6 +5900,38 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与现有 L4 洞察（缺陷中止/安全审计/跨平台一致性）无重叠，主题是「资源配置硬件优先」"
+        },
+        {
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "处理账户对账或客服纠纷时，倾向把对账推理与英文工单撰写整体委托给 agent——要求直接产出可提交的工单正文（附发票号清单与时间线），而非仅获得结论或口头建议。",
+          "confidence": "high",
+          "evidence": "直接帮我写个工单吧   咨询余额清零的问题，以及取消一个多提交的",
+          "memory_type": "preference",
+          "state": "provisional",
+          "date": "2026-08-16",
+          "id": "insight_2026-08-16T02:00:00+00:00_a1b2c3",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T02:00:00+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -7263,6 +7327,38 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 8/14 L5「加密自托管金融基础设施」同域但角度不同：8/14 记「是什么」，本条记「如何学（深潜策略）」"
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "加密资产操作已延伸到波场链（TRC-20 的 USDT 转账场景），正处于链上转账网络选择（TRC-20 vs ERC-20 手续费与到账速度差异）的学习确认阶段，尚未内化不同链代币标准的概念边界。",
+          "confidence": "medium",
+          "evidence": "trc20 链   是啥意思",
+          "memory_type": "fact",
+          "state": "provisional",
+          "date": "2026-08-16",
+          "id": "insight_2026-08-16T02:00:00+00:00_d4e5f6",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.8,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T02:00:00+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -8377,23 +8473,29 @@
         "7": 100
       },
       "total_insights": 271
+    },
+    {
+      "date": "2026-08-15T18:09:21.373699+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 274
     }
   ],
   "behavior": {
-    "checked_at": "2026-08-09T18:03:23.768714+00:00",
-    "warnings": [
-      "high short-response ratio (3/3)",
-      "high short-response ratio (4/4)",
-      "high short-response ratio (5/5)",
-      "high short-response ratio (5/5)"
-    ],
-    "insight_count": 6
+    "checked_at": "2026-08-15T18:09:01.058810+00:00",
+    "warnings": [],
+    "insight_count": 3
   },
   "_last_agent_insights": [
-    "",
-    "",
-    "",
-    "",
-    ""
+    "处理账户对账或客服纠纷时，倾向把对账推理与英文工单撰写整体委托给 agent——要求直接产出可提交的工单正文（附发票号清单与时间线），而非仅获得结论或口头建议。",
+    "加密资产操作已延伸到波场链（TRC-20 的 USDT 转账场景），正处于链上转账网络选择（TRC-20 vs ERC-20 手续费与到账速度差异）的学习确认阶段，尚未内化不同链代币标准的概念边界。",
+    "主动跟进新模型发布节奏并快速采用——Gemini 3.7 Flash 发布次日即要求替换辅助模型配置（3.6 到 3.7），且替换后要求读回验证，体现「新模型发布即评估替换」的模型生命周期管理倾向。"
   ]
 }
