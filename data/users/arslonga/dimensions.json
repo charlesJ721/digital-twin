@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-15T18:09:01.058585+00:00",
-  "total_sessions_processed": 232,
+  "last_extraction": "2026-08-16T18:06:18.809525+00:00",
+  "total_sessions_processed": 233,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -3901,6 +3901,105 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-08-16T18:06:18.809525+00:00_0",
+          "date": "2026-08-16",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "做「付费 vs 免费」这类有持续成本的决策时，用多维账本交叉论证（成本账/质量账/时机账/风险可逆性/社区共识），并主动列出「唯一不换的理由」供用户排除——决策不只给结论和依据，还把反方理由摆出来做成可证伪的，让用户完整看到取舍全貌。",
+          "confidence": "high",
+          "evidence": "Cogent IP 收费决策中「为什么换」列 5 条（成本账 $12/年持续成本、质量账 179 段有实测先例、时机账 机器空白零代价、风险可逆 换IP不影响线路、社区共识一致）+「唯一不换的理由（供你排除）」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T18:06:18.809525+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新。与既有「属地税×支付通道双变量优化」同属决策优化类，但本条信号是「主动给反方理由」的决策透明，非变量枚举。"
+        },
+        {
+          "id": "insight_2026-08-16T18:06:18.809525+00:00_1",
+          "date": "2026-08-16",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "恢复/冗余机制必须与主链路故障域隔离，否则冗余失去意义——guardian 放 AN5 而非 BWG 的理由是「BWG/WG/AaITR 全线挂时 AN5 还独立活着」，放同链路等于「断的是同一条链路，guardian 跟着死」。",
+          "confidence": "high",
+          "evidence": "「guardian 必须与主链路故障域隔离——BWG/WG/AaITR 全线挂时 AN5 还独立活着，才能执行恢复。放 BWG 上等于断的是同一条链路，guardian 跟着死」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T18:06:18.809525+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与既有「冗余设计中考虑不同故障模式（csl 走联通漫游独立路径）」同属「独立故障域」原则，但本条是恢复机制（guardian）的新实例，且点出「恢复机制与主链路同域=跟着死」的失效模式。同原则、不同对象。"
+        },
+        {
+          "id": "insight_2026-08-16T18:06:18.809525+00:00_2",
+          "date": "2026-08-16",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "网络架构采用「机房 IP 只做中转、住宅 IP 做出口」的信誉分层——机房 IP 信誉差（IP2LOC 99）但从不作为出口暴露，只承担中转职责，对外出口全走住宅 IP，从架构上规避 IP 信誉风险而非事后补救。",
+          "confidence": "high",
+          "evidence": "「机房 IP 只做中转，住宅 IP 做出口——BWG 自身 IP 信誉差（IP2LOC 99）但不暴露，架构规避了这个问题」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T18:06:18.809525+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与既有「角色分离（一台机器不兼任冲突角色）」同属分层/分离原则，但本条是 IP 信誉维度的「中转/出口」分层，非角色冲突。同原则、不同维度。"
         }
       ]
     },
@@ -5932,6 +6031,72 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-08-16T18:06:18.809525+00:00_3",
+          "date": "2026-08-16",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "接手二手资源时把「改邮箱」视为账户转移的起点而非完成——坚持 rebuild 作为系统层「唯一干净边界」（清残留 SSH key/配置/私钥/潜在后门），并补齐账户层安全动作（改密码/开 2FA/解绑前任支付）。账户转移 ≠ 系统接管。",
+          "confidence": "high",
+          "evidence": "「二手收 DMIT 只完成了账户所有权转移，VM 系统层仍是前主人的（残留 SSH key / xray 配置 / 私钥 / 潜在后门），rebuild 是唯一干净边界」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T18:06:18.809525+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新。与既有「配置修改不信任边界」不同，本条是二手资源接手的「账户转移 vs 系统接管」边界意识，属安全思维新实例。"
+        },
+        {
+          "id": "insight_2026-08-16T18:06:18.809525+00:00_4",
+          "date": "2026-08-16",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "退役资源时偏好「全链路彻底剔除、不留孤儿引用」——AS3 退役执行了 mihomo 节点/规则、SSH config 三块、known_hosts、SSH key 归档、frp 隧道服务、记忆体系（MEMORY/fact_store/skill）的全面清理，而非仅从主配置移除。",
+          "confidence": "high",
+          "evidence": "「AS3 相关都剔除吧，不用了」→ 最终「mihomo 节点+规则已删 / SSH config 已删 / known_hosts 已清 / key 归档 / frpc 隧道已停用 / 记忆体系全更新」，并做「全盘残留扫描」确认零残留",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260816_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260816_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-16T18:06:18.809525+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新。与既有「经验教训即时持久化」不同，本条是「资源退役的彻底性」偏好（不留孤儿引用），且与 MEMORY「RackNerd 已退役清除，report 中勿提及」印证为稳定模式。"
         }
       ]
     },
@@ -8486,6 +8651,19 @@
         "7": 100
       },
       "total_insights": 274
+    },
+    {
+      "date": "2026-08-16T18:06:18.809525+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 279
     }
   ],
   "behavior": {
