@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-16T18:06:18.809525+00:00",
-  "total_sessions_processed": 233,
+  "last_extraction": "2026-08-17T18:05:27.599249+00:00",
+  "total_sessions_processed": 234,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4000,6 +4000,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与既有「角色分离（一台机器不兼任冲突角色）」同属分层/分离原则，但本条是 IP 信誉维度的「中转/出口」分层，非角色冲突。同原则、不同维度。"
+        },
+        {
+          "id": "insight_2026-08-17T18:05:27.599249+00:00_0",
+          "date": "2026-08-17",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "跨会话结论一致性校验——用户对 Agent 的历史推荐持有持久记忆，当新结论与历史结论冲突时立即指出并要求回溯原会话核实，而非被动接受。例：Agent 今日称 AN5 转年付无折扣约 $299，用户立即质疑「那为什么昨天你推荐我 as3 pro 转年付会便宜呢」，迫使 Agent 回溯 8/15 会话原文核对。验证纪律从单会话扩展到跨会话时间轴。",
+          "confidence": "medium",
+          "evidence": "那为什么昨天你推荐我 as3 pro 转年付会便宜呢",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260817_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260817_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-17T18:05:27.599249+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L2「用户对Agent输出保持主动验证而非被动消费」「质疑驱动验证深化」部分重叠(~40%，同属验证纪律)；新增维度为跨会话时间轴的结论一致性追踪——记住昨日推荐并反查今日结论。未发现直接重复。"
         }
       ]
     },
@@ -8664,6 +8697,19 @@
         "7": 100
       },
       "total_insights": 279
+    },
+    {
+      "date": "2026-08-17T18:05:27.599249+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 280
     }
   ],
   "behavior": {
