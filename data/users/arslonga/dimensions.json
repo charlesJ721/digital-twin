@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-17T18:05:27.599249+00:00",
-  "total_sessions_processed": 234,
+  "last_extraction": "2026-08-18T18:04:58.144880+00:00",
+  "total_sessions_processed": 235,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4033,6 +4033,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 L2「用户对Agent输出保持主动验证而非被动消费」「质疑驱动验证深化」部分重叠(~40%，同属验证纪律)；新增维度为跨会话时间轴的结论一致性追踪——记住昨日推荐并反查今日结论。未发现直接重复。"
+        },
+        {
+          "id": "insight_2026-08-18T18:04:58.144880+00:00_0",
+          "date": "2026-08-18",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "设计演进问责——用户对 Agent 提出的「更优方案」不直接采纳，先追问「如果这是正确的，为什么你之前没这么配置」，要求 Agent 诚实区分「设计意图正确但验证有盲区」与「设计本身错误」。Agent 的诚实归因（「防污染配对了，可切换没配且没验证」）被接受并推进，而非因出错被否定。",
+          "confidence": "high",
+          "evidence": "用户原话「这是正确的配置吗，如果是，为啥你之前没这么配置」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260818_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260818_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-18T18:04:58.144880+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与 8/17「跨会话结论一致性校验」区分：那条针对事实性矛盾（历史推荐 vs 新结论），本条针对设计/架构的演进问责（为什么之前没做对）"
+        },
+        {
+          "id": "insight_2026-08-18T18:04:58.144880+00:00_1",
+          "date": "2026-08-18",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "决策前主动请求盲区补全——在拍板复杂配置变更前，用户会显式要求 Agent 穷举自己未考虑的边界（「还有我没考虑到的方面吗」），然后对 Agent 给出的每条盲区逐项裁决（分层钉死/DDG 特例/无自动回退/GLOBAL 统一），把「认知盲区」变成可逐条决策的清单而非被动暴露。",
+          "confidence": "high",
+          "evidence": "用户原话「还有我没考虑到的方面吗」→ Agent 列出 5 点 → 用户逐条「分层吧」「可以，ddg 钉死吧」「知道了」「好的」「统一吧」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260818_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260818_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-18T18:04:58.144880+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新，无现有洞察覆盖「决策前主动请求盲区穷举」这一动作"
+        },
+        {
+          "id": "insight_2026-08-18T18:04:58.144880+00:00_2",
+          "date": "2026-08-18",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "安全设计的边界穷举验证——用户对 fail-closed 设计（敏感流量钉死住宅出口）不满足于知道正常路径，会主动推演完整故障/逃生空间：敏感流量如何绕过 DMIT、AaITR 断是否风控全断、全局模式切 DMIT 是否绕过钉死，并对逃生口（全局模式）坚持实测而非口头结论，确认「钉死」的真实边界与旁路代价。",
+          "confidence": "medium",
+          "evidence": "用户连续追问「aaitr 断了，是否意味着所有风控流量全断」「即便全局模式下切 dmit 也救不了？」；Agent 实测全局模式+DMIT 后 google 出口变 179.253.246.70 才被接受",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260818_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260818_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-18T18:04:58.144880+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 8/1「宁可断不可降」同主题但不同侧面：那条讲 fail-closed 的价值观取舍本身，本条讲用户验证设计时穷举边界+实测逃生口的行为模式"
         }
       ]
     },
@@ -8710,6 +8809,19 @@
         "7": 100
       },
       "total_insights": 280
+    },
+    {
+      "date": "2026-08-18T18:04:58.144880+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 283
     }
   ],
   "behavior": {
