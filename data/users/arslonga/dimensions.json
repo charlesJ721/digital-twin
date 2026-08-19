@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-18T18:04:58.144880+00:00",
-  "total_sessions_processed": 235,
+  "last_extraction": "2026-08-19T18:06:19.433708+00:00",
+  "total_sessions_processed": 236,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4132,6 +4132,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 8/1「宁可断不可降」同主题但不同侧面：那条讲 fail-closed 的价值观取舍本身，本条讲用户验证设计时穷举边界+实测逃生口的行为模式"
+        },
+        {
+          "id": "insight_2026-08-19T18:06:19.433708+00:00_0",
+          "date": "2026-08-19",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "决策咨询中的反锚定要求——当用户要求「忽略已有配置、中立客观」时，能敏锐识别 Agent 把「论证现状合理性」包装成「中立设计」的结论泄露（推荐锚定到既有资产），并坚持真正的白纸化重做：剥离已有资产、质疑需求本身（「日常流量真的需要住宅出口吗」）、用需求强度而非现状推演方案。用户不接受用现有资产反推最优解，即便这意味着承认「住宅常备」是消费升级而非刚需。",
+          "confidence": "high",
+          "evidence": "用户要求「忽略已有配置依赖，完全中立客观务实可持续的角度思考」后，Agent 仍推荐其已有全部机型，用户直接指出「我感觉你完全还是按照现有配置来回答的，一点都不客观中立」；Agent 认错并白纸化重做（质疑需求+查证市场全貌）后才被接受推进",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260819_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260819_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-19T18:06:19.433708+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与 L2「保持现状偏误」（用户自身决策的不行动倾向）方向相反——本条是用户对 Agent 推荐中锚定现状的主动纠正；与 L2「跨会话结论一致性校验」（事实矛盾）区分：本条针对推荐/设计中的锚定与合理化偏差而非事实冲突；与 L2「Agent执行质量的元监控」（规则执行偏差）区分：本条针对内容输出的锚定偏差"
         }
       ]
     },
@@ -8822,6 +8855,19 @@
         "7": 100
       },
       "total_insights": 283
+    },
+    {
+      "date": "2026-08-19T18:06:19.433708+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 284
     }
   ],
   "behavior": {
