@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-19T18:06:19.433708+00:00",
-  "total_sessions_processed": 236,
+  "last_extraction": "2026-08-20T18:05:07.175626+00:00",
+  "total_sessions_processed": 237,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4165,6 +4165,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与 L2「保持现状偏误」（用户自身决策的不行动倾向）方向相反——本条是用户对 Agent 推荐中锚定现状的主动纠正；与 L2「跨会话结论一致性校验」（事实矛盾）区分：本条针对推荐/设计中的锚定与合理化偏差而非事实冲突；与 L2「Agent执行质量的元监控」（规则执行偏差）区分：本条针对内容输出的锚定偏差"
+        },
+        {
+          "id": "insight_2026-08-20T18:05:07.175626+00:00_0",
+          "date": "2026-08-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "协同诊断者模式——用户在与 Agent 协作排障时不是被动提供症状，而是主动读取底层日志（CMA logcat）并形成独立技术假设，甚至自我纠正口误。本会话中用户主动指出「全局模式日志里没有 .cn 调用」、提出「感觉可能是 tun 的问题，因为你看我发你的图，.ch 都是从 127 走的」、并自我纠正「说错了 是 ch 不是 cn」。角色是平等的诊断参与者而非被动的信息提供者。",
+          "confidence": "high",
+          "evidence": "用户：'但是我看 cma 日志 proton 走的确实是 dmit'；'因为全局模式日志里没有.cn 这个调用'；'说错了 是 ch 不是 cn'；'感觉可能是 tun 的问题，因为你看我发你的图，.ch 都是从 127 走的'",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260820_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260820_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-20T18:05:07.175626+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 区别于 L4[13] 独立验证（校验 agent 输出）与 L2[96] 检测盲区（找 agent 错）——此为主动共建诊断假设并自纠，非被动审查"
+        },
+        {
+          "id": "insight_2026-08-20T18:05:07.175626+00:00_1",
+          "date": "2026-08-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "对照基线差异归因——排障时本能地用一个正常工作的同源系统作为基线，对比故障系统的配置差异来定位根因。本会话中用户以 Mac（同源 v4 配置、工作正常）为基线，主动假设安卓端 CMA「需要有一些全局配置 类似于 mac 的 DNS 配置」，指向配置同步可能丢失某段——这个直觉方向正确（最终确认 CMA 配置缺失 tun 段，导致仅代理模式不接管 UDP 流量）。",
+          "confidence": "medium",
+          "evidence": "用户：'这会是 proton 单一问题吗，还是我的 cma 需要有一些全局配置 类似于 mac 的 DNS 配置'",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260820_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260820_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-20T18:05:07.175626+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L4[57] 跨平台一致性诉求相关但方向不同：L4[57] 是单端问题触发全端排查，此为用工作端作配置 diff 基线定位根因"
         }
       ]
     },
@@ -8868,6 +8934,19 @@
         "7": 100
       },
       "total_insights": 284
+    },
+    {
+      "date": "2026-08-20T18:05:07.175626+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 286
     }
   ],
   "behavior": {
