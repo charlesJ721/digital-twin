@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-20T18:05:07.175626+00:00",
-  "total_sessions_processed": 237,
+  "last_extraction": "2026-08-21T18:06:38.556915+00:00",
+  "total_sessions_processed": 239,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4231,6 +4231,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 L4[57] 跨平台一致性诉求相关但方向不同：L4[57] 是单端问题触发全端排查，此为用工作端作配置 diff 基线定位根因"
+        },
+        {
+          "id": "insight_2026-08-21T18:06:38.556915+00:00_0",
+          "date": "2026-08-21",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "排障收口后的配置治理闭环——用户不满足于「修好能通」，而是主动要求跨端配置差异审计（「现在 sfa 的网络配置，和 mac 本地有什么差异吗」），驱动 agent 对齐被墙域名列表缺口（「对齐吧」）；当 agent 揭示对齐方案是静态快照（不自动更新）时，用户立即识破其可维护性缺陷（「等等，你一个固定文件？后续不会动态变化？」），最终在成本收益评估后果断止损（「算了 就这样吧」）。三步弧线（审计→对齐→止损）体现配置治理的三层诉求：跨端单一事实源、动态可维护、不为低收益养复杂度，而非止于把故障修好。",
+          "confidence": "high",
+          "evidence": "用户：「现在 sfa 的网络配置，和 mac 本地有什么差异吗」；「对齐吧」（针对 agent 列出的差异 3 被墙域名列表缺口）；「等等，你一个固定文件？后续不会动态变化？」；「算了 就这样吧」（接受 agent 的 A/C 建议，放弃对齐）",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260821_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260821_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-21T18:06:38.556915+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L4「跨平台一致性诉求」（单端问题触发全端排查）约 40% 重叠——本条是排障收口后主动发起的配置差异审计+成本收益止损，是治理动作而非排查动作；与 L2「路由目录是动态更新的」原则（8/1 四原则）呼应——本条是该原则被 agent 静态快照方案违反时，用户对原则的主动捍卫"
+        },
+        {
+          "id": "insight_2026-08-21T18:06:38.556915+00:00_1",
+          "date": "2026-08-21",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "自动化边界探询与系统授权——用户主动探索 agent 的自动化能力边界，并愿意为此授权系统级权限：在 agent 定位根因后，用户主动问「你是不是能直接接管我手机导入 sfa 配置？」；当 agent 实测发现 adb 模拟输入被小米封锁（三重封锁：私有目录无 root、INJECT_EVENTS 拒绝、锁屏生物识别）后，用户主动开启「USB 调试（安全设置）」并「再试试 给你开了」。体现用户把 agent 当作可扩展的自动化执行体，倾向把机械操作外包给工具、自己保留决策权，并愿意为自动化授权 OS 级权限。",
+          "confidence": "medium",
+          "evidence": "用户：「我连接手机且开了开发者模式，也开了 usb 调试，你是不是能直接接管我手机导入 sfa 配置？」；「再试试 给你开了」（开启 USB 调试安全设置后授权 agent 重试全自动驱动）",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260821_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260821_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-21T18:06:38.556915+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新——既有洞察多记录「委托决策/工具选型/信任但验证」，未见「主动探询 agent 的 OS 级自动化边界并授权系统权限」这一维度"
         }
       ]
     },
@@ -8947,6 +9013,19 @@
         "7": 100
       },
       "total_insights": 286
+    },
+    {
+      "date": "2026-08-21T18:06:38.556915+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 288
     }
   ],
   "behavior": {
