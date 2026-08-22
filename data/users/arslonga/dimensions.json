@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-21T18:06:38.556915+00:00",
-  "total_sessions_processed": 239,
+  "last_extraction": "2026-08-22T18:04:39.346932+00:00",
+  "total_sessions_processed": 241,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4297,6 +4297,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新——既有洞察多记录「委托决策/工具选型/信任但验证」，未见「主动探询 agent 的 OS 级自动化边界并授权系统权限」这一维度"
+        },
+        {
+          "id": "insight_2026-08-22T18:04:39.346932+00:00_0",
+          "date": "2026-08-22",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "配置写入≠配置生效——验证必须落到机制在运行时真正生效的证据，而非回读写入的期望值。8/18 为修复 fd 满在 plist 加入 LimitNofile 65536，当时的验证记录写为「新 gateway fd 90/65536」，暗示 65536 已生效；实际上 launchd 从未重读 plist（hermes gateway restart 与 watchdog 的 launchctl start 都只踢旧定义），gateway 一直跑在 256 软限额下，4 天后 fd 再次耗尽。教训：验证要验证「药是否喂进去」（运行时 effective limit），不是「药瓶是否在架」（plist 里写了 65536）。",
+          "confidence": "high",
+          "evidence": "8/18 那个 session 里「新 gateway fd 90/65536」的记录其实是错的（当时只验证了 fd 数，没验证限额生效）；一句话总结「不是无解，是『上次的药没喂进去，这次喂进去了』」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260822_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260822_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-22T18:04:39.346932+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与 L2「排障收口后的配置治理闭环」（8/22，跨端审计→对齐→止损）互补：那条讲跨端对齐与止损，本条讲单点配置的生效验证深度"
+        },
+        {
+          "id": "insight_2026-08-22T18:04:39.346932+00:00_1",
+          "date": "2026-08-22",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "带商业动机的第三方来源需反向核实到一手证据。查证 Hermes 连接池泄漏是否「无解」时，第三方文章（betterclaw，卖托管平台，有推广动机）称已修复，agent 未采信单一来源，而是显式标注其来源性质后反向核实到 GitHub issue #18451/#18766（均 closed 2026-05-02）并对照本地版本 v0.20.0，才下「已修复」结论。识别来源动机 → 用一手来源独立验证 → 才采信。",
+          "confidence": "high",
+          "evidence": "「来源性质:betterclaw 是卖托管平台的,有推广动机,需反向核实」；随后查证「issue #18451: closed | [Bug]: CLOSE_WAIT fd leak... closed_at: 2026-05-02」与「issue #18766: closed」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260822_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260822_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-22T18:04:39.346932+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与既有「不验证不可说」多源交叉验证同源但角度更锐：本条聚焦对来源商业动机的显性识别与一手证据反向核实"
+        },
+        {
+          "id": "insight_2026-08-22T18:04:39.346932+00:00_2",
+          "date": "2026-08-22",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "阈值设定必须来自实测数据而非拍脑袋。为 CLOSE_WAIT 泄漏监控设告警阈值时，agent 不凭经验取整数值，而是回溯 8/13 故障实测数据（CLOSE_WAIT 堆到 108 个时平台不响应、当时限额 256）定出 >100 告警线，并显式写出推导依据「100 不是拍脑袋」。",
+          "confidence": "high",
+          "evidence": "「阈值设计说明:100 的告警线不是拍脑袋——8/13 故障时 CLOSE_WAIT 堆到 108 个平台就不响应了(当时限额 256)」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260822_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260822_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-22T18:04:39.346932+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 数据驱动决策的具体化——阈值取值的推导锚定在历史实测故障数据上，与既有「不凭印象下判断」纪律互补"
         }
       ]
     },
@@ -9026,6 +9125,19 @@
         "7": 100
       },
       "total_insights": 288
+    },
+    {
+      "date": "2026-08-22T18:04:39.346932+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 291
     }
   ],
   "behavior": {
