@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-23T18:08:29.451861+00:00",
-  "total_sessions_processed": 243,
+  "last_extraction": "2026-08-24T18:07:18.879964+00:00",
+  "total_sessions_processed": 245,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7942,6 +7942,72 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "章节校准法——把原则层知识用作 agent 行为校准工具：用户采纳李博杰推荐的「agent 失控时指定阅读对应章节」用法，本质是把失控 agent 从现象层打补丁拉回原则层重对齐。用户认为章节承载的是判断层知识（为什么这样设计），不随实现细节过时，失控=违反了第一性原理；并进一步要求把「症状→章节」映射表固化为可复用工件（甚至提议挂进 skill reference 供 Claude Code/Codex 场景复用）。",
+          "confidence": "high",
+          "evidence": "「作者推荐了一个我觉得很值得复用的使用方式：在 agent coding 过程中，一旦 agent 出现不受控或者不按预期工作时，直接告诉 agent 具体阅读这本书的对应具体章节，通常 agent 就会恍然大悟」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "🟢 与既有「三层过滤精读策略」「判断层最值钱」互补而非重复——新在把原则层知识用作「agent 行为校准工具」，而不仅是阅读策略；重叠 <20%",
+          "id": "insight_2026-08-24T18:10:52.592898+00:00_0",
+          "date": "2026-08-24",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260824_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260824_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-24T18:10:52.592898+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "知识基线的增量同步而非重读：对已深度通读过的长内容，作者发布新版本时用户要求「同步更新理解」（增量对齐）而非重新通读，保留既有理解基线、仅消化版本差异。本次针对李博杰《深入理解 AI Agent》2.0（章号重排 + 新增交互章 + DeepSeek Harness 案例）的同步即为此模式。",
+          "confidence": "medium",
+          "evidence": "「之前让你通读过第一版，作者发布了 2.0 更新，你也同步更新理解一下」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "🟡 与既有「知识摄入三部曲（Read→Model→CrossReference）」「三层过滤精读」同属知识管理域，但新在触发条件——是「已读内容的版本更新→增量对齐」，非首次精读；重叠约 30%",
+          "id": "insight_2026-08-24T18:10:52.592898+00:00_1",
+          "date": "2026-08-24",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260824_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.7,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260824_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-24T18:10:52.592898+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -9173,15 +9239,28 @@
         "7": 12
       },
       "total_insights": 293
+    },
+    {
+      "date": "2026-08-24T18:07:18.879964+00:00",
+      "layers": {
+        "1": 11,
+        "2": 144,
+        "3": 10,
+        "4": 62,
+        "5": 52,
+        "6": 4,
+        "7": 12
+      },
+      "total_insights": 295
     }
   ],
   "behavior": {
-    "checked_at": "2026-08-23T18:07:33.444982+00:00",
+    "checked_at": "2026-08-24T18:06:48.500590+00:00",
     "warnings": [],
     "insight_count": 2
   },
   "_last_agent_insights": [
-    "拓扑锚定决策——VPS/基础设施选型以既有网络拓扑为第一硬约束：用户构建 BWG→WG→AaITR 多层主链后，后续机房/节点决策都先问「是否破坏主链」，跨洋/跨洲会拉长 WG 隧道延迟的选项被直接排除，即使其线路本身优质。决策锚定在自身既有系统状态，而非孤立比较选项优劣。",
-    "伪优化营销识别——对商家话术保持警惕，主动拆解「双程三网优化」与「回程三网优化」（伪双程）的区别，不满足于商家自述，追问去程是否也三网各自优化。这是「回程定下载、去程定连接」选购标准向营销话术审查的外延：把单一维度的优化宣称还原为去程/回程两维分别验证。"
+    "章节校准法——把原则层知识用作 agent 行为校准工具：用户采纳李博杰推荐的「agent 失控时指定阅读对应章节」用法，本质是把失控 agent 从现象层打补丁拉回原则层重对齐。用户认为章节承载的是判断层知识（为什么这样设计），不随实现细节过时，失控=违反了第一性原理；并进一步要求把「症状→章节」映射表固化为可复用工件（甚至提议挂进 skill reference 供 Claude Code/Codex 场景复用）。",
+    "知识基线的增量同步而非重读：对已深度通读过的长内容，作者发布新版本时用户要求「同步更新理解」（增量对齐）而非重新通读，保留既有理解基线、仅消化版本差异。本次针对李博杰《深入理解 AI Agent》2.0（章号重排 + 新增交互章 + DeepSeek Harness 案例）的同步即为此模式。"
   ]
 }

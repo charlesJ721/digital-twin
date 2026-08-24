@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-23T18:08:29.451861+00:00",
-  "total_sessions_processed": 243,
+  "last_extraction": "2026-08-24T18:07:18.879964+00:00",
+  "total_sessions_processed": 245,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -31,7 +31,7 @@
       "name": "知识结构 (Knowledge Structure)",
       "fill_rate": 100,
       "status": "partial",
-      "insight_count": 50
+      "insight_count": 52
     },
     "6": {
       "name": "社会关系 (Social Relations)",
@@ -804,6 +804,19 @@
         "7": 12
       },
       "total_insights": 293
+    },
+    {
+      "date": "2026-08-24T18:07:18.879964+00:00",
+      "layers": {
+        "1": 11,
+        "2": 144,
+        "3": 10,
+        "4": 62,
+        "5": 52,
+        "6": 4,
+        "7": 12
+      },
+      "total_insights": 295
     }
   ]
 }
