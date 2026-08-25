@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-24T18:07:18.879964+00:00",
-  "total_sessions_processed": 245,
+  "last_extraction": "2026-08-25T18:11:23.225793+00:00",
+  "total_sessions_processed": 247,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4418,6 +4418,37 @@
           "memory_type": "preference",
           "state": "provisional",
           "source": "hermes-cron"
+        },
+        {
+          "id": "insight_2026-08-26T02:00:00+00:00_0",
+          "date": "2026-08-25",
+          "dimension": "决策风格",
+          "insight": "出口信誉分层按「身份敏感度」细化——当 DDG 反爬同时封锁住宅出口（BWG/AaITR 均超时、DMIT AN5 204ms 通）时，用户批准把 DDG 改走 DMIT 的 DC 出口，确认分层原则从「对外出口全走住宅」演进为「按身份敏感度分层」：身份敏感流量（Google/金融/TikTok/Telegram）仍钉死住宅，无身份绑定的搜索类流量可用 DC 出口换取可用性。",
+          "confidence": "high",
+          "evidence": "「改吧 ddg 走 dmit an5」（用户审阅 DDG 实测数据后授权）；agent 同步记忆「敏感流量钉死 AaITR 追加(DDG除外 8/25→DMIT组)」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "auto_diff": "🟢 vs 8/16「机房IP只做中转、住宅IP做出口」信誉分层——本洞察是该原则的「身份敏感度」细化（DDG 例外走 DC），非重复",
+          "provenance": {
+            "source_run_id": "cron_20260826_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260826_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-26T02:00:00+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -6515,6 +6546,37 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新。与既有「经验教训即时持久化」不同，本条是「资源退役的彻底性」偏好（不留孤儿引用），且与 MEMORY「RackNerd 已退役清除，report 中勿提及」印证为稳定模式。"
+        },
+        {
+          "id": "insight_2026-08-26T02:00:00+00:00_1",
+          "date": "2026-08-25",
+          "dimension": "行为模式",
+          "insight": "基础设施可观测性的主动消费与告警校准——用户每日接收自检 cron 报告并主动追问异常根因（「今天的每日自检 cron 有几项异常 看看具体情况」），而非 set-and-forget；排查中要求区分误报（脚本 bug）与真实问题（模型漂移 fail-closed、DDG 反爬超时），保持对自动告警的校准而非盲信或忽略。",
+          "confidence": "medium",
+          "evidence": "「今天的每日自检 cron 有几项异常 看看具体情况」；排查最终区分出 2 个脚本 bug（误报）+ 2 个真实问题",
+          "memory_type": "fact",
+          "state": "provisional",
+          "auto_diff": "🟢 vs 8/10「安全审计冲动」/8/23「系统性追溯」——本洞察是「主动消费自检报告+告警校准」，触发源为内部日报而非外部帖/单点故障，非重复",
+          "provenance": {
+            "source_run_id": "cron_20260826_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.7,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260826_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-26T02:00:00+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -9252,15 +9314,28 @@
         "7": 12
       },
       "total_insights": 295
+    },
+    {
+      "date": "2026-08-25T18:11:23.225793+00:00",
+      "layers": {
+        "1": 11,
+        "2": 145,
+        "3": 10,
+        "4": 63,
+        "5": 52,
+        "6": 4,
+        "7": 12
+      },
+      "total_insights": 297
     }
   ],
   "behavior": {
-    "checked_at": "2026-08-24T18:06:48.500590+00:00",
+    "checked_at": "2026-08-25T18:10:36.210533+00:00",
     "warnings": [],
     "insight_count": 2
   },
   "_last_agent_insights": [
-    "章节校准法——把原则层知识用作 agent 行为校准工具：用户采纳李博杰推荐的「agent 失控时指定阅读对应章节」用法，本质是把失控 agent 从现象层打补丁拉回原则层重对齐。用户认为章节承载的是判断层知识（为什么这样设计），不随实现细节过时，失控=违反了第一性原理；并进一步要求把「症状→章节」映射表固化为可复用工件（甚至提议挂进 skill reference 供 Claude Code/Codex 场景复用）。",
-    "知识基线的增量同步而非重读：对已深度通读过的长内容，作者发布新版本时用户要求「同步更新理解」（增量对齐）而非重新通读，保留既有理解基线、仅消化版本差异。本次针对李博杰《深入理解 AI Agent》2.0（章号重排 + 新增交互章 + DeepSeek Harness 案例）的同步即为此模式。"
+    "出口信誉分层按「身份敏感度」细化——当 DDG 反爬同时封锁住宅出口（BWG/AaITR 均超时、DMIT AN5 204ms 通）时，用户批准把 DDG 改走 DMIT 的 DC 出口，确认分层原则从「对外出口全走住宅」演进为「按身份敏感度分层」：身份敏感流量（Google/金融/TikTok/Telegram）仍钉死住宅，无身份绑定的搜索类流量可用 DC 出口换取可用性。",
+    "基础设施可观测性的主动消费与告警校准——用户每日接收自检 cron 报告并主动追问异常根因（「今天的每日自检 cron 有几项异常 看看具体情况」），而非 set-and-forget；排查中要求区分误报（脚本 bug）与真实问题（模型漂移 fail-closed、DDG 反爬超时），保持对自动告警的校准而非盲信或忽略。"
   ]
 }
