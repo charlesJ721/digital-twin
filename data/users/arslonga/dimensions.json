@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-25T18:11:23.225793+00:00",
-  "total_sessions_processed": 247,
+  "last_extraction": "2026-08-26T18:07:43.347284+00:00",
+  "total_sessions_processed": 248,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4449,6 +4449,39 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-08-26T18:07:43.347284+00:00_0",
+          "date": "2026-08-26",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "「取精去糟」的外部项目迁移学习法——面对外部优秀项目（personal-edge-proxy，320 star/2 天新建），用户不是整体照搬，而是明确要求基于其「核心理念与哲学，取精去糟」融入自身已有体系。落地时显式给出「不采纳」清单（WARP 出口 / 固定 SOCKS5 / HY2 主入口 / systemd timer 均因自身住宅出口 + table166 fail-closed 体系「已严格更强」而弃用），只引入 3 个可迁移执行细节（私网段阻断、AI 网页域钉死、出口 watchdog）。四步弧线：抽象到哲学层 → 基准对照自身体系 → 选择性整合 → 显式不采纳，拒绝低价值的整体迁移。",
+          "confidence": "high",
+          "evidence": "用户原话「所以基于我们当前的网络配置，基于这个项目的核心理念与哲学，取精去糟，完善优化下」；随后用户授权「全落地·方案A」，方案中明确「不采纳」WARP 出口 / 固定 SOCKS5 / HY2 主入口 / systemd timer 四项（因自身住宅出口 + table166 fail-closed 体系已更强），仅引入私网段阻断 / AI 网页域钉死 / 出口 watchdog 三个执行细节。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260826_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260826_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-26T18:07:43.347284+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与 L2「偏好设计哲学层面的理解而非表面规格」(8/15)~25%——那条是选型时追问『为什么这样设计』，本条是借鉴外部项目时的迁移整合方法论；与 L2「万源归宗的monorepo设计哲学」(7/2)~20%——那条是自身代码组织偏好（叠加而非拆分），本条是外部知识导入时的取精去糟过滤。均不同向，非重复。"
         }
       ]
     },
@@ -9327,6 +9360,19 @@
         "7": 12
       },
       "total_insights": 297
+    },
+    {
+      "date": "2026-08-26T18:07:43.347284+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 298
     }
   ],
   "behavior": {
