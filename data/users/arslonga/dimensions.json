@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-26T18:07:43.347284+00:00",
-  "total_sessions_processed": 248,
+  "last_extraction": "2026-08-27T18:05:15.544708+00:00",
+  "total_sessions_processed": 249,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4482,6 +4482,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与 L2「偏好设计哲学层面的理解而非表面规格」(8/15)~25%——那条是选型时追问『为什么这样设计』，本条是借鉴外部项目时的迁移整合方法论；与 L2「万源归宗的monorepo设计哲学」(7/2)~20%——那条是自身代码组织偏好（叠加而非拆分），本条是外部知识导入时的取精去糟过滤。均不同向，非重复。"
+        },
+        {
+          "id": "insight_2026-08-27T18:05:15.544708+00:00_0",
+          "date": "2026-08-27",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "复发必追根因——当「已处理过」的问题复发时，用户第一反应不是再修一次，而是质疑上一次修复的有效性并追根因。本次 fd 耗尽复发（8/18 配 LimitNofile → 8/22 手动重载 → 8/27 又复发），用户问「fd 问题的根因到底是啥，明明 8/18 处理过一次了」，驱动对三次历史处理的证据链审计，最终定案：8/18 配置的 plist key（LimitNofile）在 macOS 26.5.2 上被 launchd 完全忽略、从未真正生效，正解是 SoftResourceLimits.NumberOfFiles。复发表象被当作「上次修复未经验证」的信号而非「再修一次」的指令——对表面修复深度不信任，复发即触发根因审计。",
+          "confidence": "high",
+          "evidence": "用户：「fd问题的根因到底是啥，明明 8/18 处理过一次了」；据此追溯 8/18→8/22→8/27 三次处理证据链，定案「8/18 配置的 65536 从来是一份死配置——key 本身在此系统上无效」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260827_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260827_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-27T18:05:15.544708+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与 L2「外部验证强迫症」(7月)~30%——那条是不信任 agent 自我报告、要求外部证据，本条是「症状复发→质疑历史修复有效性→追根因」的决策触发模式；与 L2「协议→机械门控」(7/3)~20%——那条是不满足单次纠正、要硬化到不可复发，本条是复发后的根因审计。不同向，非重复。"
+        },
+        {
+          "id": "insight_2026-08-27T18:05:15.544708+00:00_1",
+          "date": "2026-08-27",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "修复闭环后的第一性原理补课——修复完成并实测验证通过后，用户仍追问基础机制「所以 fd 到底是啥，为啥会耗尽，耗尽了会如何」，要求从底层原理理解（fd=内核 I/O 令牌、为什么用整数而非指针、三种耗尽模式），而非停在「已修好」的操作结论。非技术出身（B2B 产品经理）却坚持第一性原理讲透，与 L1「认知驱动是本能型而非工具型」同源，但在「事后补课」场景显性化：理解机制本身是目的，修好只是副产品。",
+          "confidence": "medium",
+          "evidence": "用户：「所以 fd 到底是啥，为啥会耗尽，耗尽了会如何」；agent 用「图书馆借书证」类比讲透三层（fd 是啥／为啥耗尽／耗尽会如何）",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260827_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260827_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-27T18:05:15.544708+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L1「认知驱动是本能型而非工具型」(3/30)~40%、L1「对抗性系统理解是好奇驱动」(7/29)~30%——本洞察是同一求知本能「修复闭环后的事后补课」场景的显性化，聚焦非技术身份却要求底层机制讲透的姿态，非重复。"
         }
       ]
     },
@@ -9373,6 +9439,19 @@
         "7": 100
       },
       "total_insights": 298
+    },
+    {
+      "date": "2026-08-27T18:05:15.544708+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 300
     }
   ],
   "behavior": {
