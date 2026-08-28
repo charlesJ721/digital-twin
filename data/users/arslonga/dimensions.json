@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-27T18:05:15.544708+00:00",
-  "total_sessions_processed": 249,
+  "last_extraction": "2026-08-28T18:07:39.757293+00:00",
+  "total_sessions_processed": 252,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6676,6 +6676,39 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-08-28T18:07:39.757293+00:00_0",
+          "date": "2026-08-28",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "分词级授权信号——当 agent 已摆出结构化结论与选项时，用户以最小 token 完成对完整多步操作的授权，把意图展开的认知负担交给 agent。egress-watchdog 排查会话中：agent 给出 A/B/C/D 处置选项后，用户仅回「ac」批准 A（修 reality-rotate.sh 目标主机+ROTATE_COUNT bug+CF 剔除）+ C（修 Frontier SSH 通道）两项跨文件修复；此前用「改」（1字）授权给 watchdog 脚本加即时重试、「查」（1字）授权排查两个自 8/1 起静默失败的月度 cron；又用「嗯？怎么停了？」（7字）即时察觉 agent 因 Triage 门禁只输出声明未动手。这是高信任前提下的决策经济：授权粒度压缩到字符级，要求 agent 从极简信号推断并执行完整意图。",
+          "confidence": "medium",
+          "evidence": "用户原话：「改」（1字，授权修改 watchdog 脚本）→「查」（1字，授权排查两个失败 cron）→「ac」（2字，批准 A+C 两项修复）；「嗯？怎么停了？」（agent 输出 Triage 门禁声明、尚未发工具调用时用户即时追问）",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260828_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260828_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-28T18:07:39.757293+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 NEW——现有 L4 无覆盖「字符级授权」交互模式。最近相关但不同向：L4「中断用反问句而非指令」(7/1) 是纠正违规（反问句 vs 授权信号）；L4「关键操作被阻塞时切换直接操作模式」(7/10) 是用户亲自动手 vs 本条极简授权 agent 代劳。三者同属「低带宽高意图」交互经济，但本条的「分词级授权信任」是首次捕捉。"
         }
       ]
     },
@@ -9452,6 +9485,19 @@
         "7": 100
       },
       "total_insights": 300
+    },
+    {
+      "date": "2026-08-28T18:07:39.757293+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 301
     }
   ],
   "behavior": {

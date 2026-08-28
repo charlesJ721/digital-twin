@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-27T18:05:15.544708+00:00",
-  "total_sessions_processed": 249,
+  "last_extraction": "2026-08-28T18:07:39.757293+00:00",
+  "total_sessions_processed": 252,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -25,7 +25,7 @@
       "name": "行为模式 (Behavioral Patterns)",
       "fill_rate": 100,
       "status": "partial",
-      "insight_count": 63
+      "insight_count": 64
     },
     "5": {
       "name": "知识结构 (Knowledge Structure)",
@@ -856,6 +856,19 @@
         "7": 100
       },
       "total_insights": 300
+    },
+    {
+      "date": "2026-08-28T18:07:39.757293+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 301
     }
   ]
 }
