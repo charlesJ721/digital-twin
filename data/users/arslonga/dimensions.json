@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-28T18:07:39.757293+00:00",
-  "total_sessions_processed": 252,
+  "last_extraction": "2026-08-30T18:05:13.014762+00:00",
+  "total_sessions_processed": 253,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4548,6 +4548,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 L1「认知驱动是本能型而非工具型」(3/30)~40%、L1「对抗性系统理解是好奇驱动」(7/29)~30%——本洞察是同一求知本能「修复闭环后的事后补课」场景的显性化，聚焦非技术身份却要求底层机制讲透的姿态，非重复。"
+        },
+        {
+          "id": "insight_2026-08-30T18:05:13.014762+00:00_0",
+          "date": "2026-08-30",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "中继延迟可加性的第一性原理建模——面对「直连 vs 套中转」延迟对比，不穷举实测所有组合，而是先建立物理模型「每包 RTT ≈ 本机↔入口 + 入口↔目标两腿相加」，直接推导出「任何套法必然叠加跨太平洋腿、只会更慢」，再以 ICMP+TCP 双通道+双向对称实测交叉验证模型。结论「套中转零收益，唯一价值是可达性救援」由模型推导驱动，而非数据枚举驱动。",
+          "confidence": "high",
+          "evidence": "中继延迟是可加的：每包 RTT ≈ 本机↔LAX + LAX↔HK 两腿，所以任何套法都必然叠加 ~140ms 的跨太平洋腿，只会比直连更差。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260830_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260830_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-30T18:05:13.014762+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与已有「拓扑锚定决策」「对照基线差异归因」「阈值设定必须来自实测数据」对比重叠 <20%——新增「先建模型推导、再实测验证」的推理模式，非决策锚定或基线归因"
+        },
+        {
+          "id": "insight_2026-08-30T18:05:13.014762+00:00_1",
+          "date": "2026-08-30",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "「好产品≠好买卖」——评估接盘价值不从产品绝对优劣出发，而从对个人拓扑的边际增量出发：Irvine 被认定为三款中「性价比之王」仍判否定，因为线路与现有 AN5 同档（零增量）、内存反而降级、二手溢价吃光性价比。配套回本周期量化启发式：绝版二手溢价 ¥200 需约 10 年回本 → 限量款接盘是「集邮党」需求而非实用需求。结论「抢它的前提是正价蹲补货，不是二手溢价接盘」。",
+          "confidence": "high",
+          "evidence": "这三款是「好产品、坏买卖」...对你个人：都不值得接盘——线路与你现有 AN5 Pro Pocket 完全同档，二手溢价把性价比吃光。...绝版溢价 ¥200 需 10 年回本",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260830_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260830_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-30T18:05:13.014762+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与「拓扑锚定决策」(8/23, ~40%)、「硬件优先、带宽流量次之」(8/14, ~30%) 部分重叠——新增「边际增量评估视角」+「回本周期量化」两个可复用元素，非重复"
         }
       ]
     },
@@ -9498,6 +9564,19 @@
         "7": 100
       },
       "total_insights": 301
+    },
+    {
+      "date": "2026-08-30T18:05:13.014762+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 303
     }
   ],
   "behavior": {
