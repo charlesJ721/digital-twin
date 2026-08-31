@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-30T18:05:13.014762+00:00",
-  "total_sessions_processed": 253,
+  "last_extraction": "2026-08-31T18:07:31.825362+00:00",
+  "total_sessions_processed": 254,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4614,6 +4614,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与「拓扑锚定决策」(8/23, ~40%)、「硬件优先、带宽流量次之」(8/14, ~30%) 部分重叠——新增「边际增量评估视角」+「回本周期量化」两个可复用元素，非重复"
+        },
+        {
+          "id": "insight_2026-08-31T18:07:31.825362+00:00_0",
+          "date": "2026-08-31",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "维护成本超过理论收益时主动叫停既有自动化——Reality 轮换 cron（每30天自动换 shortId/dest）在经历一次 2 小时排障（权限 bug→网络干扰误判→SFA 同步遗漏）后被用户叫停：「轮换也不是必须的对吧，等真的哪天断了再换也来得及吧」。判据是边际账本：轮换是「锦上添花」防御（真被墙时轮换救不了 IP 封锁），但每次轮换都是线上变更+多端同步风险。这是「宁缺毋滥」原则从「拒绝新增」外延到「主动终止已有自动化」，与 8/30「好产品≠好买卖」的边际增量评估同源。",
+          "confidence": "high",
+          "evidence": "用户：「我不想折腾了，轮换也不是必须的对吧，等真的哪天断了再换也来得及吧？」；agent 诚实背书「轮换本来就是『锦上添花』防御，不是保命手段」后暂停 cron 并记录 fact #145。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260831_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260831_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-31T18:07:31.825362+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 8/30「好产品≠好买卖」同源（边际增量评估）；vs L4「宁缺毋滥原则在 VPS 扩展场景中反复激活」——动作类型新（叫停已有自动化 vs 拒绝新增），判据新（维护摩擦 vs 理论防御收益的边际账本）"
+        },
+        {
+          "id": "insight_2026-08-31T18:07:31.825362+00:00_1",
+          "date": "2026-08-31",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "排障中先排除瞬态干扰（时间巧合）再归因配置，并警惕验证工具的能力边界——Reality 轮换后 delay 5连败，两次误判根因（先 microsoft、再新 shortId fef0a6e6），靠「全新值实验C + 回滚复测」才发现真相是 GFW 干扰窗口的时间巧合，配置根本没问题。两点教训：①连续失败≠配置问题，多时间点复测排除时序干扰是变量隔离实验的前置步骤；②openssl 直连只验证伪装层（TLS 证书可达）、不校验 shortId，验证结论受验证方法能力边界限制。",
+          "confidence": "high",
+          "evidence": "「fef0a6e6 复测 3/3 通过——之前的失败是网络间歇干扰（GFW 干扰窗口 18:09-18:11），与 shortId 值、dest 值、配置全都无关」；「openssl 测试不验证 shortId（非 Reality 客户端走伪装路径），所以服务端『看着正常』不能证明 Reality 认证路径可用」。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260831_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260831_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-08-31T18:07:31.825362+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 8/11「系统化诊断中的错误修正闭环」（假设→实验→证伪→对照→推翻）部分重叠，但新增两个可复用元素：多时间点复测排除时间巧合作为前置步骤 + 验证工具能力边界（openssl 不校验 shortId）"
         }
       ]
     },
@@ -9577,6 +9643,19 @@
         "7": 100
       },
       "total_insights": 303
+    },
+    {
+      "date": "2026-08-31T18:07:31.825362+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 305
     }
   ],
   "behavior": {
