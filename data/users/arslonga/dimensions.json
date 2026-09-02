@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-08-31T18:07:31.825362+00:00",
-  "total_sessions_processed": 254,
+  "last_extraction": "2026-09-02T18:08:16.907914+00:00",
+  "total_sessions_processed": 255,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4680,6 +4680,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 8/11「系统化诊断中的错误修正闭环」（假设→实验→证伪→对照→推翻）部分重叠，但新增两个可复用元素：多时间点复测排除时间巧合作为前置步骤 + 验证工具能力边界（openssl 不校验 shortId）"
+        },
+        {
+          "id": "insight_2026-09-02T18:08:16.907914+00:00_0",
+          "date": "2026-09-02",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "技术标签的实质边界质疑——面对「硬编码匹配是否还算 RAG」的疑问，用户不满足于「用了外部知识就叫 RAG」的宽泛归类，而是把分类依据还原到检索机制本身（关键词倒排索引/向量索引 vs 规则硬编码匹配），追问自家规则匹配方案是否名实相符。体现「标签必须对应实质机制、而非表象相似」的命名审慎。",
+          "confidence": "high",
+          "evidence": "用户以图像分享了一段关于 RAG 概念界定与实现的讨论：质疑「任何使用了外部知识的生成是否都算 RAG」，对比「关键词倒排索引/向量索引」与自家「从用户输入抽取特定元素、预处理文档值、硬编码匹配逻辑」的实践，结论处追问「这种基于规则、硬编码的方案是否仍算 RAG」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260902_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260902_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-09-02T18:08:16.907914+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与现有 L2 洞察无实质重叠。与「伪优化营销识别」（质疑商家话术与实质）精神相近，但后者针对外部营销宣称，本洞察针对用户对自身技术实现的命名/归类审慎。"
         }
       ]
     },
@@ -8334,6 +8367,39 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-09-02T18:08:16.907914+00:00_1",
+          "date": "2026-09-02",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "宽泛研究命题以「结构化文档」为交付终点，并强制溯源纪律——用户要求整理「AI 范式下主流 AI-native 公司的产研协同分工与传统角色分工差异」时，明确「落成一篇文档发我」，委托 prompt 强制多源查证（4-6 来源）、逐条 URL 标注、找不到写「未找到」、严禁编造。研究被当作可溯源文档的生产过程，而非对话内即兴问答。",
+          "confidence": "medium",
+          "evidence": "「帮我整理一下，当前主流的 ai native 公司，比如 claude spotify 等，在 ai 范式下的产研协同分工方式，以及与传统角色职能分工相比的主要差异，落成一篇文档发我」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260902_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260902_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-09-02T18:08:16.907914+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 8/01「信息归档遵循一致协议」及「系统化为框架」部分重叠，新增元素：①研究焦点转向 AI 范式下的产研协同分工；②「落成文档发我」的显式文档交付指令 + 强制溯源纪律（多源查证/未找到/严禁编造）。"
         }
       ]
     },
@@ -9656,6 +9722,19 @@
         "7": 100
       },
       "total_insights": 305
+    },
+    {
+      "date": "2026-09-02T18:08:16.907914+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 307
     }
   ],
   "behavior": {
