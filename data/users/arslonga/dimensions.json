@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-04T02:41:31.596478+00:00",
+  "last_extraction": "2026-09-04T18:07:05.689947+00:00",
   "total_sessions_processed": 256,
   "layers": {
     "1": {
@@ -9817,9 +9817,9 @@
     }
   ],
   "behavior": {
-    "checked_at": "2026-08-25T18:10:36.210533+00:00",
+    "checked_at": "2026-09-04T18:07:05.690083+00:00",
     "warnings": [],
-    "insight_count": 2
+    "insight_count": 0
   },
   "_last_agent_insights": [
     "出口信誉分层按「身份敏感度」细化——当 DDG 反爬同时封锁住宅出口（BWG/AaITR 均超时、DMIT AN5 204ms 通）时，用户批准把 DDG 改走 DMIT 的 DC 出口，确认分层原则从「对外出口全走住宅」演进为「按身份敏感度分层」：身份敏感流量（Google/金融/TikTok/Telegram）仍钉死住宅，无身份绑定的搜索类流量可用 DC 出口换取可用性。",
