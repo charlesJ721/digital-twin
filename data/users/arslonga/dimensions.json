@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-04T18:07:05.689947+00:00",
-  "total_sessions_processed": 256,
+  "last_extraction": "2026-09-07T18:06:26.872913+00:00",
+  "total_sessions_processed": 257,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4746,6 +4746,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 vs 现有「恢复/冗余机制必须与主链路故障域隔离」——该条讲冗余位置隔离；本条讲「环境故障 vs 系统故障」的分类处理+感知层，机制不同"
+        },
+        {
+          "id": "insight_2026-09-07T18:06:26.872913+00:00_0",
+          "date": "2026-09-07",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "技术选型升级遵循「零风险敞口才无脑升级」判据——仅当新模型同价+同上下文+纯能力增强（无任何代价）时才直接替换，否则按成本与场景权衡保留。实例：Gemini 3.8 Flash 因与 3.7 同价同上下文即「无脑升级」；delegation 仍留 DeepSeek V4 Pro，因 3.8 输出价贵 4.3 倍、中文场景 DeepSeek 更优。成本敏感与风险敞口共同构成技术决策的双重门槛。",
+          "confidence": "high",
+          "evidence": "「3.8 Flash 是基于 3.7 的 effort 增强（model card 明示 context/modality/price 全不变）→ Gemini 家族位无脑升级，无风险敞口」；「delegation/Implement 未动（仍 DS V4 Pro 直连）——3.8 输出价贵 4.3x，中文场景 DS 仍优」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260907_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-v4-pro",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260907_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-v4-pro",
+              "timestamp": "2026-09-07T18:06:26.872913+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与既有「主动跟进新模型发布节奏并快速采用」(3.7 事件)、「分层降本」(Scout 激进/Implement 保留) 互补：本洞察补充「何时可无脑替换、何时权衡保留」的具体判据，非重复"
         }
       ]
     },
@@ -9814,6 +9847,19 @@
         "7": 100
       },
       "total_insights": 309
+    },
+    {
+      "date": "2026-09-07T18:06:26.872913+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 310
     }
   ],
   "behavior": {
