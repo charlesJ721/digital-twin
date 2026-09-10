@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-07T18:06:26.872913+00:00",
-  "total_sessions_processed": 257,
+  "last_extraction": "2026-09-10T18:03:01.263962+00:00",
+  "total_sessions_processed": 258,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4779,6 +4779,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 与既有「主动跟进新模型发布节奏并快速采用」(3.7 事件)、「分层降本」(Scout 激进/Implement 保留) 互补：本洞察补充「何时可无脑替换、何时权衡保留」的具体判据，非重复"
+        },
+        {
+          "id": "insight_2026-09-10T18:03:01.263962+00:00_0",
+          "date": "2026-09-10",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "把重复发生的人工动作机制化为「静默优先」的自动化监控——连续三次手工捕获模型发布（Gemini 3.7→3.8、DeepSeek V4.1）后，用户不再依赖自己盯发布会，而是直接要求新增一个扫描场景：定期扫描是否有同家族新模型迭代可替换、或是否有其他家更优模型可选；无发现就静默，有发现就推送「建议替换思路」给自己确认。设计三要素：①只把「重复发生的人工发现」交给自动化；②默认静默——无发现不产生任何通知，把注意力当稀缺资源；③自动化只负责发现与提建议，替换执行与否由用户确认。连架构判断（融合进现有 cron 还是独立 job）也授权 agent 自行决定并说明理由。",
+          "confidence": "high",
+          "evidence": "09-10 18:53 用户原话：「加一个场景，你看看是融合进现有 cron 还是怎么处理，基于当前模型配置，定期扫描是否有同家族新模型迭代可替换 or 是否有其他家出的更优模型可选择，如果无就静默，如果有就推给我建议替换思路让我确认」。触发背景：9/4 Gemini 3.8 Flash、9/10 DeepSeek V4.1-Flash 两次均为用户主动发现后触发迁移（09-10 18:25「deepseek v4.1 flash 是不是发布了」）。落地结果：独立 job b9933cfc2a0e（周三 11:00，deliver=telegram），agent 判定不融合的理由是「Tech Radar 无差别记录天天推，本场景默认静默只在有可行动建议时推，融合会让噪音互相带出」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260910_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260910_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-10T18:03:01.263962+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与「主动跟进新模型发布节奏并快速采用」(8/16, 行为层) 互补而非重复：那条是用户自己盯发布并立即替换；本条是用户把「盯发布」这件事机制化，并显式设定通知预算（无发现即静默）+ 保留人工确认门。与「维护成本超过理论收益时主动叫停既有自动化」(8/31) 构成自动化的准入/退出两侧判据：准入=承接重复人工发现且默认静默零注意力成本；退出=维护成本超过边际收益。"
+        },
+        {
+          "id": "insight_2026-09-10T18:03:01.263962+00:00_1",
+          "date": "2026-09-10",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "变更验收标准：穷举清点 + 全量修正，不采信执行者的完成度自述。模型 ID 迁移被 agent 报告完成后，用户没有接受该结论，而是直接下令「报告当前模型配置，穷举框架 tof cron 等等各处的记录」——要求跨 config / 技能矩阵 / TOF 管道 / cron jobs / scripts / 记忆层六个来源做独立盘点。盘点确实揪出 8 处遗漏（含因中文写法「DeepSeek V4 Pro」未被连字符搜索词命中的历史漏改），用户随即下令「1-8 全修」——对审计清单不做优先级取舍、不挑拣，一次性清零。判据：变更的「完成」不由执行者的自我报告定义，由独立穷举清单归零定义。",
+          "confidence": "high",
+          "evidence": "09-10 18:46 用户原话：「报告当前模型配置，穷举框架 tof cron 等等各处的记录」。18:48 agent 六源穷举报告列出「本次穷举新发现的遗漏（8 处）」，其中第 1 项为 model-routing SKILL.md 模型池表仍写 DeepSeek V4 Pro，性质标注为「上次迁移漏（中文写法未命中搜索词）」；第 2 项起另见 scripts/dt-diff.py 硬编码旧模型 ID、scripts/ 与 skills/ 两份 squilla-task.py 世代不一致。18:50 用户回复：「1-8 全修」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260910_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260910_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-10T18:03:01.263962+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与 L4「系统性追溯：单问题暴露后立即批量排查同类问题」相邻但不同：那条由故障触发、范围是同质同类 job（还有没有别的 unpinned job）；本条由「声明已完成」触发、范围是六源异构清单，核心是「自我报告不算证据，独立穷举清单归零才算验收」。与 8/28「分词级授权信号」差异：那条讲授权输入 token 极小（ac/改/查）；本条讲验收输出要求全量归零、不接受挑拣。"
         }
       ]
     },
@@ -9860,6 +9926,19 @@
         "7": 100
       },
       "total_insights": 310
+    },
+    {
+      "date": "2026-09-10T18:03:01.263962+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 312
     }
   ],
   "behavior": {
