@@ -8597,7 +8597,7 @@
           ],
           "superseded_by": null,
           "history": [],
-          "auto_diff": "semantic diff pending — preflight scripts/dt-preflight.py run"
+          "auto_diff": "🟢 全新——入库前 Gate 预检（embedding path LIVE）：Gate1-4 accepted=1/rejected=0，Gate5 findings=0，与既有 312 条最高余弦相似度 0.5505（最近邻为「深度技术对话后习惯性要求回顾/整理」），远低于 0.85 重复门限与 0.72 冲突门限。"
         }
       ]
     },
