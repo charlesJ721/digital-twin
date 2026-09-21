@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-20T18:02:41.120012+00:00",
-  "total_sessions_processed": 259,
+  "last_extraction": "2026-09-21T18:06:48.755405+00:00",
+  "total_sessions_processed": 261,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4845,6 +4845,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与 L4「系统性追溯：单问题暴露后立即批量排查同类问题」相邻但不同：那条由故障触发、范围是同质同类 job（还有没有别的 unpinned job）；本条由「声明已完成」触发、范围是六源异构清单，核心是「自我报告不算证据，独立穷举清单归零才算验收」。与 8/28「分词级授权信号」差异：那条讲授权输入 token 极小（ac/改/查）；本条讲验收输出要求全量归零、不接受挑拣。"
+        },
+        {
+          "id": "insight_2026-09-21T18:06:48.755405+00:00_0",
+          "date": "2026-09-21",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "恢复能力的验证必须与真实恢复路径同构——守卫工具里两处「恢复路径」检查被摆出两种修法时（最小修：把本地进程探测换成端口探测、补上现役 plist label；更彻底：把检查升级为经 frp 隧道的端到端演练），用户选择更彻底的一档，并给出第一性原理理由：「本地 pgrep 类检查本质上只能证明本机有什么进程」。判据是把验证层级锚定到真实失败场景——唯一能证明「出事时外部能不能救回来」的，是走一遍将来真正会走的那条外部路径（relay → 隧道 → 本机 sshd → launchctl 实跑），而本地代理指标（进程是否存在 / plist 是否存在 / 终端类型）在原理上就无法覆盖「外部可达性」。这是「不验证不可说」在工具设计层的显性化：关键不是有没有验证，而是验证方法能否证伪真实场景。",
+          "confidence": "high",
+          "evidence": "用户原文（选定更彻底方案）：「更彻底：把「恢复路径」从本地假设检查升级为经 frp 隧道的端到端演练（AN5 → 2222 → Mac 实跑一次 launchctl list），那才是真正的恢复能力证明；本地 pgrep 类检查本质上只能证明「本机有什么进程」」；随后实测取证：relay → 隧道 → 本机 sshd → launchctl 实跑返回 result=1、耗时 3330ms",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260921_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260921_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-21T18:06:48.755405+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 preflight 2026-09-21: max cosine 0.5845 vs 313 existing（最近邻 L2/决策风格「复发必追根因」）；Gate1-4 accepted=3 rejected=0；Gate5 语义层 LIVE（批量 316 条 ok=true）、findings=0"
+        },
+        {
+          "id": "insight_2026-09-21T18:06:48.755405+00:00_2",
+          "date": "2026-09-21",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "授权单位从「动作清单」升级为「验收状态」——执行者明文列出 4 项未闭环项（并注明「我没擅自动，都要你拍板」）后，用户只回一句「给你授权，持续修复，直到确认闭环」，既不逐项勾选，也不限定改动范围；执行者据此把动作集从 4 项扩展到 12 处、跨 3 个文件（含守卫本体插件与受保护写入路径）。判据：授权的边界不是动作枚举而是停止条件——「闭环」被定义为「每条声称都有实证」，范围扩张的裁量权归执行者。与既有「分词级授权」的区别在授权对象：那次是在执行者划定的选项菜单内做选择（范围由菜单定义），这次连菜单本身的边界一并授权（范围由目标状态定义）。",
+          "confidence": "high",
+          "evidence": "用户原话：「给你授权，持续修复，直到确认闭环」（紧接执行者「三、故意未闭的 4 项（都要你拍板，我没擅自动）」清单）；执行侧结果：12 处修改跨 3 文件，全部先备份 + 校验恰好命中 1 次才写入",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260921_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260921_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-21T18:06:48.755405+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 preflight 2026-09-21: max cosine 0.6729 vs 313 existing（最近邻 L4/行为模式「分词级授权信号」，故正文显式标注两者差别：菜单内选择 vs 菜单边界授权）；Gate1-4 accepted=3 rejected=0；Gate5 语义层 LIVE、findings=0"
         }
       ]
     },
@@ -5136,6 +5202,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 新：合规边界本身（虚构文本可/伪造文件不可）+ 对抗校准机制，区别于 L4「遇规则阻力找边界内替代路径」（覆盖绕路行为未覆盖边界划定）"
+        },
+        {
+          "id": "insight_2026-09-21T18:06:48.755405+00:00_1",
+          "date": "2026-09-21",
+          "dimension": "价值观",
+          "layer": "L3",
+          "insight": "失效的安全守卫比没有守卫更糟——在用 preflight 守卫的「恢复路径」检查被查出在本机结构性恒失败之后（4 个子检查里 3 个对本机失效：sshd 按需拉起导致 pgrep 恒判未运行、只匹配已废弃的 plist label、只识别 Terminal 而用户实际用 iTerm2），用户的选择不是绕过它、也不是「知道它坏就行」，而是修好它，并选更彻底的修法。判据：守卫恒失败会同时制造两重损害——给访问路径虚假的安全感，又把本可审批的规则命中升级成无审批通道的硬阻断（当日 agent 被拦 3 次）。与 6/29「安全防护的精确校调而非粗暴开关」方向一致但对象不同：那次是校准放行范围（白名单 / OR 改 AND），这次是修复判定本身的正确性——让 FAIL 重新只在真正失败时出现，且 fail-closed 方向不变。",
+          "confidence": "high",
+          "evidence": "诊断原文：「4 个子检查里 3 个对本机失效」「recovery_ok 永远为 false → 永远 FAIL: 部分恢复路径缺失 → 插件拿到非零返回即『存在风险因素 → BLOCKED』」；用户处置：选定更彻底修法，随后「给你授权，持续修复，直到确认闭环」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260921_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260921_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-21T18:06:48.755405+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 preflight 2026-09-21: max cosine 0.6028 vs 313 existing（最近邻 L4/行为模式「基础设施的预防性硬化」）；Gate1-4 accepted=3 rejected=0；Gate5 语义层 LIVE、findings=0"
         }
       ]
     },
@@ -9985,14 +10084,29 @@
         "7": 100
       },
       "total_insights": 313
+    },
+    {
+      "date": "2026-09-21T18:06:48.755405+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 316
     }
   ],
   "behavior": {
-    "checked_at": "2026-09-20T18:03:05.657167+00:00",
+    "checked_at": "2026-09-21T18:06:52.512921+00:00",
     "warnings": [],
-    "insight_count": 1
+    "insight_count": 3
   },
   "_last_agent_insights": [
-    "热度信号触发「单条消息整单委托」——面对新工具/新范式的热度（2026-09-19「jev 最近很火」），用户不做快速试用、不做单点问答，而是用一条消息下达完整研究委托：要求最终分析报告，并指定交付维度轴（原理 / 特点 / 横向比较 / 应用场景）。用户只锚定「维度轴 + 报告终点」，把研究规格（一手出处、数字口径核对、正反双方论点、失败场景）整体外置给 agent 展开——本批由 agent 扇出 5 路并行子研究（原理与架构 / 生态与商业化 / 公开基准横向对比 / 争议与批判 / 应用场景一手反馈），约 43 分钟后合并交付。相比既有「宽泛研究命题以结构化文档为交付终点」（2026-09-02）推进在委托粒度：命题、方法、结构均不再由用户指定，只保留维度轴与最终报告形态；热度信号充当筛选器，先判定「值得深潜」，再把研究执行完全外置。"
+    "恢复能力的验证必须与真实恢复路径同构——守卫工具里两处「恢复路径」检查被摆出两种修法时（最小修：把本地进程探测换成端口探测、补上现役 plist label；更彻底：把检查升级为经 frp 隧道的端到端演练），用户选择更彻底的一档，并给出第一性原理理由：「本地 pgrep 类检查本质上只能证明本机有什么进程」。判据是把验证层级锚定到真实失败场景——唯一能证明「出事时外部能不能救回来」的，是走一遍将来真正会走的那条外部路径（relay → 隧道 → 本机 sshd → launchctl 实跑），而本地代理指标（进程是否存在 / plist 是否存在 / 终端类型）在原理上就无法覆盖「外部可达性」。这是「不验证不可说」在工具设计层的显性化：关键不是有没有验证，而是验证方法能否证伪真实场景。",
+    "授权单位从「动作清单」升级为「验收状态」——执行者明文列出 4 项未闭环项（并注明「我没擅自动，都要你拍板」）后，用户只回一句「给你授权，持续修复，直到确认闭环」，既不逐项勾选，也不限定改动范围；执行者据此把动作集从 4 项扩展到 12 处、跨 3 个文件（含守卫本体插件与受保护写入路径）。判据：授权的边界不是动作枚举而是停止条件——「闭环」被定义为「每条声称都有实证」，范围扩张的裁量权归执行者。与既有「分词级授权」的区别在授权对象：那次是在执行者划定的选项菜单内做选择（范围由菜单定义），这次连菜单本身的边界一并授权（范围由目标状态定义）。",
+    "失效的安全守卫比没有守卫更糟——在用 preflight 守卫的「恢复路径」检查被查出在本机结构性恒失败之后（4 个子检查里 3 个对本机失效：sshd 按需拉起导致 pgrep 恒判未运行、只匹配已废弃的 plist label、只识别 Terminal 而用户实际用 iTerm2），用户的选择不是绕过它、也不是「知道它坏就行」，而是修好它，并选更彻底的修法。判据：守卫恒失败会同时制造两重损害——给访问路径虚假的安全感，又把本可审批的规则命中升级成无审批通道的硬阻断（当日 agent 被拦 3 次）。与 6/29「安全防护的精确校调而非粗暴开关」方向一致但对象不同：那次是校准放行范围（白名单 / OR 改 AND），这次是修复判定本身的正确性——让 FAIL 重新只在真正失败时出现，且 fail-closed 方向不变。"
   ]
 }
