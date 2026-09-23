@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-21T18:06:48.755405+00:00",
-  "total_sessions_processed": 261,
+  "last_extraction": "2026-09-23T18:03:29.351130+00:00",
+  "total_sessions_processed": 262,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -4911,6 +4911,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 preflight 2026-09-21: max cosine 0.6729 vs 313 existing（最近邻 L4/行为模式「分词级授权信号」，故正文显式标注两者差别：菜单内选择 vs 菜单边界授权）；Gate1-4 accepted=3 rejected=0；Gate5 语义层 LIVE、findings=0"
+        },
+        {
+          "id": "insight_2026-09-23T18:03:29.351130+00:00_0",
+          "date": "2026-09-23",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "文档声称与运行时行为冲突时，以真凭据探针为唯一裁决层：模型迁移前的方案选择里，用户挑的是「先探针后动」而非直接按官方文档执行，结果实测推翻了子 agent 引用的两条一手结论——「禁用 thinking 会 400」实为 HTTP 200 且思考照样发生，「Chat Completions 带推理不能调工具」在 OR 通路上实测无效。判据是「可观测运行时」优先于「文档与评测结论」，且接受实测反向修正已交付的结论。",
+          "confidence": "high",
+          "evidence": "用户回「1」选定「先探针后动」；探针结论：「不是 400，是 200——请求被接受，但思考照样发生」；「官方 docs 那条限制在 OR 通路上实测无效：默认 effort 与 effort=none 都返回 200 + tool_calls=1」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260923_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260923_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-23T18:03:29.351130+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 preflight 2026-09-24（embedding path LIVE，语义层生效）：max cosine 0.6333 vs 316 existing，最近邻为 L2「设计演进问责」——那条讲对 agent 方案的追问问责，本条讲「文档/评测结论须由真凭据探针裁决」；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-09-23T18:03:29.351130+00:00_3",
+          "date": "2026-09-23",
+          "dimension": "元认知",
+          "layer": "L2",
+          "insight": "委托产出不构成证据：子 agent 交回的三份调研报告中，结论先被扣住等一手原文复核才写入交付，且两处措辞被本机实测推翻（「OpenRouter 路由层失败」实为 provider 层 error；「禁用 thinking 会 400」实为静默忽略）。委托只买到调查带宽，不买到事实地位——凡要进最终判断的结论，必须由主链以一手材料或本机实测复核。",
+          "confidence": "high",
+          "evidence": "「已完成的那条（Implement 位基线核验）已经抛出一条会改变判断的话，待我用原文复核后才会写进结论」；「附带更正：子 agent 说 OR 在「路由层」就失败…实测拿到的是 provider 层 error，措辞不准确」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260923_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260923_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-23T18:03:29.351130+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 preflight 2026-09-24：max cosine 0.5910 vs L2「数据替代假设」/「实测验证后再决策」（购买与选型场景）——本条把「实测优先」推进到委托治理：子 agent 的产出默认不具备证据地位；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-09-23T18:03:29.351130+00:00_4",
+          "date": "2026-09-23",
+          "dimension": "元认知",
+          "layer": "L2",
+          "insight": "批量替换的历史真实性约束：对「现状描述」与「历史记录」两类行必须区别对待——历史行只可加注、不可重写，否则批量改写会凭空造出从未发生的记录。判据来自一次全量 ID 迁移的事后逐条判定：命中历史段落的几行被回退到当时值并标注日期，因为留着就等于给自己伪造一条证据。",
+          "confidence": "high",
+          "evidence": "「⚠️ 并还原了 2 处被机械替换伪造的历史行：v2.10 changelog 的 fallback 链、本 session 验证通过的 agent.log 收据——这两处若留着就是伪造一条从未发生的验证记录，已改回当时值并加日期注记」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260923_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260923_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-23T18:03:29.351130+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 preflight 2026-09-24：max cosine 0.5845 vs L4「变更验收标准：穷举清点+全量修正」——那条讲验收要穷举归零，本条讲批量改写的历史真实性约束（历史行只可加注不可重写）；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
         }
       ]
     },
@@ -7138,6 +7237,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 vs 现有「系统化诊断」「自愈基础设施」——本条聚焦「故障后核查下游 cron 并重跑」这一具体收口行为，此前未单独捕获"
+        },
+        {
+          "id": "insight_2026-09-23T18:03:29.351130+00:00_1",
+          "date": "2026-09-23",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "资源卸载要求「零残留终态」，且残留清单覆盖到环境变量与 OS 层：卸载第三方 CLI 时明确要求「相关配置文件和环境变量以及文件残留都清理掉」；执行侧清完两个安装源（brew cask + npm 两份）、数据目录、运行时缓存、客户端 app、Library 偏好与 LaunchAgents 后，以逐项回读（which -a 为空、目录不存在、doctor 告警消失）作为完成判据，释放约 2.6 GB。零残留不是「主力件删掉」，是穷举所有引用面后归零。",
+          "confidence": "high",
+          "evidence": "用户：「帮我把本地的 codex cli 以及客户端都彻底删了，相关配置文件和环境变量以及文件残留都清理掉」；回读验证：「which -a codex → 空 ✅；~/.codex、~/.cache/codex-runtimes、Application Support/Codex、备份目录 → 全部已清除」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260923_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260923_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-23T18:03:29.351130+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 preflight 2026-09-24：max cosine 0.6163 vs L4「退役资源时偏好全链路彻底剔除、不留孤儿引用」——同属「清理要彻底」，但旧条只覆盖网络资源引用面（节点/SSH config/key/隧道/记忆），本条是第三方 CLI 全卸载并首次覆盖 OS 层残留（环境变量清点、LaunchAgents、Library 偏好、废纸篓）；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
         }
       ]
     },
@@ -8812,6 +8944,39 @@
               "timestamp": "2026-08-01T18:04:23+00:00"
             }
           ]
+        },
+        {
+          "id": "insight_2026-09-23T18:03:29.351130+00:00_2",
+          "date": "2026-09-23",
+          "dimension": "信任建立",
+          "layer": "L6",
+          "insight": "不可逆动作的信任边界——「读不到就不动」：即使拿到「彻底删」级别的全权授权，用户接受执行者在影响面超出目标时把最后一步交回自己。执行者以权限阻断（目录枚举被 TCC 挂起、废纸篓拒绝访问）为由不删内容不可确认的目录、不用脚本代清废纸篓（会连带清掉用户其它文件），用户随后自行在 Finder 完成，双方以「无法确认内容 / 影响面外溢的动作不动」为默契。",
+          "confidence": "high",
+          "evidence": "用户：「帮我把本地的 codex cli 以及客户端都彻底删了…」；执行侧：「我没有用 osascript empty trash 代替你操作，因为那会连你废纸篓里的其它东西一起清掉，不该由我替你决定」；后续回读 stat → No such file or directory（用户已自行删除）",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260923_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260923_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-23T18:03:29.351130+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 preflight 2026-09-24：max cosine 0.5924 vs L4「充分确定式拍板」（决策权威与风险缓冲分离）——本条聚焦授权覆盖边界：目标物之外、内容不可确认的动作不随授权转移，且属 L6 稀疏层（原仅 4 条）；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
         }
       ]
     },
@@ -10097,16 +10262,31 @@
         "7": 100
       },
       "total_insights": 316
+    },
+    {
+      "date": "2026-09-23T18:03:29.351130+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 321
     }
   ],
   "behavior": {
-    "checked_at": "2026-09-22T18:01:50.486953+00:00",
+    "checked_at": "2026-09-23T18:03:51.183210+00:00",
     "warnings": [],
-    "insight_count": 0
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "恢复能力的验证必须与真实恢复路径同构——守卫工具里两处「恢复路径」检查被摆出两种修法时（最小修：把本地进程探测换成端口探测、补上现役 plist label；更彻底：把检查升级为经 frp 隧道的端到端演练），用户选择更彻底的一档，并给出第一性原理理由：「本地 pgrep 类检查本质上只能证明本机有什么进程」。判据是把验证层级锚定到真实失败场景——唯一能证明「出事时外部能不能救回来」的，是走一遍将来真正会走的那条外部路径（relay → 隧道 → 本机 sshd → launchctl 实跑），而本地代理指标（进程是否存在 / plist 是否存在 / 终端类型）在原理上就无法覆盖「外部可达性」。这是「不验证不可说」在工具设计层的显性化：关键不是有没有验证，而是验证方法能否证伪真实场景。",
-    "授权单位从「动作清单」升级为「验收状态」——执行者明文列出 4 项未闭环项（并注明「我没擅自动，都要你拍板」）后，用户只回一句「给你授权，持续修复，直到确认闭环」，既不逐项勾选，也不限定改动范围；执行者据此把动作集从 4 项扩展到 12 处、跨 3 个文件（含守卫本体插件与受保护写入路径）。判据：授权的边界不是动作枚举而是停止条件——「闭环」被定义为「每条声称都有实证」，范围扩张的裁量权归执行者。与既有「分词级授权」的区别在授权对象：那次是在执行者划定的选项菜单内做选择（范围由菜单定义），这次连菜单本身的边界一并授权（范围由目标状态定义）。",
-    "失效的安全守卫比没有守卫更糟——在用 preflight 守卫的「恢复路径」检查被查出在本机结构性恒失败之后（4 个子检查里 3 个对本机失效：sshd 按需拉起导致 pgrep 恒判未运行、只匹配已废弃的 plist label、只识别 Terminal 而用户实际用 iTerm2），用户的选择不是绕过它、也不是「知道它坏就行」，而是修好它，并选更彻底的修法。判据：守卫恒失败会同时制造两重损害——给访问路径虚假的安全感，又把本可审批的规则命中升级成无审批通道的硬阻断（当日 agent 被拦 3 次）。与 6/29「安全防护的精确校调而非粗暴开关」方向一致但对象不同：那次是校准放行范围（白名单 / OR 改 AND），这次是修复判定本身的正确性——让 FAIL 重新只在真正失败时出现，且 fail-closed 方向不变。"
+    "文档声称与运行时行为冲突时，以真凭据探针为唯一裁决层：模型迁移前的方案选择里，用户挑的是「先探针后动」而非直接按官方文档执行，结果实测推翻了子 agent 引用的两条一手结论——「禁用 thinking 会 400」实为 HTTP 200 且思考照样发生，「Chat Completions 带推理不能调工具」在 OR 通路上实测无效。判据是「可观测运行时」优先于「文档与评测结论」，且接受实测反向修正已交付的结论。",
+    "委托产出不构成证据：子 agent 交回的三份调研报告中，结论先被扣住等一手原文复核才写入交付，且两处措辞被本机实测推翻（「OpenRouter 路由层失败」实为 provider 层 error；「禁用 thinking 会 400」实为静默忽略）。委托只买到调查带宽，不买到事实地位——凡要进最终判断的结论，必须由主链以一手材料或本机实测复核。",
+    "批量替换的历史真实性约束：对「现状描述」与「历史记录」两类行必须区别对待——历史行只可加注、不可重写，否则批量改写会凭空造出从未发生的记录。判据来自一次全量 ID 迁移的事后逐条判定：命中历史段落的几行被回退到当时值并标注日期，因为留着就等于给自己伪造一条证据。",
+    "资源卸载要求「零残留终态」，且残留清单覆盖到环境变量与 OS 层：卸载第三方 CLI 时明确要求「相关配置文件和环境变量以及文件残留都清理掉」；执行侧清完两个安装源（brew cask + npm 两份）、数据目录、运行时缓存、客户端 app、Library 偏好与 LaunchAgents 后，以逐项回读（which -a 为空、目录不存在、doctor 告警消失）作为完成判据，释放约 2.6 GB。零残留不是「主力件删掉」，是穷举所有引用面后归零。",
+    "不可逆动作的信任边界——「读不到就不动」：即使拿到「彻底删」级别的全权授权，用户接受执行者在影响面超出目标时把最后一步交回自己。执行者以权限阻断（目录枚举被 TCC 挂起、废纸篓拒绝访问）为由不删内容不可确认的目录、不用脚本代清废纸篓（会连带清掉用户其它文件），用户随后自行在 Finder 完成，双方以「无法确认内容 / 影响面外溢的动作不动」为默契。"
   ]
 }
