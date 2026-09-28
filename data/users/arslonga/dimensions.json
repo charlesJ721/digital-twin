@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-23T18:03:29.351130+00:00",
-  "total_sessions_processed": 262,
+  "last_extraction": "2026-09-28T18:02:11.069613+00:00",
+  "total_sessions_processed": 263,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5010,6 +5010,138 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 preflight 2026-09-24：max cosine 0.5845 vs L4「变更验收标准：穷举清点+全量修正」——那条讲验收要穷举归零，本条讲批量改写的历史真实性约束（历史行只可加注不可重写）；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-09-28T18:02:11.069613+00:00_0",
+          "date": "2026-09-28",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "判断某个配置字段是否真的生效时，先看工具自带的校验器是否严格：若它对未知字段宽容（塞入明显的假字段仍报 test is successful），静态校验证不了任何东西，此时的正确动作是换行为实验——起隔离的一次性实例做同路径 A/B 对照，用同目标下的实际成败差异证明该字段是活旋钮，而不是接受校验器那句「成功」。",
+          "confidence": "high",
+          "evidence": "mihomo -t 对未知字段宽容（塞 bogus_unknown_key 也照样 test is successful）→ 改用行为实验：起两个一次性 mihomo 实例（独立 -d、独立端口/socket、用本机 mihomo 当上游，没碰运行中的实例），同一路径同一目标——timeout 2000ms → 检查失败 (delay 0, alive=false)；timeout 10000ms → 检查通过 (delay 4581ms, alive=true)。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:02:11.069613+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5563 vs 「系统化诊断中的错误修正闭环」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-28T18:02:11.069613+00:00_1",
+          "date": "2026-09-28",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "探测与超时的预算必须按「真实端到端新建连接成本」设定，不能采信监控面板上报的延迟值——上报值可能只测到了链路中的某一跳，与真实成本无关；余量不足时单次探测抖动就会误判并把整组切走，且异常段长会精确等于健康检查周期，这个「段长=周期」特征本身就是误判的指纹。",
+          "confidence": "high",
+          "evidence": "同一秒对比：API 报 delay = 166/175/179 ms（恒定，≈ Mac↔BWG 那一跳的 RTT），真实端到端 = 4.277/4.294/4.898 s；对照组 gstatic 报 166/163 ms、真实 0.986/0.981 s。组配置 url=cp.cloudflare.com/generate_204 且未显式设 timeout → 默认 5000ms，余量只剩 2-14%。切换史 27 次/7 天，26/27 落在 289-311s（恰一个 300s 检查周期），累计 8399s。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:02:11.069613+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5580 vs 「数据替代假设原则」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-28T18:02:11.069613+00:00_3",
+          "date": "2026-09-28",
+          "dimension": "工程决策优先级",
+          "layer": "L2",
+          "insight": "安排两项操作先后顺序时，用依赖关系的硬证据（进程父子关系、资源归属）而不是保守直觉：先确认待重启进程的进程树里挂着哪些尚在运行的任务，据此排序，避免把一个不可中断的长任务连坐杀掉。等待的成本与重跑的成本要在同一证据下比较，而不是「稳妥起见先做」。",
+          "confidence": "high",
+          "evidence": "三个采样进程全是待重启 gateway 进程（pid 87956）的直接子进程：38348 sampler_local.py 720（已跑 8分38秒）、38358 sampler_ssh.sh 720、39380 wg_only_sampler.sh 660；窗口未跑完 → 判定 restart 会连带杀掉三个采样器、整轮 15 分钟测量作废，故把重启排到测量回报之后。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:02:11.069613+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5852 vs 「多任务先做全局分析再定实施顺序」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-28T18:02:11.069613+00:00_5",
+          "date": "2026-09-28",
+          "dimension": "决策模式",
+          "layer": "L2",
+          "insight": "给出建议之后若有机会读到实现细节，就先读再定论；若实现证明原建议会引入风险，主动撤回自己的建议而不是维持立场——取舍依据是代码实际走的那条路径，不是一般性的稳妥直觉。",
+          "confidence": "high",
+          "evidence": "原建议「提交成 commit 防被 update 覆盖」，读完 updater 实现后撤回：未提交时 update 走 _stash_local_changes_if_needed 自动 autostash 保存；但本地 commit 若遇上游 force-push/rebase，走的是 update_cmd.py:795-818 的 divergence 路径 reset --hard origin/<branch>，autostash 只保未提交改动、commit 不在保护范围会被抹掉 → 结论反转为「保持未提交 + patch 存盘」，并明说「我原来的建议是错的，撤回」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:02:11.069613+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5414 vs 「结论先行输出规范」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
         }
       ]
     },
@@ -7270,6 +7402,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 preflight 2026-09-24：max cosine 0.6163 vs L4「退役资源时偏好全链路彻底剔除、不留孤儿引用」——同属「清理要彻底」，但旧条只覆盖网络资源引用面（节点/SSH config/key/隧道/记忆），本条是第三方 CLI 全卸载并首次覆盖 OS 层残留（环境变量清点、LaunchAgents、Library 偏好、废纸篓）；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-09-28T18:02:11.069613+00:00_2",
+          "date": "2026-09-28",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "委托长时测量后，子 agent 的汇总结论不直接采信——关键数字一律自己重算一遍；对其「取不到/不可恢复」类的否定结论，补一个反证实验把「逻辑拦住」和「根本没人调用」区分开：主动改写被卡对象的归属戳，再跑真实的恢复函数，看它能不能被认领、内容是否完整。",
+          "confidence": "high",
+          "evidence": "子 agent 报 27 次切换 / 26 次恰 300s，我重算 history_switches.csv 得到相同分布后才采纳；反证实验：把卡住那行的 owner 戳改成当前进程 → 成功 claim（state→attempting, attempts→1），1802 字符内容完整可取 → 证明原因是没人调用 sweep，而不是逻辑拦住。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:02:11.069613+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5774 vs 「委托产出不构成证据 / 系统化诊断中的错误修正闭环」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
         }
       ]
     },
@@ -8829,6 +8994,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新——入库前 Gate 预检（embedding path LIVE）：Gate1-4 accepted=1/rejected=0，Gate5 findings=0，与既有 312 条最高余弦相似度 0.5505（最近邻为「深度技术对话后习惯性要求回顾/整理」），远低于 0.85 重复门限与 0.72 冲突门限。"
+        },
+        {
+          "id": "insight_2026-09-28T18:02:11.069613+00:00_4",
+          "date": "2026-09-28",
+          "dimension": "知识管理",
+          "layer": "L5",
+          "insight": "把「同一套流程散落多处」从主观印象升级为可核验的结构问题：逐处列出文件清单、比对同名文件之间的实现差异、扫描被引用却不存在的断链、比对判读阈值是否已经分叉——以这些「已实际发生」的分叉作为收敛依据，而不是以文件数量多为由。收敛后的验收标准是加载成功 + 引用文件 0 MISS + 全库 grep 无残留引用，而不是文件数减少。",
+          "confidence": "high",
+          "evidence": "6 处散落（4 个技能 + 4 份 reference）；实测分叉：两份 ansi2png.py 实现不同（10 项广告词表 vs 更少、--width 参数只在 docstring 里）、断链 testing-checklist.md（SKILL 引用但文件不存在）、Scamalytics 阈值三套口径（31 vs 50）。收敛为 2 技能后验证：skill_view 均正常加载、linked_files 逐项存在 0 MISS、全库 grep 无残留引用。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:02:11.069613+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5891 vs 「信息完整性的主动冗余验证 / 过程真实性优先」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
         }
       ]
     },
@@ -10275,18 +10473,31 @@
         "7": 100
       },
       "total_insights": 321
+    },
+    {
+      "date": "2026-09-28T18:02:11.069613+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 327
     }
   ],
   "behavior": {
-    "checked_at": "2026-09-27T18:03:44.055782+00:00",
+    "checked_at": "2026-09-28T18:02:13.795542+00:00",
     "warnings": [],
-    "insight_count": 0
+    "insight_count": 6
   },
   "_last_agent_insights": [
-    "文档声称与运行时行为冲突时，以真凭据探针为唯一裁决层：模型迁移前的方案选择里，用户挑的是「先探针后动」而非直接按官方文档执行，结果实测推翻了子 agent 引用的两条一手结论——「禁用 thinking 会 400」实为 HTTP 200 且思考照样发生，「Chat Completions 带推理不能调工具」在 OR 通路上实测无效。判据是「可观测运行时」优先于「文档与评测结论」，且接受实测反向修正已交付的结论。",
-    "委托产出不构成证据：子 agent 交回的三份调研报告中，结论先被扣住等一手原文复核才写入交付，且两处措辞被本机实测推翻（「OpenRouter 路由层失败」实为 provider 层 error；「禁用 thinking 会 400」实为静默忽略）。委托只买到调查带宽，不买到事实地位——凡要进最终判断的结论，必须由主链以一手材料或本机实测复核。",
-    "批量替换的历史真实性约束：对「现状描述」与「历史记录」两类行必须区别对待——历史行只可加注、不可重写，否则批量改写会凭空造出从未发生的记录。判据来自一次全量 ID 迁移的事后逐条判定：命中历史段落的几行被回退到当时值并标注日期，因为留着就等于给自己伪造一条证据。",
-    "资源卸载要求「零残留终态」，且残留清单覆盖到环境变量与 OS 层：卸载第三方 CLI 时明确要求「相关配置文件和环境变量以及文件残留都清理掉」；执行侧清完两个安装源（brew cask + npm 两份）、数据目录、运行时缓存、客户端 app、Library 偏好与 LaunchAgents 后，以逐项回读（which -a 为空、目录不存在、doctor 告警消失）作为完成判据，释放约 2.6 GB。零残留不是「主力件删掉」，是穷举所有引用面后归零。",
-    "不可逆动作的信任边界——「读不到就不动」：即使拿到「彻底删」级别的全权授权，用户接受执行者在影响面超出目标时把最后一步交回自己。执行者以权限阻断（目录枚举被 TCC 挂起、废纸篓拒绝访问）为由不删内容不可确认的目录、不用脚本代清废纸篓（会连带清掉用户其它文件），用户随后自行在 Finder 完成，双方以「无法确认内容 / 影响面外溢的动作不动」为默契。"
+    "探测与超时的预算必须按「真实端到端新建连接成本」设定，不能采信监控面板上报的延迟值——上报值可能只测到了链路中的某一跳，与真实成本无关；余量不足时单次探测抖动就会误判并把整组切走，且异常段长会精确等于健康检查周期，这个「段长=周期」特征本身就是误判的指纹。",
+    "安排两项操作先后顺序时，用依赖关系的硬证据（进程父子关系、资源归属）而不是保守直觉：先确认待重启进程的进程树里挂着哪些尚在运行的任务，据此排序，避免把一个不可中断的长任务连坐杀掉。等待的成本与重跑的成本要在同一证据下比较，而不是「稳妥起见先做」。",
+    "给出建议之后若有机会读到实现细节，就先读再定论；若实现证明原建议会引入风险，主动撤回自己的建议而不是维持立场——取舍依据是代码实际走的那条路径，不是一般性的稳妥直觉。",
+    "委托长时测量后，子 agent 的汇总结论不直接采信——关键数字一律自己重算一遍；对其「取不到/不可恢复」类的否定结论，补一个反证实验把「逻辑拦住」和「根本没人调用」区分开：主动改写被卡对象的归属戳，再跑真实的恢复函数，看它能不能被认领、内容是否完整。",
+    "把「同一套流程散落多处」从主观印象升级为可核验的结构问题：逐处列出文件清单、比对同名文件之间的实现差异、扫描被引用却不存在的断链、比对判读阈值是否已经分叉——以这些「已实际发生」的分叉作为收敛依据，而不是以文件数量多为由。收敛后的验收标准是加载成功 + 引用文件 0 MISS + 全库 grep 无残留引用，而不是文件数减少。"
   ]
 }
