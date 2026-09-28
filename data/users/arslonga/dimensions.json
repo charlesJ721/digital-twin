@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-28T18:02:11.069613+00:00",
-  "total_sessions_processed": 263,
+  "last_extraction": "2026-09-28T18:05:06.350941+00:00",
+  "total_sessions_processed": 265,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5142,6 +5142,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5414 vs 「结论先行输出规范」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-28T18:05:06.350941+00:00_0",
+          "date": "2026-09-28",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用视觉模型校验收图类交付物时，按「版式」与「数值」分层设定信度：视觉可用于确认无折叠、无截断、区块齐全这类结构性事实，但不可用于读取图中的数值——缩略图下它会读错，而放大重渲染后读数恢复正常。因此数值一律以本地从原始文本提取的结果为准，视觉只做版式验证。",
+          "confidence": "high",
+          "evidence": "视觉抽查部分可信：确认了无换行折叠/无截断、区块标题齐全，但视觉模型对数值的读取出现幻觉（把 IP 读成 1.1.1.1/8.8.8.8，实际是 179.253.*.*），所以内容我以本地提取的文本为准，视觉只用于版式验证。后经大字重渲染复核：「版式验证通过（大字下视觉读数与文本一致，确认此前幻觉源于缩略图）」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:05:06.350941+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.4231 vs 「过程真实性优先于名义完备」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
         }
       ]
     },
@@ -7435,6 +7468,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5774 vs 「委托产出不构成证据 / 系统化诊断中的错误修正闭环」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-28T18:05:06.350941+00:00_1",
+          "date": "2026-09-28",
+          "dimension": "系统设计方法论",
+          "layer": "L4",
+          "insight": "渲染类交付物要按「目标平台的最终缩放」反推参数，而不是按源图尺寸设计：先算出长边被平台压到多少像素、字号会缩到几号，再据此决定收窄宽度、折叠空行、按内容边界分段，使压缩后仍保持可读字号。判据是最终显示尺寸下的字号，不是源文件的分辨率。",
+          "confidence": "high",
+          "evidence": "3358px 长边会被 Telegram 压到 1280 → 每行仅 5px、字号从 12px 降到 ~4.6px 必然糊；据此重新排版：每行最多 72 字符 → 宽度大幅收窄；折叠空行（244 行含 ~122 空行）+ 收窄渲染 + 按内容边界分段 → 压缩后仍保持 ~11px 字号，最终以 700×934 / 700×756 / 700×1403 三张分段图送达。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:05:06.350941+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5471 vs 「工程决策中硬约束先于软选择」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-28T18:05:06.350941+00:00_3",
+          "date": "2026-09-28",
+          "dimension": "安全风险评估模式",
+          "layer": "L4",
+          "insight": "委托边界按「可逆性 + 是否需授权」划定，而不是按工作量：只读侦察可以外包（机械、可并行、无副作用），但不可逆动作与需要用户授权的决策收敛到单点自持，因为子 agent 无法向用户提问也没有授权能力。同一任务因此常同时包含委托段与自执行段。",
+          "confidence": "high",
+          "evidence": "Triage：「侦察分两路——vault 外区域机械扫描可并行委托；vault 内部卫生与结构审计由我执行。决策与删除由我单点掌握（子 agent 无 clarify 能力，不可逆操作不可外包）」；实际委派 1 个子 agent 做只读扫描（prompt 首行含「绝对禁止：删除、移动、修改任何文件」），删除动作全部进隔离区且需用户确认。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:05:06.350941+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.6174 vs 「分词级授权信号 / Decider-Worker 分离原则」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
         }
       ]
     },
@@ -9027,6 +9126,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5891 vs 「信息完整性的主动冗余验证 / 过程真实性优先」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-28T18:05:06.350941+00:00_2",
+          "date": "2026-09-28",
+          "dimension": "知识组织",
+          "layer": "L5",
+          "insight": "发现两份同名重复文档时，不按大小或新旧直接删其一，而要先做超集判定——重复的两份可能各自残缺，正确的动作是逐字节比对、把两份的损坏点都定位出来，以信息更全的一份为基修补丢字后再合并，并保留可回溯的隔离备份而非硬删。否则「去重」会变成永久删除唯一的完整版本。",
+          "confidence": "high",
+          "evidence": "vault 内已有同名笔记（10,403B），而 vault 外副本是超集（15,762B），多出整章《追加：2026-07-03 晚场 — Prompt Echo Fix + Delegate Task 路由修复》；两份副本各自都有字符丢失损坏（vault 缺 ausa、副本缺 pt/历，正是 obsidian-cli 长文本传参损坏模式）→ 逐字节比对定位全部 3 处损坏，以副本为基修补后合并回 vault 并加追溯尾注；若无这次整理这段记录会永久丢失。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260928_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260928_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-28T18:05:06.350941+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5510 vs 「把同一套流程散落多处升级为可核验的结构问题」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
         }
       ]
     },
@@ -10486,18 +10618,31 @@
         "7": 100
       },
       "total_insights": 327
+    },
+    {
+      "date": "2026-09-28T18:05:06.350941+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 331
     }
   ],
   "behavior": {
-    "checked_at": "2026-09-28T18:02:13.795542+00:00",
+    "checked_at": "2026-09-28T18:05:06.393770+00:00",
     "warnings": [],
-    "insight_count": 6
+    "insight_count": 10
   },
   "_last_agent_insights": [
-    "探测与超时的预算必须按「真实端到端新建连接成本」设定，不能采信监控面板上报的延迟值——上报值可能只测到了链路中的某一跳，与真实成本无关；余量不足时单次探测抖动就会误判并把整组切走，且异常段长会精确等于健康检查周期，这个「段长=周期」特征本身就是误判的指纹。",
-    "安排两项操作先后顺序时，用依赖关系的硬证据（进程父子关系、资源归属）而不是保守直觉：先确认待重启进程的进程树里挂着哪些尚在运行的任务，据此排序，避免把一个不可中断的长任务连坐杀掉。等待的成本与重跑的成本要在同一证据下比较，而不是「稳妥起见先做」。",
-    "给出建议之后若有机会读到实现细节，就先读再定论；若实现证明原建议会引入风险，主动撤回自己的建议而不是维持立场——取舍依据是代码实际走的那条路径，不是一般性的稳妥直觉。",
     "委托长时测量后，子 agent 的汇总结论不直接采信——关键数字一律自己重算一遍；对其「取不到/不可恢复」类的否定结论，补一个反证实验把「逻辑拦住」和「根本没人调用」区分开：主动改写被卡对象的归属戳，再跑真实的恢复函数，看它能不能被认领、内容是否完整。",
-    "把「同一套流程散落多处」从主观印象升级为可核验的结构问题：逐处列出文件清单、比对同名文件之间的实现差异、扫描被引用却不存在的断链、比对判读阈值是否已经分叉——以这些「已实际发生」的分叉作为收敛依据，而不是以文件数量多为由。收敛后的验收标准是加载成功 + 引用文件 0 MISS + 全库 grep 无残留引用，而不是文件数减少。"
+    "渲染类交付物要按「目标平台的最终缩放」反推参数，而不是按源图尺寸设计：先算出长边被平台压到多少像素、字号会缩到几号，再据此决定收窄宽度、折叠空行、按内容边界分段，使压缩后仍保持可读字号。判据是最终显示尺寸下的字号，不是源文件的分辨率。",
+    "委托边界按「可逆性 + 是否需授权」划定，而不是按工作量：只读侦察可以外包（机械、可并行、无副作用），但不可逆动作与需要用户授权的决策收敛到单点自持，因为子 agent 无法向用户提问也没有授权能力。同一任务因此常同时包含委托段与自执行段。",
+    "把「同一套流程散落多处」从主观印象升级为可核验的结构问题：逐处列出文件清单、比对同名文件之间的实现差异、扫描被引用却不存在的断链、比对判读阈值是否已经分叉——以这些「已实际发生」的分叉作为收敛依据，而不是以文件数量多为由。收敛后的验收标准是加载成功 + 引用文件 0 MISS + 全库 grep 无残留引用，而不是文件数减少。",
+    "发现两份同名重复文档时，不按大小或新旧直接删其一，而要先做超集判定——重复的两份可能各自残缺，正确的动作是逐字节比对、把两份的损坏点都定位出来，以信息更全的一份为基修补丢字后再合并，并保留可回溯的隔离备份而非硬删。否则「去重」会变成永久删除唯一的完整版本。"
   ]
 }
