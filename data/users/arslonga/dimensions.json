@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-28T18:05:06.350941+00:00",
-  "total_sessions_processed": 265,
+  "last_extraction": "2026-09-29T18:03:13.919660+00:00",
+  "total_sessions_processed": 268,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5175,6 +5175,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.4231 vs 「过程真实性优先于名义完备」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-29T18:03:13.919660+00:00_0",
+          "date": "2026-09-29",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "事实消费呈固定三段式且顺序不可省略：先要穷尽式底账（逐项全量、可溯源、不可得项显式标注而不推算填充），再要一句话结论，最后要求把结论落到自身既有资产的取舍上。跳过底账直接给结论、或给了结论却不落到他自己的配置，都会被要求补做。",
+          "confidence": "high",
+          "evidence": "首问「查证 DMIT（dmit.io）2026 年 9 月当前在售的洛杉矶（LAX）全部产品线…输出每个在售 SKU 的名称、CPU/内存/硬盘/月流量/带宽/线路、月付价、年付价…必须区分基础配置与加配」→ 拿到 48 款全表后追问「结论呢？联通怎么选？」→ 拿到结论后再问「帮我基于我现在的 vps 配置分析下取舍」。全表中缺货 SKU 的年付价一律标「未获取（官网配置页不可读）」且不做折扣率折算，用户据此决策无异议。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260929_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260929_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-29T18:03:13.919660+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 partial overlap — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5765 vs 「复杂分析采用四段式输出结构：结论先行→分层论证链→不确定性显性标注→下一步」(同属输出结构类，但本条是需求侧消费顺序而非产出格式)"
+        },
+        {
+          "id": "insight_2026-09-29T18:03:13.919660+00:00_1",
+          "date": "2026-09-29",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用反问句而非指令做设计审查：以「…吧，…不就够了吗」的形式指出方案里的过度设计，期望对方用实测数据证伪或证实该反问，而不是顺从地照改或空口辩护；反问一旦被数据支持就立即执行。",
+          "confidence": "high",
+          "evidence": "「有个问题，不是所有流量都需要 aaitr 出口吧，非敏感流量 dmit an5 一段不就够了吗」——随后用 mihomo 日志实测证明 RULE-SET proxy 的 27,102 条确实全部经住宅出口三跳，反问成立并落地（27k 改单跳 DC）。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260929_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260929_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-29T18:03:13.919660+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 partial overlap — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.6062 vs 「设计演进问责…先追问如果这是正确的为什么之前没这么配置」；另有 0.5544「反问句作为流程违规的中断信号」——本条的反问指向设计冗余而非流程违规"
+        },
+        {
+          "id": "insight_2026-09-29T18:03:13.919660+00:00_6",
+          "date": "2026-09-29",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "授权以「动作范围 + 排除清单」成对给出：批准大范围执行（含验证后代为接手调整）的同时，会显式点名不碰的对象，使被授权方同时知道可做与不可做的边界，而不是只给正面授权。",
+          "confidence": "medium",
+          "evidence": "「好，授权你完整执行，最终验证后，本机拓扑你直接接手调整，另外把安卓 sing-box 配置文件发送到 telegram 上，iPhone 的小火箭暂时不用」——正面授权与排除项在同一句内给出。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260929_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260929_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-29T18:03:13.919660+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 partial overlap — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.7293 vs 「授权单位从动作清单升级为验收状态」（>0.72 需标注：同属授权粒度主题，但既有条目讲授权粒度/闭环，本条讲授权必须成对给出排除边界）"
         }
       ]
     },
@@ -7534,6 +7633,138 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.6174 vs 「分词级授权信号 / Decider-Worker 分离原则」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-29T18:03:13.919660+00:00_2",
+          "date": "2026-09-29",
+          "dimension": "安全风险评估模式",
+          "layer": "L4",
+          "insight": "性能收益与身份/风控风险冲突时偏保守：默认选「保留安全网的最小改动」，宁可少省一跳或牺牲部分优化彻底性，也不用机房 IP 触碰金融/账号类站点。",
+          "confidence": "high",
+          "evidence": "方案方给出金融/交易所域的三种处理：A) 显式钉回住宅（保守，推荐）B) 不管，金融域也走 DC（有风控风险）C) 用户自报名单；用户直接答「A」，随后 20 条金融域 + 后续 14 条银行域被钉回住宅出口。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260929_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260929_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-29T18:03:13.919660+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5821 vs 「宁可断，不可降」安全设计哲学（前者权衡可用性 vs 身份，本条权衡优化彻底性 vs 风控，判据不同）"
+        },
+        {
+          "id": "insight_2026-09-29T18:03:13.919660+00:00_3",
+          "date": "2026-09-29",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "用两类极简回复管理改动范围：「N 都不用动了」= 一次性否决全部遗留项改进并把现状冻结（不展开理由、不接受追加动作）；「那就再往前一步吧」= 只批准单向一步增量。改动按步审批，非必要项一律冻结，不做批量优化。",
+          "confidence": "high",
+          "evidence": "「1 2 3 都不用动了」（对应三项遗留项，随后拓扑被标注为冻结状态）；「那就再往前一步吧」（只批准 MATCH 兜底改 DC 这一步）；其后「统一 sing-box」同样是单步增量。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260929_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260929_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-29T18:03:13.919660+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5571 vs 「文件职责边界的精准修剪模式」"
+        },
+        {
+          "id": "insight_2026-09-29T18:03:13.919660+00:00_4",
+          "date": "2026-09-29",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "对后台长任务的空窗零容忍：任务较久无产出时会被直接催问，且期望等待期间先交付「已多源验证、不依赖该任务」的初步结论，而不是只回报进度或静默等待。被交付的内容必须把已确定部分与待确认部分分开标注。",
+          "confidence": "high",
+          "evidence": "三路查证子任务跑到约 15 分钟时用户直接问「还没回来？」；随后对方给出「不依赖子任务、已多源验证过」的三条先决事实并显式标注「待子任务数据确认」，用户接受并继续推进后续问题。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260929_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260929_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-29T18:03:13.919660+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5669 vs 「安排两项操作先后顺序时用依赖关系的硬证据」"
+        },
+        {
+          "id": "insight_2026-09-29T18:03:13.919660+00:00_5",
+          "date": "2026-09-29",
+          "dimension": "系统设计方法论",
+          "layer": "L4",
+          "insight": "跨端配置要求同源同构：「统一」指的是各端规则语义逐条对齐，而不是各端各自最优；平台能力差异可以用等价机制替代（如无 fallback 类型时用 urltest + tolerance），但差异必须显式声明，不接受沉默的平台特化。",
+          "confidence": "high",
+          "evidence": "单指令「统一 sing-box」；据此把手机端 final 由住宅出口改为非敏感直出，并逐条对齐显式钉死的 AI 19 条 / 银行 14 条，同时显式说明「sing-box 没有 fallback 类型」，以 urltest[DMIT DC, 住宅链] + tolerance 50 等价表达并声明这是能力边界而非偷工。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260929_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260929_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-29T18:03:13.919660+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 partial overlap — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5798 vs 「配置变更的跨平台一致性诉求」——既有条目讲触发排查与逐端验证，本条讲语义逐条对齐 + 平台能力差异必须显式声明"
         }
       ]
     },
@@ -10631,18 +10862,31 @@
         "7": 100
       },
       "total_insights": 331
+    },
+    {
+      "date": "2026-09-29T18:03:13.919660+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 338
     }
   ],
   "behavior": {
-    "checked_at": "2026-09-28T18:05:06.393770+00:00",
+    "checked_at": "2026-09-29T18:03:17.296667+00:00",
     "warnings": [],
-    "insight_count": 10
+    "insight_count": 7
   },
   "_last_agent_insights": [
-    "委托长时测量后，子 agent 的汇总结论不直接采信——关键数字一律自己重算一遍；对其「取不到/不可恢复」类的否定结论，补一个反证实验把「逻辑拦住」和「根本没人调用」区分开：主动改写被卡对象的归属戳，再跑真实的恢复函数，看它能不能被认领、内容是否完整。",
-    "渲染类交付物要按「目标平台的最终缩放」反推参数，而不是按源图尺寸设计：先算出长边被平台压到多少像素、字号会缩到几号，再据此决定收窄宽度、折叠空行、按内容边界分段，使压缩后仍保持可读字号。判据是最终显示尺寸下的字号，不是源文件的分辨率。",
-    "委托边界按「可逆性 + 是否需授权」划定，而不是按工作量：只读侦察可以外包（机械、可并行、无副作用），但不可逆动作与需要用户授权的决策收敛到单点自持，因为子 agent 无法向用户提问也没有授权能力。同一任务因此常同时包含委托段与自执行段。",
-    "把「同一套流程散落多处」从主观印象升级为可核验的结构问题：逐处列出文件清单、比对同名文件之间的实现差异、扫描被引用却不存在的断链、比对判读阈值是否已经分叉——以这些「已实际发生」的分叉作为收敛依据，而不是以文件数量多为由。收敛后的验收标准是加载成功 + 引用文件 0 MISS + 全库 grep 无残留引用，而不是文件数减少。",
-    "发现两份同名重复文档时，不按大小或新旧直接删其一，而要先做超集判定——重复的两份可能各自残缺，正确的动作是逐字节比对、把两份的损坏点都定位出来，以信息更全的一份为基修补丢字后再合并，并保留可回溯的隔离备份而非硬删。否则「去重」会变成永久删除唯一的完整版本。"
+    "授权以「动作范围 + 排除清单」成对给出：批准大范围执行（含验证后代为接手调整）的同时，会显式点名不碰的对象，使被授权方同时知道可做与不可做的边界，而不是只给正面授权。",
+    "性能收益与身份/风控风险冲突时偏保守：默认选「保留安全网的最小改动」，宁可少省一跳或牺牲部分优化彻底性，也不用机房 IP 触碰金融/账号类站点。",
+    "用两类极简回复管理改动范围：「N 都不用动了」= 一次性否决全部遗留项改进并把现状冻结（不展开理由、不接受追加动作）；「那就再往前一步吧」= 只批准单向一步增量。改动按步审批，非必要项一律冻结，不做批量优化。",
+    "对后台长任务的空窗零容忍：任务较久无产出时会被直接催问，且期望等待期间先交付「已多源验证、不依赖该任务」的初步结论，而不是只回报进度或静默等待。被交付的内容必须把已确定部分与待确认部分分开标注。",
+    "跨端配置要求同源同构：「统一」指的是各端规则语义逐条对齐，而不是各端各自最优；平台能力差异可以用等价机制替代（如无 fallback 类型时用 urltest + tolerance），但差异必须显式声明，不接受沉默的平台特化。"
   ]
 }
