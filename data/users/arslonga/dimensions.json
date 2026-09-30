@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-29T18:03:13.919660+00:00",
-  "total_sessions_processed": 268,
+  "last_extraction": "2026-09-30T18:02:33.352830+00:00",
+  "total_sessions_processed": 269,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5274,6 +5274,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 partial overlap — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.7293 vs 「授权单位从动作清单升级为验收状态」（>0.72 需标注：同属授权粒度主题，但既有条目讲授权粒度/闭环，本条讲授权必须成对给出排除边界）"
+        },
+        {
+          "id": "insight_2026-09-30T18:02:33.352830+00:00_0",
+          "date": "2026-09-30",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "排障决策遵循「先定位根因，再决定是否更换组件」：面对住宅出口兜底档劣化、且换件有数据支持时，用户明确选「先查原因，不换」；根因查清为结构性（家宽路径由 CN2 漂移到 Cogent/Verizon，双向无回国优化、约 25% 丢包）后，选择接受「只有两层冗余」而不是新增美国住宅入口。即：可修则修、不可修则显式接受并把决定固化（并注明将来若真需要第三层必须重新立项），不让同一问题被反复立项。",
+          "confidence": "high",
+          "evidence": "用户：「1. 先查原因，不换。2.写」；对「第三档兜底换成什么」的三选项清单，用户只回单个数字「3」（=接受只有两层冗余）。agent 固化：「根因已定（约 25% 丢包、集中在 Cogent→Frontier 段…），属结构性、非可修配置项」「若将来真需要第三层冗余 → 必须重新立项（= 新增住宅入口），不能靠『修 AaITR』绕过」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260930_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260930_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-30T18:02:33.352830+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "NN max cos 0.6327 vs 「排障收口后的配置治理闭环…跨端配置差异审计」；<0.72 无冲突，Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-09-30T18:02:33.352830+00:00_1",
+          "date": "2026-09-30",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "排障时用「显式边界假设」收缩不确定性空间，而不是要求穷举所有变量：用户主动给出「假定公司访客网络无问题」这一前提，把被排查范围钉死在远端与跨境路径上，并要求对可疑项直接深挖。事后实测该假设成立（公司网出口至国内段 0% 丢包），换来的是把约 25% 的丢包精确定位到 Cogent→Frontier 的单段跳变。",
+          "confidence": "high",
+          "evidence": "用户：「全部落地，2 也直接深挖，假定公司访客网络无问题」；实测去程逐跳：「5 公司出口 103.37.140.33 0.0% 6ms」「9 114.249.179.141 0.0% 11ms ← 公司网自身干净（印证『假定无问题』）」「18 Frontier 55.6% 366ms ← 跳变点」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260930_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260930_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-30T18:02:33.352830+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "NN max cos 0.5871 vs 「技术决策中坚持数据替代假设…实测 AaITR 直连延迟」；<0.72 无冲突，Gate5 findings=0"
         }
       ]
     },
@@ -7765,6 +7831,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 partial overlap — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5798 vs 「配置变更的跨平台一致性诉求」——既有条目讲触发排查与逐端验证，本条讲语义逐条对齐 + 平台能力差异必须显式声明"
+        },
+        {
+          "id": "insight_2026-09-30T18:02:33.352830+00:00_3",
+          "date": "2026-09-30",
+          "dimension": "认知资源投资",
+          "layer": "L4",
+          "insight": "成本投入的分布不对称：愿意为「提高信息量与可诊断性」买单（授权把 watchdog 采样扩到第三档、日志轮转、修复空转守卫），但拒绝为「边际冗余容量」买单（不新增美国住宅入口，接受只剩两层冗余）。判断轴不是「能不能更稳」，而是「这笔钱买到的是信息还是容量」。",
+          "confidence": "medium",
+          "evidence": "用户「好 改吧」授权执行的三项里含「把 AaITR:8443 纳入 watchdog 采样」；对补第三档冗余的方案则回「3」（接受两层冗余、不修不换）。运行语义固化：「AaITR Fallback(8443) 保留在第三位，但明确视为不可依赖」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260930_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260930_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-30T18:02:33.352830+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "NN max cos 0.5625 vs 「维护成本超过理论收益时主动叫停既有自动化」；<0.72 无冲突，Gate5 findings=0"
         }
       ]
     },
@@ -9390,6 +9489,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 no conflict — preflight: embedding path LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.5510 vs 「把同一套流程散落多处升级为可核验的结构问题」 (< 0.72 conflict floor, < 0.85 near-dup floor)"
+        },
+        {
+          "id": "insight_2026-09-30T18:02:33.352830+00:00_2",
+          "date": "2026-09-30",
+          "dimension": "知识管理",
+          "layer": "L5",
+          "insight": "对「状态变更类」基础设施信息要求显式留痕：即便 agent 指出凌晨的 raw 归档 cron 会自动萃取本次会话，用户仍要求在 vault 单独写一条记录。即自动萃取不能替代变更本身的显式档案——拓扑/配置变更必须有可检索的独立记录，而不是只存在于会话流水里。",
+          "confidence": "high",
+          "evidence": "agent：「要不要在 vault 写一条 9/30 记录？我没主动写（1:00 的 raw 归档 cron 会萃取本次 session），但『HK需求默认档变更』属于拓扑变更，按你 vault 惯例建议在 network/ 单独留痕。要写的话我立刻补。」用户回：「1. 先查原因，不换。2.写」→ 落盘 network/2026-09-30 拓扑变更与三处修复（7,517 字）。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20260930_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20260930_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-09-30T18:02:33.352830+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "NN max cos 0.5709 vs 「发现 vault 文档过时时主动修订而非仅口头告知」；<0.72 无冲突，Gate5 findings=0"
         }
       ]
     },
@@ -10875,18 +11007,30 @@
         "7": 100
       },
       "total_insights": 338
+    },
+    {
+      "date": "2026-09-30T18:02:33.352830+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 342
     }
   ],
   "behavior": {
-    "checked_at": "2026-09-29T18:03:17.296667+00:00",
+    "checked_at": "2026-09-30T18:02:36.158148+00:00",
     "warnings": [],
-    "insight_count": 7
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "授权以「动作范围 + 排除清单」成对给出：批准大范围执行（含验证后代为接手调整）的同时，会显式点名不碰的对象，使被授权方同时知道可做与不可做的边界，而不是只给正面授权。",
-    "性能收益与身份/风控风险冲突时偏保守：默认选「保留安全网的最小改动」，宁可少省一跳或牺牲部分优化彻底性，也不用机房 IP 触碰金融/账号类站点。",
-    "用两类极简回复管理改动范围：「N 都不用动了」= 一次性否决全部遗留项改进并把现状冻结（不展开理由、不接受追加动作）；「那就再往前一步吧」= 只批准单向一步增量。改动按步审批，非必要项一律冻结，不做批量优化。",
-    "对后台长任务的空窗零容忍：任务较久无产出时会被直接催问，且期望等待期间先交付「已多源验证、不依赖该任务」的初步结论，而不是只回报进度或静默等待。被交付的内容必须把已确定部分与待确认部分分开标注。",
-    "跨端配置要求同源同构：「统一」指的是各端规则语义逐条对齐，而不是各端各自最优；平台能力差异可以用等价机制替代（如无 fallback 类型时用 urltest + tolerance），但差异必须显式声明，不接受沉默的平台特化。"
+    "排障决策遵循「先定位根因，再决定是否更换组件」：面对住宅出口兜底档劣化、且换件有数据支持时，用户明确选「先查原因，不换」；根因查清为结构性（家宽路径由 CN2 漂移到 Cogent/Verizon，双向无回国优化、约 25% 丢包）后，选择接受「只有两层冗余」而不是新增美国住宅入口。即：可修则修、不可修则显式接受并把决定固化（并注明将来若真需要第三层必须重新立项），不让同一问题被反复立项。",
+    "排障时用「显式边界假设」收缩不确定性空间，而不是要求穷举所有变量：用户主动给出「假定公司访客网络无问题」这一前提，把被排查范围钉死在远端与跨境路径上，并要求对可疑项直接深挖。事后实测该假设成立（公司网出口至国内段 0% 丢包），换来的是把约 25% 的丢包精确定位到 Cogent→Frontier 的单段跳变。",
+    "成本投入的分布不对称：愿意为「提高信息量与可诊断性」买单（授权把 watchdog 采样扩到第三档、日志轮转、修复空转守卫），但拒绝为「边际冗余容量」买单（不新增美国住宅入口，接受只剩两层冗余）。判断轴不是「能不能更稳」，而是「这笔钱买到的是信息还是容量」。",
+    "对「状态变更类」基础设施信息要求显式留痕：即便 agent 指出凌晨的 raw 归档 cron 会自动萃取本次会话，用户仍要求在 vault 单独写一条记录。即自动萃取不能替代变更本身的显式档案——拓扑/配置变更必须有可检索的独立记录，而不是只存在于会话流水里。"
   ]
 }
