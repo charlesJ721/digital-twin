@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-01T03:02:15.536754+00:00",
-  "total_sessions_processed": 269,
+  "last_extraction": "2026-10-01T18:03:56.248901+00:00",
+  "total_sessions_processed": 270,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5340,6 +5340,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "NN max cos 0.5871 vs 「技术决策中坚持数据替代假设…实测 AaITR 直连延迟」；<0.72 无冲突，Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-10-01T18:03:56.248901+00:00_0",
+          "date": "2026-10-01",
+          "dimension": "认知架构",
+          "layer": "L2",
+          "insight": "实验/观测窗口按「风险时段」而非自然时段定义，并要求一次实验同时产出两个目标：既给出定性判定（异常归于哪一侧），又产出时段曲线。判据：为定位跨境网络间歇性阻断而设计的采样，不取整日、不取整班，而是钉在 18:00 至次日 09:00，理由是「顺便观测下晚高峰」——据此一次性覆盖晚高峰 19:00-23:00 与全部重负载窗口（01:00 归档 / 04:00 轮转 / 07:00 自检 / 09:00 扫描）。",
+          "confidence": "medium",
+          "evidence": "用户 2026-10-01 14:36 CST：「1. 采样窗口从晚 18 点到明早 9 点吧，顺便观测下晚高峰」；agent 据此部署 15 小时双端采样并说明「覆盖你要的晚高峰（19:00-23:00）以及全部重负载窗口（01:00 raw 归档 / 04:00 轮转 / 07:00 自检 / 09:00 Tech Radar）」，规模 15 小时 x 每侧 5400 样本 x 3 目标。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261001_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261001_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-01T18:03:56.248901+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新（max cosine 0.5679 vs「探测预算按真实端到端成本设定」，无冲突）"
+        },
+        {
+          "id": "insight_2026-10-01T18:03:56.248901+00:00_3",
+          "date": "2026-10-01",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "对已编号列出的待办清单，用单个动词下达全量执行授权：不再逐项确认、不追加条件，且授权范围严格等于清单本身，清单外不延伸。判据：授权语是「动手」这类无宾语动词，其覆盖对象完全由上一轮 agent 列出的编号清单决定。",
+          "confidence": "medium",
+          "evidence": "agent 列出三项：「(1) 修 非敏感直出 断言（消除设计内 failover 的误报）(2) 给 DC-仅-DDG 定兜底方案 (3)（等采样结果）」；用户回「动手」；agent 的 Triage 记「用户已明确『动手』」，随后只动前两项，并声明「只动这三项，不碰 v5 冻结项」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261001_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261001_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-01T18:03:56.248901+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 部分重叠（max cosine 0.6983 vs「授权以动作范围+排除清单成对给出」——同属极简授权族，本条的增量是「范围由编号清单定义、清单外不延伸」，未达 0.72 冲突线）"
         }
       ]
     },
@@ -7897,6 +7963,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-10-01T18:03:56.248901+00:00_1",
+          "date": "2026-10-01",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "对自己手写的 skill 保持人工闸门：agent 可定位缺陷、可提修法，但不得顺手修改，实际改动需显式授权。判据：一处候选文件命名约定被判定为「每月 1 号必然撞车」的缺陷，agent 定位到根因后仍只给出两种修法而未动文件，因为该约定写在用户手写的 skill 里，且这条边界被固化在另一份 agent 可维护的 skill 开篇。",
+          "confidence": "medium",
+          "evidence": "agent 报告：「这条约定写在 dt-hub/SKILL.md 里 —— 那是你手写的 skill，agent 不得自主修改（dt-pipeline-operations skill 开篇就写明了这条边界）。所以我只提修法，没有动 dt-hub 一行。你要我改的话，明确说一声『授权改 dt-hub 的文件名约定』我再动手。」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261001_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261001_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-01T18:03:56.248901+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新（max cosine 0.5723 vs「技能驱动知识沉淀」，无冲突）"
+        },
+        {
+          "id": "insight_2026-10-01T18:03:56.248901+00:00_2",
+          "date": "2026-10-01",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "消费监控告警时要求「归并 + 归因」，而不是逐条处理或原样转贴：先把多条告警收敛成少数事件，再给根因判定、排除清单，并标出哪些告警本身是设计缺陷造成的假警报；同时接受「告警数不等于发作数」这类监控自身盲区的结论，并据此升级监控本身。",
+          "confidence": "medium",
+          "evidence": "用户：「egress watchdog 最近报的异常汇总整理下，看看原因」；agent 产出「11 条告警 = 同一件事的 5 次发作，不是 11 个问题」「真实发作频率比告警更高：mihomo 日志记录了约 10 次爆发窗口（13.7 小时内），watchdog 每 10 分钟才采一次样，只抓到 4 次」「其中 1 条是设计不一致造成的假警报」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261001_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261001_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-01T18:03:56.248901+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 部分重叠（max cosine 0.6420 vs「基础设施可观测性的主动消费与告警校准」——同属主动消费告警，本条的增量是「归并成事件 + 接受告警数≠发作数」，未达 0.72 冲突线）"
         }
       ]
     },
@@ -11066,14 +11198,31 @@
         "7": 100
       },
       "total_insights": 343
+    },
+    {
+      "date": "2026-10-01T18:03:56.248901+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 347
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-01T03:02:17.753710+00:00",
+    "checked_at": "2026-10-01T18:03:58.486630+00:00",
     "warnings": [],
-    "insight_count": 1
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "认知产出呈项目驱动的突发式分布，而非日历连续型：活跃交互日只占月内少数天（2026-09 为 11/30），且近六成洞察集中在月末连续三天。洞察产出量与当月真实交互量同向——交互量降到上月约一半时，洞察产出降到约三成，说明行为信号密度由项目事件触发。判据：评估认知信号覆盖度时按活跃日折算，不要按自然日折算，否则会把「没有项目的静默日」误读为覆盖不足。"
+    "实验/观测窗口按「风险时段」而非自然时段定义，并要求一次实验同时产出两个目标：既给出定性判定（异常归于哪一侧），又产出时段曲线。判据：为定位跨境网络间歇性阻断而设计的采样，不取整日、不取整班，而是钉在 18:00 至次日 09:00，理由是「顺便观测下晚高峰」——据此一次性覆盖晚高峰 19:00-23:00 与全部重负载窗口（01:00 归档 / 04:00 轮转 / 07:00 自检 / 09:00 扫描）。",
+    "对已编号列出的待办清单，用单个动词下达全量执行授权：不再逐项确认、不追加条件，且授权范围严格等于清单本身，清单外不延伸。判据：授权语是「动手」这类无宾语动词，其覆盖对象完全由上一轮 agent 列出的编号清单决定。",
+    "认知产出呈项目驱动的突发式分布，而非日历连续型：活跃交互日只占月内少数天（2026-09 为 11/30），且近六成洞察集中在月末连续三天。洞察产出量与当月真实交互量同向——交互量降到上月约一半时，洞察产出降到约三成，说明行为信号密度由项目事件触发。判据：评估认知信号覆盖度时按活跃日折算，不要按自然日折算，否则会把「没有项目的静默日」误读为覆盖不足。",
+    "对自己手写的 skill 保持人工闸门：agent 可定位缺陷、可提修法，但不得顺手修改，实际改动需显式授权。判据：一处候选文件命名约定被判定为「每月 1 号必然撞车」的缺陷，agent 定位到根因后仍只给出两种修法而未动文件，因为该约定写在用户手写的 skill 里，且这条边界被固化在另一份 agent 可维护的 skill 开篇。",
+    "消费监控告警时要求「归并 + 归因」，而不是逐条处理或原样转贴：先把多条告警收敛成少数事件，再给根因判定、排除清单，并标出哪些告警本身是设计缺陷造成的假警报；同时接受「告警数不等于发作数」这类监控自身盲区的结论，并据此升级监控本身。"
   ]
 }
