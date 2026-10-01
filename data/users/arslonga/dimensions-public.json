@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-09-30T18:02:33.352830+00:00",
+  "last_extraction": "2026-10-01T03:02:15.536754+00:00",
   "total_sessions_processed": 269,
   "layers": {
     "1": {
@@ -25,7 +25,7 @@
       "name": "行为模式 (Behavioral Patterns)",
       "fill_rate": 100,
       "status": "partial",
-      "insight_count": 74
+      "insight_count": 75
     },
     "5": {
       "name": "知识结构 (Knowledge Structure)",
@@ -1038,6 +1038,19 @@
         "7": 100
       },
       "total_insights": 342
+    },
+    {
+      "date": "2026-10-01T03:02:15.536754+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 343
     }
   ]
 }
