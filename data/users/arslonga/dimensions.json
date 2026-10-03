@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-02T18:03:03.286563+00:00",
-  "total_sessions_processed": 271,
+  "last_extraction": "2026-10-03T18:02:31.863030+00:00",
+  "total_sessions_processed": 272,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5505,6 +5505,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新 (max cos 0.5613)"
+        },
+        {
+          "id": "insight_2026-10-03T18:02:31.863030+00:00_0",
+          "date": "2026-10-03",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "把「原因不可控」这个判定当作待求解的问题、而不是终点：当执行者论证「该问题的成因在不可触及的第三方环节、没有解法」时，用一个最短的反问把它重新打开，迫使结论从「消除原因」改写成「消除后果」这一可操作形式，并要求当下就给出可执行的动作清单与优先级。判据：反问发生在成因已被论证为不可控之后（跨境过滤发生在第三方设备上），其直接产出是把成因类讨论转成后果类处置清单（消除唯一真单点 + 部署判决性实验），而不是接受「无解」作为收束。",
+          "confidence": "high",
+          "evidence": "用户原话：「所以 dmit 问题的解法是？」——此前执行者刚论证「过滤是在跨境路径上的第三方设备做的，我们碰不到它」并得出「修 DMIT 不成立」；该问之后，回答被重写为「让它被过滤时不产生后果」，并列出三个按性价比排序的动作 + 两项待用户拍板的决定。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261003_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261003_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-03T18:02:31.863030+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新（max cosine 0.5635，最近邻＝「判决性实验」条）"
+        },
+        {
+          "id": "insight_2026-10-03T18:02:31.863030+00:00_1",
+          "date": "2026-10-03",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "落地时点由「结论是否会改变改动面」决定，而不是由「改动本身是否已经明确」决定：一个待办即使证据已经充分，只要尚在进行的实验结论可能改写它的下游产物，就宁可推迟到结论出来一次性落地，以便同一改动只执行一次。判据：把待决问题表述为「现在做还是等最终结果出来之后再说」，且该实验的结论若成立会连带改写另一个协议相关的字段（入口端口属于节点属性、会同步改动同一份配置），因此提前落地意味着要连做两次。",
+          "confidence": "medium",
+          "evidence": "用户原话：「现在更新还是等明天最终结果出来之后再说」，问句前提为前一轮已确认下游设备存在无兜底的单点（「需要更新 —— 有 1 处实质差异」）。会话内无后续用户回复，故本洞察记录的是提问所反映的判据取向，而非已确认的最终决定。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261003_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261003_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-03T18:02:31.863030+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新（max cosine 0.5821，最近邻＝「判决性实验」条）"
         }
       ]
     },
@@ -8128,6 +8194,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 部分重叠（max cosine 0.6420 vs「基础设施可观测性的主动消费与告警校准」——同属主动消费告警，本条的增量是「归并成事件 + 接受告警数≠发作数」，未达 0.72 冲突线）"
+        },
+        {
+          "id": "insight_2026-10-03T18:02:31.863030+00:00_2",
+          "date": "2026-10-03",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "把审批/安全拦截当成流程的正常状态而不是故障：当执行者报告某步骤被拦截、并同时给出「你发一句重试」与「你自己在终端跑」两条路时，选择用最短的重试信令让执行者在同一授权下重发，而不是接管执行——即优先让操作保持在同一主体、同一条授权链内完成，而不是为绕开拦截而更换执行者。判据：执行者已明确写下「我不重试」并列出两个选项，用户只回一个两字动词；未附加任何条件、未改动原方案。",
+          "confidence": "medium",
+          "evidence": "用户原话：「重试」——上一轮执行者写道「部署命令被审批超时拦下（未执行），我不重试」并给出 ①「你说一句『重试』」②「你自己在终端跑」（附完整命令）两个选项。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261003_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261003_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-03T18:02:31.863030+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新（max cosine 0.6617，最近邻＝「委托→审计闭环」条）"
+        },
+        {
+          "id": "insight_2026-10-03T18:02:31.863030+00:00_3",
+          "date": "2026-10-03",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "主端一有变更就主动向下游设备发起漂移审计，而不是等下游暴露故障：把「下游要不要跟着改」当成一个需要差异证据才能回答的问题（要求逐项比对表，而不是「要/不要」的结论），并在拿到差异后把「何时落地」单独列为下一个决策点。判据：询问发生在主端连续改动之后，且问题形式是「我的 X 需要更新配置文件吗？现在的版本是 v**」——先要证据、再谈动作。",
+          "confidence": "medium",
+          "evidence": "用户原话：「截止目前，我的 singbox 需要更新配置文件吗   现在的版本是 v7」——发生在主端当天与两天前各有一次改动之后。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261003_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261003_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-03T18:02:31.863030+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新（max cosine 0.6108，最近邻＝「跨端配置差异审计」条）"
         }
       ]
     },
@@ -11323,16 +11455,30 @@
         "7": 100
       },
       "total_insights": 350
+    },
+    {
+      "date": "2026-10-03T18:02:31.863030+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 354
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-02T18:03:06.569293+00:00",
+    "checked_at": "2026-10-03T18:02:35.904849+00:00",
     "warnings": [],
-    "insight_count": 3
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "用「竞争假设」而非否定来驱动证伪：对 agent 给出的结论不直接反对，而是抛出一个同样可检验的替代解释（「有可能是公司访客网络的问题吗」），逼出结论的边界与实际可分辨粒度。判据：这一问直接命中 agent 表述的漏洞——「中国侧」被当成一个整体，而「大陆境内到 DMIT」这段的内部细分（公司网络 / 城域 / 骨干 / 国际出口 / GFW）agent 根本分辨不了；提问后 agent 被迫改成「准确说法是排除 DMIT 侧」，并同时给出 5 条反对证据与 3 条不能排除的理由。",
-    "在两个假设于现有证据下同构、无法互相区分时，选择部署一次「判决性实验」把假设钉死，而不是继续累积观察或二选一地下注。判据：授权语极简（「实验吧」两字），而接受的是一个 24 小时、7 个 TCP 目标 + 3 跳 ICMP + 出口 IP 的分层对照矩阵——设计目的就是把「断在第几跳」定位到具体设备/运营商/跨境段，从而把「倾向」升级为「确证」；同时接受对照目标必须先实测（同腿、可达），否则实验白做。",
-    "短窗口结论必须由更长、独立的基线校验，观测窗口的跨度不得被当作总体规律；被推翻时要求逐处显式更正而不是淡化。判据：15 小时采样得出的「发作凌晨集中」被 47 天独立日志基线推翻（日内 3 段占比 37.2 / 37.0 / 25.8% 对均匀期望 37.5 / 37.5 / 25.0，基本均匀），结论被改写为「日内无稳定时段规律，全天候不规则发生」，且更正同时落进 vault 三处与 fact_store。"
+    "把「原因不可控」这个判定当作待求解的问题、而不是终点：当执行者论证「该问题的成因在不可触及的第三方环节、没有解法」时，用一个最短的反问把它重新打开，迫使结论从「消除原因」改写成「消除后果」这一可操作形式，并要求当下就给出可执行的动作清单与优先级。判据：反问发生在成因已被论证为不可控之后（跨境过滤发生在第三方设备上），其直接产出是把成因类讨论转成后果类处置清单（消除唯一真单点 + 部署判决性实验），而不是接受「无解」作为收束。",
+    "落地时点由「结论是否会改变改动面」决定，而不是由「改动本身是否已经明确」决定：一个待办即使证据已经充分，只要尚在进行的实验结论可能改写它的下游产物，就宁可推迟到结论出来一次性落地，以便同一改动只执行一次。判据：把待决问题表述为「现在做还是等最终结果出来之后再说」，且该实验的结论若成立会连带改写另一个协议相关的字段（入口端口属于节点属性、会同步改动同一份配置），因此提前落地意味着要连做两次。",
+    "把审批/安全拦截当成流程的正常状态而不是故障：当执行者报告某步骤被拦截、并同时给出「你发一句重试」与「你自己在终端跑」两条路时，选择用最短的重试信令让执行者在同一授权下重发，而不是接管执行——即优先让操作保持在同一主体、同一条授权链内完成，而不是为绕开拦截而更换执行者。判据：执行者已明确写下「我不重试」并列出两个选项，用户只回一个两字动词；未附加任何条件、未改动原方案。",
+    "主端一有变更就主动向下游设备发起漂移审计，而不是等下游暴露故障：把「下游要不要跟着改」当成一个需要差异证据才能回答的问题（要求逐项比对表，而不是「要/不要」的结论），并在拿到差异后把「何时落地」单独列为下一个决策点。判据：询问发生在主端连续改动之后，且问题形式是「我的 X 需要更新配置文件吗？现在的版本是 v**」——先要证据、再谈动作。"
   ]
 }
