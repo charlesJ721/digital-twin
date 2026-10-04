@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-03T18:02:31.863030+00:00",
-  "total_sessions_processed": 272,
+  "last_extraction": "2026-10-04T18:04:06.853163+00:00",
+  "total_sessions_processed": 274,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5571,6 +5571,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新（max cosine 0.5821，最近邻＝「判决性实验」条）"
+        },
+        {
+          "id": "insight_2026-10-04T18:04:06.853163+00:00_0",
+          "date": "2026-10-04",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "在自身熟悉领域用配置级反问纠正执行者，并要求证据层级升维：对执行者基于媒体泛述与记忆的断言（坦克400/500 的分动箱型号、网页抓取后端是否可用），用户连续以反问句直接否定，逼出的不只是改口，而是把断言层级从「多源媒体一致」抬到「官方上市稿／配置表／实测」；纠正一旦可被独立验证（新华网上市稿、bitauto 车型库、firecrawl 实测抓回 265KB 配置表）就立即被接受，而执行者必须整体重写结论并说明错误模式（选择性采信支持自己的句子）。判据：用户不做泛泛质疑，只给可检验的配置级反例。",
+          "confidence": "high",
+          "evidence": "用户原话：「400hi4t 除了最初的超能版，现款都没有 mlock 吧，都是 emod 吧」／「500 只有纯燃油是 nlock 吧，hi4t 也是 emod，700hi4t 确实是 mlock」／「firecrawl 也不可用？」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261004_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261004_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-04T18:04:06.853163+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.618 (nearest=系统化诊断中的错误修正闭环) < 0.72"
         }
       ]
     },
@@ -5895,6 +5928,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 preflight 2026-09-21: max cosine 0.6028 vs 313 existing（最近邻 L4/行为模式「基础设施的预防性硬化」）；Gate1-4 accepted=3 rejected=0；Gate5 语义层 LIVE、findings=0"
+        },
+        {
+          "id": "insight_2026-10-04T18:04:06.853163+00:00_5",
+          "date": "2026-10-04",
+          "dimension": "价值观",
+          "layer": "L3",
+          "insight": "消费决策里审美身份与机械正统不可由产品力或价格补足：用户自定六维评估轴（品牌力／产品力／价格力／工业背景／技术积累／市场沉淀）并要求对每维给出差距与更优项，能接受「品牌力差距是断层级、无法靠产品补」，同时把机甲造型与商务豪华定位判为审美错位——成本模型给出的省钱结论（换车五年省 5.5 万）也不构成换车理由，最终闸门是「质感与符号是否对得上」。",
+          "confidence": "medium",
+          "evidence": "用户原话：「综合考虑品牌力 产品力 价格力，以及工业背景 技术积累 市场沉淀，假设我的 dream car 是路虎卫士（方盒子外形 越野能力 质感）」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261004_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261004_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-04T18:04:06.853163+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.548 (nearest=好产品≠好买卖) < 0.72"
         }
       ]
     },
@@ -8260,6 +8326,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新（max cosine 0.6108，最近邻＝「跨端配置差异审计」条）"
+        },
+        {
+          "id": "insight_2026-10-04T18:04:06.853163+00:00_1",
+          "date": "2026-10-04",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "授权按「范围／参数／留痕」三层分别下放：范围决策（做不做、做几件）留给自己，可调参数下放给执行者且只给判据不给数值，留痕强制落地。判据：同一条授权里三类对象被分别指派——范围由用户拍板，参数层写的是「你定，合理就行」这种评价标准而非具体数值，且方案与执行结果被要求写入 vault。",
+          "confidence": "high",
+          "evidence": "用户授权原话：「1.同意 2.一起都做 3.你定，合理就行 4.写」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261004_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261004_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-04T18:04:06.853163+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.628 (nearest=授权以动作范围+排除清单成对给出) < 0.72"
+        },
+        {
+          "id": "insight_2026-10-04T18:04:06.853163+00:00_2",
+          "date": "2026-10-04",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "对反复诱导错误动作的流程，改流程定义而不是靠每轮自律：某周度 cron 的 prompt 含「按热度重写 MEMORY.md + 截断」两步，已被多次证明与既有结论冲突、每次空跑并诱导一次破坏性写入；用户批准的动作对象是 prompt 模板本身——删掉这两步、改为只读校验+单向同步+快照，并要求把「修复内容 + 回归判据」写在同一处以防被改回。判据：授权语指向模板而非一次输出结果。",
+          "confidence": "high",
+          "evidence": "用户回：「8. 建议（需你拍板，我不擅自改 cron）…建议把 prompt 改为「热度校验 + 主从同步 + 快照落盘 + 报告」，删掉重写/截断两步… 同意执行」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261004_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261004_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-04T18:04:06.853163+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.637 (nearest=系统化诊断中的错误修正闭环) < 0.72"
+        },
+        {
+          "id": "insight_2026-10-04T18:04:06.853163+00:00_3",
+          "date": "2026-10-04",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "对文档／配置漂移零容忍，且修完必须加防再漂机制：发现「旧路径被 5 个 cron 模板引用」「job ID 与时间线早已失效」这类漂移后，用户只回一个词即授权就地修正，并接受把范围从 1 处扩到全库 11 处；修正同时要写入权威来源注记（「权威来源是 hermes cron list」）与逐字对照校验，使同一漂移不会再发生。判据：授权极简（「修正」「改吧」）但要求含防复漂的元信息。",
+          "confidence": "medium",
+          "evidence": "用户原话：「修正」（方法论扫描路径 5 job 11 处）／「改吧」（dt-hub SKILL.md cron 表全量纠正 + 权威来源注记 + 脚本加 DEPRECATED 头注）",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261004_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261004_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-04T18:04:06.853163+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.585 (nearest=可逆性工程技术文档化) < 0.72"
         }
       ]
     },
@@ -9918,6 +10083,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "NN max cos 0.5709 vs 「发现 vault 文档过时时主动修订而非仅口头告知」；<0.72 无冲突，Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-10-04T18:04:06.853163+00:00_4",
+          "date": "2026-10-04",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "硬派越野车是有配置级认知的领域：用户掌握分动箱谱系（TOD 多片离合／Mlock 机械锁止／EMOD 电控多片／ESOF 分时四驱）与锁的配置差异，并把「机械硬连接 vs 多片离合过热衰减」当作可靠性判据——只有中央从摩擦片换成机械齿才算跨越。自有资产：坦克300城市版2023款必须型（原厂取消前后锁、自行选装后桥锁），dream car 为路虎卫士。判据：能直接指出执行者的配置级型号错误。",
+          "confidence": "high",
+          "evidence": "用户原话：「我现在开的是坦克 300 城市版 2023 款必须型」「选装了后锁」「400hi4t 除了最初的超能版，现款都没有 mlock 吧，都是 emod 吧」",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261004_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261004_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-04T18:04:06.853163+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.500 (nearest=技术选型升级零风险敞口判据) < 0.72"
         }
       ]
     },
@@ -11468,17 +11666,31 @@
         "7": 100
       },
       "total_insights": 354
+    },
+    {
+      "date": "2026-10-04T18:04:06.853163+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 360
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-03T18:02:35.904849+00:00",
+    "checked_at": "2026-10-04T18:04:13.358066+00:00",
     "warnings": [],
-    "insight_count": 4
+    "insight_count": 6
   },
   "_last_agent_insights": [
-    "把「原因不可控」这个判定当作待求解的问题、而不是终点：当执行者论证「该问题的成因在不可触及的第三方环节、没有解法」时，用一个最短的反问把它重新打开，迫使结论从「消除原因」改写成「消除后果」这一可操作形式，并要求当下就给出可执行的动作清单与优先级。判据：反问发生在成因已被论证为不可控之后（跨境过滤发生在第三方设备上），其直接产出是把成因类讨论转成后果类处置清单（消除唯一真单点 + 部署判决性实验），而不是接受「无解」作为收束。",
-    "落地时点由「结论是否会改变改动面」决定，而不是由「改动本身是否已经明确」决定：一个待办即使证据已经充分，只要尚在进行的实验结论可能改写它的下游产物，就宁可推迟到结论出来一次性落地，以便同一改动只执行一次。判据：把待决问题表述为「现在做还是等最终结果出来之后再说」，且该实验的结论若成立会连带改写另一个协议相关的字段（入口端口属于节点属性、会同步改动同一份配置），因此提前落地意味着要连做两次。",
-    "把审批/安全拦截当成流程的正常状态而不是故障：当执行者报告某步骤被拦截、并同时给出「你发一句重试」与「你自己在终端跑」两条路时，选择用最短的重试信令让执行者在同一授权下重发，而不是接管执行——即优先让操作保持在同一主体、同一条授权链内完成，而不是为绕开拦截而更换执行者。判据：执行者已明确写下「我不重试」并列出两个选项，用户只回一个两字动词；未附加任何条件、未改动原方案。",
-    "主端一有变更就主动向下游设备发起漂移审计，而不是等下游暴露故障：把「下游要不要跟着改」当成一个需要差异证据才能回答的问题（要求逐项比对表，而不是「要/不要」的结论），并在拿到差异后把「何时落地」单独列为下一个决策点。判据：询问发生在主端连续改动之后，且问题形式是「我的 X 需要更新配置文件吗？现在的版本是 v**」——先要证据、再谈动作。"
+    "消费决策里审美身份与机械正统不可由产品力或价格补足：用户自定六维评估轴（品牌力／产品力／价格力／工业背景／技术积累／市场沉淀）并要求对每维给出差距与更优项，能接受「品牌力差距是断层级、无法靠产品补」，同时把机甲造型与商务豪华定位判为审美错位——成本模型给出的省钱结论（换车五年省 5.5 万）也不构成换车理由，最终闸门是「质感与符号是否对得上」。",
+    "授权按「范围／参数／留痕」三层分别下放：范围决策（做不做、做几件）留给自己，可调参数下放给执行者且只给判据不给数值，留痕强制落地。判据：同一条授权里三类对象被分别指派——范围由用户拍板，参数层写的是「你定，合理就行」这种评价标准而非具体数值，且方案与执行结果被要求写入 vault。",
+    "对反复诱导错误动作的流程，改流程定义而不是靠每轮自律：某周度 cron 的 prompt 含「按热度重写 MEMORY.md + 截断」两步，已被多次证明与既有结论冲突、每次空跑并诱导一次破坏性写入；用户批准的动作对象是 prompt 模板本身——删掉这两步、改为只读校验+单向同步+快照，并要求把「修复内容 + 回归判据」写在同一处以防被改回。判据：授权语指向模板而非一次输出结果。",
+    "对文档／配置漂移零容忍，且修完必须加防再漂机制：发现「旧路径被 5 个 cron 模板引用」「job ID 与时间线早已失效」这类漂移后，用户只回一个词即授权就地修正，并接受把范围从 1 处扩到全库 11 处；修正同时要写入权威来源注记（「权威来源是 hermes cron list」）与逐字对照校验，使同一漂移不会再发生。判据：授权极简（「修正」「改吧」）但要求含防复漂的元信息。",
+    "硬派越野车是有配置级认知的领域：用户掌握分动箱谱系（TOD 多片离合／Mlock 机械锁止／EMOD 电控多片／ESOF 分时四驱）与锁的配置差异，并把「机械硬连接 vs 多片离合过热衰减」当作可靠性判据——只有中央从摩擦片换成机械齿才算跨越。自有资产：坦克300城市版2023款必须型（原厂取消前后锁、自行选装后桥锁），dream car 为路虎卫士。判据：能直接指出执行者的配置级型号错误。"
   ]
 }
