@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-06T18:04:16.781516+00:00",
-  "total_sessions_processed": 275,
+  "last_extraction": "2026-10-07T18:02:28.094546+00:00",
+  "total_sessions_processed": 276,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5637,6 +5637,102 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 最近邻 cosine 0.7110（<0.72 冲突阈值 / <0.85 重复阈值）vs L2『把审批/安全拦截当成流程的正常状态而不是故障』：相邻但不同轴——旧条讲真拦截下如何保留执行主体与授权链，本条讲限制声明的举证责任在谁、以及假限制如何被证伪。embedding path LIVE，Gate5 findings 0。"
+        },
+        {
+          "id": "insight_2026-10-07T18:02:28.094546+00:00_1",
+          "date": "2026-10-07",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "对含糊的「待你决策」零容忍，先要求把决策点降维成可裁决结构再逐项关闭：一句「具体需要决策什么」逼出每个待决项的「选什么／代价／我的建议」三件套；随后以逐项编号的极短回复一次性关闭全部选项（三项各 3–4 字，如「B1 不动，B2 无所谓，B3 不动，那没遗留了」），只在有异议处改写、其余直接采纳执行者给出的建议值。同一形态也用于把「授权 + 状态更新」压进一句话（批准两项动作的同时报备第三项自己已完成）。判据：决策请求必须先用事实自证「是否真的还要决策」，再给出可裁决的选项结构；用户的回复长度与决策数量不成比例。",
+          "confidence": "high",
+          "evidence": "用户：「具体需要决策什么」；执行者给出 B1 三选项表（(a) 保持现状 / (b) Establish 回退 / (c) 换另一家）+「我的建议：选 (a)」后，用户回：「B1 不动，B2 无所谓，B3 不动，那没遗留了」；更早一条：「a1 和 a2 你直接动手吧，c 我已经导入过了」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261007_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261007_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-07T18:02:28.094546+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-10-07T18:02:28.094546+00:00_3",
+          "date": "2026-10-07",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "引用历史事实前须核对它的写入时点是否早于后续落地动作；被证伪的旧事实要显式降权而非默默弃用：一次回答照抄了当天上午写入的旧事实（把当天下午已完成的网络迁移仍记作「未做」），把已完成事项报成了待决策项；查证后执行者把该条标记为 unhelpful（trust 0.5→0.4）并补录一条更正事实，形成「作废 + 更正」闭环，防止旧值在后续会话继续被检索到。判据：陈述「某事项还没做」之前先问「这条记录写于什么时候、之后有没有落地说」；被推翻的记录必须留下降权痕迹。",
+          "confidence": "high",
+          "evidence": "用户：「具体需要决策什么」；执行者：「我上一轮照抄了 10-04 上午的 fact（fact_id 323）——那条写于当天上午，而 P3/P4 是当天下午做完的，所以它过时了。我已把这它标记为 unhelpful（trust 0.5→0.4）并补了更正事实，防止以后再被它带到沟里」；工具结果：{\"fact_id\": 323, \"old_trust\": 0.5, \"new_trust\": 0.4, \"helpful_count\": 0}",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261007_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261007_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-07T18:02:28.094546+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-10-07T18:02:28.094546+00:00_4",
+          "date": "2026-10-07",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "接手历史遗留待办前先查上游是否已有更完备机制，已覆盖则明确判定「重复建设」并关闭该待办：一条 8/4 遗留的「cron 定时探针」在查证后发现上游已具备平台重连监视器（退避至 5 分钟封顶、超时置 NEEDS_ATTENTION），且当日日志有数千条 reconnect 记录与一次「降级态重连」实证，于是该探针被判为重复建设、不再落地。判据：历史待办的有效性取决于上游当前能力，而不是它当初写下的缺陷形态是否仍然成立。",
+          "confidence": "medium",
+          "evidence": "执行者：「8/4 那个失效形态（进程活着但 polling 死了、不自愈、无人知）现在由适配器自愈 + 降级态显式上报兜住了，自己再搭一个 getMe 探针属于重复建设」；同轮证据：`_platform_reconnect_watcher` 存在、当日日志 `09:15:23 reconnected in degraded mode`、gateway.log reconnect 相关行 5493 条",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261007_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261007_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-07T18:02:28.094546+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -8458,6 +8554,70 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.585 (nearest=可逆性工程技术文档化) < 0.72"
+        },
+        {
+          "id": "insight_2026-10-07T18:02:28.094546+00:00_0",
+          "date": "2026-10-07",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "授权缺口必须由显式信令打开，审批超时视为「未获同意」而非默许：配置写入的审批弹窗在 1 分钟内无响应被判为未获同意后，执行者停在原地、不换等价命令重试，并把「零改动落盘」如实报出、给出两条可前进路径（用户把命令贴进终端 / 再次下达执行并在弹出时点同意）；用户的答复是与该缺口严格对应的四字显式授权（「执行授权」），而不是沉默推进或默认放行。判据：把「未获同意」显性化 + 不绕道 + 由用户以显式授权词打开下一步，三件事必须同时出现。",
+          "confidence": "high",
+          "evidence": "工具结果：BLOCKED: Command timed out without user response. The user has NOT consented to this action. Do NOT retry this command, do NOT rephrase it, and do NOT attempt the same outcome via a different command.；执行者：「停在这里等你——配置写入的审批弹窗 1 分钟内没人回应，系统判定」未获同意」，我已按规则停止，不再换命令重试」「当前状态：零改动落盘（那条命令是复合命令，备份和两条 config set 一起被拦，所以什么都没执行）」；用户下一条：「执行授权」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261007_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261007_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-07T18:02:28.094546+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-10-07T18:02:28.094546+00:00_2",
+          "date": "2026-10-07",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "每个大动作收尾都要求一次分层「遗留审计」，且清单本身要先自证：「还有遗留需要我确认或者授权吗」触发后，期望的回答结构是「需授权 / 需决策 / 需你手动」三类分层，并把历史记录里写着「需授权」的条目逐条查证后再报（本次 4 条候选查完发现全部已落地，被单独列为「已核实、不用再报」）。判据：漏报 = 让用户白跑一趟，多报 = 噪音，所以每条待办必须先自证现状才算可进清单。",
+          "confidence": "high",
+          "evidence": "用户：「还有遗留需要我确认或者授权吗」；执行者回答结构：「## A. 需要你授权才能改（agent 禁改边界）」「## B. 需要你决策（不是授权）」「## C. 你手动做（不涉及授权）」+「已核实「不用再报」的 4 项（查证过，不是猜）」；用户后续再问：「具体需要决策什么」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261007_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261007_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-07T18:02:28.094546+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -11725,14 +11885,31 @@
         "7": 100
       },
       "total_insights": 361
+    },
+    {
+      "date": "2026-10-07T18:02:28.094546+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 366
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-06T18:04:22.716504+00:00",
+    "checked_at": "2026-10-07T18:02:32.472110+00:00",
     "warnings": [],
-    "insight_count": 1
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "执行者口中的「做不到」是待证伪的命题，不是可以转述的边界条件：任何由执行者转述的能力边界（我不能／被系统拦住／需要你操作），在到达用户之前必须先有查证动作，用户对此容错为零。一次以「该文件受保护、写入被 BLOCKED、需你在终端放行或手工改一行」形式移交的遗留项，被一个最短反问（「你解不了吗」）直接退回，逼出执行者回读限制的来源后自证：该路径本在白名单内、所用工具根本不在拦截面、拦截日志零命中——限制从未存在。可迁移判据：限制声明的举证责任在执行者一方，未查证的限制与未查证的事实同罪；「需要你做某事」这种句式本身就是触发用户质疑的信号，而不是可被接受的结论。"
+    "对含糊的「待你决策」零容忍，先要求把决策点降维成可裁决结构再逐项关闭：一句「具体需要决策什么」逼出每个待决项的「选什么／代价／我的建议」三件套；随后以逐项编号的极短回复一次性关闭全部选项（三项各 3–4 字，如「B1 不动，B2 无所谓，B3 不动，那没遗留了」），只在有异议处改写、其余直接采纳执行者给出的建议值。同一形态也用于把「授权 + 状态更新」压进一句话（批准两项动作的同时报备第三项自己已完成）。判据：决策请求必须先用事实自证「是否真的还要决策」，再给出可裁决的选项结构；用户的回复长度与决策数量不成比例。",
+    "引用历史事实前须核对它的写入时点是否早于后续落地动作；被证伪的旧事实要显式降权而非默默弃用：一次回答照抄了当天上午写入的旧事实（把当天下午已完成的网络迁移仍记作「未做」），把已完成事项报成了待决策项；查证后执行者把该条标记为 unhelpful（trust 0.5→0.4）并补录一条更正事实，形成「作废 + 更正」闭环，防止旧值在后续会话继续被检索到。判据：陈述「某事项还没做」之前先问「这条记录写于什么时候、之后有没有落地说」；被推翻的记录必须留下降权痕迹。",
+    "接手历史遗留待办前先查上游是否已有更完备机制，已覆盖则明确判定「重复建设」并关闭该待办：一条 8/4 遗留的「cron 定时探针」在查证后发现上游已具备平台重连监视器（退避至 5 分钟封顶、超时置 NEEDS_ATTENTION），且当日日志有数千条 reconnect 记录与一次「降级态重连」实证，于是该探针被判为重复建设、不再落地。判据：历史待办的有效性取决于上游当前能力，而不是它当初写下的缺陷形态是否仍然成立。",
+    "授权缺口必须由显式信令打开，审批超时视为「未获同意」而非默许：配置写入的审批弹窗在 1 分钟内无响应被判为未获同意后，执行者停在原地、不换等价命令重试，并把「零改动落盘」如实报出、给出两条可前进路径（用户把命令贴进终端 / 再次下达执行并在弹出时点同意）；用户的答复是与该缺口严格对应的四字显式授权（「执行授权」），而不是沉默推进或默认放行。判据：把「未获同意」显性化 + 不绕道 + 由用户以显式授权词打开下一步，三件事必须同时出现。",
+    "每个大动作收尾都要求一次分层「遗留审计」，且清单本身要先自证：「还有遗留需要我确认或者授权吗」触发后，期望的回答结构是「需授权 / 需决策 / 需你手动」三类分层，并把历史记录里写着「需授权」的条目逐条查证后再报（本次 4 条候选查完发现全部已落地，被单独列为「已核实、不用再报」）。判据：漏报 = 让用户白跑一趟，多报 = 噪音，所以每条待办必须先自证现状才算可进清单。"
   ]
 }
