@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-08T18:03:16.108267+00:00",
-  "total_sessions_processed": 277,
+  "last_extraction": "2026-10-10T18:03:53.811793+00:00",
+  "total_sessions_processed": 278,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5832,6 +5832,138 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新 | top1 cos 0.646（判决性实验偏好），互补非重复"
+        },
+        {
+          "id": "insight_2026-10-10T18:03:53.811793+00:00_0",
+          "date": "2026-10-10",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "调度类决策的约束取自实测极值而非名义值：把定时作业迁出高价时段时，先用每个作业的历史最长耗时倒推起跑时刻，使最慢者也留出固定余量；同日多个作业按错峰间隔排列，避免并发挤在一个点。判据是「该作业实际跑过的最坏情况」，不是平均值也不是直觉估计。",
+          "confidence": "high",
+          "evidence": "用 state.db 里每个作业的历史最长耗时倒推——Tech Radar 扫描最长 1326s(22min)、模型迭代监控 1016s、Frontier 体检 835s、DT 报告 330s ⇒ 全部保证 08:50 前收工（峰时 09:00 开始，留 10 分钟余量）。1 号那天的 4 个月度作业按 08:00→08:15→08:20→08:35 错峰排列，避免同时起 4 个 agent。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261010_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261010_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-10T18:03:53.811793+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新 · max cosine 0.5995（NN: 优先级决策基于投入产出比而非完美主义）< 0.72"
+        },
+        {
+          "id": "insight_2026-10-10T18:03:53.811793+00:00_1",
+          "date": "2026-10-10",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "自己的定量结论被后续实测推翻时，当场显式撤回并给出改正后的数字，而不是静默改口或淡化。触发条件是「先给了方向性断言、随后实测出不同量级」：此时以「原断言 + 新数字 + 明确撤回」三件套落纸，并说明原断言错在哪一步（如把某通道的价格当作整段时段的均价）。",
+          "confidence": "high",
+          "evidence": "OR 实付 = $2.390 / 若当时走直连（按当时段自动峰/谷价）= $2.054 ⇒ 多付 = $0.336（14%）… 原因：OR 的 DeepSeek 列价恰好等于 DeepSeek 峰价，而那 6 天里相当一部分调用本来就落在峰时，所以「换通道能省 50%」不成立——我上一条那句「比改时间值钱得多」是错的，撤回。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261010_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261010_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-10T18:03:53.811793+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新 · max cosine 0.5313（NN: 配置级反问纠正执行者并要求证据层级升维）< 0.72"
+        },
+        {
+          "id": "insight_2026-10-10T18:03:53.811793+00:00_2",
+          "date": "2026-10-10",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "把服务的「时间定价结构」当作可调度的工程变量：面对按时段计费的服务，第一动作是把自己的定时负载整体重排到低价时段，而不是接受现价、也不是只做总量压缩——账单被视为调度问题的一部分而非纯用量问题。判据：诉求里同时出现「按峰谷定价」与「调整定时任务时间」，且在动手前先量化该手段的收益上限。",
+          "confidence": "high",
+          "evidence": "用户原话：「梳理一下最近一个月的 token 消耗情况，应该主要是 deepseek，然后看看消耗的时间分布，再参照 deepseek 的峰谷定价策略，看看需不需要调整定时任务的时间，让所有调用都在低价时段执行」；执行侧先算出「若峰时调用全部改到谷时，理论上限节省 $1.92/月」并说明上限有限，随后把 8 个工作日作业移出峰时窗口。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261010_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261010_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-10T18:03:53.811793+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新 · max cosine 0.4879（NN: 付费vs免费多维账本交叉论证）< 0.72"
+        },
+        {
+          "id": "insight_2026-10-10T18:03:53.811793+00:00_3",
+          "date": "2026-10-10",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "写入类变更的验收标准是「从被改系统回读到的期望状态」，而不是命令返回成功或推断「应该能行」。改配置后逐条回读其生效字段；给监控脚本新增告警分支时，用桩数据把每种状态（正常/警告/紧急/接口异常/空响应）各跑一遍，并且刻意不拿真实数值去触发告警路径。",
+          "confidence": "high",
+          "evidence": "已全部改完并回读验证（hermes cron list 的 Next run 为证据）；阈值分支用桩 JSON 四态验证（不敢拿真余额去试告警路径）…测试脚本留在 ~/.hermes/cache/scratch/test_balance_branches.sh，以后改阈值可复跑",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261010_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261010_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-10T18:03:53.811793+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 部分重叠 0.6102（NN: 配置修改后「委托→审计」闭环）——差异：本条的验收对象是「被改系统回读到的期望状态」，不是对产出的事后审查"
         }
       ]
     },
@@ -8717,6 +8849,39 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-10-10T18:03:53.811793+00:00_4",
+          "date": "2026-10-10",
+          "dimension": "决策模式",
+          "layer": "L4",
+          "insight": "对「静默降级」的风险权重高于显性成本：当发现连续多日所有调用无声切换到备用通道且零告警时，判断结论是「真正的风险不是钱，是静默降级」，处置上保留备用通道（它正是这段时间任务没有全部失败的原因），把投入放在补观测盲区而非移除兜底。判据：兜底机制的成本小于其价值，先补可见性、再谈替换。",
+          "confidence": "high",
+          "evidence": "不要拆 OR fallback——它正是这 6 天 cron 没全部失败的原因。要修的是监控盲区，在 self-check.sh 里加一段（零 token，随现有 07:00 推送）；真正的风险不是钱，是静默降级：连续 6 天，每一次调用都悄悄走了备用通道，没有任何告警",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261010_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261010_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-10T18:03:53.811793+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 部分重叠 0.5976（NN: 成本投入分布不对称——信息 vs 容量）——差异：本条判据是「静默降级的风险权重高于显性成本」，处置是补观测盲区而非砍兜底"
         }
       ]
     },
@@ -12010,16 +12175,31 @@
         "7": 100
       },
       "total_insights": 369
+    },
+    {
+      "date": "2026-10-10T18:03:53.811793+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 374
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-09T18:03:26.891759+00:00",
+    "checked_at": "2026-10-10T18:03:56.595580+00:00",
     "warnings": [],
-    "insight_count": 0
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "把长期持有的偏好印象显式标记为可被实测推翻的对象：当实测显示 DMIT 接入稳定性长期劣于 BWG 时，用户直接问「我一直以为 dmit 比 bwg 更稳更优，现在看起来并不是？」，把「以为」（印象）与「现在」（数据）对置；并接受执行者指出该偏好从未被数据验证——DMIT 作主入口本是用户本人早前指定的需求、而非实测结论。判据：问句形态是「自陈印象 + 反问」，且对「你的架构决策依据只是印象」这一溯源结论不辩解、不维护面子。",
-    "以「选择性异常」作为约束归因空间的杠杆：面对 DMIT 间歇性故障而 BWG 全程零失败，用户不接受「GFW 封端口」这类单维解释，追问「为什么只有 dmit 会受影响而 bwg 不会」，用两个同源对象的不对称表现逼出归因维度的判别——最终定位为按 (目的IP, 端口) 二维过滤、且两条腿从骨干第 8 跳起 AS 级分道（DMIT 走联通169/CUII 9929，BWG 走电信 CN2）。判据：用户把「A 中招而 B 不中招」转成对机制维度的约束条件，而不是接受一个只解释 A 的整体性归因。",
-    "在不确定性下以「方向已明」而非「证据已判」作为收敛阈值：长时监控尚未抓到判决性窗口时，用户以「还没有结论吗」施压，执行者随即把「继续等窗口」改写为「现有数据已够定方向」，给出结论而非继续挂机采集。判据：压力发生在开放式等待（等一个可能不出现的窗口）途中，且用户接受「数据只够定方向、不够判决」的结论形态；这与用户愿为钉死假设部署判决性实验的偏好不矛盾——实验一旦给出方向性数据，就不为等待完美证据而推迟结论。"
+    "调度类决策的约束取自实测极值而非名义值：把定时作业迁出高价时段时，先用每个作业的历史最长耗时倒推起跑时刻，使最慢者也留出固定余量；同日多个作业按错峰间隔排列，避免并发挤在一个点。判据是「该作业实际跑过的最坏情况」，不是平均值也不是直觉估计。",
+    "自己的定量结论被后续实测推翻时，当场显式撤回并给出改正后的数字，而不是静默改口或淡化。触发条件是「先给了方向性断言、随后实测出不同量级」：此时以「原断言 + 新数字 + 明确撤回」三件套落纸，并说明原断言错在哪一步（如把某通道的价格当作整段时段的均价）。",
+    "把服务的「时间定价结构」当作可调度的工程变量：面对按时段计费的服务，第一动作是把自己的定时负载整体重排到低价时段，而不是接受现价、也不是只做总量压缩——账单被视为调度问题的一部分而非纯用量问题。判据：诉求里同时出现「按峰谷定价」与「调整定时任务时间」，且在动手前先量化该手段的收益上限。",
+    "写入类变更的验收标准是「从被改系统回读到的期望状态」，而不是命令返回成功或推断「应该能行」。改配置后逐条回读其生效字段；给监控脚本新增告警分支时，用桩数据把每种状态（正常/警告/紧急/接口异常/空响应）各跑一遍，并且刻意不拿真实数值去触发告警路径。",
+    "对「静默降级」的风险权重高于显性成本：当发现连续多日所有调用无声切换到备用通道且零告警时，判断结论是「真正的风险不是钱，是静默降级」，处置上保留备用通道（它正是这段时间任务没有全部失败的原因），把投入放在补观测盲区而非移除兜底。判据：兜底机制的成本小于其价值，先补可见性、再谈替换。"
   ]
 }
