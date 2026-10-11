@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-10T18:03:53.811793+00:00",
-  "total_sessions_processed": 278,
+  "last_extraction": "2026-10-11T18:02:50.744572+00:00",
+  "total_sessions_processed": 279,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -5964,6 +5964,138 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 部分重叠 0.6102（NN: 配置修改后「委托→审计」闭环）——差异：本条的验收对象是「被改系统回读到的期望状态」，不是对产出的事后审查"
+        },
+        {
+          "id": "insight_2026-10-11T18:02:50.744572+00:00_0",
+          "date": "2026-10-11",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "「标记废弃」这类动作本身要过一遍反向效应核查：整理过时知识时，只检查标记是否正确不够，还要看标记动作是否改动了被标记对象参与排序的其他维度——把正文改写为「已废弃」会刷新记录时间戳，而检索打分含时间衰减因子，于是废弃条目从 0.083 反升到 0.35（4.2 倍）被顶回前列。可迁移判据：整理类操作优先选可逆、零转写的手段（把排序权重压到检索硬阈值以下即确定性沉底），而不是删除或重写正文；动手前先读一遍打分公式，确认动作的副作用面。",
+          "confidence": "high",
+          "evidence": "我中途先说「年龄不参与排序」——错的，retrieval.py:71 有 decay。若按原方案「改写正文标废弃」，会刷新 updated_at 把 decay 分抬回 1.0：#81 实测 0.083 → 0.35，反升 4.2 倍，等于把废弃事实顶上来。这就是最终改为「只降 trust、不碰正文」的原因。// 检索有硬阈值 trust_score >= min_trust(=0.3)——把废弃事实压到 0.3 以下即确定性沉底，且可逆、零转写风险。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261011_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261011_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-11T18:02:50.744572+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 cos_max=0.667 (NN: 引用历史事实前须核对写入时点是否早于后续落地动作) | Gate1-4 pass | Gate5 0 findings"
+        },
+        {
+          "id": "insight_2026-10-11T18:02:50.744572+00:00_1",
+          "date": "2026-10-11",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "同一现象第二次出现时，第一动作是追「这个值是谁生成的」而不是再改一次产物：产物层修复必然被下一次刷新覆盖，真正的根因层是喂给生成器的配置项/默认值；而直接改上游代码同样不是根因层——它会被产品自身的升级流程冲掉。判据：找到生成该产物的代码路径，沿调用链确认数值来源是配置还是内置默认，再从配置落手。",
+          "confidence": "high",
+          "evidence": "plist 里那个数字不是模板常量，而是配置项生成的——gateway_launchd.py:325–340 调 configured_nofile_soft_limit() 读 runtime.nofile_soft_limit，而它在 DEFAULT_CONFIG 里默认就是 4096。所以 8/27 手写进 plist 的 65536 从来没有配置来源；9/21 那次不是「手工上限被剥掉」，而是 Hermes 按自己的默认值重写了 plist。→ 上一轮我写进 hermes-operations/hermes-self-check 的「改 gateway.py 模板」是治错层（还会被 hermes update 冲掉）。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261011_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261011_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-11T18:02:50.744572+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 cos_max=0.436 (NN: 将工程技术问题推到第一性原理层面) | Gate1-4 pass | Gate5 0 findings"
+        },
+        {
+          "id": "insight_2026-10-11T18:02:50.744572+00:00_2",
+          "date": "2026-10-11",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "迁移或清理知识条目之前，对「来源」本身先验真：在别处有副本只证明内容可恢复，不证明内容正确。本次遇到的源本身是一份过时的错误记录（称某工具不可用），若照搬「有源即可迁出」的规则，就把内容搬进了错误档案。判据：找到副本后仍要拿最新实测复核该副本，不一致就先订正源、再决定迁不迁；「有源就能删」不足以支撑删除。",
+          "confidence": "high",
+          "evidence": "⚠️ 发现一处矛盾：fact #163（8/23）写「Firecrawl/parallel_search 不可用→降级 web_search」，而 MEMORY 条目（10/5）写「Firecrawl 可用」。→ #163 已过时，瘦身同时必须订正它，否则「源」是错的。// 若我照搬「有源就能删」的规则，会把内容迁移进一个错误档案。已就地订正 #163 并降 trust。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261011_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261011_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-11T18:02:50.744572+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 cos_max=0.602 (NN: 引用历史事实前须核对写入时点) | Gate1-4 pass | Gate5 0 findings"
+        },
+        {
+          "id": "insight_2026-10-11T18:02:50.744572+00:00_5",
+          "date": "2026-10-11",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "不夸大修复的价值：当实测显示问题在观测窗口内并未真实发生（数十天零故障、资源占用 3%），修复的定位就要改写成「消除配置漂移、让配置项而非内置默认说了算」，并显式声明「不是止血」；同时把残余决策权交还用户——涉及价格、身份信息、设计宪法的压缩/变更杠杆一律不擅动，只列清单等裁决。判据：修复报告必须能回答「这个修复到底止了什么血」，答不出就不能用「修好了」结案。",
+          "confidence": "high",
+          "evidence": "→ 4096 容量上完全够用。这次修复的真实价值是消除配置漂移（让配置项而非内置默认说了算），不是止血。我不想让「修好了」掩盖这一点。// 剩下的压缩杠杆——归你决定，我不擅动……要动哪一项，说一声。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261011_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261011_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-11T18:02:50.744572+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 cos_max=0.596 (NN: 变更验收标准 穷举清点+全量修正) | Gate1-4 pass | Gate5 0 findings"
         }
       ]
     },
@@ -8882,6 +9014,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 部分重叠 0.5976（NN: 成本投入分布不对称——信息 vs 容量）——差异：本条判据是「静默降级的风险权重高于显性成本」，处置是补观测盲区而非砍兜底"
+        },
+        {
+          "id": "insight_2026-10-11T18:02:50.744572+00:00_3",
+          "date": "2026-10-11",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "对不可逆对象（手写规则、权威配置）的改写走三步协议：① 冷备并对三处副本做内容哈希比对，一致才继续；② 候选稿只落暂存区，原文件一个字节都不动，量完验完才覆盖；③ 落盘前用骨架词/要点清单逐条核对覆盖率（本次 52/52 保留、无缺失），确认「压缩」不等于「删除」。判据：仅对写坏不可逆、且有长期权威地位的对象启用；一次性可重建的产物不必付这个成本。",
+          "confidence": "high",
+          "evidence": "冷备校验（必须 byte-identical）：三处 sha256 完全一致（c8520ed1…）。// 候选稿 3003 字节先落 scratch，量完验完才 cp。// 骨架词 46/46 全部保留 → 复核 52/52，缺失 DT-push 是我的测试串大小写笔误，文件里是 dt-push内置。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261011_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261011_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-11T18:02:50.744572+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 cos_max=0.615 (NN: 可逆性工程技术文档化) | Gate1-4 pass | Gate5 0 findings"
+        },
+        {
+          "id": "insight_2026-10-11T18:02:50.744572+00:00_4",
+          "date": "2026-10-11",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "验收外部副作用时，运行态实证优先于命令回执：命令打出成功标记不算完成，要三条硬证据——目标文件的实际值、服务进程确已换新（PID 变化且启动时间晚于文件写入）、以及从该服务后代进程里读到的继承值。本次靠「shell 继承链读 ulimit」这条零成本通道拿到决定性证据（改前 4096 / 改后 65536），并顺手推翻了技能里「该读数无效」的旧说法。",
+          "confidence": "high",
+          "evidence": "验收开始——回读实证（不采信命令的 ✓，按规则4「外部副作用必须回读验证」）。// 我的 shell 继承链实测 ulimit -n = 65536（59234 ← 59044 ← 59038）✅ 决定性证据。// 原笔记写「bash -c 'ulimit -n' 反映终端 shell、无效」——那只对你自己的 iTerm 成立；对 agent 的 terminal 工具不成立，因为它是 gateway 的后代进程。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261011_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261011_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-11T18:02:50.744572+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 cos_max=0.640 (NN: 执行者口中的做不到是待证伪的命题) | Gate1-4 pass | Gate5 0 findings"
         }
       ]
     },
@@ -12188,18 +12386,31 @@
         "7": 100
       },
       "total_insights": 374
+    },
+    {
+      "date": "2026-10-11T18:02:50.744572+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 380
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-10T18:03:56.595580+00:00",
+    "checked_at": "2026-10-11T18:02:52.725840+00:00",
     "warnings": [],
-    "insight_count": 5
+    "insight_count": 6
   },
   "_last_agent_insights": [
-    "调度类决策的约束取自实测极值而非名义值：把定时作业迁出高价时段时，先用每个作业的历史最长耗时倒推起跑时刻，使最慢者也留出固定余量；同日多个作业按错峰间隔排列，避免并发挤在一个点。判据是「该作业实际跑过的最坏情况」，不是平均值也不是直觉估计。",
-    "自己的定量结论被后续实测推翻时，当场显式撤回并给出改正后的数字，而不是静默改口或淡化。触发条件是「先给了方向性断言、随后实测出不同量级」：此时以「原断言 + 新数字 + 明确撤回」三件套落纸，并说明原断言错在哪一步（如把某通道的价格当作整段时段的均价）。",
-    "把服务的「时间定价结构」当作可调度的工程变量：面对按时段计费的服务，第一动作是把自己的定时负载整体重排到低价时段，而不是接受现价、也不是只做总量压缩——账单被视为调度问题的一部分而非纯用量问题。判据：诉求里同时出现「按峰谷定价」与「调整定时任务时间」，且在动手前先量化该手段的收益上限。",
-    "写入类变更的验收标准是「从被改系统回读到的期望状态」，而不是命令返回成功或推断「应该能行」。改配置后逐条回读其生效字段；给监控脚本新增告警分支时，用桩数据把每种状态（正常/警告/紧急/接口异常/空响应）各跑一遍，并且刻意不拿真实数值去触发告警路径。",
-    "对「静默降级」的风险权重高于显性成本：当发现连续多日所有调用无声切换到备用通道且零告警时，判断结论是「真正的风险不是钱，是静默降级」，处置上保留备用通道（它正是这段时间任务没有全部失败的原因），把投入放在补观测盲区而非移除兜底。判据：兜底机制的成本小于其价值，先补可见性、再谈替换。"
+    "同一现象第二次出现时，第一动作是追「这个值是谁生成的」而不是再改一次产物：产物层修复必然被下一次刷新覆盖，真正的根因层是喂给生成器的配置项/默认值；而直接改上游代码同样不是根因层——它会被产品自身的升级流程冲掉。判据：找到生成该产物的代码路径，沿调用链确认数值来源是配置还是内置默认，再从配置落手。",
+    "迁移或清理知识条目之前，对「来源」本身先验真：在别处有副本只证明内容可恢复，不证明内容正确。本次遇到的源本身是一份过时的错误记录（称某工具不可用），若照搬「有源即可迁出」的规则，就把内容搬进了错误档案。判据：找到副本后仍要拿最新实测复核该副本，不一致就先订正源、再决定迁不迁；「有源就能删」不足以支撑删除。",
+    "不夸大修复的价值：当实测显示问题在观测窗口内并未真实发生（数十天零故障、资源占用 3%），修复的定位就要改写成「消除配置漂移、让配置项而非内置默认说了算」，并显式声明「不是止血」；同时把残余决策权交还用户——涉及价格、身份信息、设计宪法的压缩/变更杠杆一律不擅动，只列清单等裁决。判据：修复报告必须能回答「这个修复到底止了什么血」，答不出就不能用「修好了」结案。",
+    "对不可逆对象（手写规则、权威配置）的改写走三步协议：① 冷备并对三处副本做内容哈希比对，一致才继续；② 候选稿只落暂存区，原文件一个字节都不动，量完验完才覆盖；③ 落盘前用骨架词/要点清单逐条核对覆盖率（本次 52/52 保留、无缺失），确认「压缩」不等于「删除」。判据：仅对写坏不可逆、且有长期权威地位的对象启用；一次性可重建的产物不必付这个成本。",
+    "验收外部副作用时，运行态实证优先于命令回执：命令打出成功标记不算完成，要三条硬证据——目标文件的实际值、服务进程确已换新（PID 变化且启动时间晚于文件写入）、以及从该服务后代进程里读到的继承值。本次靠「shell 继承链读 ulimit」这条零成本通道拿到决定性证据（改前 4096 / 改后 65536），并顺手推翻了技能里「该读数无效」的旧说法。"
   ]
 }
