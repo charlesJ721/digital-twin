@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-11T18:02:50.744572+00:00",
-  "total_sessions_processed": 279,
+  "last_extraction": "2026-10-12T18:04:12.729768+00:00",
+  "total_sessions_processed": 280,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6096,6 +6096,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 cos_max=0.596 (NN: 变更验收标准 穷举清点+全量修正) | Gate1-4 pass | Gate5 0 findings"
+        },
+        {
+          "id": "insight_2026-10-12T18:04:12.729768+00:00_1",
+          "date": "2026-10-12",
+          "dimension": "认知架构",
+          "layer": "L2",
+          "insight": "用自带领域清单反向审计候选集完备性：给定一份「值得建立忠诚度的品牌」候选清单后，用户的动作不是质疑结论，而是直接补入自己掌握的 7 个品牌（始祖鸟 / 猛犸象 / 攀山鼠 / Montbell / Patagonia / 可隆 / Outdoor Research）并要求并入取证——补齐缺项，而不是让对方再搜一遍。判据：只要输出形态是「候选清单」，用户的验收动作就是拿自带清单逐项对差、缺项即回补；清单在用户眼里是待审草稿，完备性由用户的领域知识裁定，而非由生成者的自述裁定。",
+          "confidence": "high",
+          "evidence": "帮你拓展下范围，除了你提到的，还应该包括 始祖鸟 猛犸象 攀山鼠 montbell Patagonia kolon outdoor research 等等",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261012_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261012_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-12T18:04:12.729768+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 与既有「扩展搜索元指令」（用户责备 agent 只说啥搜啥、要求扩展思路）方向相反故不重叠：那条是用户要求 agent 自行扩容，本条是用户以自己的领域清单为独立基线、由自己补齐 agent 遗漏的条目。preflight: max cosine 0.5631（最近邻=「分层遗留审计」）。"
+        },
+        {
+          "id": "insight_2026-10-12T18:04:12.729768+00:00_2",
+          "date": "2026-10-12",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "把「品牌绑定」从「单品采购」拆成独立决策层级，并自带三因子判据：同一品牌可以「值得买」但不「值得忠诚」，用户分开提问、分开要答案；在第二问里明确列出评估轴（产品力 × 质价比 × 长期主义），并要求「原因」而非品牌榜。判据：问题从「买哪个 / 这件值不值」跃迁到「要不要长期绑定」，且判据以并列名词的形式直接写在提问里——用户要的是可解释的推荐逻辑，不是排序结果。",
+          "confidence": "high",
+          "evidence": "如果我选择对一个户外品牌建立消费忠诚度，综合产品力 质价比 长期主意，你觉得哪些品牌可以考虑，原因是什么",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261012_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261012_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-12T18:04:12.729768+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新：既有「消费决策里审美身份与机械正统不可由产品力补足」是六维评估轴（品牌力/工业背景…），本条是提问者的决策分层动作（采购标的 vs 忠诚标的）与三因子并列判据。preflight: max cosine 0.5682（最近邻=「付费 vs 免费多维账本」）。"
+        },
+        {
+          "id": "insight_2026-10-12T18:04:12.729768+00:00_4",
+          "date": "2026-10-12",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "需求以「日常 + 极端场景」双边界给出，并用最坏用例定义配置门槛：被追问用途时，用户给的是「旅行+日常」，并追加硬约束「旅行需要能覆盖高海拔雪山徒步场景」——日常只是下限，雪山徒步才是判据。判据：需求描述里同时出现一个高频日常场景与一个远超日常的极端场景，且极端场景以「需要能覆盖」的形式写成硬约束而非「顺便也能用」；据此选型应按最坏用例而不是平均用例来定档。",
+          "confidence": "medium",
+          "evidence": "旅行+日常，旅行需要能覆盖高海拔雪山徒步场景",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261012_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261012_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-12T18:04:12.729768+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与「调度类决策的约束取自实测极值而非名义值」「每次决策前强制重新锚定到当前具体场景的约束条件」相邻但不重复：两条分别讲执行侧取极值、以及拒绝通用推荐；本条是需求侧写法——用最坏用例定义选型门槛。preflight: max cosine 0.5230。"
         }
       ]
     },
@@ -6453,6 +6552,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.548 (nearest=好产品≠好买卖) < 0.72"
+        },
+        {
+          "id": "insight_2026-10-12T18:04:12.729768+00:00_0",
+          "date": "2026-10-12",
+          "dimension": "价值观与信念",
+          "layer": "L3",
+          "insight": "消费品采购的第一性判据是「持有期」而非「配置最优」：用户以「长期主义」给一笔 8 件、约 ¥11.6 万的户外装备采购定调后，主动把「是否重复/是否超配」划为不需要纠结的项，把评审压力全部压到两个可操作判据上——同规格质价比、以及是否存在可替代品牌。判据：用户先声明持有期与用途（自己穿 / 长期），再显式豁免「多买了」「功能重叠」这类一次性配置视角；换言之，要回答的不是「这份清单是否最优」，而是「每一件在持有期内值不值、有没有更值得的牌子」。",
+          "confidence": "high",
+          "evidence": "自己穿，长期主义，所以不需要纠结重复或者超配，重点关注质价比，以及是否有其他品牌可替代",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261012_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261012_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-12T18:04:12.729768+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 全新域（个人耐用品采购的价值观判据）。preflight: embedding LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.6106 vs「决策咨询中的反锚定要求」——最近邻只共享「自带判据而非接受既有结论」这一抽象层，本条讲的是持有期视角取代配置最优视角，非白纸化重做方法论。"
         }
       ]
     },
@@ -9080,6 +9212,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 cos_max=0.640 (NN: 执行者口中的做不到是待证伪的命题) | Gate1-4 pass | Gate5 0 findings"
+        },
+        {
+          "id": "insight_2026-10-12T18:04:12.729768+00:00_3",
+          "date": "2026-10-12",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "成本敏感不等于成本阻断：免费主力搜索通道因额度耗尽（402）失效时，用户的处置不是降低交付标准、也不是等它修复，而是直接点名付费替代通道并放行使用。判据：用户以工具名直接对话（parallel / firecrawl），把通道切换当作自己的决策项而非执行者的待批事项——任务价值明确时，付费通道的授权即时生效、无须回报。",
+          "confidence": "medium",
+          "evidence": "parallel 没了   还有 firecrawl 呢",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261012_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261012_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-12T18:04:12.729768+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 与「对静默降级的风险权重高于显性成本」互补而非重复（max cosine 0.6346，本批最高）：那条主张保留兜底通道、先补可见性，本条主张必要付费即时放行——一条讲兜底该留，一条讲该花的钱不省。无 Gate5 冲突（<0.72）。"
         }
       ]
     },
@@ -12399,18 +12564,31 @@
         "7": 100
       },
       "total_insights": 380
+    },
+    {
+      "date": "2026-10-12T18:04:12.729768+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 385
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-11T18:02:52.725840+00:00",
+    "checked_at": "2026-10-12T18:04:15.173617+00:00",
     "warnings": [],
-    "insight_count": 6
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "同一现象第二次出现时，第一动作是追「这个值是谁生成的」而不是再改一次产物：产物层修复必然被下一次刷新覆盖，真正的根因层是喂给生成器的配置项/默认值；而直接改上游代码同样不是根因层——它会被产品自身的升级流程冲掉。判据：找到生成该产物的代码路径，沿调用链确认数值来源是配置还是内置默认，再从配置落手。",
-    "迁移或清理知识条目之前，对「来源」本身先验真：在别处有副本只证明内容可恢复，不证明内容正确。本次遇到的源本身是一份过时的错误记录（称某工具不可用），若照搬「有源即可迁出」的规则，就把内容搬进了错误档案。判据：找到副本后仍要拿最新实测复核该副本，不一致就先订正源、再决定迁不迁；「有源就能删」不足以支撑删除。",
-    "不夸大修复的价值：当实测显示问题在观测窗口内并未真实发生（数十天零故障、资源占用 3%），修复的定位就要改写成「消除配置漂移、让配置项而非内置默认说了算」，并显式声明「不是止血」；同时把残余决策权交还用户——涉及价格、身份信息、设计宪法的压缩/变更杠杆一律不擅动，只列清单等裁决。判据：修复报告必须能回答「这个修复到底止了什么血」，答不出就不能用「修好了」结案。",
-    "对不可逆对象（手写规则、权威配置）的改写走三步协议：① 冷备并对三处副本做内容哈希比对，一致才继续；② 候选稿只落暂存区，原文件一个字节都不动，量完验完才覆盖；③ 落盘前用骨架词/要点清单逐条核对覆盖率（本次 52/52 保留、无缺失），确认「压缩」不等于「删除」。判据：仅对写坏不可逆、且有长期权威地位的对象启用；一次性可重建的产物不必付这个成本。",
-    "验收外部副作用时，运行态实证优先于命令回执：命令打出成功标记不算完成，要三条硬证据——目标文件的实际值、服务进程确已换新（PID 变化且启动时间晚于文件写入）、以及从该服务后代进程里读到的继承值。本次靠「shell 继承链读 ulimit」这条零成本通道拿到决定性证据（改前 4096 / 改后 65536），并顺手推翻了技能里「该读数无效」的旧说法。"
+    "用自带领域清单反向审计候选集完备性：给定一份「值得建立忠诚度的品牌」候选清单后，用户的动作不是质疑结论，而是直接补入自己掌握的 7 个品牌（始祖鸟 / 猛犸象 / 攀山鼠 / Montbell / Patagonia / 可隆 / Outdoor Research）并要求并入取证——补齐缺项，而不是让对方再搜一遍。判据：只要输出形态是「候选清单」，用户的验收动作就是拿自带清单逐项对差、缺项即回补；清单在用户眼里是待审草稿，完备性由用户的领域知识裁定，而非由生成者的自述裁定。",
+    "把「品牌绑定」从「单品采购」拆成独立决策层级，并自带三因子判据：同一品牌可以「值得买」但不「值得忠诚」，用户分开提问、分开要答案；在第二问里明确列出评估轴（产品力 × 质价比 × 长期主义），并要求「原因」而非品牌榜。判据：问题从「买哪个 / 这件值不值」跃迁到「要不要长期绑定」，且判据以并列名词的形式直接写在提问里——用户要的是可解释的推荐逻辑，不是排序结果。",
+    "需求以「日常 + 极端场景」双边界给出，并用最坏用例定义配置门槛：被追问用途时，用户给的是「旅行+日常」，并追加硬约束「旅行需要能覆盖高海拔雪山徒步场景」——日常只是下限，雪山徒步才是判据。判据：需求描述里同时出现一个高频日常场景与一个远超日常的极端场景，且极端场景以「需要能覆盖」的形式写成硬约束而非「顺便也能用」；据此选型应按最坏用例而不是平均用例来定档。",
+    "消费品采购的第一性判据是「持有期」而非「配置最优」：用户以「长期主义」给一笔 8 件、约 ¥11.6 万的户外装备采购定调后，主动把「是否重复/是否超配」划为不需要纠结的项，把评审压力全部压到两个可操作判据上——同规格质价比、以及是否存在可替代品牌。判据：用户先声明持有期与用途（自己穿 / 长期），再显式豁免「多买了」「功能重叠」这类一次性配置视角；换言之，要回答的不是「这份清单是否最优」，而是「每一件在持有期内值不值、有没有更值得的牌子」。",
+    "成本敏感不等于成本阻断：免费主力搜索通道因额度耗尽（402）失效时，用户的处置不是降低交付标准、也不是等它修复，而是直接点名付费替代通道并放行使用。判据：用户以工具名直接对话（parallel / firecrawl），把通道切换当作自己的决策项而非执行者的待批事项——任务价值明确时，付费通道的授权即时生效、无须回报。"
   ]
 }
