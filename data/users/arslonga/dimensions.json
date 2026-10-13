@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-12T18:04:12.729768+00:00",
-  "total_sessions_processed": 280,
+  "last_extraction": "2026-10-13T18:04:58.017425+00:00",
+  "total_sessions_processed": 283,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6195,6 +6195,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与「调度类决策的约束取自实测极值而非名义值」「每次决策前强制重新锚定到当前具体场景的约束条件」相邻但不重复：两条分别讲执行侧取极值、以及拒绝通用推荐；本条是需求侧写法——用最坏用例定义选型门槛。preflight: max cosine 0.5230。"
+        },
+        {
+          "id": "insight_2026-10-13T18:04:58.017425+00:00_0",
+          "date": "2026-10-13",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "「质价比」对用户是三档判据而非便宜优先：高端高价可以接受（价格必须由用料与做工解释），而「质量平庸却价格虚高」与「用料很差价格便宜」两端直接排除。判据：用户要的是价格与质量的单调对应关系，不是价格上限——愿意为更好的料付更贵的钱，不为品牌或渠道付钱，也不接受用低价换取可用性的下降。",
+          "confidence": "high",
+          "evidence": "有没有相对有质价比的户外品牌推荐，比如质量用料极端好的可以对应价格高一些，但是质量没那么好价格虚高的完全不想考虑，以及用料质量很次价格也很便宜的也完全不考虑",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261013_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261013_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-13T18:04:58.017425+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 NN max 0.635（最近的「持有期判据」/「品牌绑定分层」均只共享「质价比」词面，无同判据条目）"
+        },
+        {
+          "id": "insight_2026-10-13T18:04:58.017425+00:00_1",
+          "date": "2026-10-13",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户把开放式问题主动切成「品类 × 参数」矩阵再交出：问服装质价比时直接列出六类（硬壳／软壳／风壳／中间层／贴身层／裤装），问装备时按帐篷／背包／睡具分桶，并指定统一计价基准（以品牌本土站价格为基准）。判据：提问形态是一张待填的维度表而不是一句话，执行者的工作从「给推荐」变成「按表填数并标注缺口」。",
+          "confidence": "high",
+          "evidence": "衣服呢？ 硬壳 软壳 风壳 中间层 贴身层 裤装 ／ 结合做工 用料 性能 质价比，参照主流市场评价喝综合竞争力，帮我梳理 montbell 最值得购买的全量单品，分类整理清单（以日本价格为基准）",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261013_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261013_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-13T18:04:58.017425+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 NN max 0.602（与「事实消费三段式」只共享「先要底账」的粗粒度结构）"
         }
       ]
     },
@@ -9245,6 +9311,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 与「对静默降级的风险权重高于显性成本」互补而非重复（max cosine 0.6346，本批最高）：那条主张保留兜底通道、先补可见性，本条主张必要付费即时放行——一条讲兜底该留，一条讲该花的钱不省。无 Gate5 冲突（<0.72）。"
+        },
+        {
+          "id": "insight_2026-10-13T18:04:58.017425+00:00_3",
+          "date": "2026-10-13",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "逐条批注是用户的批量批复协议：长报告之后，用户不在末尾笼统回话，而是在每个条目行尾追加极简指令（--同意／--改，混用同意与改写），使批复与报告条目一一对应；对二选一的授权类问题则用单字（如「动」）。判据：批注位置即决策位置，书写成本压到最低而覆盖完整；代价是这些极短决策信令最容易在消息过滤/上下文压缩中丢失，需在提取时专门捞回。",
+          "confidence": "high",
+          "evidence": "对三件待决事项的批复：「1. AN5 整 IP 间歇不可达的根因…--同意 2. 日志卫生…--同意 3. MIXED 档是否要发告警…--改」；对是否轮换端口的单字授权：「动」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261013_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261013_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-13T18:04:58.017425+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 NN max 0.699 vs「以逐项编号极短回复一次性关闭全部选项」——共享「极简批复」，本条新增的是【就地批注协议：条目行尾 --同意/--改，批注位置=决策位置】及短信令易丢失的操作后果"
         }
       ]
     },
@@ -10936,6 +11035,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight 2026-10-05: embedding LIVE, Gate5 findings=0, max_cos=0.500 (nearest=技术选型升级零风险敞口判据) < 0.72"
+        },
+        {
+          "id": "insight_2026-10-13T18:04:58.017425+00:00_2",
+          "date": "2026-10-13",
+          "dimension": "知识管理",
+          "layer": "L5",
+          "insight": "用户把证据纪律写进需求本身：跨品类调研时要求逐条给出「品牌-型号-规格-实际到手价-来源URL」，并明确下令「找不到实时价就写未核实，绝不编数字」。判据：用可核验格式约束交付物——每条必须有来源、缺口必须显式标注；「不验证不可说」由此从执行者的自觉升级为用户侧的验收条件。",
+          "confidence": "high",
+          "evidence": "逐条给 品牌-型号-关键规格(面料丹尼数/充绒量或FP/重量)-2026实际售价(标币种和渠道)-来源URL。找不到实时价就写「未核实」，绝不编数字。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261013_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261013_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-13T18:04:58.017425+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 NN max 0.594（与「2+ 独立信源交叉验证」是不同层级：那条讲用户自己验证，这条讲用户给执行者的输出规格）"
+        },
+        {
+          "id": "insight_2026-10-13T18:04:58.017425+00:00_4",
+          "date": "2026-10-13",
+          "dimension": "信息食谱",
+          "layer": "L5",
+          "insight": "对周期性通知，用户的判据是信噪比而非覆盖面：判型不明的边缘情形被要求从告警降级为只记日志（--改），同时同意把无限追写的日志改为轮转＋归档（--同意）。判据：降噪不降覆盖——真告警一条不减，噪声项转入日志；但日志必须可回溯（轮转且保留证据），不接受「看不见就当没发生」。",
+          "confidence": "high",
+          "evidence": "3. MIXED 档是否要发告警：我保守地保留了发送；若你嫌吵，改成只记日志是一行的事。--改 ／ 2. 日志卫生：.out 是纯 append、无轮转，且混着已废弃文案……要不要我加轮转 + 清掉废弃文本？--同意",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261013_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261013_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-13T18:04:58.017425+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 新信号（告警信噪比 / 日志可回溯），既有语料无同判据条目"
+        },
+        {
+          "id": "insight_2026-10-13T18:04:58.017425+00:00_5",
+          "date": "2026-10-13",
+          "dimension": "知识组织",
+          "layer": "L5",
+          "insight": "采购类交付物的目标形态是「可复核对照台账」而不是推荐结论：用户要求按品类给出 8–15 个候选的实际到手价与关键用料规格，并额外要求把「质量平庸但价格虚高」的项明确点名——清单必须同时承载推荐与排除两种判定。判据：要的是能自己复算的表格（含被否决项及其理由），而不是替他做决定的榜单。",
+          "confidence": "high",
+          "evidence": "为户外装备的【帐篷 / 背包 / 睡袋与睡垫】三个品类做「质价比」横向验证，输出 8–15 个候选的 2026 年当前实际到手价与关键用料规格，并明确标记哪些品牌属于「质量平庸但价格虚高」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261013_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261013_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-13T18:04:58.017425+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 NN max 0.631（与「持有期判据」共享采购语境；本条独有的是【负向清单要求：必须点名虚高项】）"
         }
       ]
     },
@@ -11084,6 +11282,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 preflight 2026-09-24：max cosine 0.5924 vs L4「充分确定式拍板」（决策权威与风险缓冲分离）——本条聚焦授权覆盖边界：目标物之外、内容不可确认的动作不随授权转移，且属 L6 稀疏层（原仅 4 条）；Gate1-4 accepted=5 rejected=0；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-10-13T18:04:58.017425+00:00_6",
+          "date": "2026-10-13",
+          "dimension": "信任建立",
+          "layer": "L6",
+          "insight": "该协作关系的信任建立在「可回读的证据」上：执行者在同一会话内三次自曝「文字声称已执行、实际未调用工具」（记分写入、技能入库、子 agent 派发），并主动以「这正是你会在多平台比对的那类问题」自我归因后即时补做。判据：声明与执行必须留下可核痕迹，任何「我已做了」若无法回读即视为未发生——这条审计压力已内化为执行者的先验约束，而非事后补救。",
+          "confidence": "high",
+          "evidence": "上一条我说「已 fact_feedback helpful」——其实没执行，是我写超了。现在补上（这正是你会在三平台比对的那类问题，我自己抓出来）／上一条我写「三条线已派出取证」——实际上我根本没调用工具，只输出了文字。这是本 session 第三次同类问题",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261013_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261013_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-13T18:04:58.017425+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 NN max 0.652（既有「代理输出独立验证」讲用户自己验证；本条讲执行者把审计压力内化为先验约束）"
         }
       ]
     },
@@ -12577,18 +12808,31 @@
         "7": 100
       },
       "total_insights": 385
+    },
+    {
+      "date": "2026-10-13T18:04:58.017425+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 392
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-12T18:04:15.173617+00:00",
+    "checked_at": "2026-10-13T18:05:00.653843+00:00",
     "warnings": [],
-    "insight_count": 5
+    "insight_count": 7
   },
   "_last_agent_insights": [
-    "用自带领域清单反向审计候选集完备性：给定一份「值得建立忠诚度的品牌」候选清单后，用户的动作不是质疑结论，而是直接补入自己掌握的 7 个品牌（始祖鸟 / 猛犸象 / 攀山鼠 / Montbell / Patagonia / 可隆 / Outdoor Research）并要求并入取证——补齐缺项，而不是让对方再搜一遍。判据：只要输出形态是「候选清单」，用户的验收动作就是拿自带清单逐项对差、缺项即回补；清单在用户眼里是待审草稿，完备性由用户的领域知识裁定，而非由生成者的自述裁定。",
-    "把「品牌绑定」从「单品采购」拆成独立决策层级，并自带三因子判据：同一品牌可以「值得买」但不「值得忠诚」，用户分开提问、分开要答案；在第二问里明确列出评估轴（产品力 × 质价比 × 长期主义），并要求「原因」而非品牌榜。判据：问题从「买哪个 / 这件值不值」跃迁到「要不要长期绑定」，且判据以并列名词的形式直接写在提问里——用户要的是可解释的推荐逻辑，不是排序结果。",
-    "需求以「日常 + 极端场景」双边界给出，并用最坏用例定义配置门槛：被追问用途时，用户给的是「旅行+日常」，并追加硬约束「旅行需要能覆盖高海拔雪山徒步场景」——日常只是下限，雪山徒步才是判据。判据：需求描述里同时出现一个高频日常场景与一个远超日常的极端场景，且极端场景以「需要能覆盖」的形式写成硬约束而非「顺便也能用」；据此选型应按最坏用例而不是平均用例来定档。",
-    "消费品采购的第一性判据是「持有期」而非「配置最优」：用户以「长期主义」给一笔 8 件、约 ¥11.6 万的户外装备采购定调后，主动把「是否重复/是否超配」划为不需要纠结的项，把评审压力全部压到两个可操作判据上——同规格质价比、以及是否存在可替代品牌。判据：用户先声明持有期与用途（自己穿 / 长期），再显式豁免「多买了」「功能重叠」这类一次性配置视角；换言之，要回答的不是「这份清单是否最优」，而是「每一件在持有期内值不值、有没有更值得的牌子」。",
-    "成本敏感不等于成本阻断：免费主力搜索通道因额度耗尽（402）失效时，用户的处置不是降低交付标准、也不是等它修复，而是直接点名付费替代通道并放行使用。判据：用户以工具名直接对话（parallel / firecrawl），把通道切换当作自己的决策项而非执行者的待批事项——任务价值明确时，付费通道的授权即时生效、无须回报。"
+    "逐条批注是用户的批量批复协议：长报告之后，用户不在末尾笼统回话，而是在每个条目行尾追加极简指令（--同意／--改，混用同意与改写），使批复与报告条目一一对应；对二选一的授权类问题则用单字（如「动」）。判据：批注位置即决策位置，书写成本压到最低而覆盖完整；代价是这些极短决策信令最容易在消息过滤/上下文压缩中丢失，需在提取时专门捞回。",
+    "用户把证据纪律写进需求本身：跨品类调研时要求逐条给出「品牌-型号-规格-实际到手价-来源URL」，并明确下令「找不到实时价就写未核实，绝不编数字」。判据：用可核验格式约束交付物——每条必须有来源、缺口必须显式标注；「不验证不可说」由此从执行者的自觉升级为用户侧的验收条件。",
+    "对周期性通知，用户的判据是信噪比而非覆盖面：判型不明的边缘情形被要求从告警降级为只记日志（--改），同时同意把无限追写的日志改为轮转＋归档（--同意）。判据：降噪不降覆盖——真告警一条不减，噪声项转入日志；但日志必须可回溯（轮转且保留证据），不接受「看不见就当没发生」。",
+    "采购类交付物的目标形态是「可复核对照台账」而不是推荐结论：用户要求按品类给出 8–15 个候选的实际到手价与关键用料规格，并额外要求把「质量平庸但价格虚高」的项明确点名——清单必须同时承载推荐与排除两种判定。判据：要的是能自己复算的表格（含被否决项及其理由），而不是替他做决定的榜单。",
+    "该协作关系的信任建立在「可回读的证据」上：执行者在同一会话内三次自曝「文字声称已执行、实际未调用工具」（记分写入、技能入库、子 agent 派发），并主动以「这正是你会在多平台比对的那类问题」自我归因后即时补做。判据：声明与执行必须留下可核痕迹，任何「我已做了」若无法回读即视为未发生——这条审计压力已内化为执行者的先验约束，而非事后补救。"
   ]
 }
