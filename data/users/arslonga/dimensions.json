@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-17T18:03:59.767492+00:00",
-  "total_sessions_processed": 286,
+  "last_extraction": "2026-10-18T18:02:30.835588+00:00",
+  "total_sessions_processed": 288,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6421,6 +6421,72 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-10-18T18:02:30.835588+00:00_0",
+          "date": "2026-10-18",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "否定性口径不构成终止信号，而是需要被消解的具体约束：厂商客服给出「不支持多个 VRF 控制同一空调」时，用户既不放弃自己的方案、也不照单全收，而是要求把这句反对意见变成可核验的追问结构——先拆出对方口中的「多个 VRF」到底指什么，再据此设计确认问句。判据：面对权威口径的反对，他要的不是「谁对」的裁决，而是一套能把歧义钉死、让对方给出可执行承诺的问法；方案在未被实证推翻前保持有效。可迁移：把「他们说不行」翻译成「他们说的不行对应哪个具体拓扑」。",
+          "confidence": "high",
+          "evidence": "我问中弘客服，对方说不支持多个 vrf 控制同一空调，我该如何和他确认能正常安装",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261018_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261018_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-18T18:02:30.835588+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cosine=0.5810 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
+        },
+        {
+          "id": "insight_2026-10-18T18:02:30.835588+00:00_1",
+          "date": "2026-10-18",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "证据等级按「同场景同型号的一手实测」优先排序，而不是按来源的官方程度排序：当官方文档只给通用接法时，用户主动提供同小区、同空调型号、同开发商系统的邻居实测案例（业主群截图），并要求据此修正方案；执行者的多轮逻辑推演与厂商口头口径都被排在它之后。判据：这类社区实证之所以被采纳，是因为它把「理论上可行」变成了「同一批机器上已经跑通」——来源权威性让位于场景同一性。可迁移：缺官方文档时，先找同批次设备的成功案例，再谈原理。",
+          "confidence": "high",
+          "evidence": "业主9-702表示将VRF接在次卧空调内机上，实际不冲突，但基本弃用了小天智能系统；随后用户确认「有邻居亲测可用」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261018_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261018_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-18T18:02:30.835588+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cosine=0.5883 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
         }
       ]
     },
@@ -9632,6 +9698,72 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-10-18T18:02:30.835588+00:00_2",
+          "date": "2026-10-18",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "对不可逆施工，先问「最小改动面」再问「怎么做」：面对要不要抛弃开发商整套系统的岔路，用户的提问形态是「直接接现有的红蓝线就行，还是得先拆外机把集控去掉」——把「要不要拆」这个范围问题单独拎出来作为决策项，而不是让执行者直接给出接线步骤。判据：接受「电气上脱离即可、物理上不必拆走」这类最小充分解，只要它同时满足功能与不留隐患。可迁移：改动范围本身是独立决策项，不能埋在施工步骤里默认掉。",
+          "confidence": "high",
+          "evidence": "如果我完全抛弃开发商那一套，我是直接把中弘接现在黑线的红蓝线就行，还是得先拆外机把星网的集控给去掉",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261018_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261018_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-18T18:02:30.835588+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cosine=0.6198 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
+        },
+        {
+          "id": "insight_2026-10-18T18:02:30.835588+00:00_4",
+          "date": "2026-10-18",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "验收以现场实测为终止条件，不以结论的置信度为终止条件：方案交付后，用户不是复述结论，而是直接用通电结果回填（设备装上了、启动了，但读到的空调数量为 0；随后单独给原系统通电也不再受控），实测一否定就立即把目标从「装新设备」切换到「先把原系统恢复」。判据：实测数据出现后，此前所有推演（含已经收敛的接线方案）都降级为待验假设；排查优先级由「有没有把一个原本能用的系统弄坏」决定，而不是由新功能能否跑通决定。",
+          "confidence": "high",
+          "evidence": "我中弘 vrf 已经装在内机上了，成功启动了，但是空调数量是 0，这个和我现在没有接上星网的空调网关有关系吗？……我单独把星网的通电 也无法控制",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261018_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261018_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-18T18:02:30.835588+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cosine=0.6352 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
         }
       ]
     },
@@ -11454,6 +11586,72 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-10-18T18:02:30.835588+00:00_3",
+          "date": "2026-10-18",
+          "dimension": "知识管理",
+          "layer": "L5",
+          "insight": "权威笔记的维护协议是原地修正而非版本并列：发现已落盘的矩阵用了旧款型号（膜已换代）后，用户的指令是「直接在原文基础上修正，查证后修正」——不允许以勘误条目、补丁笔记或新版本与原文并存，且次序被明确固定为先查证、后改写。判据：单一事实源优先于修订可追溯；把未核实的媒体口径先写进权威文档、事后再改，是被禁止的路径。可迁移：交付物一旦被当作查表依据，就只能原地更新，不能让读者自己去拼哪一版才对。",
+          "confidence": "high",
+          "evidence": "直接在原文基础上修正，查证后修正",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261018_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261018_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-18T18:02:30.835588+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cosine=0.6797 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
+        },
+        {
+          "id": "insight_2026-10-18T18:02:30.835588+00:00_5",
+          "date": "2026-10-18",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "对已购品类，用户自己维护一条独立于交付物的型号世代线：交付矩阵给出后，他用「新款已换掉 GORE-TEX」这条更新去压测矩阵，并直接追问后果（「你之前的生态位会因此调整吗」），而不是指责查错。判据：交付物被当作有时间戳的快照，随时可以被他手上的新品信息推翻；他关心的是这个变化会连锁改动哪几个位，而不是谁对谁错。可迁移：对快速迭代的品类，结论必须挂在「型号 + 世代」上，只挂品牌与品类会在换代时静默失效。",
+          "confidence": "medium",
+          "evidence": "montbell 新款的 storm cruiser 改款了，不用 goretex 了，你之前的生态位会因此调整吗",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261018_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261018_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-18T18:02:30.835588+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cosine=0.5633 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
         }
       ]
     },
@@ -11994,19 +12192,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-06-19T18:07:20.229983+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 37
-    },
     {
       "date": "2026-06-20T18:01:27.308255",
       "layers": {
@@ -13141,16 +13326,31 @@
         "7": 100
       },
       "total_insights": 402
+    },
+    {
+      "date": "2026-10-18T18:02:30.835588+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 408
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-17T18:04:02.368477+00:00",
+    "checked_at": "2026-10-18T18:02:32.559880+00:00",
     "warnings": [],
-    "insight_count": 3
+    "insight_count": 6
   },
   "_last_agent_insights": [
-    "大工程开工前把「口径方案」当成独立可批准物：面对 18 品牌 × 全层谱 × 三档这类返工成本极高的研究委托，用户不直接放行取证，而是要求先交思路（功能位颗粒度、质价比只在同规格档内比、做工按可核验项列、数据可信度 A/B/C 分层、已知盲区先预告）再动手。判据：委托语里写明「先整理下思路和我确认，然后再动手」；确认时用一次多选把三个岔路口全部按推荐值整包批准，不逐项改写。可迁移：交付物越难返工，越要把「判据是否对齐」从执行过程里摘出来，做成一份可以先看后批的方案。",
-    "完备性的定义是「任意场景都能查到确定答案」，不是型号数量也不是覆盖主流：用户给衣橱清单定的成功判据是「后续但凡想基于功能场景选购时，对照清单里的任意选购都不会出错」，并据此在 18 位全覆盖（含保暖裤、美利奴、超轻风裤等长尾位）与精简 12 位之间，主动选了工作量最大的一档。判据：他要消除的是「选错的可能」，长尾位的价值在于把尚未发生的场景也提前变成可查表的一格；因此清单的完备性由「覆盖未来查询空间」度量，而不是由已列条目数度量。",
-    "把价格档位当成分工界面：同一功能位用户要「三档并列（入门/中端/顶配），你按预算挑」，明确拒绝「单一最优 + 1 备选」——他保留的是「这次花多少钱」这个决策变量，执行者只负责把每一档的正确候选铺开；同时接受把弱相关品牌直接判成「不建议」，而不是为其安排一个凑数位置。判据：理想交付是「梯度 + 结论」并存——既有可挑选的空间，也有明确的否定判定，而不是替他一次收死的推荐。"
+    "证据等级按「同场景同型号的一手实测」优先排序，而不是按来源的官方程度排序：当官方文档只给通用接法时，用户主动提供同小区、同空调型号、同开发商系统的邻居实测案例（业主群截图），并要求据此修正方案；执行者的多轮逻辑推演与厂商口头口径都被排在它之后。判据：这类社区实证之所以被采纳，是因为它把「理论上可行」变成了「同一批机器上已经跑通」——来源权威性让位于场景同一性。可迁移：缺官方文档时，先找同批次设备的成功案例，再谈原理。",
+    "对不可逆施工，先问「最小改动面」再问「怎么做」：面对要不要抛弃开发商整套系统的岔路，用户的提问形态是「直接接现有的红蓝线就行，还是得先拆外机把集控去掉」——把「要不要拆」这个范围问题单独拎出来作为决策项，而不是让执行者直接给出接线步骤。判据：接受「电气上脱离即可、物理上不必拆走」这类最小充分解，只要它同时满足功能与不留隐患。可迁移：改动范围本身是独立决策项，不能埋在施工步骤里默认掉。",
+    "验收以现场实测为终止条件，不以结论的置信度为终止条件：方案交付后，用户不是复述结论，而是直接用通电结果回填（设备装上了、启动了，但读到的空调数量为 0；随后单独给原系统通电也不再受控），实测一否定就立即把目标从「装新设备」切换到「先把原系统恢复」。判据：实测数据出现后，此前所有推演（含已经收敛的接线方案）都降级为待验假设；排查优先级由「有没有把一个原本能用的系统弄坏」决定，而不是由新功能能否跑通决定。",
+    "权威笔记的维护协议是原地修正而非版本并列：发现已落盘的矩阵用了旧款型号（膜已换代）后，用户的指令是「直接在原文基础上修正，查证后修正」——不允许以勘误条目、补丁笔记或新版本与原文并存，且次序被明确固定为先查证、后改写。判据：单一事实源优先于修订可追溯；把未核实的媒体口径先写进权威文档、事后再改，是被禁止的路径。可迁移：交付物一旦被当作查表依据，就只能原地更新，不能让读者自己去拼哪一版才对。",
+    "对已购品类，用户自己维护一条独立于交付物的型号世代线：交付矩阵给出后，他用「新款已换掉 GORE-TEX」这条更新去压测矩阵，并直接追问后果（「你之前的生态位会因此调整吗」），而不是指责查错。判据：交付物被当作有时间戳的快照，随时可以被他手上的新品信息推翻；他关心的是这个变化会连锁改动哪几个位，而不是谁对谁错。可迁移：对快速迭代的品类，结论必须挂在「型号 + 世代」上，只挂品牌与品类会在换代时静默失效。"
   ]
 }
