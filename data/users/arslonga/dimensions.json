@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-18T18:02:30.835588+00:00",
-  "total_sessions_processed": 288,
+  "last_extraction": "2026-10-19T18:02:15.213663+00:00",
+  "total_sessions_processed": 290,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6487,6 +6487,171 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cosine=0.5883 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_0",
+          "date": "2026-10-19",
+          "dimension": "认知架构",
+          "layer": "L2",
+          "insight": "多条名义上独立的通道在同一时刻失效时，先判定共同上游而不是逐条排障：判据是失效时刻的重合度（本次两条隧道握手同时停在约 2 小时前，而 keepalive 是 25 秒），重合到分钟级即可排除各自故障，直接去看两条链共享的那一端。反向同样成立：只有单条通道故障时，不得据此推断共享端故障。",
+          "confidence": "high",
+          "evidence": "DMIT→AaITR WireGuard 握手停在 2 小时 6 分前；BWG→AaITR WireGuard 握手停在 2 小时 5 分前（persistent keepalive 25s）；节点 delay：DMIT AN5 住宅 / BWG-PLAN / AaITR Fallback 全部 delay=0，而纯 DC 的 DMIT AN5 Pro 164ms / HKG T1 WEE 209ms 正常。执行者判定：同一时刻，共因=AaITR。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.5605 低于 0.72 阈值（Gate5 findings=0）｜最近邻：成本敏感不等于成本阻断（付费通道授权）"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_1",
+          "date": "2026-10-19",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "退役基础设施按两层拆开处理：实体层（节点定义、凭据、机器）彻底清除，语义层（组名、规则归属、未来接入位）原地保留并写成注释模板。判据是这批规则是否编码了不可重建的判断——把编码了判断的规则打散重排，等于先丢知识再重建，回归时还得逐条重新判断；只清实体不影响运行，未来接入成本降到一行。仅在排队实质取消或永久放弃该能力时才重构结构。",
+          "confidence": "high",
+          "evidence": "用户问：qqpw 到位的时间不确定，你觉得是留着 slot，还是先按照没有家宽节点调整？执行者结论：留 slot——但留的是「规则归属 + 组结构」，不是「无效节点」；95 条规则是知识资产，不是配置噪音，按无家宽重构 = 把这套判断打散进 DC 组。落地形态：住宅出口 = fallback[DMIT AN5 Pro]，130 条规则零改动，proxies 段末留 qqpw 接入模板注释。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.5721 低于 0.72 阈值（Gate5 findings=0）｜最近邻：退役资源全链路彻底剔除"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_2",
+          "date": "2026-10-19",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "成员在组里、健康检查通过、实际能出站是三件不同的事：冗余必须验证到「故障时能接管」这一层，否则只是纸面冗余。核查点是该成员自身的出站配置（是否真有非隧道的直出、是否绑到了已失效的下一跳），而不是它在组里的位置或入口端口是否 OPEN——入口全通、出口不存在的组合会让切换静默落到死路。",
+          "confidence": "high",
+          "evidence": "BWG 的 Xray 出站只有一个 freedom tag=residential 且带 mark:102（走 WG→已退役的 AaITR），没有 direct 出站；入口 443 OPEN、delay 实测 162ms。执行者结论：「BWG 作为 fallback 目前是纸面定位——它现在根本无法出站」，并据此把「改造 BWG」从可选项升级为消除单点的必要项。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.5321 低于 0.72 阈值（Gate5 findings=0）｜最近邻：验收以现场实测为终止条件"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_8",
+          "date": "2026-10-19",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "提质的第一动作是审计已经在付钱却没有用上的东西，而不是引入新资源：同一接口返回里更长的摘要字段没人用、权威度与日期与重排序分数这些免费信号被整体丢弃、并发上限比实测安全值还保守——这三项都是零成本。判据：优化清单先列「已有资源利用率」，新增采购排在它后面；能用现有字段满足的需求不新增依赖。",
+          "confidence": "high",
+          "evidence": "实测同一次搜索的字段长度：snippet 85–261 字 vs summary 585–1466 字，而代码用的是 snippet；authority / date / rerank_score 三个字段此前完全没进输出；并发实测 5 路全部 200、总耗 0.42s，而文档写的是 ≤3。改后 description 长度 849 / 1017 / 907 / 618 / 1499 字并带 [auth=3/4 · r=2.41] 前缀，成本未变。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.6485 低于 0.72 阈值（Gate5 findings=0）｜最近邻：消费品采购第一性判据=持有期"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_9",
+          "date": "2026-10-19",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "版本核查的结论强度止于可观测证据：厂商只暴露别名、不回传构建号时，能证明的是「别名解析到最新构建」，不能证明「当前跑的是某个具体版本号」。此时正确交付是三段式——结论（无需改配置）、证据边界（哪一层不可观测）、替代路径（若要钉死版本该用什么标识）。判据：凡是「已是最新」这类断言，都要写清它停在哪一层证据上。",
+          "confidence": "high",
+          "evidence": "官方公告：DeepSeek-V4.1-Flash-1017，Now live on our website, app, and API；本地 GET /models 只返回 [deepseek-flash, deepseek-v4-pro]；真实 chat 调用的响应 model 字段 = deepseek-flash。执行者的不确定性声明：API 不回传 build 号，我无法从响应里 100% 证明现在跑的是 1017，并给出带日期后缀 slug 作为钉死版本的备选。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.5532 低于 0.72 阈值（Gate5 findings=0）｜最近邻：2+ 独立信源交叉验证"
         }
       ]
     },
@@ -9764,6 +9929,171 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cosine=0.6352 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_3",
+          "date": "2026-10-19",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "改动既有配置的完成判据是双向断言：该变的变了，不该变的逐条等价。做法是把改动前后都解析成结构再比对（规则列表逐条相等、组数一致、DNS 段与 rule-providers 与顶层键一致），再跑引用完整性（每个组引用、每条规则目标都存在），最后才 reload。只有 reload 成功或服务恢复，无法区分这次改动是精准的还是顺手改坏了别处。另外数量与预期不符时先复核统计口径（文本匹配会把其他段混进列表），再怀疑改动本身。",
+          "confidence": "high",
+          "evidence": "规则数 old/new: 130 130 / 规则完全一致: True / 组数 old/new: 9 9 / dns 段一致: True / rule-providers 一致: True / 顶层 keys 一致: True；随后 无效引用: 无、无效目标: 无，再 mihomo -t test is successful + 热重载 HTTP 204。中途曾因文本统计得到 178 条而以为改坏，改用 YAML 解析核对后为 130 条且逐条一致。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.6535 低于 0.72 阈值（Gate5 findings=0）｜最近邻：主端变更后向下游发起漂移审计"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_4",
+          "date": "2026-10-19",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "基础设施变更的完成定义包含观测层的期望值同步：改了出口、端口或身份，必须同步改监控脚本里的期望断言，否则监控从故障探测器退化成噪声源。同步后要实跑一轮确认退出码正常且日志出现新的成功行，只做语法检查不算完成——语法通过的脚本仍可能因为期望值没改而持续误报。",
+          "confidence": "high",
+          "evidence": "watchdog 关键段改动：期望出口由 47.178.51.104 改为 179.253.246.70（主档）/ 80.251.210.175（BWG 降级档），移除 AaITR 8443 第三层检查；验证：bash -n OK → 执行一轮 exit=0 → 日志「住宅出口 OK (179.253.246.70)」「非敏感直出 OK」「port check fail=0/10」。改前该脚本每小时误报 12 次。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.6612 低于 0.72 阈值（Gate5 findings=0）｜最近邻：写入类变更的验收=回读期望状态"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_5",
+          "date": "2026-10-19",
+          "dimension": "系统设计方法论",
+          "layer": "L4",
+          "insight": "写方案前先验证方案所依赖的机制假设，否则方案里会长出并不存在的降级链。本次两条关键假设都查到出处：用户目录里的后端插件会被扫描但需显式启用；显式配置的后端不可用时不会静默回退，而是直接报错。第二条直接决定了「降级必须写在行为层，不能指望配置层」。判据：方案里每条机制断言都要能指到具体代码位置或实测结果，指不到的降级为待验项，不写成既定事实。",
+          "confidence": "high",
+          "evidence": "执行者：「策略要写对，必须先确认一件事：用户目录 plugins 里的 web provider 会不会被自动发现……不然写出来的策略里会有假的降级链」→ 查 plugins_discovery.py：用户目录会被扫描，但 kind: backend 的自动加载只对 bundled 生效，必须显式 enable；web_search_registry 的 _resolve 里显式配置优先级最高，即使 is_available() 为 False 也返回该 provider → 「这条决定了降级必须写在行为层（我的 skill），不能指望配置层」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.6001 低于 0.72 阈值（Gate5 findings=0）｜最近邻：主端变更后向下游发起漂移审计"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_6",
+          "date": "2026-10-19",
+          "dimension": "系统设计方法论",
+          "layer": "L4",
+          "insight": "重试策略必须按错误类型分级，并用单测把语义钉死：把读超时和连接抖动当成同一类可重试错误，会让超时预算被放大一倍（20 秒变 41 秒）；正确分级是连接级错误重试、读超时与服务端错误快速失败。验证不靠找站点复现，而是桩出错误类型再断言尝试次数。判据：凡是写成「通用兜底重试」的地方，都要按错误类型拆开，否则兜底本身成为新的延迟源。",
+          "confidence": "high",
+          "evidence": "原逻辑实测：gigazine 抓取 41.3s（读超时被通用重试又跑了一遍）；改后同站点 7.8s 成功。单测锁死语义：ReadTimeout → attempts=1 elapsed=0.03s；ConnectError → attempts=2 elapsed=1.15s。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.5860 低于 0.72 阈值（Gate5 findings=0）｜最近邻：把审批拦截当流程正常状态"
+        },
+        {
+          "id": "insight_2026-10-19T18:02:15.213663+00:00_7",
+          "date": "2026-10-19",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "验证新实现是否真的被加载，用「改前已知失败的同一个操作」当探针：同一条调用在重启前报错、重启后返回正常结果，这个前后反转才构成证据；任意成功样本在旧实现下也可能成功，不具判别力。对无法直接观测的项（如重试语义），显式标注为「同文件同次加载 + 单测推断」，不冒充直接证据。",
+          "confidence": "high",
+          "evidence": "重启前同一条 web_search 返回：web is configured to use deepseek ... but no registered web search provider has that name；重启后同一条调用 success: True n: 3。关于超时/重试那项，执行者如实写出：无法人为制造卡死来复现，但它和上面两项在同一个文件、同一次加载里，此外这条已有单元测试锁定。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261019_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261019_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-19T18:02:15.213663+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "cos_max=0.5988 低于 0.72 阈值（Gate5 findings=0）｜最近邻：同一套流程散落多处的结构问题"
         }
       ]
     },
@@ -12193,19 +12523,6 @@
   },
   "history": [
     {
-      "date": "2026-06-20T18:01:27.308255",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 40
-    },
-    {
       "date": "2026-06-21T02:00:00.000000",
       "layers": {
         "1": 35,
@@ -13339,18 +13656,31 @@
         "7": 100
       },
       "total_insights": 408
+    },
+    {
+      "date": "2026-10-19T18:02:15.213663+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 418
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-18T18:02:32.559880+00:00",
+    "checked_at": "2026-10-19T18:02:17.434809+00:00",
     "warnings": [],
-    "insight_count": 6
+    "insight_count": 10
   },
   "_last_agent_insights": [
-    "证据等级按「同场景同型号的一手实测」优先排序，而不是按来源的官方程度排序：当官方文档只给通用接法时，用户主动提供同小区、同空调型号、同开发商系统的邻居实测案例（业主群截图），并要求据此修正方案；执行者的多轮逻辑推演与厂商口头口径都被排在它之后。判据：这类社区实证之所以被采纳，是因为它把「理论上可行」变成了「同一批机器上已经跑通」——来源权威性让位于场景同一性。可迁移：缺官方文档时，先找同批次设备的成功案例，再谈原理。",
-    "对不可逆施工，先问「最小改动面」再问「怎么做」：面对要不要抛弃开发商整套系统的岔路，用户的提问形态是「直接接现有的红蓝线就行，还是得先拆外机把集控去掉」——把「要不要拆」这个范围问题单独拎出来作为决策项，而不是让执行者直接给出接线步骤。判据：接受「电气上脱离即可、物理上不必拆走」这类最小充分解，只要它同时满足功能与不留隐患。可迁移：改动范围本身是独立决策项，不能埋在施工步骤里默认掉。",
-    "验收以现场实测为终止条件，不以结论的置信度为终止条件：方案交付后，用户不是复述结论，而是直接用通电结果回填（设备装上了、启动了，但读到的空调数量为 0；随后单独给原系统通电也不再受控），实测一否定就立即把目标从「装新设备」切换到「先把原系统恢复」。判据：实测数据出现后，此前所有推演（含已经收敛的接线方案）都降级为待验假设；排查优先级由「有没有把一个原本能用的系统弄坏」决定，而不是由新功能能否跑通决定。",
-    "权威笔记的维护协议是原地修正而非版本并列：发现已落盘的矩阵用了旧款型号（膜已换代）后，用户的指令是「直接在原文基础上修正，查证后修正」——不允许以勘误条目、补丁笔记或新版本与原文并存，且次序被明确固定为先查证、后改写。判据：单一事实源优先于修订可追溯；把未核实的媒体口径先写进权威文档、事后再改，是被禁止的路径。可迁移：交付物一旦被当作查表依据，就只能原地更新，不能让读者自己去拼哪一版才对。",
-    "对已购品类，用户自己维护一条独立于交付物的型号世代线：交付矩阵给出后，他用「新款已换掉 GORE-TEX」这条更新去压测矩阵，并直接追问后果（「你之前的生态位会因此调整吗」），而不是指责查错。判据：交付物被当作有时间戳的快照，随时可以被他手上的新品信息推翻；他关心的是这个变化会连锁改动哪几个位，而不是谁对谁错。可迁移：对快速迭代的品类，结论必须挂在「型号 + 世代」上，只挂品牌与品类会在换代时静默失效。"
+    "改动既有配置的完成判据是双向断言：该变的变了，不该变的逐条等价。做法是把改动前后都解析成结构再比对（规则列表逐条相等、组数一致、DNS 段与 rule-providers 与顶层键一致），再跑引用完整性（每个组引用、每条规则目标都存在），最后才 reload。只有 reload 成功或服务恢复，无法区分这次改动是精准的还是顺手改坏了别处。另外数量与预期不符时先复核统计口径（文本匹配会把其他段混进列表），再怀疑改动本身。",
+    "基础设施变更的完成定义包含观测层的期望值同步：改了出口、端口或身份，必须同步改监控脚本里的期望断言，否则监控从故障探测器退化成噪声源。同步后要实跑一轮确认退出码正常且日志出现新的成功行，只做语法检查不算完成——语法通过的脚本仍可能因为期望值没改而持续误报。",
+    "写方案前先验证方案所依赖的机制假设，否则方案里会长出并不存在的降级链。本次两条关键假设都查到出处：用户目录里的后端插件会被扫描但需显式启用；显式配置的后端不可用时不会静默回退，而是直接报错。第二条直接决定了「降级必须写在行为层，不能指望配置层」。判据：方案里每条机制断言都要能指到具体代码位置或实测结果，指不到的降级为待验项，不写成既定事实。",
+    "重试策略必须按错误类型分级，并用单测把语义钉死：把读超时和连接抖动当成同一类可重试错误，会让超时预算被放大一倍（20 秒变 41 秒）；正确分级是连接级错误重试、读超时与服务端错误快速失败。验证不靠找站点复现，而是桩出错误类型再断言尝试次数。判据：凡是写成「通用兜底重试」的地方，都要按错误类型拆开，否则兜底本身成为新的延迟源。",
+    "验证新实现是否真的被加载，用「改前已知失败的同一个操作」当探针：同一条调用在重启前报错、重启后返回正常结果，这个前后反转才构成证据；任意成功样本在旧实现下也可能成功，不具判别力。对无法直接观测的项（如重试语义），显式标注为「同文件同次加载 + 单测推断」，不冒充直接证据。"
   ]
 }
