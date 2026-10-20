@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-19T18:02:15.213663+00:00",
-  "total_sessions_processed": 290,
+  "last_extraction": "2026-10-20T18:02:19.629756+00:00",
+  "total_sessions_processed": 291,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6652,6 +6652,134 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "cos_max=0.5532 低于 0.72 阈值（Gate5 findings=0）｜最近邻：2+ 独立信源交叉验证"
+        },
+        {
+          "id": "insight_2026-10-20T18:02:19.629756+00:00_0",
+          "date": "2026-10-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "当监控/守护探针报告目标异常、而目标实际健康时，优先怀疑探针本身而不是被监控对象：探针若依赖上游实现细节（进程命令行、SDK 公开 API、启动器形态），上游一次大版本改版就会让它静默假阴性，且失败模式是「主动杀掉健康进程」而非报错。判据：探针的判据里出现非契约性事实（名字/命令行长什么样）即视为脆弱，必须换成结构化事实（pidfile + kill -0、状态文件字段、官方 SDK 新 API）。",
+          "confidence": "high",
+          "evidence": "同一会话三例同形：① mineru-mcp/mnemosyne 依赖的 fastmcp 3.4.2 与 mcp 2.0.0 不兼容，启动即 ImportError，日志只有截断的 MCPError，已静默失效 9 天；② fallback-guard.sh 的 gateway_alive() 用 pgrep -f 'hermes_cli.main gateway run'，v0.22.2 换启动器后 cmdline 变成 python3 -I -c，每 300 秒误判 DOWN 并 kickstart -k 杀掉健康 gateway；③ watchdog_v2.sh 的 GATEWAY_PROC pgrep 兜底同样失效，只是先读 pidfile 才没爆。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261020_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261020_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-20T18:02:19.629756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-10-20T18:02:19.629756+00:00_1",
+          "date": "2026-10-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "症状消失不等于根因解决：当修复手段只能让告警/横幅不再出现、却解释不了它为什么出现时，视为未修。此人不接受用「再重启一次」把状态刷干净来结账，要求走被修复系统自身的判定逻辑、并先自证前置条件成立（活体 fleet 确实跑着目标 sha）再清除标记，避免伪造清账。",
+          "confidence": "high",
+          "evidence": "对 hermes update 遗留的「A previous hermes update pulled new code but did not restart」横幅：明确写下「这条警告不是 gateway 没重启，重启也清不掉它——卡的是账本比对，不是进程状态。所以我没有用重启去『糊』」，随后定位 inventory.runtimes 对同一 pid 存了 mapped 行与 stopped_unmapped 副本导致恒 False，先备份、自证 code_sha == 0fbefc8c，再调官方 _marker_only_restart_obsolete() 清除。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261020_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261020_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-20T18:02:19.629756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-10-20T18:02:19.629756+00:00_2",
+          "date": "2026-10-20",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "多个消费者共享一个依赖时，改「声明兼容新区间的单个消费者」而不是改「被共享的那个」：不降级宿主钉版、不动全局依赖，只升那个已经声明兼容新区间的服务端包。动手前用 dry-run 列出将被连带变动的包做白名单核对，升级后再复核关键钉版与宿主 import 未变。",
+          "confidence": "high",
+          "evidence": "MCP 修复时判定「这两个包都装在 Hermes 自己的 venv 里，而 Hermes 硬钉 mcp==2.0.0，所以降级 mcp 这条最省事的路会直接打断 Hermes 客户端本身」；最终只升 fastmcp 3.4.2→4.1.1 与 mnemosyne-memory 3.5.0→3.15.1，并「dry-run 白名单核对：只动这两个包 + uncalled-for，没有连带升降 mcp/starlette/pydantic」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261020_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261020_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-20T18:02:19.629756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-10-20T18:02:19.629756+00:00_3",
+          "date": "2026-10-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用时间规律做故障指纹：看到固定间隔的重复故障时，先把间隔当指纹反查调度者（定时器周期 + 启动耗时），而不是从症状向下逐层排查。等间隔本身就排除了随机崩溃与偶发网络错误，把搜索空间压缩到一个定时任务。",
+          "confidence": "high",
+          "evidence": "看到 14:04–14:35 每约 5 分钟一条 shutting down 的截图后，直接判定「这不是过期横幅，gateway 现在处于重启循环」，并从 launchd 任务的 run interval = 300 seconds 反查到 ai.hermes.fallback；随后用「间隔精确 316s（300s 定时 + 启动耗时）」把 fallback 日志与 gateway 侧 SIGTERM 时间戳一一对应。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261020_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261020_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-20T18:02:19.629756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -10094,6 +10222,70 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "cos_max=0.5988 低于 0.72 阈值（Gate5 findings=0）｜最近邻：同一套流程散落多处的结构问题"
+        },
+        {
+          "id": "insight_2026-10-20T18:02:19.629756+00:00_4",
+          "date": "2026-10-20",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "破坏性升级前先盘点本地补丁，而不是只备份配置：本地未提交改动/自建补丁往往没有第二份副本，上游最新版也未必包含它，所以升级前必须逐项比对「当前工作树改动」与「patches 目录里的补丁文件」是否一致，再连同 config/env/依赖 freeze/数据库一起留备份和旧 commit sha 作为回滚基线。",
+          "confidence": "high",
+          "evidence": "升级 Triage 里写明「记忆里明确记录未提交工作树改动 + patch 存 ~/.hermes/patches/，直接 hermes update 有丢掉本地修复的风险，必须先盘后升」；实测比对「当前改动 vs 09-28 补丁」行数相同（122/122），再做 config.yaml.bak/env.bak/head-before.txt/telegram-patch.patch 四份备份，并先跑 hermes update --check 拿到 17119 commits behind 与重启清单。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261020_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261020_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-20T18:02:19.629756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
+        },
+        {
+          "id": "insight_2026-10-20T18:02:19.629756+00:00_5",
+          "date": "2026-10-20",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "对「历史未完结业务线」与「当前正在制造噪音的故障」冲突时，稳定选择先压当前阻塞：未完结的业务探索可以被明确作废，但持续产生错误信号/告警的东西必须先停。此人用一句话就切断旧线索（不再跟进），不留半开的并行分支。",
+          "confidence": "high",
+          "evidence": "agent 提示「上一段未完结的业务线（供你挑）：10/18 的空调总线诊断，话头停在怀疑总线本身或两个集控打架」，用户回复「空调的不用管了，先解决眼前的问题」，随后全部注意力转到刚发现的阻塞问题（MCP park + 重启循环）上。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261020_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261020_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-20T18:02:19.629756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -11982,6 +12174,38 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cosine=0.5633 (dt-preflight 2026-10-19, embedding live, Gate5 findings=0)"
+        },
+        {
+          "id": "insight_2026-10-20T18:02:19.629756+00:00_6",
+          "date": "2026-10-20",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "故障复盘沉淀成「可迁移判据」而不是事件叙事：写入 skill 的是触发条件 + 判据 + 反例（如何区分永久 park 与可自愈 park、如何用节奏定位凶手、账本类告警为何重启无效），并同时补测试用例让人工结论有机器证据。同一形状的坑在不同组件上出现时，收敛成一条通用规则而非三条个案记录。",
+          "confidence": "high",
+          "evidence": "本会话三次 patch skill：mcp-server-setup 新增「SDK 大版本漂移：stdio 服务在 import 期崩溃（静默 park）」节；hermes-restart-recovery 新增「重启循环：先找节奏再找凶手」「update 回执怎么正确结账」两节；同时为 Telegram 重投补丁补 3 个测试（4 tests passed）使补丁行为有机器证据。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261020_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261020_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-20T18:02:19.629756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": []
         }
       ]
     },
@@ -12522,20 +12746,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-06-21T02:00:00.000000",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 40,
-      "note": "No new insights. Sessions scanned: 20260619_200840_16abab5c (feishu, fully covered by prior extractions), 20260620_011318_d8f8786c (telegram, 118 msg, updated past last extraction at 22:58 but too large for cron parsing - marked for supplementary extraction in next interactive session). All behavioral patterns from these sessions (cross-model triangulation, 你怎么看+写吧 decision pulse, recursive framework review) already captured by 2026-06-20 runs."
-    },
     {
       "date": "2026-06-21T18:02:09.772531+00:00",
       "layers": {
@@ -13669,18 +13879,31 @@
         "7": 100
       },
       "total_insights": 418
+    },
+    {
+      "date": "2026-10-20T18:02:19.629756+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 425
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-19T18:02:17.434809+00:00",
+    "checked_at": "2026-10-20T18:02:21.487688+00:00",
     "warnings": [],
-    "insight_count": 10
+    "insight_count": 7
   },
   "_last_agent_insights": [
-    "改动既有配置的完成判据是双向断言：该变的变了，不该变的逐条等价。做法是把改动前后都解析成结构再比对（规则列表逐条相等、组数一致、DNS 段与 rule-providers 与顶层键一致），再跑引用完整性（每个组引用、每条规则目标都存在），最后才 reload。只有 reload 成功或服务恢复，无法区分这次改动是精准的还是顺手改坏了别处。另外数量与预期不符时先复核统计口径（文本匹配会把其他段混进列表），再怀疑改动本身。",
-    "基础设施变更的完成定义包含观测层的期望值同步：改了出口、端口或身份，必须同步改监控脚本里的期望断言，否则监控从故障探测器退化成噪声源。同步后要实跑一轮确认退出码正常且日志出现新的成功行，只做语法检查不算完成——语法通过的脚本仍可能因为期望值没改而持续误报。",
-    "写方案前先验证方案所依赖的机制假设，否则方案里会长出并不存在的降级链。本次两条关键假设都查到出处：用户目录里的后端插件会被扫描但需显式启用；显式配置的后端不可用时不会静默回退，而是直接报错。第二条直接决定了「降级必须写在行为层，不能指望配置层」。判据：方案里每条机制断言都要能指到具体代码位置或实测结果，指不到的降级为待验项，不写成既定事实。",
-    "重试策略必须按错误类型分级，并用单测把语义钉死：把读超时和连接抖动当成同一类可重试错误，会让超时预算被放大一倍（20 秒变 41 秒）；正确分级是连接级错误重试、读超时与服务端错误快速失败。验证不靠找站点复现，而是桩出错误类型再断言尝试次数。判据：凡是写成「通用兜底重试」的地方，都要按错误类型拆开，否则兜底本身成为新的延迟源。",
-    "验证新实现是否真的被加载，用「改前已知失败的同一个操作」当探针：同一条调用在重启前报错、重启后返回正常结果，这个前后反转才构成证据；任意成功样本在旧实现下也可能成功，不具判别力。对无法直接观测的项（如重试语义），显式标注为「同文件同次加载 + 单测推断」，不冒充直接证据。"
+    "多个消费者共享一个依赖时，改「声明兼容新区间的单个消费者」而不是改「被共享的那个」：不降级宿主钉版、不动全局依赖，只升那个已经声明兼容新区间的服务端包。动手前用 dry-run 列出将被连带变动的包做白名单核对，升级后再复核关键钉版与宿主 import 未变。",
+    "用时间规律做故障指纹：看到固定间隔的重复故障时，先把间隔当指纹反查调度者（定时器周期 + 启动耗时），而不是从症状向下逐层排查。等间隔本身就排除了随机崩溃与偶发网络错误，把搜索空间压缩到一个定时任务。",
+    "破坏性升级前先盘点本地补丁，而不是只备份配置：本地未提交改动/自建补丁往往没有第二份副本，上游最新版也未必包含它，所以升级前必须逐项比对「当前工作树改动」与「patches 目录里的补丁文件」是否一致，再连同 config/env/依赖 freeze/数据库一起留备份和旧 commit sha 作为回滚基线。",
+    "对「历史未完结业务线」与「当前正在制造噪音的故障」冲突时，稳定选择先压当前阻塞：未完结的业务探索可以被明确作废，但持续产生错误信号/告警的东西必须先停。此人用一句话就切断旧线索（不再跟进），不留半开的并行分支。",
+    "故障复盘沉淀成「可迁移判据」而不是事件叙事：写入 skill 的是触发条件 + 判据 + 反例（如何区分永久 park 与可自愈 park、如何用节奏定位凶手、账本类告警为何重启无效），并同时补测试用例让人工结论有机器证据。同一形状的坑在不同组件上出现时，收敛成一条通用规则而非三条个案记录。"
   ]
 }
