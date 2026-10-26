@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-20T18:02:19.629756+00:00",
-  "total_sessions_processed": 291,
+  "last_extraction": "2026-10-26T18:03:15.775805+00:00",
+  "total_sessions_processed": 293,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6780,6 +6780,105 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-10-26T18:03:15.775805+00:00_0",
+          "date": "2026-10-26",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "判型前先证明实验条件真的成立：当结论建立在「换个环境再测」之上时，先把变量本身量化（出口 IP 归属、首跳网关、无线信道与信号强度），三者任一未变就说明环境根本没换，重复测试零信息量。不接受操作者自述的「我已经切了」作为前提，也不用同一路径的第二次失败去加强结论；只有变量真变了的那一次复测才有判别力。",
+          "confidence": "high",
+          "evidence": "用户「我切手机热点了，你直接再试试」→ 复测显示 en1 仍是公司网段、出口仍 103.37.140.x、Wi-Fi 5GHz 信道 60 信号 -34dBm，判定「这台 Mac 至今只在公司那一个 Wi-Fi 里换了个 IP，从未离开」；连说三次「再试/再看」后才真正切到蜂窝（出口 114.254.2.87），结论随即反转。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261026_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261026_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-26T18:03:15.775805+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "manual literal dedup (semantic path FALLBACK today): keyword scan 换网/热点/控制变量/复测/前提 = 0 hits in 425 existing insights"
+        },
+        {
+          "id": "insight_2026-10-26T18:03:15.775805+00:00_1",
+          "date": "2026-10-26",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "并行与委托的收益要先扣掉共享故障域：子任务和主链跑在同一台机器、同一条出口、同一套凭据上时，fan-out 买不到任何可用性，只买到同一故障的更多失败副本。判据是子任务的下游依赖是否与主链不同域；同域时正确动作是把链路修通，而不是加并行度。",
+          "confidence": "high",
+          "evidence": "断网期间 agent 派子 agent 检索社区，用户直接质问「你现在都连不上外网，你的子 agent 有啥用」；同窗口内用户自己用 4G 蜂窝做独立通路验证（「4g 也不通」），认的是真的换了故障域的证据，不是任务并行度。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261026_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261026_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-26T18:03:15.775805+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "manual literal dedup: 5 near entries on delegation (2026-08-12 context pollution / 2026-09-28 reversibility boundary / 2026-09-23 delegation-is-not-evidence / 2026-09-20 single-message research brief / 2026-09-28 recompute numbers) — none covers shared-fault-domain redundancy, kept"
+        },
+        {
+          "id": "insight_2026-10-26T18:03:15.775805+00:00_3",
+          "date": "2026-10-26",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "故障判型的第一步是确定横截面归属：先看同类事件是否在同一时间窗内发生在多个不相关的人身上，把「单点配置问题」与「群体性封锁／平台故障」分开，再决定是查本机还是等外部恢复。群体事件下，本机侧的一切更换动作（轮换端口、换节点、重装）都是低期望消耗。",
+          "confidence": "high",
+          "evidence": "用户「我看了下论坛，貌似大批量出现坠机，这种情况，你有什么建议和思路吗」（2026-10-26 18:13），随后接受判型并问「如果是 A 能等来解封吗」；最后以自己的 4G 蜂窝复测（「4g 也不通」）把本地因素排除。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261026_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261026_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-26T18:03:15.775805+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "manual literal dedup: closest existing = 2026-08-01 multi-source cross-verification (verifying facts across sources) — different axis (fault scoping, group vs single point), kept"
         }
       ]
     },
@@ -12206,6 +12305,39 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-10-26T18:03:15.775805+00:00_2",
+          "date": "2026-10-26",
+          "dimension": "知识结构",
+          "layer": "L5",
+          "insight": "基础设施资产在记忆里必须是有状态的实体（在役／退役／排队待接入），引用时要连状态一起引；某个资产一旦宣告退役，就不该再出现在故障判型或方案建议里。过期事实被引用一次，整条推理链的可信度就会被折价，且这个代价由别人替你说出来。",
+          "confidence": "high",
+          "evidence": "用户「AaITR不是之前和你说了已经过期了吗？你怎么还拿AaITR说事儿？」（2026-10-26 18:20，agent 在断网方案里仍把已退役的 AaITR 列为可用节点）",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261026_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261026_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-26T18:03:15.775805+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "manual literal dedup: keyword scan 过期/退役/生命周期/在役 = 0 hits in 425 existing insights"
         }
       ]
     },
@@ -12746,19 +12878,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-06-21T18:02:09.772531+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 42
-    },
     {
       "date": "2026-06-22T00:58:35.313880+00:00",
       "layers": {
@@ -13892,18 +14011,30 @@
         "7": 100
       },
       "total_insights": 425
+    },
+    {
+      "date": "2026-10-26T18:03:15.775805+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 429
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-25T18:01:28.953239+00:00",
+    "checked_at": "2026-10-26T18:03:18.073430+00:00",
     "warnings": [],
-    "insight_count": 0
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "多个消费者共享一个依赖时，改「声明兼容新区间的单个消费者」而不是改「被共享的那个」：不降级宿主钉版、不动全局依赖，只升那个已经声明兼容新区间的服务端包。动手前用 dry-run 列出将被连带变动的包做白名单核对，升级后再复核关键钉版与宿主 import 未变。",
-    "用时间规律做故障指纹：看到固定间隔的重复故障时，先把间隔当指纹反查调度者（定时器周期 + 启动耗时），而不是从症状向下逐层排查。等间隔本身就排除了随机崩溃与偶发网络错误，把搜索空间压缩到一个定时任务。",
-    "破坏性升级前先盘点本地补丁，而不是只备份配置：本地未提交改动/自建补丁往往没有第二份副本，上游最新版也未必包含它，所以升级前必须逐项比对「当前工作树改动」与「patches 目录里的补丁文件」是否一致，再连同 config/env/依赖 freeze/数据库一起留备份和旧 commit sha 作为回滚基线。",
-    "对「历史未完结业务线」与「当前正在制造噪音的故障」冲突时，稳定选择先压当前阻塞：未完结的业务探索可以被明确作废，但持续产生错误信号/告警的东西必须先停。此人用一句话就切断旧线索（不再跟进），不留半开的并行分支。",
-    "故障复盘沉淀成「可迁移判据」而不是事件叙事：写入 skill 的是触发条件 + 判据 + 反例（如何区分永久 park 与可自愈 park、如何用节奏定位凶手、账本类告警为何重启无效），并同时补测试用例让人工结论有机器证据。同一形状的坑在不同组件上出现时，收敛成一条通用规则而非三条个案记录。"
+    "判型前先证明实验条件真的成立：当结论建立在「换个环境再测」之上时，先把变量本身量化（出口 IP 归属、首跳网关、无线信道与信号强度），三者任一未变就说明环境根本没换，重复测试零信息量。不接受操作者自述的「我已经切了」作为前提，也不用同一路径的第二次失败去加强结论；只有变量真变了的那一次复测才有判别力。",
+    "并行与委托的收益要先扣掉共享故障域：子任务和主链跑在同一台机器、同一条出口、同一套凭据上时，fan-out 买不到任何可用性，只买到同一故障的更多失败副本。判据是子任务的下游依赖是否与主链不同域；同域时正确动作是把链路修通，而不是加并行度。",
+    "故障判型的第一步是确定横截面归属：先看同类事件是否在同一时间窗内发生在多个不相关的人身上，把「单点配置问题」与「群体性封锁／平台故障」分开，再决定是查本机还是等外部恢复。群体事件下，本机侧的一切更换动作（轮换端口、换节点、重装）都是低期望消耗。",
+    "基础设施资产在记忆里必须是有状态的实体（在役／退役／排队待接入），引用时要连状态一起引；某个资产一旦宣告退役，就不该再出现在故障判型或方案建议里。过期事实被引用一次，整条推理链的可信度就会被折价，且这个代价由别人替你说出来。"
   ]
 }
