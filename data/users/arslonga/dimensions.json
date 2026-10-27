@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-26T18:03:15.775805+00:00",
-  "total_sessions_processed": 293,
+  "last_extraction": "2026-10-27T18:03:57.899885+00:00",
+  "total_sessions_processed": 297,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -6879,6 +6879,138 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "manual literal dedup: closest existing = 2026-08-01 multi-source cross-verification (verifying facts across sources) — different axis (fault scoping, group vs single point), kept"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_0",
+          "date": "2026-10-27",
+          "dimension": "推理风格",
+          "layer": "2",
+          "insight": "方案的价值以「能否小规模试点」为第一道门槛：先问能不能在有限时间、有限人力里跑起来、有没有可度量的指标、机制是否与自身组织同构；覆盖面、框架完整度、案例新颖度都不构成采购理由。评估他方实践时要求单一锚点而非横向巡礼。",
+          "confidence": "high",
+          "evidence": "用户：「核心应该聚焦而不是大而宽泛，最好围绕一个具体的工作新流程、机制，重点突出和传统产研范式比有什么差异…不要泛泛而谈，需要取其精华」；并追问「锚定一家公司的实践落地的话，你建议我调研哪家」，随后把切口压到「把 PRD＋设计稿换成可运行原型＋客户证据」这一个动作。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5567 vs 大工程开工前把口径方案当成独立可批准物（不同：那是委托前的口径确认，这是成果的采纳门槛）"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_2",
+          "date": "2026-10-27",
+          "dimension": "决策风格",
+          "layer": "2",
+          "insight": "架构评审按「资产价值 × 暴露成本」排序：最贵、最稀缺、最难替换的资源放在最后一跳，被外部直连的第一跳必须是可牺牲的廉价件；把高价值资产当前置入口的方案会被当场驳回，因为赌输等于全部资产归零。",
+          "confidence": "high",
+          "evidence": "用户：「我直连qqpw？那不就相当于把qqpw暴露给中国ip吗」→ 助手承认「我上一条把顺序给反了」，改为「入口用可牺牲的 DC IP、住宅 IP 是第三跳/最后一跳」，并写明「把第四个别名 IP 也押上去，赌输就四台全没」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5854 vs 提质先审计已付钱未用上的资源（不同：那是成本利用，这是暴露面排序）"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_4",
+          "date": "2026-10-27",
+          "dimension": "推理风格",
+          "layer": "2",
+          "insight": "政策与价格类事实采用一手口径优先：商家客服、官方文档、自身实测记录压过第三方整理与社区教程；一旦一手口径推翻此前引用的二手结论，应当场认错并按新前提重估，不做「两边都有道理」的和稀泥。",
+          "confidence": "high",
+          "evidence": "用户：「单说dmit侧，不支持免费换ip，只能$5付费换IP，且有换了ip也是断的」→ 助手承认「我上一轮说每 15 天免费换一次，那出自第三方整理…你拿到的客服口径优先于我引用的二手来源——这个我错了」，并重算换 IP 的期望值。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5709 vs 定量结论被推翻时显式撤回（相邻族：都要求当场撤回，但那条讲自己的数字，这条讲信源等级的排序规则）"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_5",
+          "date": "2026-10-27",
+          "dimension": "推理风格",
+          "layer": "2",
+          "insight": "引入他人失败经验时，期望的是对自己方案做压力测试，而不是求同：正确回应是先用自身历史命中率量化（存活多久、同段健康度），再拆出「反馈成立的条件」与「被当成宿命的部分」，并点明生存者偏差。",
+          "confidence": "medium",
+          "evidence": "用户：「我看有人反馈 换了ip 也立即被封了 这还有必要换吗？」→ 助手用该 IP 上线至被彻底封约 2.3 个月、179.253.246.0/24 段 100/254 存活于 443 反驳「立即被封」的宿命论，并标注社区反馈存在幸存者偏差。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.4992 vs 系统化诊断的错误修正闭环（不同：本条处理他人轶事的可信度，不涉及自身假设的证伪）"
         }
       ]
     },
@@ -10385,6 +10517,105 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_3",
+          "date": "2026-10-27",
+          "dimension": "行为模式",
+          "layer": "4",
+          "insight": "冗余腿受损时分两种处置而不是一刀切：主腿恢复即停手，其余腿在「需新增支出 + 仍在封锁窗口内」的条件下显式推迟，标记为等窗口过去再看——延迟对称是有前提的止损，不是把不行动当默认。",
+          "confidence": "high",
+          "evidence": "用户：「1. 不换，dmit 好了就行，其他的等风波过了再看」（同一轮已给出 BWG 付费换 IP 报价 $7.4–$8.8、HKG 走 DMIT 面板两条可选路径；且当时处于大面积封禁窗口内）。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5250 vs 故障恢复后的下游影响面核查与重跑（不同：那条是补跑下游任务，这条是止损的范围与时机）；次近 0.5185 是无法确认正向收益时保持现状——本条用「需新增支出 + 封锁窗口内」的条件限定与之区分，不构成普遍的不行动偏好"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_6",
+          "date": "2026-10-27",
+          "dimension": "行为模式",
+          "layer": "4",
+          "insight": "需要外部动作或花钱的项推迟、零成本项立刻推进：把「等明天买域名」与「今晚先换伪装目标」拆成两件事执行，避免整条线被一个未决采购卡住。",
+          "confidence": "high",
+          "evidence": "用户：「明天我再买域名，你先换个 edu 后缀的吧」→ 当晚把服务端两个入站的 dest/serverNames、客户端 SNI、reality-rotate 的 DEST_POOL 四处同步切到 edu 站，并做端到端验证与回滚备份。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5649 vs 提质先审计已付钱未用上的资源（不同：那条讲资源利用，这条讲任务解耦与推进顺序）"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_7",
+          "date": "2026-10-27",
+          "dimension": "系统设计方法论",
+          "layer": "4",
+          "insight": "故障恢复不以「恢复可用」为终点：只要根因指向结构性缺陷，点修复（换 IP、换端口）就会被判为不合格交付，必须附上缺陷清单、可横向关联面的收敛与长期机制，否则同类故障按周期重演。",
+          "confidence": "high",
+          "evidence": "用户：「既然全新 ip 可用，我希望你不只是简单替换，而是从充分加固抗封角度设计完整方案，兼顾长期」→ 随后盘出三条结构缺陷：伪装目标踩 Xray 硬编码 warning、同一 IP 四个同构 Reality 入站（探测面 ×4）、没有任何 IP 被封后仍可用的通道。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6350 vs 故障恢复后的下游影响面核查与重跑（相邻族：都要求越过「已修好」，但那条是补跑下游任务，这条是消除结构缺陷）"
         }
       ]
     },
@@ -12338,6 +12569,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "manual literal dedup: keyword scan 过期/退役/生命周期/在役 = 0 hits in 425 existing insights"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_1",
+          "date": "2026-10-27",
+          "dimension": "知识结构",
+          "layer": "5",
+          "insight": "存量研究的更新方式是叠加而非重写：新证据与新判定写成追加章节，原始判断一字不改地留着，使「当时怎么想、现在改了什么」可对照；覆盖式重写等于销毁证伪基线。",
+          "confidence": "high",
+          "evidence": "用户：「更新，然后把结论发到我的飞书 bot」→ 交付为「新增第九节『增量修订』，52 行，含逐条检验表；原 1–8 节一字未动，保留 9/2 的原始判断以便对照」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6182 vs 批量替换的历史真实性约束（相邻族：都属「不可覆盖既有记录」，但那条讲数据迁移的历史行，这条讲研究文档的版本叠加）"
+        },
+        {
+          "id": "insight_2026-10-27T18:03:57.899885+00:00_8",
+          "date": "2026-10-27",
+          "dimension": "知识结构",
+          "layer": "5",
+          "insight": "对历史技术风险的引用常有定性偏移：把「审计发现并拆除的隐患」记成「已经发生过的事故」。遇到这类前提时先摆正定性（是否真发生过、泄漏面到底在哪）再回答，既不迁就错误前提，也不否定记忆本身。",
+          "confidence": "medium",
+          "evidence": "用户：「我记得之前出过一波问题，大概是用了 cf 的域名导致被偷跑流量的」→ 助手核查 2026-08-09 审计：dest 为 apple 自有段、实测 0 条 cdn-cgi 痕迹；真正风险是 DEST_POOL 含 www.cloudflare.com，8-28 已剔除，定性为「不是事故，是审计发现的定时炸弹，被拆了」。",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261027_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261027_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-27T18:03:57.899885+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6233 vs 引用历史事实前须核对写入时点（相邻族：都属历史事实的精度问题，但那条讲时效与降权，这条讲性质偏移）"
         }
       ]
     },
@@ -12878,19 +13175,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-06-22T00:58:35.313880+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 42
-    },
     {
       "date": "2026-06-22T00:59:01.653129+00:00",
       "layers": {
@@ -14024,17 +14308,31 @@
         "7": 100
       },
       "total_insights": 429
+    },
+    {
+      "date": "2026-10-27T18:03:57.899885+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 438
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-26T18:03:18.073430+00:00",
+    "checked_at": "2026-10-27T18:04:00.391768+00:00",
     "warnings": [],
-    "insight_count": 4
+    "insight_count": 9
   },
   "_last_agent_insights": [
-    "判型前先证明实验条件真的成立：当结论建立在「换个环境再测」之上时，先把变量本身量化（出口 IP 归属、首跳网关、无线信道与信号强度），三者任一未变就说明环境根本没换，重复测试零信息量。不接受操作者自述的「我已经切了」作为前提，也不用同一路径的第二次失败去加强结论；只有变量真变了的那一次复测才有判别力。",
-    "并行与委托的收益要先扣掉共享故障域：子任务和主链跑在同一台机器、同一条出口、同一套凭据上时，fan-out 买不到任何可用性，只买到同一故障的更多失败副本。判据是子任务的下游依赖是否与主链不同域；同域时正确动作是把链路修通，而不是加并行度。",
-    "故障判型的第一步是确定横截面归属：先看同类事件是否在同一时间窗内发生在多个不相关的人身上，把「单点配置问题」与「群体性封锁／平台故障」分开，再决定是查本机还是等外部恢复。群体事件下，本机侧的一切更换动作（轮换端口、换节点、重装）都是低期望消耗。",
-    "基础设施资产在记忆里必须是有状态的实体（在役／退役／排队待接入），引用时要连状态一起引；某个资产一旦宣告退役，就不该再出现在故障判型或方案建议里。过期事实被引用一次，整条推理链的可信度就会被折价，且这个代价由别人替你说出来。"
+    "冗余腿受损时分两种处置而不是一刀切：主腿恢复即停手，其余腿在「需新增支出 + 仍在封锁窗口内」的条件下显式推迟，标记为等窗口过去再看——延迟对称是有前提的止损，不是把不行动当默认。",
+    "需要外部动作或花钱的项推迟、零成本项立刻推进：把「等明天买域名」与「今晚先换伪装目标」拆成两件事执行，避免整条线被一个未决采购卡住。",
+    "故障恢复不以「恢复可用」为终点：只要根因指向结构性缺陷，点修复（换 IP、换端口）就会被判为不合格交付，必须附上缺陷清单、可横向关联面的收敛与长期机制，否则同类故障按周期重演。",
+    "存量研究的更新方式是叠加而非重写：新证据与新判定写成追加章节，原始判断一字不改地留着，使「当时怎么想、现在改了什么」可对照；覆盖式重写等于销毁证伪基线。",
+    "对历史技术风险的引用常有定性偏移：把「审计发现并拆除的隐患」记成「已经发生过的事故」。遇到这类前提时先摆正定性（是否真发生过、泄漏面到底在哪）再回答，既不迁就错误前提，也不否定记忆本身。"
   ]
 }
