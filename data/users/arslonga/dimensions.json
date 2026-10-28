@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-27T18:03:57.899885+00:00",
-  "total_sessions_processed": 297,
+  "last_extraction": "2026-10-28T18:03:41.180893+00:00",
+  "total_sessions_processed": 298,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7011,6 +7011,171 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.4992 vs 系统化诊断的错误修正闭环（不同：本条处理他人轶事的可信度，不涉及自身假设的证伪）"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_0",
+          "date": "2026-10-28",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "故障定性必须先锁定「不可区分前提」：任何用外部 vantage 否定内部故障的结论，前提是被观察对象确实处于可观察状态。忘了这一步，关机与封锁在证据上完全同构，结论会随新证据反复反转。可迁移判据：先证明「对象活着且可观测」，再讨论它为什么不可达。",
+          "confidence": "high",
+          "evidence": "「墙外探测必须在「确认目标机开机」的前提下做，否则关机与封锁不可区分——那次 28 分钟内结论反转三次就是这么来的。」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6049 nearest=「以『方向已明』而非『证据已判』作为收敛阈值」；本条讲判型前的可观测前提，非收敛阈值，<0.72 无冲突"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_1",
+          "date": "2026-10-28",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "冗余要按「判定是否独立」来买，不按物理距离或节点数量来买：同一机房的两台机器在延迟地图上完全重合，仍可能买到独立的封锁判定（异 ASN / 异 IP / 异上游），这才是它们真实的冗余价值；反过来，跨城但同 ASN 同上游的两台，被针对性处置时会同时死。谈「几条腿」之前先问「它们是同一个判定对象的副本，还是两个判定对象」。",
+          "confidence": "high",
+          "evidence": "「BWG 不是独立地理腿：实测 DMIT→BWG RTT 均值 0.674ms、0% 丢包——两台在同一个洛杉矶机房群/同城互联。它的冗余价值是「异 ASN + 异 IP + 异上游线路」，不是路径不同」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5631 nearest=「成本投入分布不对称：为信息量买单、不为边际冗余容量买单」；本条给冗余的计量单位（判定独立性），<0.72 无冲突"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_2",
+          "date": "2026-10-28",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "风险定位要落到「载体的具体用法」而不是「载体本身」：同一个对象可以是风险源也可以是风险消除手段，取决于它被放在哪个位置。判风险时先问「它在配置里扮演什么角色」，再决定禁用它还是依赖它——把整个品类禁掉是最省事也最没信息量的做法。",
+          "confidence": "high",
+          "evidence": "「域名本身不是风险源，把别人的 CDN 域名写进 dest/serverName 才是。」以及「「域名 = SNI = 证书 = 站点内容」四者自洽，是这套方案里最难被判定成代理的形态」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.4752 无近邻冲突"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_3",
+          "date": "2026-10-28",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "收益判断用「自身历史事件」折算，并显式划出「不能承诺的部分」：把过去若干次同类故障的耗时与现金成本加总成年化数字，对照采购成本给出 ROI；对无法用数据支撑的收益（如「降低被判定概率」）直接标注不可承诺。这类决策的性质要说明白——买的是保险，不是性能。",
+          "confidence": "high",
+          "evidence": "「用你自己的历史数据折算，大致是每年省 4–8 小时 + $20 换 IP，成本 $10/年。所以这是买保险，不是买性能。」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5761 nearest=「付费 vs 免费多维账本交叉论证」；本条强调用自身历史事件年化 + 标注不可承诺项，<0.72 无冲突"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_4",
+          "date": "2026-10-28",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "把「等外部条件恢复」转成「预置完成 + 自动触发器」：先盘点哪些工作不依赖外部条件（服务端改造、证书签发、客户端配置），在等待窗口内全部做完，再写一个带假阳性防护的自动激活器。外部条件一恢复即无缝生效，等待期不再是空转——这是可控性设计，不是抢跑。",
+          "confidence": "high",
+          "evidence": "用户「需要等解封再执行吗，现在执行是不是也行，解封后无缝生效」→ 回复「只有一件事必须等解封：端到端验证。其余全部可以在墙外完成」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5315 nearest=「零信任安全设计哲学（先全封后按需开放）」；本条讲等待期的预置与自动激活，<0.72 无冲突"
         }
       ]
     },
@@ -10616,6 +10781,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.6350 vs 故障恢复后的下游影响面核查与重跑（相邻族：都要求越过「已修好」，但那条是补跑下游任务，这条是消除结构缺陷）"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_5",
+          "date": "2026-10-28",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "告警降噪必须落在可计算的判据上，不能停在「这条看着像噪声」的主观分级：先定义「这次失败是否发生在一个仍有健康成员的组内」，组内尚有健康成员→判切换瞬态只记日志，组内全灭→才推真断网。降噪的价值不在省消息，而在保护告警可信度——误报会训练出告警免疫，真事故时人不看。",
+          "confidence": "high",
+          "evidence": "「组内有健康成员 → 判为 fallback 切换瞬态，只写日志，不推 Telegram；组内零健康成员 → 才推「探针失败且组内无健康成员（判定为真断网）」」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6873 nearest=「对周期性通知的判据是信噪比而非覆盖面」；本条给出可计算判据（组内健康成员数=0）与告警免疫机制，<0.72 未达冲突线但属同域近邻，入库后需留意合并"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_6",
+          "date": "2026-10-28",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "幂等性必须靠「反向演练」证明，不能靠读代码自我确认：脚本在「条件尚未满足」的真实状态下先跑一遍，再从「条件已满足」状态重跑，看是否重复插入。带行尾注释、带格式变体的配置文件里，「整行精确匹配」式幂等检查几乎必然失效。",
+          "confidence": "high",
+          "evidence": "「反向演练抓到一个真 bug：幂等检查写成了整行精确匹配，但组内条目带行尾注释，导致重复插入。修掉并重验」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6036 nearest=「写入类变更的验收是从被改系统回读期望状态」；本条对象是幂等性（重跑不产生第二份变更），<0.72 无冲突"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_7",
+          "date": "2026-10-28",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "自动触发器判「已恢复」不能停在可达层（端口能连、探测有回包），必须要求业务协议真的握手成功；否则会在半恢复窗口误激活一整条链路，把「部分可用」变成「配置已切但链路半死」。任何自动触发器都要先回答：我的成功判据是可达，还是可用。",
+          "confidence": "high",
+          "evidence": "「含假阳性防护：不是 TCP 一通就宣布解封，必须 Reality 握手也成功」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5727 nearest=「故障恢复不以恢复可用为终点，需附缺陷清单」；本条针对自动触发器的判据层级（可达 vs 可用），<0.72 无冲突"
         }
       ]
     },
@@ -12635,6 +12899,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.6233 vs 引用历史事实前须核对写入时点（相邻族：都属历史事实的精度问题，但那条讲时效与降权，这条讲性质偏移）"
+        },
+        {
+          "id": "insight_2026-10-28T18:03:41.180893+00:00_8",
+          "date": "2026-10-28",
+          "dimension": "系统设计方法论",
+          "layer": "L5",
+          "insight": "单一事实源之外还要配「漂移检查器语义」：检查器必须区分惰性残留与活跃引用（只扫生效中的配置，跳过已停用条目的描述性文本），否则会为已退役资产永久报警。检查器的误报率与覆盖面同等重要——噪声会直接折算成可信度损失。",
+          "confidence": "high",
+          "evidence": "「暂停的 job 是惰性的：prompt 里留着已退役 IP 不构成漂移，否则检查器会永久报噪声」；「长期误报会训练出「告警免疫」」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261028_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261028_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-28T18:03:41.180893+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6062 nearest=「对静默降级的风险权重高于显性成本，先补可见性」；本条讲检查器自身的语义边界，<0.72 无冲突"
         }
       ]
     },
@@ -13175,19 +13472,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-06-22T00:59:01.653129+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 47
-    },
     {
       "date": "2026-06-24T18:06:27.171867+00:00",
       "layers": {
@@ -14321,18 +14605,31 @@
         "7": 100
       },
       "total_insights": 438
+    },
+    {
+      "date": "2026-10-28T18:03:41.180893+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 447
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-27T18:04:00.391768+00:00",
+    "checked_at": "2026-10-28T18:03:43.293397+00:00",
     "warnings": [],
     "insight_count": 9
   },
   "_last_agent_insights": [
-    "冗余腿受损时分两种处置而不是一刀切：主腿恢复即停手，其余腿在「需新增支出 + 仍在封锁窗口内」的条件下显式推迟，标记为等窗口过去再看——延迟对称是有前提的止损，不是把不行动当默认。",
-    "需要外部动作或花钱的项推迟、零成本项立刻推进：把「等明天买域名」与「今晚先换伪装目标」拆成两件事执行，避免整条线被一个未决采购卡住。",
-    "故障恢复不以「恢复可用」为终点：只要根因指向结构性缺陷，点修复（换 IP、换端口）就会被判为不合格交付，必须附上缺陷清单、可横向关联面的收敛与长期机制，否则同类故障按周期重演。",
-    "存量研究的更新方式是叠加而非重写：新证据与新判定写成追加章节，原始判断一字不改地留着，使「当时怎么想、现在改了什么」可对照；覆盖式重写等于销毁证伪基线。",
-    "对历史技术风险的引用常有定性偏移：把「审计发现并拆除的隐患」记成「已经发生过的事故」。遇到这类前提时先摆正定性（是否真发生过、泄漏面到底在哪）再回答，既不迁就错误前提，也不否定记忆本身。"
+    "把「等外部条件恢复」转成「预置完成 + 自动触发器」：先盘点哪些工作不依赖外部条件（服务端改造、证书签发、客户端配置），在等待窗口内全部做完，再写一个带假阳性防护的自动激活器。外部条件一恢复即无缝生效，等待期不再是空转——这是可控性设计，不是抢跑。",
+    "告警降噪必须落在可计算的判据上，不能停在「这条看着像噪声」的主观分级：先定义「这次失败是否发生在一个仍有健康成员的组内」，组内尚有健康成员→判切换瞬态只记日志，组内全灭→才推真断网。降噪的价值不在省消息，而在保护告警可信度——误报会训练出告警免疫，真事故时人不看。",
+    "幂等性必须靠「反向演练」证明，不能靠读代码自我确认：脚本在「条件尚未满足」的真实状态下先跑一遍，再从「条件已满足」状态重跑，看是否重复插入。带行尾注释、带格式变体的配置文件里，「整行精确匹配」式幂等检查几乎必然失效。",
+    "自动触发器判「已恢复」不能停在可达层（端口能连、探测有回包），必须要求业务协议真的握手成功；否则会在半恢复窗口误激活一整条链路，把「部分可用」变成「配置已切但链路半死」。任何自动触发器都要先回答：我的成功判据是可达，还是可用。",
+    "单一事实源之外还要配「漂移检查器语义」：检查器必须区分惰性残留与活跃引用（只扫生效中的配置，跳过已停用条目的描述性文本），否则会为已退役资产永久报警。检查器的误报率与覆盖面同等重要——噪声会直接折算成可信度损失。"
   ]
 }
