@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-10-28T18:03:41.180893+00:00",
-  "total_sessions_processed": 298,
+  "last_extraction": "2026-10-29T18:02:30.111659+00:00",
+  "total_sessions_processed": 299,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7176,6 +7176,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.5315 nearest=「零信任安全设计哲学（先全封后按需开放）」；本条讲等待期的预置与自动激活，<0.72 无冲突"
+        },
+        {
+          "id": "insight_2026-10-29T18:02:30.111659+00:00_0",
+          "date": "2026-10-29",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "评估「要不要为了降风险而偏离现役最优路径」时，用「确定的性能或现金损失 vs 未证实的收益」作判据：只要收益侧没有一手证据、而损失的是已经付费买到的性能，就否决该方案；即使提出方是 agent、论证听起来合理，也直接指出这是负优化。",
+          "confidence": "high",
+          "evidence": "用户原话：「走 cf 岂不是相当于负优化了（延迟），就丧失了我选三网优化线路的意义了」。此前 agent 建议把大流量导向 CF 腿以稀释 SNI 画像；被这句话否掉后实测同机同目标：DMIT 直连 TTFB 0.69s / 10MB 1.44MB/s，CF-WS TTFB 3.07–16.40s / 未完成，agent 撤回该建议并写进文档修正段。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261029_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261029_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-29T18:02:30.111659+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.633（最近邻：收益判断用自身历史事件折算/划出不能承诺的部分）；Gate3 通过，属新增判断轴（否决机制而非 ROI 折算方法）"
+        },
+        {
+          "id": "insight_2026-10-29T18:02:30.111659+00:00_2",
+          "date": "2026-10-29",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "审阅 agent 给出的方案时，重点不在核对已讲的部分，而在找「没讲的那一面」：会从外部听来的说法里提炼一个 agent 未覆盖的风险维度，直接质问为何遗漏，并要求把该维度写进正式文档，而不是接受「方案本身没错」的解释。",
+          "confidence": "high",
+          "evidence": "用户原话：「昨天看到一个说法，说用自己的域名作为 sni 伪装，有一个问题是，站点本身很小众，但是确有大量流量访问，反而容易被 GFW 盯上，这个说法成立吗，你让我申请自己域名的时候完全没提这个」。agent 承认漏讲，补出三层异常模型（确定性矛盾/统计可疑/行为特征）并新增 vault 文档 9.1 节「残余风险：自建域名的流量画像问题」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261029_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261029_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-29T18:02:30.111659+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.649（最近邻：设计演进问责）；Gate3 通过，区别在于本条是「风险覆盖度审计 + 要求文档化」，而非「追问设计不一致」"
+        },
+        {
+          "id": "insight_2026-10-29T18:02:30.111659+00:00_4",
+          "date": "2026-10-29",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "判断 IP / 线路这类资产的质量时，用「供给约束强度 + 邻居污染机制」这一层解释，不接受评分工具的分值差作为质量结论——同档区间内的分差在他看来不构成「谁更好」的证据。",
+          "confidence": "high",
+          "evidence": "用户原话：「我认知里，aaitr 的 ip 综合质量优于 qqpw，综合论坛来说，qqpw 最大的优势是对于使用约束更严格一些，更不容易出现『被同 ip 段其他人滥用导致送中』」。agent 用 ip-api 与 proxycheck.io 两源抽样同段邻居，两段结果完全一致（proxy 0/24、类型全 Business、risk 0），承认无法证实也无法否定，并接受该判断属供给侧推断而非实测。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261029_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261029_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-29T18:02:30.111659+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.608（最近邻：工具与方法论的质量审查标准）；Gate3 通过，本条是「拒绝以评分刻度代表质量」的判据层"
         }
       ]
     },
@@ -10880,6 +10979,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.5727 nearest=「故障恢复不以恢复可用为终点，需附缺陷清单」；本条针对自动触发器的判据层级（可达 vs 可用），<0.72 无冲突"
+        },
+        {
+          "id": "insight_2026-10-29T18:02:30.111659+00:00_1",
+          "date": "2026-10-29",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "把「需要人盯着的判断时点」整个外包出去：要求 agent 自己判定状态变化（解封/恢复/到期）并在判定成立后直接执行动作、返回结果，而不是把动作留在「提醒本人去执行」；同时对探测频率有明确的成本约束，接受「低频兜底 + 复用已有采样做零成本提速」，反对高频轮询。",
+          "confidence": "high",
+          "evidence": "用户原话：「我咋知道解封呢，你是不是可以自己判断下，解封了直接执行，然后给我个结果」；随后「30 分钟太频繁了，每 12h 一次就行」。落地形态：cron 改 09:00/21:00 两次 + 复用 egress-watchdog 已在跑的端口采样做前置发现（发现延迟 ≤10min，不新增轮询），状态机存 leg-status.json。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261029_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261029_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-29T18:02:30.111659+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.631（最近邻：把重复人工动作机制化为静默优先的自动化）；Gate3 通过，新增的是「委托判断权 + 探测频率成本约束」而非「新增扫描场景」"
+        },
+        {
+          "id": "insight_2026-10-29T18:02:30.111659+00:00_3",
+          "date": "2026-10-29",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "新资产先与既有基线做同标准实测对标，不达预期即放弃，且要求把已经写进配置的引用一并清除（不留悬空引用、不长期挂着不用的机器）；放弃决定一旦做出，不再保留「以后再试」的模糊状态。",
+          "confidence": "high",
+          "evidence": "qqpw 住宅 VDS 流程：接入 → 跑 IPQuality（五源一致原生家宽、Scamalytics 7 分）→ 与 AaITR 基线对比（直连 173ms vs 经中转端到端 0.89s；3.49MB/s vs 0.81MB/s）→ 用户判断「感觉这个不如我之前的 aaitr」并给出机制理由 → 最终「放弃 qqpw 了，等自然过期不续费了，你从配置里也删掉吧（如果已经配了的话）」。随后 ssh 别名、私钥、mihomo 模板 18 行、记忆中旧预期全部清除。",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261029_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261029_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-29T18:02:30.111659+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.574（最近邻：资产在记忆里必须有状态）；Gate3 通过，本条是「对标—弃用—清引用」的完整行为闭环"
+        },
+        {
+          "id": "insight_2026-10-29T18:02:30.111659+00:00_5",
+          "date": "2026-10-29",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "面对不熟悉的 Web 控制台（注册商搜索页、API 令牌权限矩阵），倾向截图发给 agent 索取「怎么选」的逐步点击指令，而不是自己读文档摸索；若 agent 读图读错，直接给正确值纠正，不追究过程。",
+          "confidence": "medium",
+          "evidence": "两张 Cloudflare 手机截图（Registrar 搜索结果页、API Token 权限策略与 summary 页）配同一句「怎么选」；域名被 agent 误读成 jcdfcorcqy.com 后，用户直接发 OOB 消息「你识别错了 是 jcdforcqy.com」，随后继续按流程推进，未做额外追责。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261029_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261029_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-10-29T18:02:30.111659+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.593（最近邻：分词级授权信号）；Gate3 通过，本条是「GUI 任务外包给读图 + 逐步指令」的交互形态"
         }
       ]
     },
@@ -13473,19 +13671,6 @@
   },
   "history": [
     {
-      "date": "2026-06-24T18:06:27.171867+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 47
-    },
-    {
       "date": "2026-06-24T18:06:55.646049+00:00",
       "layers": {
         "1": 35,
@@ -14618,18 +14803,31 @@
         "7": 100
       },
       "total_insights": 447
+    },
+    {
+      "date": "2026-10-29T18:02:30.111659+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 453
     }
   ],
   "behavior": {
-    "checked_at": "2026-10-28T18:03:43.293397+00:00",
+    "checked_at": "2026-10-29T18:02:32.952799+00:00",
     "warnings": [],
-    "insight_count": 9
+    "insight_count": 6
   },
   "_last_agent_insights": [
-    "把「等外部条件恢复」转成「预置完成 + 自动触发器」：先盘点哪些工作不依赖外部条件（服务端改造、证书签发、客户端配置），在等待窗口内全部做完，再写一个带假阳性防护的自动激活器。外部条件一恢复即无缝生效，等待期不再是空转——这是可控性设计，不是抢跑。",
-    "告警降噪必须落在可计算的判据上，不能停在「这条看着像噪声」的主观分级：先定义「这次失败是否发生在一个仍有健康成员的组内」，组内尚有健康成员→判切换瞬态只记日志，组内全灭→才推真断网。降噪的价值不在省消息，而在保护告警可信度——误报会训练出告警免疫，真事故时人不看。",
-    "幂等性必须靠「反向演练」证明，不能靠读代码自我确认：脚本在「条件尚未满足」的真实状态下先跑一遍，再从「条件已满足」状态重跑，看是否重复插入。带行尾注释、带格式变体的配置文件里，「整行精确匹配」式幂等检查几乎必然失效。",
-    "自动触发器判「已恢复」不能停在可达层（端口能连、探测有回包），必须要求业务协议真的握手成功；否则会在半恢复窗口误激活一整条链路，把「部分可用」变成「配置已切但链路半死」。任何自动触发器都要先回答：我的成功判据是可达，还是可用。",
-    "单一事实源之外还要配「漂移检查器语义」：检查器必须区分惰性残留与活跃引用（只扫生效中的配置，跳过已停用条目的描述性文本），否则会为已退役资产永久报警。检查器的误报率与覆盖面同等重要——噪声会直接折算成可信度损失。"
+    "审阅 agent 给出的方案时，重点不在核对已讲的部分，而在找「没讲的那一面」：会从外部听来的说法里提炼一个 agent 未覆盖的风险维度，直接质问为何遗漏，并要求把该维度写进正式文档，而不是接受「方案本身没错」的解释。",
+    "判断 IP / 线路这类资产的质量时，用「供给约束强度 + 邻居污染机制」这一层解释，不接受评分工具的分值差作为质量结论——同档区间内的分差在他看来不构成「谁更好」的证据。",
+    "把「需要人盯着的判断时点」整个外包出去：要求 agent 自己判定状态变化（解封/恢复/到期）并在判定成立后直接执行动作、返回结果，而不是把动作留在「提醒本人去执行」；同时对探测频率有明确的成本约束，接受「低频兜底 + 复用已有采样做零成本提速」，反对高频轮询。",
+    "新资产先与既有基线做同标准实测对标，不达预期即放弃，且要求把已经写进配置的引用一并清除（不留悬空引用、不长期挂着不用的机器）；放弃决定一旦做出，不再保留「以后再试」的模糊状态。",
+    "面对不熟悉的 Web 控制台（注册商搜索页、API 令牌权限矩阵），倾向截图发给 agent 索取「怎么选」的逐步点击指令，而不是自己读文档摸索；若 agent 读图读错，直接给正确值纠正，不追究过程。"
   ]
 }
