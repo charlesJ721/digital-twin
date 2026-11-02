@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-01T18:02:49.152683+00:00",
-  "total_sessions_processed": 303,
+  "last_extraction": "2026-11-02T18:03:06.928911+00:00",
+  "total_sessions_processed": 304,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7407,6 +7407,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "NN max cosine 0.5928 vs「把原因不可控判定当作待求解问题」：那条讲成因不可控时的重开动作，本条讲故障影响面的排除法提问，重叠约 30%。"
+        },
+        {
+          "id": "insight_2026-11-02T18:03:06.928911+00:00_0",
+          "date": "2026-11-02",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "读数前先定口径，而不是先下结论：见到「X:10/10」「89 条」「40 次」这类计数，先分清三件事——方向（记录的是失败数还是通过数）、覆盖窗口（不同日志文件起点不同，不能相加或相减）、对象（哪一侧、哪个进程）。实测代价：把 BWG 那行当成「10 次通过」，结论就是「今天才出问题」；确认它是失败计数后，才得出「该线路自 10-26 起已连续挂 7 天」。判据：字段名不含 fail/pass 时，先取一条已知状态的样本反推极性，再拿它做趋势判断。",
+          "confidence": "high",
+          "evidence": "会话原文：「watchdog 那行里的 BWG:10/10 是「失败 10 次/10 次」，不是「通过 10 次」（字段名就是 bwg_fail）……BWG 从 2026-10-26 19:38 起就已经是 10/10 全挂，到今天已经连续挂了 7 天」；另：「统计口径提醒：gateway-exit-diag.log 里累计 89 条 exit_nonzero、gateway-starts.log 累计 40 次启动 —— 两个文件覆盖范围不同，不能直接读成『崩溃 89 次』」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261102_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261102_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-02T18:03:06.928911+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 max_cos 0.634 vs 「判读是否已恢复时先怀疑采集端」：同属读数判读层，但本条讲计数的方向/窗口/对象三问，不是恢复判定。新增信息=字段极性反推法。"
+        },
+        {
+          "id": "insight_2026-11-02T18:03:06.928911+00:00_1",
+          "date": "2026-11-02",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "「查不到」不能当「已经死了」：探针的空返回、超时、非数字与明确的否定值必须走不同分支。守护/自愈类逻辑里三者混用的代价可量化——某远端守护 1203 次「判定 DOWN 并重启」中，1199 次拿到的是空值（SSH 连不上），真正确认停机只有 4 次，即 99.7% 的自愈动作在杀健康进程。配套两条：连续两次确认才动手；拉起用非破坏性动作（不带「先杀再起」的旗标）。判据：自愈系统必须能回答「这些动作里有多大比例其实是观测失败」。",
+          "confidence": "high",
+          "evidence": "会话原文：「1203 次 restarting 行，alive= 空值 1199 次、真 alive=0 仅 4 次 → 99.7% 的『重启网关』决定是 SSH 幻觉」；「空 = UNKNOWN 只记日志绝不动手；拉起用 kickstart（无 -k）」；事故：「16:10:14.518 给了一个完全健康的 gateway 一记 SIGTERM」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261102_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261102_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-02T18:03:06.928911+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 max_cos 0.580 vs 「自动触发器判已恢复不能停在可达层」：同为监控判据，本条讲空值/超时与否定值必须分路 + 自愈动作非破坏化。新增信息=1199/1203 的量化判据。"
+        },
+        {
+          "id": "insight_2026-11-02T18:03:06.928911+00:00_2",
+          "date": "2026-11-02",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "授权的动作清单按现场证据收窄，不按授权原文凑齐：批准「把两个已失效成员标注掉」之后，实测其中一个只是不稳定（3 次延迟测试 1 成 2 超时）而非失效，于是只摘除真正死掉的那个、另一个改成注释说明可靠性，并主动撤回上一轮「两个都是假的」的过强判断。判据：执行前若发现授权前提被证伪，缩小动作并说明差异，而不是「既然批了就都做完」。",
+          "confidence": "high",
+          "evidence": "用户原文：「好  先落地 a」；会话原文：「CF-WS 兜底 的结果推翻了我上一条判断：我一共做了 3 次延迟测试，1 次成功（338ms）、2 次超时，它是不稳定但确实还活着的兜底……真正失效的只有 BWG 这一层」；「A 已经落地。不过按实测，我缩小了范围」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261102_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261102_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-02T18:03:06.928911+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max_cos 0.647（最近邻为审批重试类，语义不同）：本条讲授权前提被证伪时收窄动作范围。"
         }
       ]
     },
@@ -11342,6 +11441,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "NN max cosine 0.6625 vs「大工程开工前把口径方案当成独立可批准物」：那条讲开工前的批准顺序，本条讲方案定稿后的物料收尾，重叠约 35%。"
+        },
+        {
+          "id": "insight_2026-11-02T18:03:06.928911+00:00_3",
+          "date": "2026-11-02",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "改配置做两侧检查：改前查「谁按名字或路径引用它」，改后查「谁会把改动冲掉或加回」。实例：给节点改名会断掉两个按节点名做自动激活的脚本，于是放弃改名、改选「从组里摘除成员但保留节点定义」，因为这与既有的「解封后自动插回」机制同构；改完再逐一确认没有脚本重建该段配置、以及失败采样时自动逻辑走的是「未命中，跳过」。判据：一个改动的安全性取决于它的引用方与覆写方，不取决于改动本身多小。",
+          "confidence": "high",
+          "evidence": "会话原文：「因为改名会带来这个问题：net-activate-legs.py 和 leg-watchdog.py 都是按节点名来激活的，一改名，BWG 解封后的自动激活就断了。所以我选了摘除成员的做法」；「确认 net-drift.py / net-apply.sh 不含组定义重建逻辑，不会把我的改动冲掉；leg-watchdog 在 BWG 采样失败时走的是未命中，跳过分支，不会立刻把它加回来」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261102_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261102_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-02T18:03:06.928911+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 max_cos 0.703 vs 「改动既有配置的完成判据是双向断言」：同为改动验证，但那条讲『变与不变』，本条讲『引用方与覆写方』，互补不重复。"
+        },
+        {
+          "id": "insight_2026-11-02T18:03:06.928911+00:00_4",
+          "date": "2026-11-02",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "远端改动的验收要到「真实调度节拍」这一层才算完：本地语法→传输后两端 sha256 一致→远端语法→功能探针→手动整跑一次看是否静默→再等一个真实 cron 周期跑完回读日志行数未变，最后显式列出没有实测的分支。典型交付句是「HEALTHY 路径已实测；DOWN 路径只做了代码审读与语法校验，没有真去停服务验证」。判据：等不到真实节拍的验证只能算静态检查，报告里必须降级表述。",
+          "confidence": "high",
+          "evidence": "会话原文：「新版：-rwxr-xr-x root:root 2817 B，sha256 ac33d5c067f0… 两端一致；sudo -n bash -n → REMOTE SYNTAX OK；整脚本实跑一次：script_rc=0，日志行数 2445 → 2445 一字未增；等了一个真实 cron 节拍复验：AN5 23:30:22 PST 那一轮跑完，日志仍是 2445 行」；「诚实边界：HEALTHY 路径已实测；DOWN 路径只做了代码审读 + 语法校验，没有真去停网关验证」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261102_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261102_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-02T18:03:06.928911+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max_cos 0.596：本条讲验收要跨真实调度节拍 + 未实测分支须降级表述。"
         }
       ]
     },
@@ -13935,19 +14100,6 @@
   },
   "history": [
     {
-      "date": "2026-06-28T18:04:53.288147+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 62
-    },
-    {
       "date": "2026-06-29T18:05:23.921216+00:00",
       "layers": {
         "1": 35,
@@ -15080,15 +15232,31 @@
         "7": 100
       },
       "total_insights": 461
+    },
+    {
+      "date": "2026-11-02T18:03:06.928911+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 466
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-01T18:02:51.185282+00:00",
+    "checked_at": "2026-11-02T18:03:09.282263+00:00",
     "warnings": [],
-    "insight_count": 2
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "某一路供给中断时，用负面清单确认影响面：不问「哪些坏了」，而是逐项列出自己怀疑会受影响的设备（洗衣机/烘衣机/洗碗机/扫地机器人）要求逐个判定「是否其实不受影响」，并顺带要例外条件（哪类机型才会中招）。判据：提问方向是排除法，答案必须覆盖全部列举项，漏一项等于没答。",
-    "方案定稿之后才核算物料：先要方案排序与取舍理由，最后单独问一次「原厂自带的那两样够不够」，用是否需要重复采购给方案收尾。判据：采购问题出现在方案确定之后而非之前，且期望的是「够用/不必买」这类可执行结论，不是规格科普。"
+    "读数前先定口径，而不是先下结论：见到「X:10/10」「89 条」「40 次」这类计数，先分清三件事——方向（记录的是失败数还是通过数）、覆盖窗口（不同日志文件起点不同，不能相加或相减）、对象（哪一侧、哪个进程）。实测代价：把 BWG 那行当成「10 次通过」，结论就是「今天才出问题」；确认它是失败计数后，才得出「该线路自 10-26 起已连续挂 7 天」。判据：字段名不含 fail/pass 时，先取一条已知状态的样本反推极性，再拿它做趋势判断。",
+    "「查不到」不能当「已经死了」：探针的空返回、超时、非数字与明确的否定值必须走不同分支。守护/自愈类逻辑里三者混用的代价可量化——某远端守护 1203 次「判定 DOWN 并重启」中，1199 次拿到的是空值（SSH 连不上），真正确认停机只有 4 次，即 99.7% 的自愈动作在杀健康进程。配套两条：连续两次确认才动手；拉起用非破坏性动作（不带「先杀再起」的旗标）。判据：自愈系统必须能回答「这些动作里有多大比例其实是观测失败」。",
+    "授权的动作清单按现场证据收窄，不按授权原文凑齐：批准「把两个已失效成员标注掉」之后，实测其中一个只是不稳定（3 次延迟测试 1 成 2 超时）而非失效，于是只摘除真正死掉的那个、另一个改成注释说明可靠性，并主动撤回上一轮「两个都是假的」的过强判断。判据：执行前若发现授权前提被证伪，缩小动作并说明差异，而不是「既然批了就都做完」。",
+    "改配置做两侧检查：改前查「谁按名字或路径引用它」，改后查「谁会把改动冲掉或加回」。实例：给节点改名会断掉两个按节点名做自动激活的脚本，于是放弃改名、改选「从组里摘除成员但保留节点定义」，因为这与既有的「解封后自动插回」机制同构；改完再逐一确认没有脚本重建该段配置、以及失败采样时自动逻辑走的是「未命中，跳过」。判据：一个改动的安全性取决于它的引用方与覆写方，不取决于改动本身多小。",
+    "远端改动的验收要到「真实调度节拍」这一层才算完：本地语法→传输后两端 sha256 一致→远端语法→功能探针→手动整跑一次看是否静默→再等一个真实 cron 周期跑完回读日志行数未变，最后显式列出没有实测的分支。典型交付句是「HEALTHY 路径已实测；DOWN 路径只做了代码审读与语法校验，没有真去停服务验证」。判据：等不到真实节拍的验证只能算静态检查，报告里必须降级表述。"
   ]
 }
