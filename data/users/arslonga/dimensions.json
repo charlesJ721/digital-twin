@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-02T18:03:06.928911+00:00",
-  "total_sessions_processed": 304,
+  "last_extraction": "2026-11-03T18:03:17.099358+00:00",
+  "total_sessions_processed": 305,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7506,6 +7506,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 max_cos 0.647（最近邻为审批重试类，语义不同）：本条讲授权前提被证伪时收窄动作范围。"
+        },
+        {
+          "id": "insight_2026-11-03T18:03:17.099358+00:00_0",
+          "date": "2026-11-03",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "现象表现为「突然不通」时，第一归因指向自己掌控的资产（VPS、客户端配置），而不是运营商或外部环境；因此排障的第一个动作是自证清白式的当场实测——端口连通、配置校验、端到端出口 IP。连续的几次都是资产侧健康、问题落在外部链路抖动或客户端运行期临时状态。这个默认方向让收敛更快，代价是外部因素往往晚一步才被定案。",
+          "confidence": "high",
+          "evidence": "11-03 用户问「dmit 出问题了？」，实测本机到 AN5 的 443/8443/22222 各 10/10 通、端到端 5/5 返回 200、机器 uptime 6 天 23 小时 load 0.00、服务全 active；问「我的 singbox 出问题了？」，sing-box check PASS、七个节点凭据与 mihomo 零漂移、逐节点实测 4 条可用。两次都证明资产侧正常。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261103_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261103_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-03T18:03:17.099358+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6528 vs 多假设并行验证/端口逐层排除（本条讲归因默认方向）"
+        },
+        {
+          "id": "insight_2026-11-03T18:03:17.099358+00:00_3",
+          "date": "2026-11-03",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "状态类问题的判据是当场实测，不采信上一次的结论、监控脚本缓存，也不采信客户端面板上的历史数字：面板里带时间戳的延迟值是过期缓存（如标着 35d ago 的 34ms、71ms），只有本次运行期测出的绿色值才算数。这条判据的实际代价很低——几次误读都被面板缓存解释掉了，而按缓存判定会把已死线路当成活的。",
+          "confidence": "high",
+          "evidence": "连问三次「BWG 恢复了吗 / dmit 出问题了？/ sing-box 出问题了？」后都立即重测；随后手机截图里 BWG-PLAN 显示 34ms，实测三端口 0/3、mihomo 3/3 超时，确认为带 35d ago 的缓存值；同时接受「左边小字是历史缓存、右边绿色才是本次测量」的读数规则。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261103_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261103_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-03T18:03:17.099358+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6218 vs 读数先定口径（本条聚焦面板历史缓存值不可采信）"
         }
       ]
     },
@@ -7896,6 +7962,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 全新域（个人耐用品采购的价值观判据）。preflight: embedding LIVE; Gate1-4 accepted; Gate5 findings=0; max cosine 0.6106 vs「决策咨询中的反锚定要求」——最近邻只共享「自带判据而非接受既有结论」这一抽象层，本条讲的是持有期视角取代配置最优视角，非白纸化重做方法论。"
+        },
+        {
+          "id": "insight_2026-11-03T18:03:17.099358+00:00_4",
+          "date": "2026-11-03",
+          "dimension": "价值观",
+          "layer": "L3",
+          "insight": "对没有公开口碑的供应商默认按不可信处理：先查域名注册史、面板实现、服务器 ASN 与属地，再谈价格；接受「月付先试、不年付、不把账号流量交给它」的边界，把第三方线路当可丢弃的分流而不是基础设施。",
+          "confidence": "medium",
+          "evidence": "对陌生机场的评估要求落在可核查项上：域名 2021 年注册、Wayback 连续快照、V2Board 面板、出口服务器 AS6233 xTom 圣何塞、公开评测零收录；在此之上继续采纳「只月付、只做日常浏览分流、不动住宅出口」的结论。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261103_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261103_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-03T18:03:17.099358+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5643 vs 购前实测再决策（本条讲未知供应商的可试不可托付边界）"
         }
       ]
     },
@@ -11507,6 +11606,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 max_cos 0.596：本条讲验收要跨真实调度节拍 + 未实测分支须降级表述。"
+        },
+        {
+          "id": "insight_2026-11-03T18:03:17.099358+00:00_1",
+          "date": "2026-11-03",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "验收冗余只看是否异机、异 AS、异 IP 段，账面有几个 fallback 成员不算数。当发现某组的可靠成员全部指向同一台机器的两个端口时，接受「可靠厚度等于一台机器」这个不利结论，并同意把已死成员从组里摘出、节点定义与脚本引用保留以便自动恢复。",
+          "confidence": "high",
+          "evidence": "对话中列出四个成员后，实测其中两个全超时、一个仅 1/3 成功，随后用户以「好  先落地 a」（8 字符）批准摘除已死成员；agent 摘掉 BWG-PLAN、保留节点定义、把 CF-WS 标注为「3 次 1 成 2 超时，可用但不可靠」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261103_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261103_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-03T18:03:17.099358+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6020 vs 冗余按判定是否独立来买（本条新增：账面成员数不算、接受摘除死成员）"
+        },
+        {
+          "id": "insight_2026-11-03T18:03:17.099358+00:00_2",
+          "date": "2026-11-03",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "突发事故后不追求先定性再动手，而是按风险阶梯推进：零风险清理 → 低风险参数收敛 → 需要用户侧动作的改动放最后；一次授权覆盖整批已列明事项，不逐条确认。未定性的那一环允许挂着，只要它不影响当前运行，同时要求把已验证的做法沉淀成可复用技能。",
+          "confidence": "high",
+          "evidence": "agent 给出 A（只能用户执行）/B（可代做）/C（无需动作）三组待办后，用户回「好 改吧 也写进技能」，一次覆盖 guardian 三态重写、日志轮转扩展、技能打三处补丁；agent 自述「User authorized: fix guardian on AN5 + write skill」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261103_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261103_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-03T18:03:17.099358+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6014 vs 先全局分析再实施（本条讲风险阶梯与批量授权）"
+        },
+        {
+          "id": "insight_2026-11-03T18:03:17.099358+00:00_5",
+          "date": "2026-11-03",
+          "dimension": "安全风险评估模式",
+          "layer": "L4",
+          "insight": "手上有能直接推进排障的凭据时，会直接把含 token 的订阅链接贴进对话，并在被提醒之后继续复用同一条；凭据遮蔽与轮换的提醒责任实际上落在 agent 一侧。与此配套的预期是：agent 主动提示重置、不回显明文、临时文件按最小权限落盘。",
+          "confidence": "medium",
+          "evidence": "同一个 32 位十六进制 token 的连接连续两次原样发送（第二次附言「这个    他家老得换地址    感觉是容灾」）；agent 两次提示该 token 已进入对话记录、建议用完后在面板重置。",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261103_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261103_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-03T18:03:17.099358+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6194 vs 充分确定式拍板（本条讲凭据卫生让位于排障效率）"
         }
       ]
     },
@@ -14100,19 +14298,6 @@
   },
   "history": [
     {
-      "date": "2026-06-29T18:05:23.921216+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 66
-    },
-    {
       "date": "2026-06-30T18:07:53.427368+00:00",
       "layers": {
         "1": 35,
@@ -15245,18 +15430,31 @@
         "7": 100
       },
       "total_insights": 466
+    },
+    {
+      "date": "2026-11-03T18:03:17.099358+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 472
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-02T18:03:09.282263+00:00",
+    "checked_at": "2026-11-03T18:03:18.645045+00:00",
     "warnings": [],
-    "insight_count": 5
+    "insight_count": 6
   },
   "_last_agent_insights": [
-    "读数前先定口径，而不是先下结论：见到「X:10/10」「89 条」「40 次」这类计数，先分清三件事——方向（记录的是失败数还是通过数）、覆盖窗口（不同日志文件起点不同，不能相加或相减）、对象（哪一侧、哪个进程）。实测代价：把 BWG 那行当成「10 次通过」，结论就是「今天才出问题」；确认它是失败计数后，才得出「该线路自 10-26 起已连续挂 7 天」。判据：字段名不含 fail/pass 时，先取一条已知状态的样本反推极性，再拿它做趋势判断。",
-    "「查不到」不能当「已经死了」：探针的空返回、超时、非数字与明确的否定值必须走不同分支。守护/自愈类逻辑里三者混用的代价可量化——某远端守护 1203 次「判定 DOWN 并重启」中，1199 次拿到的是空值（SSH 连不上），真正确认停机只有 4 次，即 99.7% 的自愈动作在杀健康进程。配套两条：连续两次确认才动手；拉起用非破坏性动作（不带「先杀再起」的旗标）。判据：自愈系统必须能回答「这些动作里有多大比例其实是观测失败」。",
-    "授权的动作清单按现场证据收窄，不按授权原文凑齐：批准「把两个已失效成员标注掉」之后，实测其中一个只是不稳定（3 次延迟测试 1 成 2 超时）而非失效，于是只摘除真正死掉的那个、另一个改成注释说明可靠性，并主动撤回上一轮「两个都是假的」的过强判断。判据：执行前若发现授权前提被证伪，缩小动作并说明差异，而不是「既然批了就都做完」。",
-    "改配置做两侧检查：改前查「谁按名字或路径引用它」，改后查「谁会把改动冲掉或加回」。实例：给节点改名会断掉两个按节点名做自动激活的脚本，于是放弃改名、改选「从组里摘除成员但保留节点定义」，因为这与既有的「解封后自动插回」机制同构；改完再逐一确认没有脚本重建该段配置、以及失败采样时自动逻辑走的是「未命中，跳过」。判据：一个改动的安全性取决于它的引用方与覆写方，不取决于改动本身多小。",
-    "远端改动的验收要到「真实调度节拍」这一层才算完：本地语法→传输后两端 sha256 一致→远端语法→功能探针→手动整跑一次看是否静默→再等一个真实 cron 周期跑完回读日志行数未变，最后显式列出没有实测的分支。典型交付句是「HEALTHY 路径已实测；DOWN 路径只做了代码审读与语法校验，没有真去停服务验证」。判据：等不到真实节拍的验证只能算静态检查，报告里必须降级表述。"
+    "状态类问题的判据是当场实测，不采信上一次的结论、监控脚本缓存，也不采信客户端面板上的历史数字：面板里带时间戳的延迟值是过期缓存（如标着 35d ago 的 34ms、71ms），只有本次运行期测出的绿色值才算数。这条判据的实际代价很低——几次误读都被面板缓存解释掉了，而按缓存判定会把已死线路当成活的。",
+    "对没有公开口碑的供应商默认按不可信处理：先查域名注册史、面板实现、服务器 ASN 与属地，再谈价格；接受「月付先试、不年付、不把账号流量交给它」的边界，把第三方线路当可丢弃的分流而不是基础设施。",
+    "验收冗余只看是否异机、异 AS、异 IP 段，账面有几个 fallback 成员不算数。当发现某组的可靠成员全部指向同一台机器的两个端口时，接受「可靠厚度等于一台机器」这个不利结论，并同意把已死成员从组里摘出、节点定义与脚本引用保留以便自动恢复。",
+    "突发事故后不追求先定性再动手，而是按风险阶梯推进：零风险清理 → 低风险参数收敛 → 需要用户侧动作的改动放最后；一次授权覆盖整批已列明事项，不逐条确认。未定性的那一环允许挂着，只要它不影响当前运行，同时要求把已验证的做法沉淀成可复用技能。",
+    "手上有能直接推进排障的凭据时，会直接把含 token 的订阅链接贴进对话，并在被提醒之后继续复用同一条；凭据遮蔽与轮换的提醒责任实际上落在 agent 一侧。与此配套的预期是：agent 主动提示重置、不回显明文、临时文件按最小权限落盘。"
   ]
 }
