@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-03T18:03:17.099358+00:00",
-  "total_sessions_processed": 305,
+  "last_extraction": "2026-11-04T18:02:51.618756+00:00",
+  "total_sessions_processed": 307,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7572,6 +7572,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.6218 vs 读数先定口径（本条聚焦面板历史缓存值不可采信）"
+        },
+        {
+          "id": "insight_2026-11-04T18:02:51.618756+00:00_2",
+          "date": "2026-11-04",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "第三方转售类订阅（拼车/合租）的评估顺序是风险 → 规格 → 控制权，营销词必须还原成可验证参数才认：先要失败模式清单，再把「4K」「独享」这类 SKU 话术拆成同时播放路数、profile 数、验证邮箱归属等硬指标。价格与卖家规模都不构成安全感（规模只放大坏账面），最终判据是断流时自己能否取回控制权。",
+          "confidence": "high",
+          "evidence": "11-04 23:57 首问「网飞拼车有什么注意事项吗」；11-05 00:07「我看一般都区分 4k 独享和 4k 高清」，用自见的两类 SKU 术语要求解释差异。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261104_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261104_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-04T18:02:51.618756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "top1 cosine 0.5403 vs「对没有公开口碑的供应商默认按不可信处理」（基建供应商）。本条是该原则在消费订阅领域的泛化，但新增判据「控制权归属」与「营销词还原为硬参数」，非重复。"
+        },
+        {
+          "id": "insight_2026-11-04T18:02:51.618756+00:00_3",
+          "date": "2026-11-04",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "对既有资产问的是能力档位而不是二值可用性：要的是「现在这条线路能做到哪一档」（如流媒体自制剧与非自制剧分别验证），而不是「能不能用」；且只认当场测量，不采信社区口碑或历史结论。判据：提问本身是分档问法，隐含要求把能力拆成可独立验证的子项。",
+          "confidence": "medium",
+          "evidence": "11-04 18:47 用户问「我现在的节点  网飞解锁如何」，agent 逐节点按自制/非自制两条判据实测才作答。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261104_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261104_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-04T18:02:51.618756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "top1 cosine 0.5444 vs「判断 IP/线路质量用供给约束+邻居污染机制」。区别：该条反对分值差当结论，本条要求把能力拆成分档可验证项，不重复。"
         }
       ]
     },
@@ -11705,6 +11771,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.6194 vs 充分确定式拍板（本条讲凭据卫生让位于排障效率）"
+        },
+        {
+          "id": "insight_2026-11-04T18:02:51.618756+00:00_0",
+          "date": "2026-11-04",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "排障对话里只供给最小可判定事实，判读权完全外置：按 agent 指定的判据逐项回传原始观测值（状态灯颜色、设备屏显格式），追加的也是单点排除性对照（换片源结果相同），不解释含义、不复述过程、不给自己的推测。期望的交付形态是 agent 承担推理并直接给出下一步分流，用户只负责采集与执行。判据：回复极短、带编号或分号、内容是读数而非描述。",
+          "confidence": "high",
+          "evidence": "11-04 22:37 用户回「1 蓝灯常亮 / 2 multi ch pcm」（对应上一轮要求回报 LED 状态与 Info 显示）；22:47 追加「杜比电影也是只从回音壁出声」作单点排除对照。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261104_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261104_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-04T18:02:51.618756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "语义去重（text-embedding-3-small, LIVE）：top1 cosine 0.6399 vs「报障输入自带对照与边界」。区别：该条讲输入自带正常项/异常项的收窄，本条讲观测与判读的责任分离（只回传读数、不解释）。判为不同信息，不合并。"
+        },
+        {
+          "id": "insight_2026-11-04T18:02:51.618756+00:00_1",
+          "date": "2026-11-04",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "上下文按「结论是否打到真实场景」增量披露：不预先交代实际使用条件，直到 agent 的长链推导落到错误默认对象上，才用一句话点明真实条件（例如实际观看终端不是本机），且不解释为何之前没说，期望 agent 自行作废旧前提并重算结论。判据：一句话纠正发生在结论之后而非提问之前。",
+          "confidence": "high",
+          "evidence": "11-05 00:02 agent 依据本机 1080p 显示器判定看不到 4K；00:03 用户一句「我现在 sony 电视上看」，此前未提及观看终端。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261104_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261104_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-04T18:02:51.618756+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "top1 cosine 0.6751 vs「文档声称与运行时行为冲突时以真凭据探针为唯一裁决层」。区别：该条是证据等级裁决，本条是上下文披露时序与默认前提纠偏，不同维度，不合并。"
         }
       ]
     },
@@ -14298,19 +14430,6 @@
   },
   "history": [
     {
-      "date": "2026-06-30T18:07:53.427368+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 70
-    },
-    {
       "date": "2026-07-01T18:06:00.077569+00:00",
       "layers": {
         "1": 35,
@@ -15443,18 +15562,30 @@
         "7": 100
       },
       "total_insights": 472
+    },
+    {
+      "date": "2026-11-04T18:02:51.618756+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 476
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-03T18:03:18.645045+00:00",
+    "checked_at": "2026-11-04T18:02:53.959246+00:00",
     "warnings": [],
-    "insight_count": 6
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "状态类问题的判据是当场实测，不采信上一次的结论、监控脚本缓存，也不采信客户端面板上的历史数字：面板里带时间戳的延迟值是过期缓存（如标着 35d ago 的 34ms、71ms），只有本次运行期测出的绿色值才算数。这条判据的实际代价很低——几次误读都被面板缓存解释掉了，而按缓存判定会把已死线路当成活的。",
-    "对没有公开口碑的供应商默认按不可信处理：先查域名注册史、面板实现、服务器 ASN 与属地，再谈价格；接受「月付先试、不年付、不把账号流量交给它」的边界，把第三方线路当可丢弃的分流而不是基础设施。",
-    "验收冗余只看是否异机、异 AS、异 IP 段，账面有几个 fallback 成员不算数。当发现某组的可靠成员全部指向同一台机器的两个端口时，接受「可靠厚度等于一台机器」这个不利结论，并同意把已死成员从组里摘出、节点定义与脚本引用保留以便自动恢复。",
-    "突发事故后不追求先定性再动手，而是按风险阶梯推进：零风险清理 → 低风险参数收敛 → 需要用户侧动作的改动放最后；一次授权覆盖整批已列明事项，不逐条确认。未定性的那一环允许挂着，只要它不影响当前运行，同时要求把已验证的做法沉淀成可复用技能。",
-    "手上有能直接推进排障的凭据时，会直接把含 token 的订阅链接贴进对话，并在被提醒之后继续复用同一条；凭据遮蔽与轮换的提醒责任实际上落在 agent 一侧。与此配套的预期是：agent 主动提示重置、不回显明文、临时文件按最小权限落盘。"
+    "第三方转售类订阅（拼车/合租）的评估顺序是风险 → 规格 → 控制权，营销词必须还原成可验证参数才认：先要失败模式清单，再把「4K」「独享」这类 SKU 话术拆成同时播放路数、profile 数、验证邮箱归属等硬指标。价格与卖家规模都不构成安全感（规模只放大坏账面），最终判据是断流时自己能否取回控制权。",
+    "对既有资产问的是能力档位而不是二值可用性：要的是「现在这条线路能做到哪一档」（如流媒体自制剧与非自制剧分别验证），而不是「能不能用」；且只认当场测量，不采信社区口碑或历史结论。判据：提问本身是分档问法，隐含要求把能力拆成可独立验证的子项。",
+    "排障对话里只供给最小可判定事实，判读权完全外置：按 agent 指定的判据逐项回传原始观测值（状态灯颜色、设备屏显格式），追加的也是单点排除性对照（换片源结果相同），不解释含义、不复述过程、不给自己的推测。期望的交付形态是 agent 承担推理并直接给出下一步分流，用户只负责采集与执行。判据：回复极短、带编号或分号、内容是读数而非描述。",
+    "上下文按「结论是否打到真实场景」增量披露：不预先交代实际使用条件，直到 agent 的长链推导落到错误默认对象上，才用一句话点明真实条件（例如实际观看终端不是本机），且不解释为何之前没说，期望 agent 自行作废旧前提并重算结论。判据：一句话纠正发生在结论之后而非提问之前。"
   ]
 }
