@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-05T18:02:29.841806+00:00",
-  "total_sessions_processed": 309,
+  "last_extraction": "2026-11-06T18:03:58.014636+00:00",
+  "total_sessions_processed": 312,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7803,6 +7803,171 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 max cosine 0.634（最近邻：证据纪律写进需求/一手口径优先），均未区分「官方规格 vs 社区口碑」这两类信源的可替代性，无近重复"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_0",
+          "date": "2026-11-06",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "评价远端性能前，先把本机能力量出来当分母：先跑多线程国内下载聚合并记录网卡上限，再拿各节点同一口径的吞吐与之相比。实测本机基线约 842Mbps、网卡 1Gb/s，而主力节点跑到 800 至 850Mbps，于是判定它已撞在本机天花板上，不是线路见顶，结论从「换机器」翻转为「换接入方式」。判据：性能结论只能写成观测值与基准的比值，低于基准才有资格归因到远端。",
+          "confidence": "high",
+          "evidence": "8 流国内下载基线只有 842Mbps；而 en0 是 Broadcom 57762，最大链路 1Gb/s。插网线就能到 ~930M；AN5：不换。800-850M 已撞本机天花板，换任何 LA 机器都不会更快。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.548 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_1",
+          "date": "2026-11-06",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "「超时」不是证据：SYN 超时既不是 refused，也不能推出被墙，它只说明中间有东西在丢包或拒绝。判据顺序是先二分两侧，看本机出站是否放行（拿第三方端口服务对同一端口试），再看服务端入站策略是否只放行了白名单端口（加固机器常见 INPUT DROP，只开少数几个）。实测三条线同一端口全部超时，而本机对同端口探测通，定位到服务端防火墙漏放行；把超时直接写成「GFW 封了」会白折腾一整轮。",
+          "confidence": "high",
+          "evidence": "nc: connectx to 154.17.11.49 port 5201 (tcp) failed: Operation timed out；port9000 http=200 time=0.367471 port5201 http=200；ufw status 只列 22222/443/51820/8443/39182/80",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.550 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_2",
+          "date": "2026-11-06",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "单个吞吐数字不足以做取舍，要三样同时到位。参数：同一条线路在 10 秒 8 流与 20 秒 16 流下给出 157 与 715Mbps，差 4.5 倍。分布：单流只有 7 至 20M，多流能到 650 至 715M，这个落差本身就是路径丢包的指纹，说明只适合多连接。横向对照：上传在三条不同线路上都是 34 至 46M，说明瓶颈在共同的上一层，是家宽签约上行，不该继续在远端找理由。判据：读数缺参数、缺单多流分布、缺对照，任何一项都不能进结论。",
+          "confidence": "high",
+          "evidence": "BWG DL8 sum_received 157.3；BWG DL16 sum_received 329.7；AN5 UL8 43.3、BWG UL8 33.9、HK UL8 39.7；上传在多条不同线路节点上数值一致 = 家宽签约上行上限",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.546 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_3",
+          "date": "2026-11-06",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "纸上比对参数前先做两步清洗：对齐口径、标出互斥。实例一，电商页写「95% AdobeRGB」，厂商规格页写「110%」，前者是覆盖率后者是面积，两个数不可直接比。实例二，同一台机器的 10bit 只在 5K70Hz 出现，切到 5K75Hz 就掉到 8bit，上限之间是互斥关系，不能各取最优拼出一台不存在的机器。做法是按主用途锁定取值（修图要 10bit 就接受 70Hz），再比剩下的项。判据：凡「A 比 B 高 X%」的论断，先确认两侧统计方式与生效条件一致。",
+          "confidence": "high",
+          "evidence": "AdobeRGB 110%（面积口径，不是覆盖率），京东写的「95% AdobeRGB」是另一个口径，两者不可直接比；位深与刷新互斥：10bit 只在 5K70/QHD260；跑 5K75 就是 8bit",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.552 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_4",
+          "date": "2026-11-06",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "评价一个供应商行不行之前，先确认自己买的是它哪一档：同一机房的高端档与入门档，在同一条家宽上实测 45ms 与 249ms，差 5.5 倍。所以「这家不行」往往是「档位选错」，换机房解决不了。配套动作是拿商家官方分档入口里的现役测试地址，在同一条线上一档一档对照，流传在博文里的旧测试地址已经全部不通，照着测只会得到假结论。判据：跨供应商比较必须先固定档位这个变量。",
+          "confidence": "high",
+          "evidence": "HK Pro 191.222.216.216 45.173ms；HK T1 249.124ms；HK Pro 103.117.100.199 100.0% packet loss（博文旧地址）；可以确认是 T1 档，不是 Pro",
+          "memory_type": "fact",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.583 (<0.72, no contradiction); Gate1-5 accepted"
         }
       ]
     },
@@ -12002,6 +12167,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "top1 cosine 0.6751 vs「文档声称与运行时行为冲突时以真凭据探针为唯一裁决层」。区别：该条是证据等级裁决，本条是上下文披露时序与默认前提纠偏，不同维度，不合并。"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_5",
+          "date": "2026-11-06",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "面对「再等等也许更便宜」的价格不确定性，选择用可撤销条款对冲而不是等待：当场下单、同时开价保，把后面的活动是否更低交给到期前的比价与退差，并预留发票与页面留证。判据：当最优时点不可预测、但交易带有可撤销条款时，先执行后比对优于继续观察，多付一次比价动作，换掉赌时点的风险。",
+          "confidence": "high",
+          "evidence": "开价保。京东双11 周期到 11/14，返场 11/10 20:00 起红包到峰值，现在买有 7 天价保兜底，11/10 晚上回来比一次页面价，低了直接走价保，不用等",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.557 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_6",
+          "date": "2026-11-06",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "大件到货的验收清单按「还能不能退」排序，而不是按重要性排序：唯一无法在下单前验证、事后又不可补救的那一项被放在第一条，并明确限定要在退货窗口内完成；漏光、坏点、异响、附件齐全这类可当场发现的项目排在后面。判据：验收顺序的分母是「错了还能不能退回」，不是「这项有多关键」。",
+          "confidence": "high",
+          "evidence": "到货 48 小时内必须验的 6 项，1. 系统设置 显示器 刷新率，5K 下有没有 70/75Hz。这一项是唯一可能「参数白买」的点，要在退货窗口内知道",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.534 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-06T18:03:58.014636+00:00_7",
+          "date": "2026-11-06",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "设备类问题用材料替代提问：一次给齐实拍照片、说明书照片与厂商 App 的保修页，等于把事实源钉死，随后只接受按模板产出的结果，模板是「当前是什么状态、我要做什么、目标是什么」三段。附带一个防错动作，补一张 App 页声明具体型号，防止步骤串到同系列其他机型；并显式点掉不需要再核的部件，等于叫停继续追问。判据：材料越全，越是在要求成稿式交付，此时再问一轮会被视作没读材料。",
+          "confidence": "high",
+          "evidence": "语音转写：台阵不用管，我现在是要你基于我给你发的机器现在的实际状态的图片告诉我每一个步骤，当前是怎么样，我需要怎么做，目标是怎么样；校准一下，我的型号是这个",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261106_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261106_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-06T18:03:58.014636+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max_cos=0.559 (<0.72, no contradiction); Gate1-5 accepted"
         }
       ]
     },
@@ -14628,19 +14892,6 @@
   },
   "history": [
     {
-      "date": "2026-07-02T18:05:53.693944+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 80
-    },
-    {
       "date": "2026-07-03T18:05:39.799829+00:00",
       "layers": {
         "1": 35,
@@ -15773,18 +16024,31 @@
         "7": 100
       },
       "total_insights": 482
+    },
+    {
+      "date": "2026-11-06T18:03:58.014636+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 490
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-05T18:02:33.195434+00:00",
+    "checked_at": "2026-11-06T18:03:59.844180+00:00",
     "warnings": [],
-    "insight_count": 6
+    "insight_count": 8
   },
   "_last_agent_insights": [
-    "「确认某套方案」这类措辞的验收对象是运行态而不是文档：要的是配置真被改动、探针当场通过、失败分支留了回滚点。若这套方案根本没有成文版本，正确做法是如实说没有，并把散落在脚本、状态文件与判据里的实际规则重建出来，而不是补一份文档交差。",
-    "分组/层级的数量必须一一对应真实失效模式，对不上就删：哪怕组名有历史意义，只要成员集合相同或只被一条规则引用，就合并；最终只留「主 / 兜底 / 按需手动」三档语义。判据：能用一句话说清每个组覆盖哪种失效，说不清的就是账面冗余。",
-    "候选清单的完备性按「用户会先想到谁」衡量，而不是按「搜索命中了谁」：每一个被排除的主流选项（老牌大厂、生态对位品）都要写明排除依据。被追问「为什么没有 X」时，问题不在结论本身，而在排除理由没有显性化。",
-    "把厂商规格页与导购价格快照当「多源」不成立：官方参数＋电商价只能证明纸面与标价，被测物的真实口碑必须来自社区实测原话（品控抽奖、阴阳屏、啸叫这类个体差异只存在于用户帖）。判据：结论若只有官方与价格两类来源，必须主动标注「社区侧未交叉验证」。",
-    "选型类需求的交付物是分层决策框架而非推荐清单：按不可逆性排序（买完不可改 > 决定体验上限 > 可妥协 > 可等待），每层给可核查的数字门槛（ppi 阈值、接口必须写明 5K60 10bit、色域只认覆盖率、校色只认随箱报告），最后收敛成「预算 X 选谁」的决策流。"
+    "纸上比对参数前先做两步清洗：对齐口径、标出互斥。实例一，电商页写「95% AdobeRGB」，厂商规格页写「110%」，前者是覆盖率后者是面积，两个数不可直接比。实例二，同一台机器的 10bit 只在 5K70Hz 出现，切到 5K75Hz 就掉到 8bit，上限之间是互斥关系，不能各取最优拼出一台不存在的机器。做法是按主用途锁定取值（修图要 10bit 就接受 70Hz），再比剩下的项。判据：凡「A 比 B 高 X%」的论断，先确认两侧统计方式与生效条件一致。",
+    "评价一个供应商行不行之前，先确认自己买的是它哪一档：同一机房的高端档与入门档，在同一条家宽上实测 45ms 与 249ms，差 5.5 倍。所以「这家不行」往往是「档位选错」，换机房解决不了。配套动作是拿商家官方分档入口里的现役测试地址，在同一条线上一档一档对照，流传在博文里的旧测试地址已经全部不通，照着测只会得到假结论。判据：跨供应商比较必须先固定档位这个变量。",
+    "面对「再等等也许更便宜」的价格不确定性，选择用可撤销条款对冲而不是等待：当场下单、同时开价保，把后面的活动是否更低交给到期前的比价与退差，并预留发票与页面留证。判据：当最优时点不可预测、但交易带有可撤销条款时，先执行后比对优于继续观察，多付一次比价动作，换掉赌时点的风险。",
+    "大件到货的验收清单按「还能不能退」排序，而不是按重要性排序：唯一无法在下单前验证、事后又不可补救的那一项被放在第一条，并明确限定要在退货窗口内完成；漏光、坏点、异响、附件齐全这类可当场发现的项目排在后面。判据：验收顺序的分母是「错了还能不能退回」，不是「这项有多关键」。",
+    "设备类问题用材料替代提问：一次给齐实拍照片、说明书照片与厂商 App 的保修页，等于把事实源钉死，随后只接受按模板产出的结果，模板是「当前是什么状态、我要做什么、目标是什么」三段。附带一个防错动作，补一张 App 页声明具体型号，防止步骤串到同系列其他机型；并显式点掉不需要再核的部件，等于叫停继续追问。判据：材料越全，越是在要求成稿式交付，此时再问一轮会被视作没读材料。"
   ]
 }
