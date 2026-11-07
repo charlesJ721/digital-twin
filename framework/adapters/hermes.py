@@ -40,6 +40,18 @@ class HermesSessionReader:
     def __init__(self, state_db: str | Path):
         self.state_db = Path(state_db).expanduser()
 
+    def available(self) -> bool:
+        """Check if state.db is accessible (capability probing)."""
+        if not self.state_db.exists():
+            return False
+        try:
+            conn = sqlite3.connect(str(self.state_db))
+            conn.execute("SELECT 1 FROM sessions LIMIT 1")
+            conn.close()
+            return True
+        except Exception:
+            return False
+
     def _connect(self) -> sqlite3.Connection:
         if not self.state_db.exists():
             raise FileNotFoundError(f"Hermes state DB not found: {self.state_db}")

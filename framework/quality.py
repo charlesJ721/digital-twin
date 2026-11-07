@@ -1,8 +1,10 @@
-"""Quality filtering and public projection helpers."""
 from __future__ import annotations
+"""Quality filtering, public projection helpers, and behavior self-check."""
 
 from copy import deepcopy
-from typing import Any, Iterable
+from typing import Any, Iterable, Optional
+
+from .mirror_detector import MirrorDetector, CheckResult
 
 CONFIDENCE_RANK = {"low": 0, "medium": 1, "high": 2}
 
@@ -11,6 +13,7 @@ class QualityFilter:
     def __init__(self, min_confidence: str = "medium", max_chars: int = 2000):
         self.min_confidence = min_confidence
         self.max_chars = max_chars
+        self._mirror = MirrorDetector()
 
     def accept(self, insight: dict[str, Any]) -> tuple[bool, str | None]:
         text = str(insight.get("insight") or insight.get("content") or "")
@@ -24,6 +27,12 @@ class QualityFilter:
         if not insight.get("dimension"):
             return False, "missing dimension"
         return True, None
+
+    def behavior_check(
+        self, agent_response: str, user_message: str
+    ) -> CheckResult:
+        """检测 Agent 行为偏差：mirror（镜像用户措辞）和 loop（重复自己）。"""
+        return self._mirror.check(agent_response, user_message)
 
     def filter(self, insights: Iterable[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         accepted: list[dict[str, Any]] = []

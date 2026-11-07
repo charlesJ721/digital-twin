@@ -123,7 +123,7 @@ def call_llm(
     *,
     api_key: str | None = None,
     api_base: str = "https://api.deepseek.com/v1",
-    model: str = "deepseek-chat",
+    model: str = "deepseek-flash",
     max_tokens: int = 4096,
     temperature: float = 0.3,
 ) -> str:
@@ -166,7 +166,7 @@ def extract_insights(
     *,
     api_key: str | None = None,
     api_base: str = "https://api.deepseek.com/v1",
-    model: str = "deepseek-chat",
+    model: str = "deepseek-flash",
     prompt_template: str | None = None,
     validate: bool = True,
 ) -> dict[str, Any]:

@@ -15,6 +15,13 @@ class HermesMemoryExtractor:
         self.config = config
         self.reader = HermesSessionReader(config.hermes_state_db)
         self.memory = HermesMemoryReader(config.dimensions_path)
+        self._available: bool | None = None  # lazy probe
+
+    def capable(self) -> bool:
+        """Runtime check: can we actually read Hermes data?"""
+        if self._available is None:
+            self._available = self.reader.available()
+        return self._available
 
     def last_extraction_time(self) -> datetime:
         return self.memory.last_extraction_time()

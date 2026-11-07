@@ -15,6 +15,7 @@ from .extractors import HermesMemoryExtractor
 from .detectors import ContradictionDetector
 from .quality import QualityFilter, public_projection
 from .schema import DimensionSchema
+from .mirror_detector import MirrorDetector
 
 
 class DigitalTwinPipeline:
@@ -69,6 +70,7 @@ class DigitalTwinPipeline:
         blocked_texts = {_text_key(c.candidate) for c in contradictions if c.reason == "near_duplicate"}
 
         merged = 0
+        all_insight_texts: list[str] = []
         for insight in accepted:
             if _text_key(insight) in blocked_texts:
                 continue
@@ -83,8 +85,33 @@ class DigitalTwinPipeline:
             layer["status"] = "partial"
             layer["fill_rate"] = min(100, max(int(layer.get("fill_rate", 0)), len(layer["latest_insights"]) * 10))
             merged += 1
+            all_insight_texts.append(str(insight.get("insight", "")))
+
         dimensions["last_extraction"] = datetime.now(timezone.utc).isoformat()
         dimensions["total_sessions_processed"] = int(dimensions.get("total_sessions_processed", 0)) + merged
+
+        # ── Behavior scan: mirror/loop detection on generated insights ──
+        behavior_warnings: list[str] = []
+        mirror_detector = MirrorDetector()
+        prev = dimensions.get("_last_agent_insights", [])
+        for i, text in enumerate(all_insight_texts):
+            user_proxy = all_insight_texts[i - 1] if i > 0 else ""
+            result = mirror_detector.check(text, user_proxy)
+            if result.warning:
+                behavior_warnings.append(result.warning)
+        # Cross-run loop: current batch vs previous batch
+        if prev and all_insight_texts:
+            from .mirror_detector import _jaccard, _bigrams
+            score = _jaccard(_bigrams(all_insight_texts[0]), _bigrams(prev[-1] if prev else ""))
+            if score > 0.50:
+                behavior_warnings.append(f"cross-run-loop({score:.2f})")
+        dimensions["behavior"] = {
+            "checked_at": datetime.now(timezone.utc).isoformat(),
+            "warnings": behavior_warnings or [],
+            "insight_count": len(all_insight_texts),
+        }
+        dimensions["_last_agent_insights"] = all_insight_texts[-5:] if all_insight_texts else prev
+
         self.write_dimensions(dimensions)
         return {
             "merged": merged,
@@ -139,11 +166,23 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--extract-text-file", help="read extraction text from file (for --extract-insights)")
     parser.add_argument("--call-llm", action="store_true",
                         help="call LLM API to generate insights (requires DEEPSEEK_API_KEY)")
-    parser.add_argument("--model", default="deepseek-chat", help="LLM model for --call-llm")
+    parser.add_argument("--model", default="deepseek-flash", help="LLM model for --call-llm")
     parser.add_argument("--merge-json", help="merge candidate insights from JSON file")
     parser.add_argument("--push", action="store_true", help="push merged candidate JSON to API")
     parser.add_argument("--shadow-legacy", help="compare framework extraction with a legacy script")
+    parser.add_argument("--probe", action="store_true", help="probe Hermes capabilities at runtime")
     args = parser.parse_args(argv)
+
+    if args.probe:
+        from .capabilities import probe_all
+        import json as _json
+        caps = probe_all()
+        print(_json.dumps(caps.to_dict(), ensure_ascii=False, indent=2))
+        if caps.probe_errors:
+            print(f"\n⚠️  {len(caps.probe_errors)} probe error(s):", file=sys.stderr)
+            for e in caps.probe_errors:
+                print(f"  - {e}", file=sys.stderr)
+        return 0
 
     pipeline = DigitalTwinPipeline(load_config(args.config))
     if args.extract:

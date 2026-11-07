@@ -34,7 +34,7 @@ def bootstrap_from_hermes(
     *,
     days: int = 90,
     call_llm: bool = False,
-    model: str = "deepseek-chat",
+    model: str = "deepseek-flash",
     api_key: str | None = None,
     force: bool = False,
 ) -> dict[str, Any]:

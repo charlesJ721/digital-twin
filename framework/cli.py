@@ -58,7 +58,7 @@ def main(argv: list[str] | None = None) -> int:
     bootstrap.add_argument("--from-hermes", action="store_true", help="extract from state.db (Path B)")
     bootstrap.add_argument("--days", type=int, default=90, help="days of history to analyze")
     bootstrap.add_argument("--call-llm", action="store_true", help="call LLM API to generate insights")
-    bootstrap.add_argument("--model", default="deepseek-chat")
+    bootstrap.add_argument("--model", default="deepseek-flash")
     bootstrap.add_argument("--config", default="config.yaml")
 
     args = parser.parse_args(argv)
