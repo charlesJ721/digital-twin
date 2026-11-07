@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-06T18:03:58.014636+00:00",
-  "total_sessions_processed": 312,
+  "last_extraction": "2026-11-07T18:02:50.568500+00:00",
+  "total_sessions_processed": 314,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -7968,6 +7968,171 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight max_cos=0.583 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-07T18:02:50.568500+00:00_0",
+          "date": "2026-11-07",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "同一块屏在不同平台上的能力上限必须分开取数：规格表那一行写的是面板在 Windows + DP 直连下的上限，接到 macOS 后要以系统实际枚举出的模式表为判据——实测 121 个模式全为 24bit、5K 只有 60 与 75 两档，规格表承诺的 10bit／70Hz 档在系统侧根本不存在。判据：跨平台的参数承诺要各平台各验一次，不能拿一方的上限替另一方作答；UI 下拉里不出现物理分辨率，也不等于没跑在那个分辨率上。",
+          "confidence": "high",
+          "evidence": "「我想切 10bit 70hz 怎么做」→「共 121 个可用模式，全部是 24-bit（8bit/通道）」「5K 下可用刷新率只有 60.0 和 75.0，没有 70」；另「能看到 2 倍缩放选项」对应实测 Resolution: 5120 x 2880 / UI Looks like 2560 x 1440 @ 75Hz",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261107_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261107_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-07T18:02:50.568500+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 0.664 最近邻＝纸上比对参数两步清洗（10bit/75Hz 互斥）；本条是跨平台取数：规格上限 vs 枚举结果"
+        },
+        {
+          "id": "insight_2026-11-07T18:02:50.568500+00:00_1",
+          "date": "2026-11-07",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "被问「怎么做」时先回答「能不能做」：目标档位在本机不存在，正确交付是先证明它不存在（给出枚举级证据，而不是「应该不行」），再按代价给替代路径排序——先确认是否真需要、再借 HDR 通路换位深、最后才是第三方工具自造 timing 并说明其不确定处，收束到「留在当前最优组合」。判据：操作类问题的第一问是可行性，答案必须先于步骤；只给步骤等于默认目标成立。",
+          "confidence": "high",
+          "evidence": "用户问「我想切 10bit 70hz 怎么做」，回复先给「macOS 上没有『切 10bit 70Hz』这条路——70Hz 这个档位不存在」，随后列三条按值得做排序的路径并建议留在 5K75/8bit",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261107_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261107_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-07T18:02:50.568500+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 0.638 最近邻＝硬件类问题交付步骤链；本条是「先答可行性再给步骤」的顺序约束"
+        },
+        {
+          "id": "insight_2026-11-07T18:02:50.568500+00:00_3",
+          "date": "2026-11-07",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "物理通路的选择以「厂商是否把该能力写在这个口上」为第一判据，其次带宽机制，最后才是单线便利：同一台主机上 5K 只被官方规格写在雷雳口，HDMI 只承诺 4K60；带宽上 5K75 8bpc 已超 DP1.4 有效载荷，必须靠 DSC 才能成立。判据：这类「该用哪个口／哪根线」的问题不接受惯例答案，必须落到官方承诺 + 带宽算术 + 一条到手十分钟即可验证的判据（插上后看系统报的分辨率与刷新率）。",
+          "confidence": "high",
+          "evidence": "「按之前说的，飞利浦显示器连 mac mini，5k 分辨率要跑满，应该用 hdmi 还是 typec」→「Apple 自己的规格表把 5K 写在雷雳口上……一台通过雷雳最高 5K@60，或通过 HDMI 最高 4K@60」「5120×2880@75、8bpc ≈ 26.5 Gbps，已经超过 DP 1.4 有效载荷 25.92 Gbps，所以 5K75 必须靠 DSC」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261107_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261107_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-07T18:02:50.568500+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 0.615 最近邻＝参数口径清洗；本条是物理通路选型的第一判据（官方承诺 > 带宽 > 便利）"
+        },
+        {
+          "id": "insight_2026-11-07T18:02:50.568500+00:00_4",
+          "date": "2026-11-07",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "定根因靠单变量对照，不靠相关性：用同一二进制复制出多个配置变体（删 tfo／删整段 dns／只删 fallback／改 enhanced-mode／最小配置），各起独立实例跑同一基准，只有「只删 fallback」这一项从 1.4–2.1 跳到 4.4–4.9 MB/s，其余变量全不动。判据：生产配置不参与试错，试错实例要能随时销毁并可回滚；相关性再强也不能写成根因，必须是只改一项、其余全等的对照。",
+          "confidence": "high",
+          "evidence": "「用同一二进制起 8 个配置变体对照，锁定变量：……删 dns 段 4.4–5.1 MB/s／DoH nameserver，删 fallback 4.4–4.9 MB/s ← 根因」「根因：dns.fallback 里写的 8.8.4.4 和 8.8.8.8 在国内被阻断」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261107_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261107_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-07T18:02:50.568500+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 0.573 最近邻＝改动前后双向断言；本条是单变量多实例对照定根因"
+        },
+        {
+          "id": "insight_2026-11-07T18:02:50.568500+00:00_5",
+          "date": "2026-11-07",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "兜底通道的可用性是概率分布，不是布尔值：边缘侧 TLS 握手成功率在 1/5–5/5 之间波动，客户端默认只连 DNS 返回的第一个 IP，撞上黑洞即整连超时，一次探测失败就被记成 alive=false。判据：间歇性阻断要报成功率与失败模式，并注明断在链路层还是客户端侧；用多 IP 并发连接只能把「必失败」改善成「概率成功」，不能宣称修好。影响面也要一起给：第三级兜底即使修好，首包仍远慢于主线路，只适合救急。",
+          "confidence": "high",
+          "evidence": "「CF 解析出的两个边缘 IP……TLS 握手成功率只有 1/5–5/5 波动」「mihomo 默认只连 DNS 返回的第一个 IP，撞上黑洞 IP 就整连超时」「新增全局 tcp-concurrent: true……CF-WS 从每次必超时变为约 1/3 尝试成功（338ms）」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261107_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261107_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-07T18:02:50.568500+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 0.625 最近邻＝备件和平时期失效；本条是可用性按概率分布报，不用 alive 布尔"
         }
       ]
     },
@@ -12266,6 +12431,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight max_cos=0.559 (<0.72, no contradiction); Gate1-5 accepted"
+        },
+        {
+          "id": "insight_2026-11-07T18:02:50.568500+00:00_2",
+          "date": "2026-11-07",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "报障用的是「可选项对照」而不是「坏了」：同时列出可用档位与缺失档位（能选 75/60、看不到 5K 分辨率、但有 2 倍缩放），要的是判定这个缺失属于设计行为还是故障，而不是直接动手修。判据：症状描述里同时含正常项与缺失项时，先解释机制（系统只列逻辑分辨率），再给可自查的复核方式（按住 Option 点缩放／看系统信息里的 Resolution），最后才谈取舍。",
+          "confidence": "high",
+          "evidence": "「能选 75hz/60hz  但是没看到 5k 分辨率选项   也能看到 2 倍缩放选项」；回复「你已经跑在 5K 75Hz 上了——『看不到 5K 选项』是 macOS 的显示方式，不是故障」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261107_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261107_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-07T18:02:50.568500+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 0.661 最近邻＝报障自带对照与边界；本条补「设计行为 vs 故障」的分流判据"
+        },
+        {
+          "id": "insight_2026-11-07T18:02:50.568500+00:00_6",
+          "date": "2026-11-07",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "授权强度绑定在动词上，而不是会话级一次性放行：说「看着吗」＝只读巡检 + 如实报告（把可用性拆成主链路与各级兜底分别报），不擅动配置；说「修」才升格为可改基础设施，并允许同一条指令里并行两个任务、由执行方自行决定先止血还是先定位。判据：动词决定副作用边界——前一句的只读不延伸为后续也受限，后一句的授权也不需要回头再确认一次。",
+          "confidence": "high",
+          "evidence": "19:29「网络代理正常看着吗」→ agent 只做只读实测并明确「这是改代理配置，按边界我不擅自动手。要修就说一声」；19:36「修 mihomo   同时诊断 11mbps 到 2mbps 的问题」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261107_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261107_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-07T18:02:50.568500+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟡 0.702 最近邻＝授权单位升级为验收状态；本条是授权强度绑定动词（看着/修）"
         }
       ]
     },
@@ -14892,19 +15123,6 @@
   },
   "history": [
     {
-      "date": "2026-07-03T18:05:39.799829+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 85
-    },
-    {
       "date": "2026-07-04T18:04:43.456066+00:00",
       "layers": {
         "1": 35,
@@ -16037,18 +16255,31 @@
         "7": 100
       },
       "total_insights": 490
+    },
+    {
+      "date": "2026-11-07T18:02:50.568500+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 497
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-06T18:03:59.844180+00:00",
+    "checked_at": "2026-11-07T18:02:52.401005+00:00",
     "warnings": [],
-    "insight_count": 8
+    "insight_count": 7
   },
   "_last_agent_insights": [
-    "纸上比对参数前先做两步清洗：对齐口径、标出互斥。实例一，电商页写「95% AdobeRGB」，厂商规格页写「110%」，前者是覆盖率后者是面积，两个数不可直接比。实例二，同一台机器的 10bit 只在 5K70Hz 出现，切到 5K75Hz 就掉到 8bit，上限之间是互斥关系，不能各取最优拼出一台不存在的机器。做法是按主用途锁定取值（修图要 10bit 就接受 70Hz），再比剩下的项。判据：凡「A 比 B 高 X%」的论断，先确认两侧统计方式与生效条件一致。",
-    "评价一个供应商行不行之前，先确认自己买的是它哪一档：同一机房的高端档与入门档，在同一条家宽上实测 45ms 与 249ms，差 5.5 倍。所以「这家不行」往往是「档位选错」，换机房解决不了。配套动作是拿商家官方分档入口里的现役测试地址，在同一条线上一档一档对照，流传在博文里的旧测试地址已经全部不通，照着测只会得到假结论。判据：跨供应商比较必须先固定档位这个变量。",
-    "面对「再等等也许更便宜」的价格不确定性，选择用可撤销条款对冲而不是等待：当场下单、同时开价保，把后面的活动是否更低交给到期前的比价与退差，并预留发票与页面留证。判据：当最优时点不可预测、但交易带有可撤销条款时，先执行后比对优于继续观察，多付一次比价动作，换掉赌时点的风险。",
-    "大件到货的验收清单按「还能不能退」排序，而不是按重要性排序：唯一无法在下单前验证、事后又不可补救的那一项被放在第一条，并明确限定要在退货窗口内完成；漏光、坏点、异响、附件齐全这类可当场发现的项目排在后面。判据：验收顺序的分母是「错了还能不能退回」，不是「这项有多关键」。",
-    "设备类问题用材料替代提问：一次给齐实拍照片、说明书照片与厂商 App 的保修页，等于把事实源钉死，随后只接受按模板产出的结果，模板是「当前是什么状态、我要做什么、目标是什么」三段。附带一个防错动作，补一张 App 页声明具体型号，防止步骤串到同系列其他机型；并显式点掉不需要再核的部件，等于叫停继续追问。判据：材料越全，越是在要求成稿式交付，此时再问一轮会被视作没读材料。"
+    "物理通路的选择以「厂商是否把该能力写在这个口上」为第一判据，其次带宽机制，最后才是单线便利：同一台主机上 5K 只被官方规格写在雷雳口，HDMI 只承诺 4K60；带宽上 5K75 8bpc 已超 DP1.4 有效载荷，必须靠 DSC 才能成立。判据：这类「该用哪个口／哪根线」的问题不接受惯例答案，必须落到官方承诺 + 带宽算术 + 一条到手十分钟即可验证的判据（插上后看系统报的分辨率与刷新率）。",
+    "定根因靠单变量对照，不靠相关性：用同一二进制复制出多个配置变体（删 tfo／删整段 dns／只删 fallback／改 enhanced-mode／最小配置），各起独立实例跑同一基准，只有「只删 fallback」这一项从 1.4–2.1 跳到 4.4–4.9 MB/s，其余变量全不动。判据：生产配置不参与试错，试错实例要能随时销毁并可回滚；相关性再强也不能写成根因，必须是只改一项、其余全等的对照。",
+    "兜底通道的可用性是概率分布，不是布尔值：边缘侧 TLS 握手成功率在 1/5–5/5 之间波动，客户端默认只连 DNS 返回的第一个 IP，撞上黑洞即整连超时，一次探测失败就被记成 alive=false。判据：间歇性阻断要报成功率与失败模式，并注明断在链路层还是客户端侧；用多 IP 并发连接只能把「必失败」改善成「概率成功」，不能宣称修好。影响面也要一起给：第三级兜底即使修好，首包仍远慢于主线路，只适合救急。",
+    "报障用的是「可选项对照」而不是「坏了」：同时列出可用档位与缺失档位（能选 75/60、看不到 5K 分辨率、但有 2 倍缩放），要的是判定这个缺失属于设计行为还是故障，而不是直接动手修。判据：症状描述里同时含正常项与缺失项时，先解释机制（系统只列逻辑分辨率），再给可自查的复核方式（按住 Option 点缩放／看系统信息里的 Resolution），最后才谈取舍。",
+    "授权强度绑定在动词上，而不是会话级一次性放行：说「看着吗」＝只读巡检 + 如实报告（把可用性拆成主链路与各级兜底分别报），不擅动配置；说「修」才升格为可改基础设施，并允许同一条指令里并行两个任务、由执行方自行决定先止血还是先定位。判据：动词决定副作用边界——前一句的只读不延伸为后续也受限，后一句的授权也不需要回头再确认一次。"
   ]
 }
