@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-07T18:02:50.568500+00:00",
-  "total_sessions_processed": 314,
+  "last_extraction": "2026-11-08T18:03:09.103990+00:00",
+  "total_sessions_processed": 321,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -8133,6 +8133,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 0.625 最近邻＝备件和平时期失效；本条是可用性按概率分布报，不用 alive 布尔"
+        },
+        {
+          "id": "insight_2026-11-08T18:03:09.103990+00:00_0",
+          "date": "2026-11-08",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "对口碑型标签先拆解再决定是否采信：听到「东西不错但商家不行」这类整体评价，不接着问推荐，而是追问「具体指的是什么」，要求把标签落到可核事件（谁在何时做了什么、后果是什么、有没有第三方复述），并接受标签用词本身被推翻（例如「线路不错」实际指 IP 质量与性价比，不是国内线路）。判据：标签是待分解的假设，不是可以直接继承的结论。",
+          "confidence": "high",
+          "evidence": "「关于 aaitr，我普遍看到评价是 线路不错但是商家不行 具体指的是啥」（2026-11-08 20:13，会话 本地/AaITR 商家口碑与评价分析，首轮提问）",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261108_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261108_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-08T18:03:09.103990+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6093（最近邻：品牌绑定的独立决策层级）；embedding path LIVE；Gate1-4 accepted=3 rejected=0；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-08T18:03:09.103990+00:00_1",
+          "date": "2026-11-08",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "会核对推荐内部的排序口径是否自洽：看到清单按可得性排序、而「如果是我会选」却指向另一个对象时，立即指出这种不一致并要求给单一排序依据，而不是接受一份并列清单。判据：一旦出现「A 排第一、但我自己会选 B」，说明混用了两套标准；先把口径统一，再谈选谁。",
+          "confidence": "high",
+          "evidence": "「有点意外你首选的是 blossomhost，我以为你会首选干杯云的 gateway 升级版」（2026-11-08 20:38，会话 本地/AaITR 商家口碑与评价分析）；执行方随后承认「我给的是两个不同的排序标准，混在一起说了」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261108_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261108_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-08T18:03:09.103990+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6097（最近邻：候选清单完备性按用户会先想到谁）；embedding path LIVE；Gate5 findings=0"
         }
       ]
     },
@@ -12497,6 +12563,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 0.702 最近邻＝授权单位升级为验收状态；本条是授权强度绑定动词（看着/修）"
+        },
+        {
+          "id": "insight_2026-11-08T18:03:09.103990+00:00_2",
+          "date": "2026-11-08",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "采购付款后仍在可退窗口内开放同规格比较：不会因为已经下单就停止评估，一旦出现价格更低或功能更强的新候选，就以「和我的 X 比如何」要求逐项对比，并把结论收束成留/换两档及各自的触发条件（窗口期、功能差异、差价是否有意义）。判据：比较基准是手里那台而不是纸面参数；只要窗口未关，已付款不构成决策终点。",
+          "confidence": "high",
+          "evidence": "「这个和我的飞利浦比如何」（2026-11-08 11:23，telegram 常驻会话，附 MSI MAG 271KPD7 商详截图：到手 2499 元、内置 KVM、支架可竖屏）；对照已购飞利浦 27M2G5800 于 11-06/11-07 下单、到手 3480.81 元，执行方判定「你 11-06/07 下单，今天第 2 天，来得及」",
+          "memory_type": "trace",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261108_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261108_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-08T18:03:09.103990+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.6195（最近邻：价保对冲式比价）；embedding path LIVE；Gate5 findings=0"
         }
       ]
     },
@@ -15123,19 +15222,6 @@
   },
   "history": [
     {
-      "date": "2026-07-04T18:04:43.456066+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 87
-    },
-    {
       "date": "2026-07-05T18:04:42.339776+00:00",
       "layers": {
         "1": 35,
@@ -16268,18 +16354,29 @@
         "7": 100
       },
       "total_insights": 497
+    },
+    {
+      "date": "2026-11-08T18:03:09.103990+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 500
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-07T18:02:52.401005+00:00",
+    "checked_at": "2026-11-08T18:03:11.048260+00:00",
     "warnings": [],
-    "insight_count": 7
+    "insight_count": 3
   },
   "_last_agent_insights": [
-    "物理通路的选择以「厂商是否把该能力写在这个口上」为第一判据，其次带宽机制，最后才是单线便利：同一台主机上 5K 只被官方规格写在雷雳口，HDMI 只承诺 4K60；带宽上 5K75 8bpc 已超 DP1.4 有效载荷，必须靠 DSC 才能成立。判据：这类「该用哪个口／哪根线」的问题不接受惯例答案，必须落到官方承诺 + 带宽算术 + 一条到手十分钟即可验证的判据（插上后看系统报的分辨率与刷新率）。",
-    "定根因靠单变量对照，不靠相关性：用同一二进制复制出多个配置变体（删 tfo／删整段 dns／只删 fallback／改 enhanced-mode／最小配置），各起独立实例跑同一基准，只有「只删 fallback」这一项从 1.4–2.1 跳到 4.4–4.9 MB/s，其余变量全不动。判据：生产配置不参与试错，试错实例要能随时销毁并可回滚；相关性再强也不能写成根因，必须是只改一项、其余全等的对照。",
-    "兜底通道的可用性是概率分布，不是布尔值：边缘侧 TLS 握手成功率在 1/5–5/5 之间波动，客户端默认只连 DNS 返回的第一个 IP，撞上黑洞即整连超时，一次探测失败就被记成 alive=false。判据：间歇性阻断要报成功率与失败模式，并注明断在链路层还是客户端侧；用多 IP 并发连接只能把「必失败」改善成「概率成功」，不能宣称修好。影响面也要一起给：第三级兜底即使修好，首包仍远慢于主线路，只适合救急。",
-    "报障用的是「可选项对照」而不是「坏了」：同时列出可用档位与缺失档位（能选 75/60、看不到 5K 分辨率、但有 2 倍缩放），要的是判定这个缺失属于设计行为还是故障，而不是直接动手修。判据：症状描述里同时含正常项与缺失项时，先解释机制（系统只列逻辑分辨率），再给可自查的复核方式（按住 Option 点缩放／看系统信息里的 Resolution），最后才谈取舍。",
-    "授权强度绑定在动词上，而不是会话级一次性放行：说「看着吗」＝只读巡检 + 如实报告（把可用性拆成主链路与各级兜底分别报），不擅动配置；说「修」才升格为可改基础设施，并允许同一条指令里并行两个任务、由执行方自行决定先止血还是先定位。判据：动词决定副作用边界——前一句的只读不延伸为后续也受限，后一句的授权也不需要回头再确认一次。"
+    "对口碑型标签先拆解再决定是否采信：听到「东西不错但商家不行」这类整体评价，不接着问推荐，而是追问「具体指的是什么」，要求把标签落到可核事件（谁在何时做了什么、后果是什么、有没有第三方复述），并接受标签用词本身被推翻（例如「线路不错」实际指 IP 质量与性价比，不是国内线路）。判据：标签是待分解的假设，不是可以直接继承的结论。",
+    "会核对推荐内部的排序口径是否自洽：看到清单按可得性排序、而「如果是我会选」却指向另一个对象时，立即指出这种不一致并要求给单一排序依据，而不是接受一份并列清单。判据：一旦出现「A 排第一、但我自己会选 B」，说明混用了两套标准；先把口径统一，再谈选谁。",
+    "采购付款后仍在可退窗口内开放同规格比较：不会因为已经下单就停止评估，一旦出现价格更低或功能更强的新候选，就以「和我的 X 比如何」要求逐项对比，并把结论收束成留/换两档及各自的触发条件（窗口期、功能差异、差价是否有意义）。判据：比较基准是手里那台而不是纸面参数；只要窗口未关，已付款不构成决策终点。"
   ]
 }
