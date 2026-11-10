@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-08T18:03:09.103990+00:00",
-  "total_sessions_processed": 321,
+  "last_extraction": "2026-11-10T18:01:48.960813+00:00",
+  "total_sessions_processed": 323,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -8199,6 +8199,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.6097（最近邻：候选清单完备性按用户会先想到谁）；embedding path LIVE；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-10T18:01:48.960813+00:00_0",
+          "date": "2026-11-10",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "消费类采购的决策标准是多维并列而非单一价格排序：价格、售后确定性、运行稳定性（噪音/故障率）被同时当作权重项，只按性价比排序的推荐会被视为不完整。讨论中会持续把「售后由谁承担」抬到与价格同级的位置。",
+          "confidence": "high",
+          "evidence": "「结合以上背景信息，以及综合市场评价反馈，帮我整理和推荐质价比、售后、稳定性等维度优质的品牌和型号」；后续追问中反复落点在「授权经销商/开票/上门安装」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261110_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261110_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-10T18:01:48.960813+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-10T18:01:48.960813+00:00_1",
+          "date": "2026-11-10",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "对时效性信息采用一手源门槛：当推荐清单与自己掌握的当前市场信息不一致时会直接挑战，要求出示最新官方产品名录；采信标准是「官网/官方样本原文」，二手聚合页转述不足以支撑决策，冲突项不做折中裁决而是标记为待书面确认。",
+          "confidence": "high",
+          "evidence": "「威乐 himulti1 最新系列好像没有 2-42  你要不要更新下最新信息  最新产品名录什么的」",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261110_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261110_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-10T18:01:48.960813+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-10T18:01:48.960813+00:00_2",
+          "date": "2026-11-10",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "决策粒度要求下沉到可下单的实体单位：渠道款、物料编号、是否内置某模块、保修主体必须逐项分开，品牌级或系列级推荐被视为不可执行；相邻型号会被追问是否为同一台，目的是排除买错货而非满足好奇。",
+          "confidence": "high",
+          "evidence": "「himulti1 WiFi 款和 plus 指的是同一个对吗」；前一轮「北京线下零售商帮我找找」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261110_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261110_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-10T18:01:48.960813+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -8622,6 +8721,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.5643 vs 购前实测再决策（本条讲未知供应商的可试不可托付边界）"
+        },
+        {
+          "id": "insight_2026-11-10T18:01:48.960813+00:00_3",
+          "date": "2026-11-10",
+          "dimension": "价值观",
+          "layer": "L3",
+          "insight": "交易偏好可追责的线下授权渠道：愿意为「实体门店、可开票、可上门安装、售后有明确责任主体」承担溢价与额外沟通成本（跨区询价、电话核实授权名单），对纯线上低价渠道保持距离。",
+          "confidence": "medium",
+          "evidence": "「北京线下零售商帮我找找」，随后接受以官方授权名单/实体门店为落点的方案",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261110_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261110_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-10T18:01:48.960813+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -15222,19 +15354,6 @@
   },
   "history": [
     {
-      "date": "2026-07-05T18:04:42.339776+00:00",
-      "layers": {
-        "1": 35,
-        "2": 60,
-        "3": 50,
-        "4": 60,
-        "5": 70,
-        "6": 50,
-        "7": 45
-      },
-      "total_insights": 87
-    },
-    {
       "date": "2026-07-09T18:04:26.998134+00:00",
       "layers": {
         "1": 4,
@@ -16367,16 +16486,30 @@
         "7": 100
       },
       "total_insights": 500
+    },
+    {
+      "date": "2026-11-10T18:01:48.960813+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 504
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-08T18:03:11.048260+00:00",
+    "checked_at": "2026-11-10T18:01:50.620590+00:00",
     "warnings": [],
-    "insight_count": 3
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "对口碑型标签先拆解再决定是否采信：听到「东西不错但商家不行」这类整体评价，不接着问推荐，而是追问「具体指的是什么」，要求把标签落到可核事件（谁在何时做了什么、后果是什么、有没有第三方复述），并接受标签用词本身被推翻（例如「线路不错」实际指 IP 质量与性价比，不是国内线路）。判据：标签是待分解的假设，不是可以直接继承的结论。",
-    "会核对推荐内部的排序口径是否自洽：看到清单按可得性排序、而「如果是我会选」却指向另一个对象时，立即指出这种不一致并要求给单一排序依据，而不是接受一份并列清单。判据：一旦出现「A 排第一、但我自己会选 B」，说明混用了两套标准；先把口径统一，再谈选谁。",
-    "采购付款后仍在可退窗口内开放同规格比较：不会因为已经下单就停止评估，一旦出现价格更低或功能更强的新候选，就以「和我的 X 比如何」要求逐项对比，并把结论收束成留/换两档及各自的触发条件（窗口期、功能差异、差价是否有意义）。判据：比较基准是手里那台而不是纸面参数；只要窗口未关，已付款不构成决策终点。"
+    "消费类采购的决策标准是多维并列而非单一价格排序：价格、售后确定性、运行稳定性（噪音/故障率）被同时当作权重项，只按性价比排序的推荐会被视为不完整。讨论中会持续把「售后由谁承担」抬到与价格同级的位置。",
+    "对时效性信息采用一手源门槛：当推荐清单与自己掌握的当前市场信息不一致时会直接挑战，要求出示最新官方产品名录；采信标准是「官网/官方样本原文」，二手聚合页转述不足以支撑决策，冲突项不做折中裁决而是标记为待书面确认。",
+    "决策粒度要求下沉到可下单的实体单位：渠道款、物料编号、是否内置某模块、保修主体必须逐项分开，品牌级或系列级推荐被视为不可执行；相邻型号会被追问是否为同一台，目的是排除买错货而非满足好奇。",
+    "交易偏好可追责的线下授权渠道：愿意为「实体门店、可开票、可上门安装、售后有明确责任主体」承担溢价与额外沟通成本（跨区询价、电话核实授权名单），对纯线上低价渠道保持距离。"
   ]
 }
