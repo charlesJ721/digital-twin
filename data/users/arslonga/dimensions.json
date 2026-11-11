@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-10T18:01:48.960813+00:00",
-  "total_sessions_processed": 323,
+  "last_extraction": "2026-11-11T18:02:27.889395+00:00",
+  "total_sessions_processed": 325,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -8298,6 +8298,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-11T18:02:27.889395+00:00_1",
+          "date": "2026-11-11",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "工具类交付的验收基线是「已在用的同类产品有多省事」，不是功能是否齐全：看到要在手机上逐个导入 5 个节点，直接反问为什么不能像既有客户端那样一次导入，把多步手工流程判成交付缺陷而不是使用习惯差异。判据：步骤数属于需求项；N 步的补漏方案不能与一步到位的常规路径并列展示，否则等于把兜底当成主路径。",
+          "confidence": "high",
+          "evidence": "「为啥要单独导入5次 不能像sfa那样 一次导入吗」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261111_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261111_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-11T18:02:27.889395+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-11T18:02:27.889395+00:00_2",
+          "date": "2026-11-11",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "参数类答案必须翻译成体验刻度才算完成：给出一个规格上限（例如设备承压不超过某个公斤数）时，关心的不是单位换算表本身，而是这个数值在实际体验里对应什么档位——手感、相当于多少层楼的高差、与舒适区间和「不宜超过」线的相对位置。同时要求把「设备能承受的上限」与「应当设定的目标值」分开，拒绝拿上限当设定值。",
+          "confidence": "high",
+          "evidence": "「净水设备承受的水压不要超过四公斤，这个是净水老板的建议，我想知道4公斤，在实际体验上是什么水平」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261111_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261111_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-11T18:02:27.889395+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-11T18:02:27.889395+00:00_3",
+          "date": "2026-11-11",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "对外部性风险（自己的设备会不会影响他人）要的是量化到可感知阈值的影响边界，而不是定性安抚或定性恐吓：问影响范围时，期待回答同时给出受影响对象（哪一段管路、哪些住户、还是另一套系统）与量级（是否低于人的感知阈值），并按系统拓扑判定影响方向，而不是按直觉（例如「顶层上面没人所以无影响」）。",
+          "confidence": "medium",
+          "evidence": "「关于对邻居的影响，结合我的场景，水箱水，水箱在地下，我在11层顶层，自吸泵对其他邻居（楼下、对门）的真实可能影响范围」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261111_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261111_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-11T18:02:27.889395+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -12728,6 +12827,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.6195（最近邻：价保对冲式比价）；embedding path LIVE；Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-11T18:02:27.889395+00:00_0",
+          "date": "2026-11-11",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "未决项不是等待项：分析留下的待测/待确认项会被用户当成自己的行动清单去现场取证。一次选型分析把「入户静压与峰值动压未测」列为待办后，用户没有追问下一轮怎么算，而是回头向开发商要来立管全链路规格（主管逐层递减到顶部支管），用一手参数把「会不会影响其他住户」这一问题直接结案。判据：能向权威方（开发商/物业/厂商）问到的参数由用户去问，执行者据此收口，而不是停在假设上继续推演。",
+          "confidence": "high",
+          "evidence": "「主管道DN100的，会随着楼层逐步递减，最高处DN32」「问了一下开发商我们的立管规格」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261111_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261111_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-11T18:02:27.889395+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-11T18:02:27.889395+00:00_4",
+          "date": "2026-11-11",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "追问实现细节时会主动补入自己的物理约束，要求把通用工艺裁成可施工版本：讨论减振做法时补一句「准备装到橱柜里」，讨论管路拓扑时补「水箱在地下、住在顶层」——约束不是背景闲聊，而是用来裁掉不可行选项的边界条件。判据：答案要能回答「在既定空间里装不装得下、装不下退到哪一档」，通用方案清单不算交付。",
+          "confidence": "medium",
+          "evidence": "「减震垫 + 波纹管柔性过渡……这个展开讲讲，我是准备安装到橱柜里」「水箱在地下，我在11层顶层」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261111_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261111_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-11T18:02:27.889395+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -15354,19 +15519,6 @@
   },
   "history": [
     {
-      "date": "2026-07-09T18:04:26.998134+00:00",
-      "layers": {
-        "1": 4,
-        "2": 47,
-        "3": 7,
-        "4": 25,
-        "5": 18,
-        "6": 3,
-        "7": 7
-      },
-      "total_insights": 111
-    },
-    {
       "date": "2026-07-10T18:03:38.434611+00:00",
       "layers": {
         "1": 40,
@@ -16499,17 +16651,31 @@
         "7": 100
       },
       "total_insights": 504
+    },
+    {
+      "date": "2026-11-11T18:02:27.889395+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 509
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-10T18:01:50.620590+00:00",
+    "checked_at": "2026-11-11T18:02:29.659591+00:00",
     "warnings": [],
-    "insight_count": 4
+    "insight_count": 5
   },
   "_last_agent_insights": [
-    "消费类采购的决策标准是多维并列而非单一价格排序：价格、售后确定性、运行稳定性（噪音/故障率）被同时当作权重项，只按性价比排序的推荐会被视为不完整。讨论中会持续把「售后由谁承担」抬到与价格同级的位置。",
-    "对时效性信息采用一手源门槛：当推荐清单与自己掌握的当前市场信息不一致时会直接挑战，要求出示最新官方产品名录；采信标准是「官网/官方样本原文」，二手聚合页转述不足以支撑决策，冲突项不做折中裁决而是标记为待书面确认。",
-    "决策粒度要求下沉到可下单的实体单位：渠道款、物料编号、是否内置某模块、保修主体必须逐项分开，品牌级或系列级推荐被视为不可执行；相邻型号会被追问是否为同一台，目的是排除买错货而非满足好奇。",
-    "交易偏好可追责的线下授权渠道：愿意为「实体门店、可开票、可上门安装、售后有明确责任主体」承担溢价与额外沟通成本（跨区询价、电话核实授权名单），对纯线上低价渠道保持距离。"
+    "工具类交付的验收基线是「已在用的同类产品有多省事」，不是功能是否齐全：看到要在手机上逐个导入 5 个节点，直接反问为什么不能像既有客户端那样一次导入，把多步手工流程判成交付缺陷而不是使用习惯差异。判据：步骤数属于需求项；N 步的补漏方案不能与一步到位的常规路径并列展示，否则等于把兜底当成主路径。",
+    "参数类答案必须翻译成体验刻度才算完成：给出一个规格上限（例如设备承压不超过某个公斤数）时，关心的不是单位换算表本身，而是这个数值在实际体验里对应什么档位——手感、相当于多少层楼的高差、与舒适区间和「不宜超过」线的相对位置。同时要求把「设备能承受的上限」与「应当设定的目标值」分开，拒绝拿上限当设定值。",
+    "对外部性风险（自己的设备会不会影响他人）要的是量化到可感知阈值的影响边界，而不是定性安抚或定性恐吓：问影响范围时，期待回答同时给出受影响对象（哪一段管路、哪些住户、还是另一套系统）与量级（是否低于人的感知阈值），并按系统拓扑判定影响方向，而不是按直觉（例如「顶层上面没人所以无影响」）。",
+    "未决项不是等待项：分析留下的待测/待确认项会被用户当成自己的行动清单去现场取证。一次选型分析把「入户静压与峰值动压未测」列为待办后，用户没有追问下一轮怎么算，而是回头向开发商要来立管全链路规格（主管逐层递减到顶部支管），用一手参数把「会不会影响其他住户」这一问题直接结案。判据：能向权威方（开发商/物业/厂商）问到的参数由用户去问，执行者据此收口，而不是停在假设上继续推演。",
+    "追问实现细节时会主动补入自己的物理约束，要求把通用工艺裁成可施工版本：讨论减振做法时补一句「准备装到橱柜里」，讨论管路拓扑时补「水箱在地下、住在顶层」——约束不是背景闲聊，而是用来裁掉不可行选项的边界条件。判据：答案要能回答「在既定空间里装不装得下、装不下退到哪一档」，通用方案清单不算交付。"
   ]
 }
