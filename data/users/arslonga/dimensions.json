@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-15T18:01:55.664252+00:00",
-  "total_sessions_processed": 326,
+  "last_extraction": "2026-11-17T18:02:41.119598+00:00",
+  "total_sessions_processed": 330,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -274,6 +274,39 @@
           "memory_type": "preference",
           "state": "provisional",
           "auto_diff": ""
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_2",
+          "date": "2026-11-17",
+          "dimension": "动机结构",
+          "layer": "L1",
+          "insight": "备用资源按「双态预算」定价：常态持有期要求成本压到接近零，启用期才要求稳定且速度够用，两态分开定价，不拿启用体验去论证常态成本。判据：评估容灾/备用方案时先问「平时是否完全不进路径、是否只付持有成本」，再问「真用时是否够用」；用「平时也很快」当买入理由会被判为非必要支出。",
+          "confidence": "high",
+          "evidence": "用户：「或者基于我的诉求，你给我个方案，其一是成本可控，其二是多节点地域差异，其三是容灾，主要是大部分时候用不上不想太花钱，但是偶尔想用的时候又需要稳定且速度够用」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -8463,6 +8496,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cosine=0.51 vs 未决项不是等待项——相邻但不同：本条讲信息给出顺序（数值先行、前提滞后），非行动清单转化"
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_0",
+          "date": "2026-11-17",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "授权的缺失不等于能力的缺失：未经批准的路径不能被从方案集里预先删掉，只能标注「需授权」并给出代价。判据：提出方案时若某条路因权限边界被降权成一句附注，等于用流程替用户做了技术否决；正确做法是把它当候选之一评估可行性，把授权留成一个待选项，而不是当成否决理由。",
+          "confidence": "high",
+          "evidence": "用户：「网络这一条   为什么没有改 mac mini 网络配置这个选项」；执行方复盘：「我把「改 Mac mini 网络配置」写成了「须授权，我不会擅自动」一句附注，实际效果是把一条主线降权成了不可行，并由此单边锁定了机型结论」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_1",
+          "date": "2026-11-17",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用「剥离主导变量再重排」当探针：价格、品牌、口碑这类强项会被要求先摘掉，看剩余排序是否变化，以此识别哪些结论其实只是该变量的代理。判据：同一问题要给出两版排序（含价格／撇开价格），差异项才是真实权重结构；只给一版就等于放弃了对照。",
+          "confidence": "high",
+          "evidence": "用户：「四代 apple tv 的话，不同国家版本如何选择」→ 收到含价格排序的回答后追问「撇开价格因素呢」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -12959,6 +13058,138 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_3",
+          "date": "2026-11-17",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "外部威胁叙事（会期、封号潮、社区大面积报障）会触发对自有资产的预防性体检，而不是等故障发生；验收要求把「别人出事」与「自己是否出事」分开取证。判据：这类问法要当场实测自有链路并给出与社区报告可比的口径（同一时段同一指标），只转述社区动态等于没有回答。",
+          "confidence": "high",
+          "evidence": "用户：「貌似 APEC 会议又开始封 ip 了   我们的节点还安好吗」。",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_4",
+          "date": "2026-11-17",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "仪表达标不能结案，体感是最终验收线：设备按规格输出、读数落在设计区间时，若主观体验没有改善，问题不会被判为已解决，而是把矛盾推回给执行者继续分层定位。判据：交付必须解释「数值合规但体感未达标」这一组合，不能拿合规读数当结论。",
+          "confidence": "high",
+          "evidence": "用户：「我装了威乐的 himulti pro，装的时候测了一下，过前置过滤器后的动态水压在 2.8 2.9 左右（厨房水龙头持续放水时的水压），但是花洒出水仍然很软」。",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_5",
+          "date": "2026-11-17",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "跨会话的设备与环境档案被当作默认前提：涉及已讨论过的硬件或拓扑时，重新发问或给出泛化分叉会被视为失职，期望直接按已记录型号作答，缺失处显式标注缺什么。判据：开答前先检索既有记录（会话、vault、事实库），拿不到的部分标为未记录，而不是用「取决于你是哪种情况」代替检索。",
+          "confidence": "medium",
+          "evidence": "用户：「你应该知道我的索尼电视是什么型号吧，以及你也应该知道我还有一套三星 q990h」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_6",
+          "date": "2026-11-17",
+          "dimension": "决策风格",
+          "layer": "L4",
+          "insight": "冗余成员按「故障域是否独立 + 常态是否零成本」准入，而不是按常态延迟：一个平时永不进路径、只在主备都失效时接管的慢节点，价值成立。判据是它在失效场景里是否提供别处没有的故障域，以及平时是否一个字节都不占；若故障域与主节点重合（同源站、同机房），再快也不增加兜底厚度。",
+          "confidence": "medium",
+          "evidence": "用户：「那感觉 hkg 节点   价值有限啊   延迟太高了」→ 听到该腿平时不占路径后回复「A  同时更新 sfa 文件发我」（A 即保留第三腿）。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -15579,24 +15810,44 @@
               "timestamp": "2026-08-01T18:04:23+00:00"
             }
           ]
+        },
+        {
+          "id": "insight_2026-11-17T18:02:41.119598+00:00_7",
+          "date": "2026-11-17",
+          "dimension": "叙事/自我",
+          "layer": "L7",
+          "insight": "定制文字制品的形式约束高于字面精度：为特定人名找嵌字诗句时允许谐音、近音替代，但拒绝为凑字把整句拆成逗号分句——宁可放宽匹配也不破坏句式完整。判据：这类需求里「整句可用」是硬约束，「字全中」是软约束，判反了会被直接退回。",
+          "confidence": "medium",
+          "evidence": "用户：「不要逗号分句的，要整句的」「可以不完全一样的字，接受谐音」「近似音也可以」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261117_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261117_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-17T18:02:41.119598+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     }
   },
   "history": [
-    {
-      "date": "2026-07-11T18:05:06.739778+00:00",
-      "layers": {
-        "1": 40,
-        "2": 100,
-        "3": 70,
-        "4": 100,
-        "5": 100,
-        "6": 50,
-        "7": 70
-      },
-      "total_insights": 128
-    },
     {
       "date": "2026-07-14T18:05:11Z",
       "layers": {
@@ -16730,15 +16981,31 @@
         "7": 100
       },
       "total_insights": 511
+    },
+    {
+      "date": "2026-11-17T18:02:41.119598+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 519
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-15T18:01:57.505443+00:00",
+    "checked_at": "2026-11-17T18:02:42.503591+00:00",
     "warnings": [],
-    "insight_count": 2
+    "insight_count": 8
   },
   "_last_agent_insights": [
-    "自测取值偏「可得性」而非「代表性」，且默认读数自带诊断力：装泵后报的 2.8–2.9 kgf 取自前置过滤器后（恰在恒压变频泵出口）、工况是厨房单龙头放水，未标测点位置与流量。该读数只能证明设备按设定值在工作，不能代表末端体感。收到用户实测值时须先补齐测点、流量、设备状态三要素再判读，避免把设备自证当成系统结论。",
-    "信息顺序是「现象/数值 → 前提」，且前提往往滞后一轮：安装拓扑（泵在前置过滤器后、中央净水前）是在给出读数、被追问后才补充的。判定所需的约束（安装顺序、测点、工况）默认不在首轮信息里。接手这类问题应先把拓扑与测点钉死，再接收读数，否则第一轮判读必然建立在不完整前提上。"
+    "外部威胁叙事（会期、封号潮、社区大面积报障）会触发对自有资产的预防性体检，而不是等故障发生；验收要求把「别人出事」与「自己是否出事」分开取证。判据：这类问法要当场实测自有链路并给出与社区报告可比的口径（同一时段同一指标），只转述社区动态等于没有回答。",
+    "仪表达标不能结案，体感是最终验收线：设备按规格输出、读数落在设计区间时，若主观体验没有改善，问题不会被判为已解决，而是把矛盾推回给执行者继续分层定位。判据：交付必须解释「数值合规但体感未达标」这一组合，不能拿合规读数当结论。",
+    "跨会话的设备与环境档案被当作默认前提：涉及已讨论过的硬件或拓扑时，重新发问或给出泛化分叉会被视为失职，期望直接按已记录型号作答，缺失处显式标注缺什么。判据：开答前先检索既有记录（会话、vault、事实库），拿不到的部分标为未记录，而不是用「取决于你是哪种情况」代替检索。",
+    "冗余成员按「故障域是否独立 + 常态是否零成本」准入，而不是按常态延迟：一个平时永不进路径、只在主备都失效时接管的慢节点，价值成立。判据是它在失效场景里是否提供别处没有的故障域，以及平时是否一个字节都不占；若故障域与主节点重合（同源站、同机房），再快也不增加兜底厚度。",
+    "定制文字制品的形式约束高于字面精度：为特定人名找嵌字诗句时允许谐音、近音替代，但拒绝为凑字把整句拆成逗号分句——宁可放宽匹配也不破坏句式完整。判据：这类需求里「整句可用」是硬约束，「字全中」是软约束，判反了会被直接退回。"
   ]
 }
