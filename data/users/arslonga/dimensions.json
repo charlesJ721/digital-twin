@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-17T18:02:41.119598+00:00",
-  "total_sessions_processed": 330,
+  "last_extraction": "2026-11-18T18:03:05.683241+00:00",
+  "total_sessions_processed": 332,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -8562,6 +8562,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-18T18:03:05.683241+00:00_0",
+          "date": "2026-11-18",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "账号与订阅类资产按「迁不迁移」定价，而不是按「要不要」定价：目标功能到手前先问能不能在原账号上改归属（改国家地区），把新建账号当成更贵的方案；一旦改归属的代价是把已有购买生态（应用授权、已购内容、区域订阅）整体搬走，就直接放弃这个目标，宁可不做也不换账本。判据：问的是「能不能在原来那个号上改」，而不是「哪个区的号更好」。",
+          "confidence": "high",
+          "evidence": "用户：我的港区账号可以通过改国家地区直接切成美区账号吗（此前已用港区号买 Shadowrocket、装 Infuse，目标只是 Siri AI 与美区独占 App）；随后接受结论「能改但不划算，别硬改」，选择不改区",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261118_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261118_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-18T18:03:05.683241+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-18T18:03:05.683241+00:00_1",
+          "date": "2026-11-18",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "自建还是买成品，由「这件事我会不会长期亲手维护」决定，不由成本、自由度或画质上限决定：先声明自己没有做过的动作（没搭过 NAS、没收集过高清片源），再要求给出「类似服务的成品」；所有需要长期自建与维护的路线（播放器 Pro、自建库、PT 共享）一律判为空转，最终收敛到订阅制成品加已有硬件承担（用现成的游戏机当 UHD 播放机）。判据：方案里凡出现「你需要长期维护 X」，先被能力边界筛掉，再谈性价比。",
+          "confidence": "high",
+          "evidence": "用户：我没有自己搭建过 nas，也没自己收集过高清电影，有没有啥提供类似服务的；用户：那基于我的硬件配置，你建议我如何，比如，直接一个 netflix 省事儿？——最终接受「明确不做：Infuse Pro、Native Player、NAS、PT、共享库订阅」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261118_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261118_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-18T18:03:05.683241+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -13190,6 +13256,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-18T18:03:05.683241+00:00_2",
+          "date": "2026-11-18",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "常态性能基线是内化的，异常先由体感触发核查而不是由故障触发：在没有报错、没有外部事件的时候，仅凭「比平时慢」就会要求实测复核，并且接受的答复必须是同口径的前后对照（哪一段变了、变到多少），整体判定「都在正常范围」不算答复。判据：这类抽查发生在故障之前，检验的是漂移而不是可用性。",
+          "confidence": "medium",
+          "evidence": "用户：几个 vps 节点的延迟是不是有点异常高了？——实测后节点延迟均在基线内，唯一变化是 AN5 到 Telegram 由约 1.0 秒变 1.7 至 2.6 秒，用户接受该分段结论",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261118_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261118_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-18T18:03:05.683241+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "pending"
         }
       ]
     },
@@ -15849,28 +15948,6 @@
   },
   "history": [
     {
-      "date": "2026-07-14T18:05:11Z",
-      "layers": {
-        "1": 5,
-        "2": 65,
-        "3": 7,
-        "4": 31,
-        "5": 26,
-        "6": 3,
-        "7": 7
-      },
-      "total_insights": 144,
-      "fill_rate": {
-        "1": 40,
-        "2": 100,
-        "3": 70,
-        "4": 100,
-        "5": 100,
-        "6": 50,
-        "7": 70
-      }
-    },
-    {
       "date": "2026-07-16T18:05:20Z",
       "layers": {
         "1": 40,
@@ -16994,18 +17071,29 @@
         "7": 100
       },
       "total_insights": 519
+    },
+    {
+      "date": "2026-11-18T18:03:05.683241+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 522
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-17T18:02:42.503591+00:00",
+    "checked_at": "2026-11-18T18:03:07.105587+00:00",
     "warnings": [],
-    "insight_count": 8
+    "insight_count": 3
   },
   "_last_agent_insights": [
-    "外部威胁叙事（会期、封号潮、社区大面积报障）会触发对自有资产的预防性体检，而不是等故障发生；验收要求把「别人出事」与「自己是否出事」分开取证。判据：这类问法要当场实测自有链路并给出与社区报告可比的口径（同一时段同一指标），只转述社区动态等于没有回答。",
-    "仪表达标不能结案，体感是最终验收线：设备按规格输出、读数落在设计区间时，若主观体验没有改善，问题不会被判为已解决，而是把矛盾推回给执行者继续分层定位。判据：交付必须解释「数值合规但体感未达标」这一组合，不能拿合规读数当结论。",
-    "跨会话的设备与环境档案被当作默认前提：涉及已讨论过的硬件或拓扑时，重新发问或给出泛化分叉会被视为失职，期望直接按已记录型号作答，缺失处显式标注缺什么。判据：开答前先检索既有记录（会话、vault、事实库），拿不到的部分标为未记录，而不是用「取决于你是哪种情况」代替检索。",
-    "冗余成员按「故障域是否独立 + 常态是否零成本」准入，而不是按常态延迟：一个平时永不进路径、只在主备都失效时接管的慢节点，价值成立。判据是它在失效场景里是否提供别处没有的故障域，以及平时是否一个字节都不占；若故障域与主节点重合（同源站、同机房），再快也不增加兜底厚度。",
-    "定制文字制品的形式约束高于字面精度：为特定人名找嵌字诗句时允许谐音、近音替代，但拒绝为凑字把整句拆成逗号分句——宁可放宽匹配也不破坏句式完整。判据：这类需求里「整句可用」是硬约束，「字全中」是软约束，判反了会被直接退回。"
+    "账号与订阅类资产按「迁不迁移」定价，而不是按「要不要」定价：目标功能到手前先问能不能在原账号上改归属（改国家地区），把新建账号当成更贵的方案；一旦改归属的代价是把已有购买生态（应用授权、已购内容、区域订阅）整体搬走，就直接放弃这个目标，宁可不做也不换账本。判据：问的是「能不能在原来那个号上改」，而不是「哪个区的号更好」。",
+    "自建还是买成品，由「这件事我会不会长期亲手维护」决定，不由成本、自由度或画质上限决定：先声明自己没有做过的动作（没搭过 NAS、没收集过高清片源），再要求给出「类似服务的成品」；所有需要长期自建与维护的路线（播放器 Pro、自建库、PT 共享）一律判为空转，最终收敛到订阅制成品加已有硬件承担（用现成的游戏机当 UHD 播放机）。判据：方案里凡出现「你需要长期维护 X」，先被能力边界筛掉，再谈性价比。",
+    "常态性能基线是内化的，异常先由体感触发核查而不是由故障触发：在没有报错、没有外部事件的时候，仅凭「比平时慢」就会要求实测复核，并且接受的答复必须是同口径的前后对照（哪一段变了、变到多少），整体判定「都在正常范围」不算答复。判据：这类抽查发生在故障之前，检验的是漂移而不是可用性。"
   ]
 }
