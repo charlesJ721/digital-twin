@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-19T18:02:30.093514+00:00",
-  "total_sessions_processed": 333,
+  "last_extraction": "2026-11-20T18:03:14.974304+00:00",
+  "total_sessions_processed": 334,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -8692,6 +8692,171 @@
           ],
           "superseded_by": null,
           "history": []
+        },
+        {
+          "id": "insight_2026-11-20T18:03:14.974304+00:00_0",
+          "date": "2026-11-20",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "决策委托的默认形态是「先给最优解、再留替换权」：要求把综合判断收敛成一条主线，同时列出可灵活换掉的支线，选择权放在支线层而不是主线层。判据：并列的平行方案被视为未完成的工作，因为它把排序责任又推回给用户。",
+          "confidence": "high",
+          "evidence": "首条需求原话：攻略结构应该是一条主线+其他可选支线，主线是综合最推荐，支线是可按自己偏好灵活调整替换",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261120_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261120_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-20T18:03:14.974304+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.624 (NN: 约束矩阵决策); Gate1-4 accepted, Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-20T18:03:14.974304+00:00_1",
+          "date": "2026-11-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "多轮迭代产生碎片后，会用自定义命名要求收敛成单一终版，并在同一次请求里把验收口径钉死（哪些结构必须齐备、不许留迭代痕迹）。判据：这类请求等同一次交付重定义，收到后应停止增量修补、整体重出一版，而不是在上一版上打补丁。",
+          "confidence": "high",
+          "evidence": "「给我个最终总结版」→ 随后「给我个最终清洁版，指的是主线+支线+注意事项的完整清洁版」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261120_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261120_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-20T18:03:14.974304+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.562 (NN: 不可逆对象改写三步协议); Gate1-4 accepted, Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-20T18:03:14.974304+00:00_2",
+          "date": "2026-11-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "对方案里每个被断言为必要的选项都追问一次替代可能，并配合假设反转（把非首选项提升成第一优先级）观察代价函数怎么变。用途是分辨硬约束与顾问偏好，不是否决结论；正确回应是把「必须」拆成「不做会损失什么、代价多大」，而不是重申必要性。",
+          "confidence": "high",
+          "evidence": "连续三处追问：5 座不行吗（而非 8 座）／必须国内飞吗、不能全程自驾吗／如果必去该地并把它当第一优先级呢",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261120_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261120_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-20T18:03:14.974304+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.685 (NN: 约束矩阵决策); Gate1-4 accepted, Gate5 findings=0, 未达 0.72 冲突线"
+        },
+        {
+          "id": "insight_2026-11-20T18:03:14.974304+00:00_3",
+          "date": "2026-11-20",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "规划资源时按最坏情形打桩而非取平均：首要角色直接给出上界假设（全程只有一个人扛），可选项也允许放宽成窄口径。目的不是悲观，而是避免方案在第一天就因乐观假设失效。判据：先问「最坏情况下这套还能不能跑」，再谈优化与舒适度。",
+          "confidence": "high",
+          "evidence": "对司机与房型两问的编号式回答：绝大部分时候一人开、甚至可能全程都一人开；房型都可以，twin 或大床都行",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261120_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261120_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-20T18:03:14.974304+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.548 (NN: 投入产出比优先级决策); Gate1-4 accepted, Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-20T18:03:14.974304+00:00_4",
+          "date": "2026-11-20",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "约束分不可逆与可逆两层：已订的交通与同行人数当固定边界、不再进入讨论，车型／住宿／顺序这类可逆项才允许反复重排。判据：一条建议能否被采纳，取决于它能否在不可逆边界内成立；默认动作是重排方案而不是重议边界，除非明确提出要动边界。",
+          "confidence": "medium",
+          "evidence": "开局即声明只定了往返同一城市的机票；此后三次整体重排（6 晚版／某地优先版／全自驾版）都围绕这张票，从未提议改票",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261120_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261120_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-20T18:03:14.974304+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.554 (NN: 规则阻力下的等价替代路径); Gate1-4 accepted, Gate5 findings=0"
         }
       ]
     },
@@ -13353,6 +13518,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-20T18:03:14.974304+00:00_5",
+          "date": "2026-11-20",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "对外共享成果时追求可见性最大、写入最小：愿意让任何人凭链接直接打开，但坚持只读，编辑权不外放。判据：开放只发生在读侧；「能不能看」与「能不能改」被当成两个独立开关分别表态，安全侧永远收在写权限上。",
+          "confidence": "high",
+          "evidence": "「调整下权限，完全公开访问」→ 紧接着「完全公开但只读」，把已改成的可编辑回退为可读",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261120_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261120_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-20T18:03:14.974304+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.563 (NN: 不可逆动作的信任边界); Gate1-4 accepted, Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-20T18:03:14.974304+00:00_6",
+          "date": "2026-11-20",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "工具链因缺权限断掉时，选择去源头开权限把链路打通，不接受「你自己手动导入」这类十秒绕过方案。判据：一次性配置成本换长期可复用链路，取舍明显偏后者；绕行方案即使更快也不被采纳，且不会被当成等价选项重复提出。",
+          "confidence": "high",
+          "evidence": "agent 给出本地文件手动导入的替代路径后，用户转去后台开通应用权限，并回报「权限开通了」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261120_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261120_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-20T18:03:14.974304+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.552 (NN: 拓扑锚定决策); Gate1-4 accepted, Gate5 findings=0"
         }
       ]
     },
@@ -16012,19 +16243,6 @@
   },
   "history": [
     {
-      "date": "2026-07-17T18:05:09.120337+00:00",
-      "layers": {
-        "1": 40,
-        "2": 100,
-        "3": 70,
-        "4": 100,
-        "5": 100,
-        "6": 50,
-        "7": 70
-      },
-      "total_insights": 157
-    },
-    {
       "date": "2026-07-18T18:03:18.990185+00:00",
       "layers": {
         "1": 40,
@@ -17148,15 +17366,31 @@
         "7": 100
       },
       "total_insights": 524
+    },
+    {
+      "date": "2026-11-20T18:03:14.974304+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 531
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-19T18:02:31.480312+00:00",
+    "checked_at": "2026-11-20T18:03:16.611531+00:00",
     "warnings": [],
-    "insight_count": 2
+    "insight_count": 7
   },
   "_last_agent_insights": [
-    "建议里的评价词必须指明度量对象，否则会被用户的一手运行经验直接推翻：被建议「港区更稳」时，用户拿自己日常实际在跑的主出口反问「我的美西节点比香港节点更稳吧  为啥推荐我港区」，实测中位延迟 158ms 对 370ms，他赢。真正的错因是同一个「稳」字被用在两个不相干的度量上（网络延迟与抖动 vs 账号注册国与出口国的一致性）。判据：给「更稳/更快/更划算」这类比较级时，先写清比较的是哪个量、用谁的观测口径，再给结论；混用两个度量会被当成结论错误而不是表达疏漏。",
-    "官方形态的存在会终止比价：同一需求一旦存在官方对应形态，用户就不在灰产渠道之间继续挑更便宜或更不容易掉号的那个，而是直接索取官方形态的取得路径，即使它的硬门槛更多。判据：听完合租车位的三档划分与电视端掉车风险后，下一句就是问官方额外成员怎么取得，没有回头比价。给这类需求的交付里，官方形态必须主动列出并附带其前置条件（只能由主账号持有人购买并发出邀请、受邀者须与主账号注册国同国激活、一次一台设备一位成员），否则等于把灰产当成唯一选项。"
+    "对方案里每个被断言为必要的选项都追问一次替代可能，并配合假设反转（把非首选项提升成第一优先级）观察代价函数怎么变。用途是分辨硬约束与顾问偏好，不是否决结论；正确回应是把「必须」拆成「不做会损失什么、代价多大」，而不是重申必要性。",
+    "规划资源时按最坏情形打桩而非取平均：首要角色直接给出上界假设（全程只有一个人扛），可选项也允许放宽成窄口径。目的不是悲观，而是避免方案在第一天就因乐观假设失效。判据：先问「最坏情况下这套还能不能跑」，再谈优化与舒适度。",
+    "约束分不可逆与可逆两层：已订的交通与同行人数当固定边界、不再进入讨论，车型／住宿／顺序这类可逆项才允许反复重排。判据：一条建议能否被采纳，取决于它能否在不可逆边界内成立；默认动作是重排方案而不是重议边界，除非明确提出要动边界。",
+    "对外共享成果时追求可见性最大、写入最小：愿意让任何人凭链接直接打开，但坚持只读，编辑权不外放。判据：开放只发生在读侧；「能不能看」与「能不能改」被当成两个独立开关分别表态，安全侧永远收在写权限上。",
+    "工具链因缺权限断掉时，选择去源头开权限把链路打通，不接受「你自己手动导入」这类十秒绕过方案。判据：一次性配置成本换长期可复用链路，取舍明显偏后者；绕行方案即使更快也不被采纳，且不会被当成等价选项重复提出。"
   ]
 }
