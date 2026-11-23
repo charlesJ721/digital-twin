@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-20T18:03:14.974304+00:00",
-  "total_sessions_processed": 334,
+  "last_extraction": "2026-11-23T18:02:48.101306+00:00",
+  "total_sessions_processed": 336,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -8857,6 +8857,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.554 (NN: 规则阻力下的等价替代路径); Gate1-4 accepted, Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-23T18:02:48.101306+00:00_0",
+          "date": "2026-11-23",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "需求简报按「核心 / 夹带」两级交付：核心项（自驾、自然风光）决定行程骨架，夹带项（热气球这类体验）只允许占位、不允许反过来重塑骨架。判据：这类简报里凡是写成「夹带 / 顺便」的内容，回应时不得让它改变结构层取舍；要把夹带项提升成主线，必须单独说明代价。",
+          "confidence": "high",
+          "evidence": "结合前文我发你的机票信息，重新帮我规划澳大利亚自驾，机票和人员信息不变，核心是自驾，自然风光为主，夹带一些热气球之类的体验项目",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261123_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261123_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-23T18:02:48.101306+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max cosine 0.5402 (accepted, Gate5 0 findings)"
+        },
+        {
+          "id": "insight_2026-11-23T18:02:48.101306+00:00_1",
+          "date": "2026-11-23",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "约束过紧时先拆「必看清单」和「内部交通」两层，不拆端点与出行方式：用抽走旗舰景点（必去的大洋路）和国内航班做压力测试，看剩余结构是否仍成立，保留下来的是起降城市与自驾这个身份。判据：被标为「必去」的项不等于硬约束；冲突时应把它当可弃项先移除再重排，而不是围绕它做妥协。",
+          "confidence": "high",
+          "evidence": "如果把必去大洋路去掉，不考虑国内航班，还是以自驾为主，起落悉尼，有什么其他建议吗",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261123_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261123_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-23T18:02:48.101306+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max cosine 0.5593 vs 约束可逆/不可逆两层 (accepted)"
+        },
+        {
+          "id": "insight_2026-11-23T18:02:48.101306+00:00_2",
+          "date": "2026-11-23",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "纠正上游假设时给可计算口径而不是形容词：把「行李没那么多」换成「3 个 28 寸 + 2 个 24 寸」，让下游结论必须整体重算，而不是在原结论上打局部补丁。判据：收到这种参数化修正要重跑整条链（容量、车型、机票行李额），不要保留只对新口径部分生效的折中结论。",
+          "confidence": "high",
+          "evidence": "没那么多行李，按照 3 个 28 寸 2 个 24 寸算吧",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261123_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261123_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-23T18:02:48.101306+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max cosine 0.5348 (accepted)"
         }
       ]
     },
@@ -13584,6 +13683,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight 2026-11-21: embedding=LIVE, max_cos=0.552 (NN: 拓扑锚定决策); Gate1-4 accepted, Gate5 findings=0"
+        },
+        {
+          "id": "insight_2026-11-23T18:02:48.101306+00:00_3",
+          "date": "2026-11-23",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "往已经能用的网络栈里加新组件（公司 VPN 客户端）之前先问冲突面，不等装完再排障；判断依据要求落在本机现状（utun 占用、默认路由、resolver 顺序、代理例外表），不接受「一般不会冲突」的泛化结论。判据：这类问法的正确回应是先实测既有叠层再给冲突矩阵，并点明唯一的禁令条件（例如不给 mihomo 开 TUN）。",
+          "confidence": "high",
+          "evidence": "我在本地再装一个anyconnect连接公司的网络，和当前网络配置会冲突吗",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261123_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261123_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-23T18:02:48.101306+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "preflight max cosine 0.6153 vs 多层系统归因 (accepted, distinct: 用户侧预防性冲突评估 vs agent 侧归因链)"
         }
       ]
     },
@@ -16243,19 +16375,6 @@
   },
   "history": [
     {
-      "date": "2026-07-18T18:03:18.990185+00:00",
-      "layers": {
-        "1": 40,
-        "2": 100,
-        "3": 70,
-        "4": 100,
-        "5": 100,
-        "6": 50,
-        "7": 70
-      },
-      "total_insights": 164
-    },
-    {
       "date": "2026-07-19T18:04:15.803305+00:00",
       "layers": {},
       "total_insights": 0
@@ -17379,18 +17498,30 @@
         "7": 100
       },
       "total_insights": 531
+    },
+    {
+      "date": "2026-11-23T18:02:48.101306+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 535
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-20T18:03:16.611531+00:00",
+    "checked_at": "2026-11-23T18:02:50.184678+00:00",
     "warnings": [],
-    "insight_count": 7
+    "insight_count": 4
   },
   "_last_agent_insights": [
-    "对方案里每个被断言为必要的选项都追问一次替代可能，并配合假设反转（把非首选项提升成第一优先级）观察代价函数怎么变。用途是分辨硬约束与顾问偏好，不是否决结论；正确回应是把「必须」拆成「不做会损失什么、代价多大」，而不是重申必要性。",
-    "规划资源时按最坏情形打桩而非取平均：首要角色直接给出上界假设（全程只有一个人扛），可选项也允许放宽成窄口径。目的不是悲观，而是避免方案在第一天就因乐观假设失效。判据：先问「最坏情况下这套还能不能跑」，再谈优化与舒适度。",
-    "约束分不可逆与可逆两层：已订的交通与同行人数当固定边界、不再进入讨论，车型／住宿／顺序这类可逆项才允许反复重排。判据：一条建议能否被采纳，取决于它能否在不可逆边界内成立；默认动作是重排方案而不是重议边界，除非明确提出要动边界。",
-    "对外共享成果时追求可见性最大、写入最小：愿意让任何人凭链接直接打开，但坚持只读，编辑权不外放。判据：开放只发生在读侧；「能不能看」与「能不能改」被当成两个独立开关分别表态，安全侧永远收在写权限上。",
-    "工具链因缺权限断掉时，选择去源头开权限把链路打通，不接受「你自己手动导入」这类十秒绕过方案。判据：一次性配置成本换长期可复用链路，取舍明显偏后者；绕行方案即使更快也不被采纳，且不会被当成等价选项重复提出。"
+    "需求简报按「核心 / 夹带」两级交付：核心项（自驾、自然风光）决定行程骨架，夹带项（热气球这类体验）只允许占位、不允许反过来重塑骨架。判据：这类简报里凡是写成「夹带 / 顺便」的内容，回应时不得让它改变结构层取舍；要把夹带项提升成主线，必须单独说明代价。",
+    "约束过紧时先拆「必看清单」和「内部交通」两层，不拆端点与出行方式：用抽走旗舰景点（必去的大洋路）和国内航班做压力测试，看剩余结构是否仍成立，保留下来的是起降城市与自驾这个身份。判据：被标为「必去」的项不等于硬约束；冲突时应把它当可弃项先移除再重排，而不是围绕它做妥协。",
+    "纠正上游假设时给可计算口径而不是形容词：把「行李没那么多」换成「3 个 28 寸 + 2 个 24 寸」，让下游结论必须整体重算，而不是在原结论上打局部补丁。判据：收到这种参数化修正要重跑整条链（容量、车型、机票行李额），不要保留只对新口径部分生效的折中结论。",
+    "往已经能用的网络栈里加新组件（公司 VPN 客户端）之前先问冲突面，不等装完再排障；判断依据要求落在本机现状（utun 占用、默认路由、resolver 顺序、代理例外表），不接受「一般不会冲突」的泛化结论。判据：这类问法的正确回应是先实测既有叠层再给冲突矩阵，并点明唯一的禁令条件（例如不给 mihomo 开 TUN）。"
   ]
 }
