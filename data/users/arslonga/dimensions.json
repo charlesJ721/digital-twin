@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-23T18:02:48.101306+00:00",
-  "total_sessions_processed": 336,
+  "last_extraction": "2026-11-24T18:03:01.927607+00:00",
+  "total_sessions_processed": 339,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -8956,6 +8956,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight max cosine 0.5348 (accepted)"
+        },
+        {
+          "id": "insight_2026-11-24T18:03:01.927607+00:00_0",
+          "date": "2026-11-24",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户在讨论中优先校准前提、而不是在给定前提上优化结论：他会用一条更具体的第一手事实替换 agent 的默认假设——墙是现浇承重墙而非后砌填充墙、两户分属隔壁单元且走廊不连通、护照到期日是具体某天而非月份区间——每次替换都使原方案作废并迫使重算；他不接受在错误前提上得出的次优解，也不接受用区间估计代替可核实的确定值。",
+          "confidence": "high",
+          "evidence": "「承重墙，开关位置不对齐（因为我们是重新改了插座位置），今年交付的新房」；「和门缝没关系吧，我们两户是隔壁单元，实际接壤的就只有一面石墙」；「我看了下，我的护照，27年11月9号到期」",
+          "memory_type": "episodic",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261124_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261124_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-24T18:03:01.927607+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 preflight 最高 cosine 0.664（vs 设计演进问责）；差异：那条讲对 agent 历史方案问责，本条讲用第一手事实替换默认前提并拒绝区间估计"
+        },
+        {
+          "id": "insight_2026-11-24T18:03:01.927607+00:00_1",
+          "date": "2026-11-24",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户会把主观体验翻译成可判定的量级与规则：用「传导 40%」这类比例描述声学强度，同时要求答复给出「算不算异常」的二元判定、对应的规范阈值（45dB 与 50dB 两档）与责任归属；他要求把「是否合规」和「体验能否接受」当成两个独立结论，而不是合成一个笼统的好坏。",
+          "confidence": "medium",
+          "evidence": "「晚上夜深人静的时候，隔壁说话够不上清晰可闻，但是传导40%感觉还是有的，这种通常是什么原因导致的，算异常吗，以及如何改善」；「今年交付的新房，关于声音部分，能清晰听到的是对方大笑的声音」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261124_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261124_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-24T18:03:01.927607+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 preflight 最高 cosine 0.646（vs 参数类答案必须翻译成体验刻度）；方向相反：那条是规格→体验，本条是体验→可判定阈值与合规/体验两分"
         }
       ]
     },
@@ -15801,6 +15867,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟡 max cosine 0.693（最近邻：采购交付物是可复核对照台账）。那条要台账与排除项，本条要「按不可逆性分层 + 数字门槛 + 预算决策流」的框架形态"
+        },
+        {
+          "id": "insight_2026-11-24T18:03:01.927607+00:00_2",
+          "date": "2026-11-24",
+          "dimension": "知识管理",
+          "layer": "L5",
+          "insight": "用户把知识库当外部记忆：跨主题提问时只给一句指路（「你结合我澳洲计划评估呢」），默认 agent 应自行检索既有设计决策笔记、已锁死的行程前提，并把历史结论纳入新判断；他不重复交代背景，也不接受脱离既有上下文的孤立答案。",
+          "confidence": "medium",
+          "evidence": "「你结合我澳洲计划评估呢」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261124_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261124_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-24T18:03:01.927607+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 preflight 最高 cosine 0.584（vs 系统化深度追问链）；本条聚焦知识库作为外部记忆的检索期待，非追问深度"
         }
       ]
     },
@@ -16374,11 +16473,6 @@
     }
   },
   "history": [
-    {
-      "date": "2026-07-19T18:04:15.803305+00:00",
-      "layers": {},
-      "total_insights": 0
-    },
     {
       "date": "2026-07-19T18:04:35.812111+00:00",
       "layers": {
@@ -17511,17 +17605,29 @@
         "7": 100
       },
       "total_insights": 535
+    },
+    {
+      "date": "2026-11-24T18:03:01.927607+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 538
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-23T18:02:50.184678+00:00",
+    "checked_at": "2026-11-24T18:03:03.497959+00:00",
     "warnings": [],
-    "insight_count": 4
+    "insight_count": 3
   },
   "_last_agent_insights": [
-    "需求简报按「核心 / 夹带」两级交付：核心项（自驾、自然风光）决定行程骨架，夹带项（热气球这类体验）只允许占位、不允许反过来重塑骨架。判据：这类简报里凡是写成「夹带 / 顺便」的内容，回应时不得让它改变结构层取舍；要把夹带项提升成主线，必须单独说明代价。",
-    "约束过紧时先拆「必看清单」和「内部交通」两层，不拆端点与出行方式：用抽走旗舰景点（必去的大洋路）和国内航班做压力测试，看剩余结构是否仍成立，保留下来的是起降城市与自驾这个身份。判据：被标为「必去」的项不等于硬约束；冲突时应把它当可弃项先移除再重排，而不是围绕它做妥协。",
-    "纠正上游假设时给可计算口径而不是形容词：把「行李没那么多」换成「3 个 28 寸 + 2 个 24 寸」，让下游结论必须整体重算，而不是在原结论上打局部补丁。判据：收到这种参数化修正要重跑整条链（容量、车型、机票行李额），不要保留只对新口径部分生效的折中结论。",
-    "往已经能用的网络栈里加新组件（公司 VPN 客户端）之前先问冲突面，不等装完再排障；判断依据要求落在本机现状（utun 占用、默认路由、resolver 顺序、代理例外表），不接受「一般不会冲突」的泛化结论。判据：这类问法的正确回应是先实测既有叠层再给冲突矩阵，并点明唯一的禁令条件（例如不给 mihomo 开 TUN）。"
+    "用户在讨论中优先校准前提、而不是在给定前提上优化结论：他会用一条更具体的第一手事实替换 agent 的默认假设——墙是现浇承重墙而非后砌填充墙、两户分属隔壁单元且走廊不连通、护照到期日是具体某天而非月份区间——每次替换都使原方案作废并迫使重算；他不接受在错误前提上得出的次优解，也不接受用区间估计代替可核实的确定值。",
+    "用户会把主观体验翻译成可判定的量级与规则：用「传导 40%」这类比例描述声学强度，同时要求答复给出「算不算异常」的二元判定、对应的规范阈值（45dB 与 50dB 两档）与责任归属；他要求把「是否合规」和「体验能否接受」当成两个独立结论，而不是合成一个笼统的好坏。",
+    "用户把知识库当外部记忆：跨主题提问时只给一句指路（「你结合我澳洲计划评估呢」），默认 agent 应自行检索既有设计决策笔记、已锁死的行程前提，并把历史结论纳入新判断；他不重复交代背景，也不接受脱离既有上下文的孤立答案。"
   ]
 }
