@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-24T18:03:01.927607+00:00",
-  "total_sessions_processed": 339,
+  "last_extraction": "2026-11-25T18:03:37.238064+00:00",
+  "total_sessions_processed": 343,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -9022,6 +9022,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "🟢 preflight 最高 cosine 0.646（vs 参数类答案必须翻译成体验刻度）；方向相反：那条是规格→体验，本条是体验→可判定阈值与合规/体验两分"
+        },
+        {
+          "id": "insight_2026-11-25T18:03:37.238064+00:00_0",
+          "date": "2026-11-25",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "提前订的判断标准是稀缺性优先于折扣，且折扣要先过「条款是否覆盖我的日期」这一关。对高金额多人行程，他会提前一年以上立项（2027 年 5 月的行程在 2026 年 11 月核黑五），但黑五清单里热气球券限工作日、租车租赁期只到次年 1 月、Virgin 承运窗口不含去程日——这些看着对口实际用不上的促销会被逐条排除。真正值得早订的是房源与特定车型这类稀缺项，而不是为了几百澳元的名义折扣把票锁成不可退改。判据：先算条款命中率与稀缺性，再算金额；期权价值高于折扣金额。",
+          "confidence": "high",
+          "evidence": "用户：最近黑五，参考之前你给我规划的澳大利亚行程，有没有建议我可以趁早黑五提前订的；结论为「真正能用上的只有一块（Qantas 国内段），其余三项看着对口但都对不上日期」，并写明「不值得为几百澳元把 5 张票锁成不可退改」，早订的真实理由是 Port Campbell / Halls Gap 房源少与 8 座车稀缺",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261125_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261125_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-25T18:03:37.238064+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5199 (NN: 用可撤销条款对冲价格不确定性; 非同主题); Gate5 0 findings; embedding LIVE"
+        },
+        {
+          "id": "insight_2026-11-25T18:03:37.238064+00:00_1",
+          "date": "2026-11-25",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "在高溢价品类上，用户把品牌当「规格与体验的参照系」、把批发渠道当执行端：先用 Tiffany 4 号确定内径 14.9mm，再问周大福对应号，最后问水贝怎么报号。落单参数始终是物理量（内径/周长毫米），不是任何一家的圈号，因为圈号体系不可跨店迁移。可迁移判据：跨体系换算时锚定物理量，名义编号只用于沟通。",
+          "confidence": "high",
+          "evidence": "用户连续三问：Tiffany 戒圈 4 号对应周大福什么尺寸 → 无名指戴 t 家 4 号，那中指通常建议选周大福几号 → 周大福 9 号对应国内水贝市场几号；最终建议报「内径 15.2mm、内周长 47.7mm」而不是只报号数",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261125_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261125_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-25T18:03:37.238064+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.4800 (NN: 决策粒度下沉到可下单实体单位; 同族不同类); Gate5 0 findings; embedding LIVE"
         }
       ]
     },
@@ -13782,6 +13848,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "preflight max cosine 0.6153 vs 多层系统归因 (accepted, distinct: 用户侧预防性冲突评估 vs agent 侧归因链)"
+        },
+        {
+          "id": "insight_2026-11-25T18:03:37.238064+00:00_2",
+          "date": "2026-11-25",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "「最终版」在用户这里有明确的验收标准：一份可直接转发给同行者的成品。过程痕迹（上一版为什么不行、结论怎么变的、轮次对比）必须全部剥离，结构完整到第三方能照着执行，并且发布成获得链接即可阅读的文档，而不是留在聊天里。可迁移判据：交付物按「外人拿到能不能直接用」验收，不按「我看完了没」验收。",
+          "confidence": "medium",
+          "evidence": "用户：落一版最终版攻略给我吧，还是一样，携程飞书公开文档发我飞书上；agent 交付说明「删掉了所有过程化的内容：不再有上一版为什么不行、结论变了这类痕迹，它是一份能直接发给同行朋友的成品」",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261125_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261125_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-25T18:03:37.238064+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max_cos=0.5660 (NN: 信息归档协议/结构化文档交付; 非同一条); Gate5 0 findings; embedding LIVE; 事件发生于 2026-11-23（早于本窗口 watermark），本周为漏提补录"
         }
       ]
     },
@@ -16474,19 +16573,6 @@
   },
   "history": [
     {
-      "date": "2026-07-19T18:04:35.812111+00:00",
-      "layers": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0
-      },
-      "total_insights": 0
-    },
-    {
       "date": "2026-07-19T18:04:52.605116+00:00",
       "layers": {
         "1": 6,
@@ -17618,16 +17704,29 @@
         "7": 100
       },
       "total_insights": 538
+    },
+    {
+      "date": "2026-11-25T18:03:37.238064+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 541
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-24T18:03:03.497959+00:00",
+    "checked_at": "2026-11-25T18:03:39.005080+00:00",
     "warnings": [],
     "insight_count": 3
   },
   "_last_agent_insights": [
-    "用户在讨论中优先校准前提、而不是在给定前提上优化结论：他会用一条更具体的第一手事实替换 agent 的默认假设——墙是现浇承重墙而非后砌填充墙、两户分属隔壁单元且走廊不连通、护照到期日是具体某天而非月份区间——每次替换都使原方案作废并迫使重算；他不接受在错误前提上得出的次优解，也不接受用区间估计代替可核实的确定值。",
-    "用户会把主观体验翻译成可判定的量级与规则：用「传导 40%」这类比例描述声学强度，同时要求答复给出「算不算异常」的二元判定、对应的规范阈值（45dB 与 50dB 两档）与责任归属；他要求把「是否合规」和「体验能否接受」当成两个独立结论，而不是合成一个笼统的好坏。",
-    "用户把知识库当外部记忆：跨主题提问时只给一句指路（「你结合我澳洲计划评估呢」），默认 agent 应自行检索既有设计决策笔记、已锁死的行程前提，并把历史结论纳入新判断；他不重复交代背景，也不接受脱离既有上下文的孤立答案。"
+    "提前订的判断标准是稀缺性优先于折扣，且折扣要先过「条款是否覆盖我的日期」这一关。对高金额多人行程，他会提前一年以上立项（2027 年 5 月的行程在 2026 年 11 月核黑五），但黑五清单里热气球券限工作日、租车租赁期只到次年 1 月、Virgin 承运窗口不含去程日——这些看着对口实际用不上的促销会被逐条排除。真正值得早订的是房源与特定车型这类稀缺项，而不是为了几百澳元的名义折扣把票锁成不可退改。判据：先算条款命中率与稀缺性，再算金额；期权价值高于折扣金额。",
+    "在高溢价品类上，用户把品牌当「规格与体验的参照系」、把批发渠道当执行端：先用 Tiffany 4 号确定内径 14.9mm，再问周大福对应号，最后问水贝怎么报号。落单参数始终是物理量（内径/周长毫米），不是任何一家的圈号，因为圈号体系不可跨店迁移。可迁移判据：跨体系换算时锚定物理量，名义编号只用于沟通。",
+    "「最终版」在用户这里有明确的验收标准：一份可直接转发给同行者的成品。过程痕迹（上一版为什么不行、结论怎么变的、轮次对比）必须全部剥离，结构完整到第三方能照着执行，并且发布成获得链接即可阅读的文档，而不是留在聊天里。可迁移判据：交付物按「外人拿到能不能直接用」验收，不按「我看完了没」验收。"
   ]
 }
