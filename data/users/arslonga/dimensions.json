@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-25T18:03:37.238064+00:00",
-  "total_sessions_processed": 343,
+  "last_extraction": "2026-11-26T18:02:28.648753+00:00",
+  "total_sessions_processed": 344,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -9088,6 +9088,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.4800 (NN: 决策粒度下沉到可下单实体单位; 同族不同类); Gate5 0 findings; embedding LIVE"
+        },
+        {
+          "id": "insight_2026-11-26T18:02:28.648753+00:00_0",
+          "date": "2026-11-26",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "用户不接受结论停在「未确认」：agent 抓不到的反爬/JS 渲染页面，用户就把官网界面截图回传，让促销窗口、承运期、每日实价逐项钉死。判据：交付里出现「需你自查 / 未确认」这类留白时，下一轮带回的是截图，而不是接受留白；一手界面截图优先于任何第三方聚合价，被截图推翻的估算基线必须整条重算并明说撤回，不许保留折中结论。",
+          "confidence": "high",
+          "evidence": "agent 在促销结论里写「官方公布的促销航线表里没有 Sydney–Melbourne……唯一确认办法是你在 qantas.com 搜」，并说明脚本抓不到完整列表（JS 渲染 + 反爬）；用户随后依次发来 Qantas 机场选择框、促销卡（Ends Tue 1 Dec 2026 / Economy one way from $159 / Depart between 05 May–24 June 2027）与班次票价表三张截图；agent 随即撤回自己「Qantas 5 月常规 $110–117」的第三方聚合基线，改为官网实价 $179–199，并写明「你发来的数据推翻了我的数字」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261126_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261126_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-26T18:02:28.648753+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max cos 0.6175（最近邻：采购付款后仍在可退窗口内开放同规格比较，机制不同）；与「质疑驱动验证：以实时截图/实测数据作为反证」cos 0.5810，区别在于本条是被动证据通道（agent 抓不到的反爬页面由用户截图补上）+ 要求显式撤回被推翻的基线，而非评估类对话里的主动挑战循环"
+        },
+        {
+          "id": "insight_2026-11-26T18:02:28.648753+00:00_2",
+          "date": "2026-11-26",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "要动作先要入口：临到执行时单问一句官方域名/正门在哪，不接受 agent 给出的二手路径或第三方聚合站；入口答复要带可达性证据（分站跳转关系、促销页状态码），而不是只给一个 URL 字符串。",
+          "confidence": "medium",
+          "evidence": "用户单问「Qantas 官网是啥」；agent 实测 qantas.com/au/en.html → 301 → /en-au、/en-au/book/flight-deals → 200、qantas.com/cn/zh_cn.html → 301 → /zh-cn 之后才给分站建议，并补充「澳洲国内段促销和 A$ 价格以澳洲站为准」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261126_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261126_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-26T18:02:28.648753+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max cos 0.5326（最近邻：用竞争假设驱动证伪）；与「官方形态的存在会终止比价」同族但不同侧——那条讲官方形态取代灰产渠道，本条讲执行前要正门入口 + 可达性证据"
         }
       ]
     },
@@ -13881,6 +13947,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max_cos=0.5660 (NN: 信息归档协议/结构化文档交付; 非同一条); Gate5 0 findings; embedding LIVE; 事件发生于 2026-11-23（早于本窗口 watermark），本周为漏提补录"
+        },
+        {
+          "id": "insight_2026-11-26T18:02:28.648753+00:00_1",
+          "date": "2026-11-26",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "指令信令压到最小时，上下文由载荷承担：图像消息常只配一句话甚至两个字（「选哪个」），默认 agent 要自己读图识别选项差异，给出唯一选择 + 决定性约束 + 为什么另一个不行。判据：图像 + 短口令到达时，交付形态是「选 X」，不是「A 或 B 你挑」；选项差别要落到硬约束（时间预算、落地机场、取车点）而不是偏好措辞。",
+          "confidence": "medium",
+          "evidence": "用户发机场搜索截图（Sydney (Kingsford Smith) SYD / Sydney (Western Sydney International) WSI），配文只有「选哪个」；agent 回「选 Sydney (Kingsford Smith) — SYD」，并给三条硬性约束：国际段 11:45 落地后 T1→T3 约 15–20 分钟，而 WSI 在 Badgerys Creek 需 35 分钟以上车程；回程 5/9 22:55 从 SYD T1 起飞；当晚住 CBD。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261126_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261126_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-26T18:02:28.648753+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "max cos 0.5894（最近邻：对含糊的待你决策零容忍、要求降维成可裁决结构）；与「面对不熟悉的 Web 控制台倾向截图索取怎么选」cos 0.5487，区别在于本条约束的是交付形态——不是逐步点击指令，而是唯一解 + 硬约束理由"
         }
       ]
     },
@@ -16573,19 +16672,6 @@
   },
   "history": [
     {
-      "date": "2026-07-19T18:04:52.605116+00:00",
-      "layers": {
-        "1": 6,
-        "2": 76,
-        "3": 8,
-        "4": 37,
-        "5": 31,
-        "6": 4,
-        "7": 7
-      },
-      "total_insights": 169
-    },
-    {
       "date": "2026-07-21T18:04:33.381328+00:00",
       "layers": {
         "1": 6,
@@ -17717,16 +17803,29 @@
         "7": 100
       },
       "total_insights": 541
+    },
+    {
+      "date": "2026-11-26T18:02:28.648753+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 544
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-25T18:03:39.005080+00:00",
+    "checked_at": "2026-11-26T18:02:30.003426+00:00",
     "warnings": [],
     "insight_count": 3
   },
   "_last_agent_insights": [
-    "提前订的判断标准是稀缺性优先于折扣，且折扣要先过「条款是否覆盖我的日期」这一关。对高金额多人行程，他会提前一年以上立项（2027 年 5 月的行程在 2026 年 11 月核黑五），但黑五清单里热气球券限工作日、租车租赁期只到次年 1 月、Virgin 承运窗口不含去程日——这些看着对口实际用不上的促销会被逐条排除。真正值得早订的是房源与特定车型这类稀缺项，而不是为了几百澳元的名义折扣把票锁成不可退改。判据：先算条款命中率与稀缺性，再算金额；期权价值高于折扣金额。",
-    "在高溢价品类上，用户把品牌当「规格与体验的参照系」、把批发渠道当执行端：先用 Tiffany 4 号确定内径 14.9mm，再问周大福对应号，最后问水贝怎么报号。落单参数始终是物理量（内径/周长毫米），不是任何一家的圈号，因为圈号体系不可跨店迁移。可迁移判据：跨体系换算时锚定物理量，名义编号只用于沟通。",
-    "「最终版」在用户这里有明确的验收标准：一份可直接转发给同行者的成品。过程痕迹（上一版为什么不行、结论怎么变的、轮次对比）必须全部剥离，结构完整到第三方能照着执行，并且发布成获得链接即可阅读的文档，而不是留在聊天里。可迁移判据：交付物按「外人拿到能不能直接用」验收，不按「我看完了没」验收。"
+    "用户不接受结论停在「未确认」：agent 抓不到的反爬/JS 渲染页面，用户就把官网界面截图回传，让促销窗口、承运期、每日实价逐项钉死。判据：交付里出现「需你自查 / 未确认」这类留白时，下一轮带回的是截图，而不是接受留白；一手界面截图优先于任何第三方聚合价，被截图推翻的估算基线必须整条重算并明说撤回，不许保留折中结论。",
+    "要动作先要入口：临到执行时单问一句官方域名/正门在哪，不接受 agent 给出的二手路径或第三方聚合站；入口答复要带可达性证据（分站跳转关系、促销页状态码），而不是只给一个 URL 字符串。",
+    "指令信令压到最小时，上下文由载荷承担：图像消息常只配一句话甚至两个字（「选哪个」），默认 agent 要自己读图识别选项差异，给出唯一选择 + 决定性约束 + 为什么另一个不行。判据：图像 + 短口令到达时，交付形态是「选 X」，不是「A 或 B 你挑」；选项差别要落到硬约束（时间预算、落地机场、取车点）而不是偏好措辞。"
   ]
 }
