@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_extraction": "2026-11-26T18:02:28.648753+00:00",
-  "total_sessions_processed": 344,
+  "last_extraction": "2026-11-27T18:02:55.248311+00:00",
+  "total_sessions_processed": 348,
   "layers": {
     "1": {
       "name": "人格特质 (Personality)",
@@ -307,6 +307,39 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "pending"
+        },
+        {
+          "id": "insight_2026-11-27T18:02:55.248311+00:00_0",
+          "date": "2026-11-27",
+          "dimension": "动机结构",
+          "layer": "L1",
+          "insight": "个人存储按「只增不删的存量」建模：容量预算不按当前需求估，而按「以后随手存、基本不删」的累积量估，并把「容量是否永久有效、能否随时再加」排在速度与便利之前。判据：被问到使用方式时直接自述为仓鼠党；容量讨论围绕「均衡容量是多少」这类存量问题展开，而不是下载速度或在线播放体验。",
+          "confidence": "high",
+          "evidence": "用户原话：「我可能不会删 还会随手存 我是仓鼠党」；此前问「均衡容量是多少呢 你觉得」；最终选中的账号为 405.36TB 长期空间（截图原文：初始空间 15GB、长期空间 405.36TB，状态均可用）。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261127_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261127_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-27T18:02:55.248311+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max cos 0.528 vs「备用资源按双态预算定价」(L1)"
         }
       ]
     },
@@ -9154,6 +9187,105 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max cos 0.5326（最近邻：用竞争假设驱动证伪）；与「官方形态的存在会终止比价」同族但不同侧——那条讲官方形态取代灰产渠道，本条讲执行前要正门入口 + 可达性证据"
+        },
+        {
+          "id": "insight_2026-11-27T18:02:55.248311+00:00_1",
+          "date": "2026-11-27",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "容量类采购要求「空间永久 + 一次付清」，只卖时长的档位判为负价值：先把各档拆成「哪些容量到期会被收回」，再要求不再产生后续容量支出的方案；宁可一次性买到十年以上，也不接受到期续费或只卖时长的终身会员。判据：出价结构里缺「永久空间」这一项时，价格再低也进不了终选。",
+          "confidence": "high",
+          "evidence": "用户原话：「不想后续还要为容量长期付费，这些如何推荐」；其对官方套餐的复述：「官方套餐，5t 永久，45t 5 年后失效」；最终成交账号为 405.36TB 长期空间、会员到期 2037-03-13（¥2290），而非按年化最便宜的 5 年 50TB 方案。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261127_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261127_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-27T18:02:55.248311+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max cos 0.573 vs「价格档位当成分工界面」(L2)"
+        },
+        {
+          "id": "insight_2026-11-27T18:02:55.248311+00:00_2",
+          "date": "2026-11-27",
+          "dimension": "决策风格",
+          "layer": "L2",
+          "insight": "二手数字账号的成交靠「顺序 + 担保」而不是靠信任：先清点自己的身份锚点（手机号是否已注册、实名名额是否被占），不足就先把旧号注销腾出锚点；付款后由卖家改绑、自己上线验收容量与控制权（改密码、清绑定、踢设备、开两步验证），全部完成才确认收货。判据：「确认收货」是验收闸门，不是付款后的例行步骤。",
+          "confidence": "high",
+          "evidence": "用户原话：「我的手机号之前注册过了，没办法被换绑，我该咋办，注销原来账号能释放吗」「我发现有个快速注销，帮我搜下看看一般多久审核」「实名是必须的吗」；卖家流程截图原文：「付款后卖家会直接修改绑定的手机号并录制视频，买家上线验证无误后再确认收货」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261127_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261127_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-27T18:02:55.248311+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max cos 0.558 vs「接手二手资源把改邮箱视为起点」(L4)"
+        },
+        {
+          "id": "insight_2026-11-27T18:02:55.248311+00:00_5",
+          "date": "2026-11-27",
+          "dimension": "推理风格",
+          "layer": "L2",
+          "insight": "面对陌生名单先建品类地图，再谈选择：收到一串服务商或站点名时，逐个问「这些是啥、为啥推荐这些」，并要求与已锁定的候选横向比较，拒绝在未解析的名词清单上直接做选择。判据：清单里每个名字都要有品类归属与推荐理由，缺一项等于没回答。",
+          "confidence": "medium",
+          "evidence": "用户原话：「鸢尾 / 折纸 / 黑猫 / MICU 这类 这些是啥 为啥推荐这些 跟115比呢」；同一会话稍后又问「影巢 癫影 观影 seedhub 蜗牛4k 这些是干啥的」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261127_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261127_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-27T18:02:55.248311+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max cos 0.606 vs「品牌绑定拆成独立决策层级」(L2)"
         }
       ]
     },
@@ -13980,6 +14112,72 @@
           "superseded_by": null,
           "history": [],
           "auto_diff": "max cos 0.5894（最近邻：对含糊的待你决策零容忍、要求降维成可裁决结构）；与「面对不熟悉的 Web 控制台倾向截图索取怎么选」cos 0.5487，区别在于本条约束的是交付形态——不是逐步点击指令，而是唯一解 + 硬约束理由"
+        },
+        {
+          "id": "insight_2026-11-27T18:02:55.248311+00:00_3",
+          "date": "2026-11-27",
+          "dimension": "防御机制",
+          "layer": "L4",
+          "insight": "风控敏感的服务获取按「最坏损失可整体放弃」设计：把实验放在一次性专用身份上——新注册的账号 + 只服务它的固定属地出口，主力账号与主力身份不参与，先把失败后的损失上限压到可弃级别再谈成功率。判据：遇到灰产/低价渠道时第一反应是拆账号、拆 IP，而不是把优惠套到主力账号上。",
+          "confidence": "medium",
+          "evidence": "在被告知 35 元学生认证方案可能连带封掉主 Google 账号（内含 Gmail/Drive/Photos 长期记录）后，用户原话：「我新创建一个google账号，固定美区bwg节点，这样呢」。",
+          "memory_type": "policy",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261127_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261127_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-27T18:02:55.248311+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max cos 0.620 vs「性能收益与身份/风控风险冲突时偏保守」(L4)"
+        },
+        {
+          "id": "insight_2026-11-27T18:02:55.248311+00:00_4",
+          "date": "2026-11-27",
+          "dimension": "行为模式",
+          "layer": "L4",
+          "insight": "资产到手即进入冷启动，而不是收尾：付款完成后立刻要求「初始化填充」的方向与第一波资源来源，并同时交出自己可常开的设备清单，要求方案按现有硬件落地、不新增基础设施。判据：采购的验收点是「库里有内容、能跑起来」，不是「东西买到了」。",
+          "confidence": "medium",
+          "evidence": "用户原话：「115 网盘到手了，准备初始化填充内容了，给我个方向，去哪弄第一波冷启动资源」「常开的机器应该就是 mac mini，当然 dmit bwg 那几个 vps 也算」。",
+          "memory_type": "preference",
+          "state": "provisional",
+          "source": "hermes-cron",
+          "provenance": {
+            "source_run_id": "cron_20261127_0200",
+            "source_turn_id": 0,
+            "extraction_model": "deepseek-flash",
+            "extraction_method": "cron",
+            "confidence_at_extraction": 0.85,
+            "user_confirmed": false,
+            "confirmation_turn_id": null
+          },
+          "provenance_chain": [
+            {
+              "action": "extracted",
+              "source_run_id": "cron_20261127_0200",
+              "source_turn_id": 0,
+              "model": "deepseek-flash",
+              "timestamp": "2026-11-27T18:02:55.248311+00:00"
+            }
+          ],
+          "superseded_by": null,
+          "history": [],
+          "auto_diff": "🟢 max cos 0.574 vs「验收以现场实测为终止条件」(L4)"
         }
       ]
     },
@@ -16672,19 +16870,6 @@
   },
   "history": [
     {
-      "date": "2026-07-21T18:04:33.381328+00:00",
-      "layers": {
-        "1": 6,
-        "2": 82,
-        "3": 8,
-        "4": 39,
-        "5": 32,
-        "6": 4,
-        "7": 7
-      },
-      "total_insights": 178
-    },
-    {
       "date": "2026-07-25T18:03:31Z",
       "layers": {},
       "total_insights": 0
@@ -17816,16 +18001,31 @@
         "7": 100
       },
       "total_insights": 544
+    },
+    {
+      "date": "2026-11-27T18:02:55.248311+00:00",
+      "layers": {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 50,
+        "7": 100
+      },
+      "total_insights": 550
     }
   ],
   "behavior": {
-    "checked_at": "2026-11-26T18:02:30.003426+00:00",
+    "checked_at": "2026-11-27T18:02:56.634765+00:00",
     "warnings": [],
-    "insight_count": 3
+    "insight_count": 6
   },
   "_last_agent_insights": [
-    "用户不接受结论停在「未确认」：agent 抓不到的反爬/JS 渲染页面，用户就把官网界面截图回传，让促销窗口、承运期、每日实价逐项钉死。判据：交付里出现「需你自查 / 未确认」这类留白时，下一轮带回的是截图，而不是接受留白；一手界面截图优先于任何第三方聚合价，被截图推翻的估算基线必须整条重算并明说撤回，不许保留折中结论。",
-    "要动作先要入口：临到执行时单问一句官方域名/正门在哪，不接受 agent 给出的二手路径或第三方聚合站；入口答复要带可达性证据（分站跳转关系、促销页状态码），而不是只给一个 URL 字符串。",
-    "指令信令压到最小时，上下文由载荷承担：图像消息常只配一句话甚至两个字（「选哪个」），默认 agent 要自己读图识别选项差异，给出唯一选择 + 决定性约束 + 为什么另一个不行。判据：图像 + 短口令到达时，交付形态是「选 X」，不是「A 或 B 你挑」；选项差别要落到硬约束（时间预算、落地机场、取车点）而不是偏好措辞。"
+    "容量类采购要求「空间永久 + 一次付清」，只卖时长的档位判为负价值：先把各档拆成「哪些容量到期会被收回」，再要求不再产生后续容量支出的方案；宁可一次性买到十年以上，也不接受到期续费或只卖时长的终身会员。判据：出价结构里缺「永久空间」这一项时，价格再低也进不了终选。",
+    "二手数字账号的成交靠「顺序 + 担保」而不是靠信任：先清点自己的身份锚点（手机号是否已注册、实名名额是否被占），不足就先把旧号注销腾出锚点；付款后由卖家改绑、自己上线验收容量与控制权（改密码、清绑定、踢设备、开两步验证），全部完成才确认收货。判据：「确认收货」是验收闸门，不是付款后的例行步骤。",
+    "面对陌生名单先建品类地图，再谈选择：收到一串服务商或站点名时，逐个问「这些是啥、为啥推荐这些」，并要求与已锁定的候选横向比较，拒绝在未解析的名词清单上直接做选择。判据：清单里每个名字都要有品类归属与推荐理由，缺一项等于没回答。",
+    "风控敏感的服务获取按「最坏损失可整体放弃」设计：把实验放在一次性专用身份上——新注册的账号 + 只服务它的固定属地出口，主力账号与主力身份不参与，先把失败后的损失上限压到可弃级别再谈成功率。判据：遇到灰产/低价渠道时第一反应是拆账号、拆 IP，而不是把优惠套到主力账号上。",
+    "资产到手即进入冷启动，而不是收尾：付款完成后立刻要求「初始化填充」的方向与第一波资源来源，并同时交出自己可常开的设备清单，要求方案按现有硬件落地、不新增基础设施。判据：采购的验收点是「库里有内容、能跑起来」，不是「东西买到了」。"
   ]
 }
